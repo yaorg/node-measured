@@ -1,6 +1,5 @@
 var common = require('../common');
 var assert = require('assert');
-var units = common.betterMetrics.units;
 
 (function testHasName() {
   var counter = new common.betterMetrics.Counter('connections');
