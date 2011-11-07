@@ -1,8 +1,8 @@
-var common = require('../common');
+var common = require('../../common');
 var assert = require('assert');
 var units = common.betterMetrics.units;
 
-var meter = new common.betterMetrics.Meter('requests');
+var meter = new common.betterMetrics.Meter(null, 1 * units.SECONDS);
 
 // Do not let the meter start, we don't want timers running here
 meter.start = function() {};

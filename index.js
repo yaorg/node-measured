@@ -1,5 +1,8 @@
 exports.units = require('./lib/units');
-exports.Meter = require('./lib/Meter');
 exports.EWMA = require('./lib/EWMA');
-exports.Counter = require('./lib/Counter');
-exports.Gauge = require('./lib/Gauge');
+exports.Collection = require('./lib/Collection');
+
+var metrics = require('./lib/metrics');
+for (var name in metrics) {
+  exports[name] = metrics[name];
+}

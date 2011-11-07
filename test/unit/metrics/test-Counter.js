@@ -1,10 +1,5 @@
-var common = require('../common');
+var common = require('../../common');
 var assert = require('assert');
-
-(function testHasName() {
-  var counter = new common.betterMetrics.Counter('connections');
-  assert.equal(counter.name, 'connections');
-})();
 
 (function testHasInitialValueOf0() {
   var counter = new common.betterMetrics.Counter();
