@@ -17,7 +17,6 @@ meter.start = function() {};
   });
 })();
 
-
 meter.mark(5);
 meter._tick();
 
