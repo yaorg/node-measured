@@ -1,0 +1,21 @@
+{
+  "author": "Felix Geisendörfer <felix@debuggable.com> (http://debuggable.com/)",
+  "name": "better-metrics",
+  "description": "This is an alternative port of Coda Hale's metrics library.",
+  "version": "0.0.0",
+  "homepage": "https://github.com/felixge/node-better-metrics",
+  "repository": {
+    "url": ""
+  },
+  "main": "./index",
+  "scripts": {
+    "test": "make test"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "far": "0.0.7"
+  }
+}
