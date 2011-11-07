@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "homepage": "https://github.com/felixge/node-better-metrics",
   "repository": {
-    "url": ""
+    "url": "git://github.com/felixge/node-better-metrics.git"
   },
   "main": "./index",
   "scripts": {
