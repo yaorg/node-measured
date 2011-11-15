@@ -16,6 +16,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "far": "0.0.7"
+    "urun": "0.0.3"
   }
 }
