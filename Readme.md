@@ -1,5 +1,7 @@
 # better-metrics
 
+[![Build Status](https://secure.travis-ci.org/felixge/node-better-metrics.png)](http://travis-ci.org/felixge/node-better-metrics)
+
 This is an alternative port of Coda Hale's [metrics library][codametrics].
 
 I created this because I did not like the existing [metrics][existingmetrics]
@@ -9,6 +11,10 @@ idioms for most things.
 
 [codametrics]:  https://github.com/codahale/metrics
 [existingmetrics]: https://github.com/mikejihbe/metrics
+
+## Install
+
+This is not ready for you yet
 
 ## Usage
 
