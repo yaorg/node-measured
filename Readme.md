@@ -5,9 +5,10 @@
 This is an alternative port of Coda Hale's [metrics library][codametrics].
 
 I created this because I did not like the existing [metrics][existingmetrics]
-port, which makes too many (bad) assumptions that aren't present in the original
-library. However, this is not a 1:1 port either as I have tried to use node
-idioms for most things.
+port, because:
+
+* It expects me to expose my metrics over http
+* The test suite contains no assert statements (!)
 
 [codametrics]:  https://github.com/codahale/metrics
 [existingmetrics]: https://github.com/mikejihbe/metrics
