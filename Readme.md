@@ -9,6 +9,7 @@ port which:
 
 * Expects me to expose my metrics over http
 * Has a test suite contains no assert statements (!?)
+* Violates the license of 3rd party code it is using (BinaryHeap)
 
 [codametrics]:  https://github.com/codahale/metrics
 [existingmetrics]: https://github.com/mikejihbe/metrics
