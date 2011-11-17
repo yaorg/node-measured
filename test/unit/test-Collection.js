@@ -35,7 +35,7 @@ test('Collection', {
 
   'throws exception when creating a metric without name': function() {
     assert.throws(function() {
-      collection.counter()
+      collection.counter();
     }, /Collection.NoMetricName/);
   },
 });

@@ -128,7 +128,7 @@ test('Histogram#percentiles', {
     sample    = sinon.stub(new EDS);
     histogram = new Histogram({sample: sample});
 
-    var values = []
+    var values = [];
     for (var i = 1; i <= 100; i++) {
       values.push(i);
     }
