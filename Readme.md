@@ -1,6 +1,6 @@
 # felix-metrics
 
-[![Build Status](https://secure.travis-ci.org/felixge/node-better-metrics.png)](http://travis-ci.org/felixge/node-better-metrics)
+[![Build Status](https://secure.travis-ci.org/felixge/node-felix-metrics.png)](http://travis-ci.org/felixge/node-felix-metrics)
 
 This is an alternative port of Coda Hale's [metrics library][codametrics].
 
@@ -19,7 +19,7 @@ This is not ready for you yet
 Here is a simple example that measures the requests / second for a http server:
 
 ```js
-var metrics = require('better-metrics'));
+var metrics = require('felix-metrics'));
 var meter   = new metrics.Meter();
 
 var http = require('http');
