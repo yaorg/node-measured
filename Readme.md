@@ -77,6 +77,10 @@ interval.
 
 * **read:** A function that returns the current value of the Gauge.
 
+**Methods:**
+
+None.
+
 ## Counter
 
 Things that increment or decrement. For example sessions on a server:
@@ -88,7 +92,12 @@ counter.inc();
 
 **Options:**
 
-* **count:** An initial count to initialize the counter with.
+* **count:** An initial count for the counter. Defaults to `0`.
+
+**Methods:**
+
+**inc(n = 1):** Increment the counter by `n`.
+**dec(n = 1):** Decrement the counter by `n`.
 
 ## Meter
 
