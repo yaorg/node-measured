@@ -17,7 +17,7 @@
   "dependencies": {},
   "devDependencies": {
     "urun": "0.0.3",
-    "utest": "0.0.2",
+    "utest": "0.0.3",
     "sinon": "git://github.com/felixge/Sinon.JS.git#stub-prototype-properties"
   }
 }
