@@ -16,44 +16,44 @@ test('Stopwatch', {
     clock.restore();
   },
 
-  'returns time on stop': function() {
+  'returns time on end': function() {
     clock.tick(10);
 
     var watch = new Stopwatch();
     clock.tick(100);
 
-    var elapsed = watch.stop();
+    var elapsed = watch.end();
     assert.equal(elapsed, 100);
   },
 
-  'emits time on stop': function() {
+  'emits time on end': function() {
     var watch = new Stopwatch();
     clock.tick(20);
 
     var time;
-    watch.on('stop', function(_time) {
+    watch.on('end', function(_time) {
       time = _time;
     });
 
-    watch.stop();
+    watch.end();
 
     assert.equal(time, 20);
   },
 
-  'becomes useless after being stopped once': function() {
+  'becomes useless after being ended once': function() {
     var watch = new Stopwatch();
     clock.tick(20);
 
     var time;
-    watch.on('stop', function(_time) {
+    watch.on('end', function(_time) {
       time = _time;
     });
 
-    assert.equal(watch.stop(), 20);
+    assert.equal(watch.end(), 20);
     assert.equal(time, 20);
 
     time = null;
-    assert.equal(watch.stop(), undefined);
+    assert.equal(watch.end(), undefined);
     assert.equal(time, null);
   },
 });

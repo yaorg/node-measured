@@ -52,7 +52,7 @@ test('Timer', {
 
     var watch = timer.start();
     clock.tick(50);
-    watch.stop();
+    watch.end();
 
     assert.ok(meter.mark.calledOnce);
     assert.equal(histogram.update.args[0][0], 50);

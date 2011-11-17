@@ -127,11 +127,15 @@ http.createServer(function(req, res) {
 
 ### Histogram
 
-Things that are measured as distributions of numbers. Example:
+Things that are measured as distributions of scalars. Example:
 
 ```js
 var histogram = new metrics.Histogram();
-histogram.update(5);
+http.createServer(function(req, res) {
+  if (req.headers['content-length']) {
+    histogram.update(parseInt(req.headers['content-length'], 10));
+  }
+});
 ```
 
 **Options:**
@@ -143,6 +147,45 @@ histogram.update(5);
 * `update(value, timestamp)` Pushes `value` into the sample. `timestamp`
   defaults to `Date.now()`.
 
-## Todo
+### Timers
 
-* Finish Readme : )
+Timers are a combination of Meters and Histograms. They measure the rate as
+well as distribution of scalar events. Since they are frequently used for
+tracking how long certain things take, they expose an API for that:
+
+```js
+var timer = new metrics.Timer();
+http.createServer(function(req, res) {
+  var stopwatch = timer.start();
+  req.on('end', function() {
+    stopwatch.end();
+  });
+});
+```
+
+But you can also use them as generic histograms that also track the rate of
+events:
+
+```js
+var timer = new metrics.Timer();
+http.createServer(function(req, res) {
+  if (req.headers['content-length']) {
+    timer.update(parseInt(req.headers['content-length'], 10));
+  }
+});
+```
+
+**Options:**
+
+* `meter` The internal meter to use. Defaults to a new `Meter`.
+* `histogram` The internal histogram to use. Defaults to a new `Histogram`.
+
+**Methods:**
+
+* `start()` Returns a `Stopwatch`.
+* `update(value)` Updates the internal histogram with `value` and marks one
+  event on the internal meter.
+
+## License
+
+This module is licensed under the MIT license.
