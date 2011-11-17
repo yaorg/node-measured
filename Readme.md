@@ -96,8 +96,8 @@ counter.inc();
 
 **Methods:**
 
-**inc(n = 1):** Increment the counter by `n`.
-**dec(n = 1):** Decrement the counter by `n`.
+* **inc(n = 1):** Increment the counter by `n`.
+* **dec(n = 1):** Decrement the counter by `n`.
 
 ## Meter
 
