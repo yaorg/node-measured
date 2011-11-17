@@ -50,7 +50,10 @@ This will output something like this every second:
      '15MinuteRate': 11.646507524106095 } }
 ```
 
-**Step 3:** Profit!
+**Step 3:** Aggregate the data into your backend of choice. I recommend
+[graphite][].
+
+[graphite]: http://graphite.wikidot.com/
 
 ## Todo
 
