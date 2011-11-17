@@ -12,7 +12,9 @@ because I wanted to fully understand the underlaying Math and algorithms.
 
 ## Install
 
-This is not ready for you yet
+```
+npm install felix-metrics
+```
 
 ## Usage
 
