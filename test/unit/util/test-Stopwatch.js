@@ -16,9 +16,10 @@ test('Stopwatch', {
     clock.restore();
   },
 
-  'start and stop': function() {
+  'returns time on stop': function() {
+    clock.tick(10);
+
     var watch = new Stopwatch();
-    watch.start();
     clock.tick(100);
 
     var elapsed = watch.stop();
@@ -27,7 +28,6 @@ test('Stopwatch', {
 
   'emits time on stop': function() {
     var watch = new Stopwatch();
-    watch.start();
     clock.tick(20);
 
     var time;
@@ -42,7 +42,6 @@ test('Stopwatch', {
 
   'becomes useless after being stopped once': function() {
     var watch = new Stopwatch();
-    watch.start();
     clock.tick(20);
 
     var time;

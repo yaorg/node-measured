@@ -19,8 +19,8 @@ This is not ready for you yet
 Here is a simple example that measures the requests / second for a http server:
 
 ```js
-var metrics = require('felix-metrics'));
-var meter   = new metrics.Meter();
+var metrics      = require('felix-metrics'));
+var collection   = new metrics.Meter();
 
 var http = require('http');
 http.createServer(function(req, res) {

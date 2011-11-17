@@ -45,4 +45,18 @@ test('Timer', {
 
     assert.deepEqual(json['histogram'], {c: 3, d: 4});
   },
+
+  '#start returns a Stopwatch which updates the timer': function() {
+    var clock = sinon.useFakeTimers();
+    clock.tick(10);
+
+    var watch = timer.start();
+    clock.tick(50);
+    watch.stop();
+
+    assert.ok(meter.mark.calledOnce);
+    assert.equal(histogram.update.args[0][0], 50);
+
+    clock.restore();
+  },
 });
