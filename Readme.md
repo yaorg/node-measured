@@ -75,7 +75,7 @@ interval.
 
 **Options:**
 
-* `read:` A function that returns the current value of the Gauge.
+* `read` A function that returns the current value of the Gauge.
 
 **Methods:**
 
@@ -92,12 +92,12 @@ counter.inc();
 
 **Options:**
 
-* `count:` An initial count for the counter. Defaults to `0`.
+* `count` An initial count for the counter. Defaults to `0`.
 
 **Methods:**
 
-* `inc(n = 1):` Increment the counter by `n`.
-* `dec(n = 1):` Decrement the counter by `n`.
+* `#inc(n = 1)` Increment the counter by `n`.
+* `#dec(n = 1)` Decrement the counter by `n`.
 
 ## Meter
 
