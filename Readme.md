@@ -43,5 +43,3 @@ This will print something like this:
 ## Todo
 
 * Finish Readme : )
-* Re-write Histogram and involved classes, took them from the original metrics
-  library as I had to get those ready in a hurry for something : ).
