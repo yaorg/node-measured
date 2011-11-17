@@ -1,4 +1,4 @@
-# better-metrics
+# felix-metrics
 
 [![Build Status](https://secure.travis-ci.org/felixge/node-better-metrics.png)](http://travis-ci.org/felixge/node-better-metrics)
 
