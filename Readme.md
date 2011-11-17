@@ -81,13 +81,18 @@ interval.
 
 None.
 
-## Counter
+### Counter
 
-Things that increment or decrement. For example sessions on a server:
+Things that increment or decrement. Example:
 
 ```js
-var sessions = new metrics.Counter();
-counter.inc();
+var activeUploads = new metrics.Counter();
+http.createServer(function(req, res) {
+  activeUploads.inc();
+  req.on('end', function() {
+    activeUploads.dec();
+  });
+});
 ```
 
 **Options:**
@@ -96,12 +101,47 @@ counter.inc();
 
 **Methods:**
 
-* `#inc(n = 1)` Increment the counter by `n`.
-* `#dec(n = 1)` Decrement the counter by `n`.
+* `inc(n)` Increment the counter by `n`. Defaults to `1`.
+* `dec(n)` Decrement the counter by `n`. Defaults to `1`.
 
-## Meter
+### Meter
 
-Things that are measured as a rate, typically in seconds.
+Things that are measured as events / interval. Example:
+
+```js
+var meter = new metrics.Meter();
+http.createServer(function(req, res) {
+  meter.mark();
+});
+```
+
+**Options:**
+
+* `rateUnit` The rate unit. Defaults to `1000` (1 sec).
+* `tickInterval` The interval in which the averages are updated. Defaults to
+  `5000` (5 sec).
+
+**Methods:**
+
+* `mark(n)` Register `n` events as having just occured. Defaults to `1.
+
+### Histogram
+
+Things that are measured as distributions of numbers. Example:
+
+```js
+var histogram = new metrics.Histogram();
+histogram.update(5);
+```
+
+**Options:**
+
+* `sample` The sample resevoir to use. Defaults to an `ExponentiallyDecayingSample`.
+
+**Methods:**
+
+* `update(value, timestamp)` Pushes `value` into the sample. `timestamp`
+  defaults to `Date.now()`.
 
 ## Todo
 
