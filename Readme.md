@@ -63,9 +63,11 @@ The following metrics are available (both standalone and on the Collection API):
 
 Values that can be read instantly. Example:
 
+```js
 var gauge = new metrics.Gauge({read: function() {
   return process.memoryUsage().rss;
 });
+```
 
 There is currently no callback support for Gauges because otherwise it would be
 very difficult to report the metrics inside a collection within a regular
@@ -79,8 +81,10 @@ interval.
 
 Things that increment or decrement. For example sessions on a server:
 
+```js
 var sessions = new metrics.Counter();
 counter.inc();
+```
 
 **Options:**
 
