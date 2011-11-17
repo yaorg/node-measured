@@ -27,7 +27,7 @@ test('Meter', {
 
     var json = meter.toJSON();
     assert.equal(json['count'], 5);
-    assert.equal(json['1MinuteRate'].toFixed(4), '0.0800')
+    assert.equal(json['1MinuteRate'].toFixed(4), '0.0800');
     assert.equal(json['5MinuteRate'].toFixed(4), '0.0165');
     assert.equal(json['15MinuteRate'].toFixed(4), '0.0055');
 
