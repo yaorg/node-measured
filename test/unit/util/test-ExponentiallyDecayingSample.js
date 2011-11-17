@@ -1,12 +1,12 @@
 var common = require('../../common');
 var test   = require('utest');
 var assert = require('assert');
-var ExponentiallyDecayingSample = common.betterMetrics.ExponentiallyDecayingSample;
+var EDS = common.betterMetrics.ExponentiallyDecayingSample;
 var units = common.betterMetrics.units;
 
 test('ExponentiallyDecayingSample', {
   'returns an empty array for toJSON by default': function() {
-    var sample = new ExponentiallyDecayingSample();
+    var sample = new EDS();
     assert.deepEqual(sample.toJSON(), []);
   },
 });
@@ -14,7 +14,7 @@ test('ExponentiallyDecayingSample', {
 var sample;
 test('ExponentiallyDecayingSample#update', {
   before: function() {
-    sample = new ExponentiallyDecayingSample({
+    sample = new EDS({
       size: 2,
       random: function() {
         return 1;
@@ -55,7 +55,7 @@ test('ExponentiallyDecayingSample#update', {
 var sample;
 test('ExponentiallyDecayingSample#_rescale', {
   before: function() {
-    sample = new ExponentiallyDecayingSample({
+    sample = new EDS({
       size: 2,
       random: function() {
         return 1;

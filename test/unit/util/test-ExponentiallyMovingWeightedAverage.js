@@ -1,11 +1,12 @@
-var common = require('../common');
+var common = require('../../common');
 var test   = require('utest');
 var assert = require('assert');
 var units = common.betterMetrics.units;
+var EMWA = common.betterMetrics.ExponentiallyMovingWeightedAverage;
 
-test('EWMA', {
+test('ExponentiallyMovingWeightedAverage', {
   'decay over several updates and ticks': function() {
-    var ewma = new common.betterMetrics.EWMA(1 * units.MINUTES, 5 * units.SECONDS);
+    var ewma = new EMWA(1 * units.MINUTES, 5 * units.SECONDS);
 
     ewma.update(5);
     ewma.tick();
