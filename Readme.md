@@ -4,12 +4,8 @@
 
 This is an alternative port of Coda Hale's [metrics library][codametrics].
 
-I created this because I did not like the existing [metrics][existingmetrics]
-port which:
-
-* Expects me to expose my metrics over http
-* Has a test suite contains no assert statements (!?)
-* Violates the license of 3rd party code it is using (BinaryHeap)
+I created this despite the existing [metrics port][existingmetrics] for node.js
+because I wanted to fully understand the underlaying Math and algorithms.
 
 [codametrics]:  https://github.com/codahale/metrics
 [existingmetrics]: https://github.com/mikejihbe/metrics
