@@ -20,10 +20,11 @@ This is not ready for you yet
 of a http server:
 
 ```js
-var metrics      = require('felix-metrics'));
-var collection   = new metrics.Meter();
+var metrics    = require('felix-metrics');
+var collection = new metrics.Collection('http');
+var http       = require('http');
 
-var http = require('http');
+var rps = collection.meter('requestsPerSecond');
 http.createServer(function(req, res) {
   meter.mark();
   res.end('Thanks');
