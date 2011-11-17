@@ -6,9 +6,9 @@ test('Gauge', {
   'reads value from function': function() {
     var i = 0;
 
-    var gauge = new common.betterMetrics.Gauge(function() {
+    var gauge = new common.betterMetrics.Gauge({read: function() {
       return i++;
-    });
+    }});
 
     assert.equal(gauge.toJSON()['value'], 0);
     assert.equal(gauge.toJSON()['value'], 1);
