@@ -36,15 +36,13 @@ test('Timer', {
     meter.toJSON.returns({a: 1, b: 2});
     var json = timer.toJSON();
 
-    assert.equal(json['meter.a'], 1);
-    assert.equal(json['meter.b'], 2);
+    assert.deepEqual(json['meter'], {a: 1, b: 2});
   },
 
   '#toJSON() contains histogram info': function() {
-    histogram.toJSON.returns({a: 1, b: 2});
+    histogram.toJSON.returns({c: 3, d: 4});
     var json = timer.toJSON();
 
-    assert.equal(json['histogram.a'], 1);
-    assert.equal(json['histogram.b'], 2);
+    assert.deepEqual(json['histogram'], {c: 3, d: 4});
   },
 });

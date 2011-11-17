@@ -4,7 +4,7 @@ var assert = require('assert');
 
 test('Collection', {
   'with two counters': function() {
-    var collection = new common.betterMetrics.Collection('foo.bar.');
+    var collection = new common.betterMetrics.Collection('counters');
     var a = collection.counter('a');
     var b = collection.counter('b');
 
@@ -12,10 +12,10 @@ test('Collection', {
     b.inc(5);
 
     assert.deepEqual(collection.toJSON(), {
-      'foo.bar.a': {
+      'a': {
         count: 3,
       },
-      'foo.bar.b': {
+      'b': {
         count: 5,
       },
     });
