@@ -16,7 +16,8 @@ This is not ready for you yet
 
 ## Usage
 
-Here is a simple example that measures the requests / second for a http server:
+**Step 1:** Add metrics to your code. For example, lets track the requests/sec
+of a http server:
 
 ```js
 var metrics      = require('felix-metrics'));
@@ -29,16 +30,26 @@ http.createServer(function(req, res) {
 }).listen(3000);
 ```
 
-Now this just measures things, but does not give you any way to look at the
-results. But fear not, logging this information is really simple:
+**Step 2:** Show the collected metrics (more advanced examples follow later):
 
 ```js
-setTimeout(function() {
-  console.log(meter.toJSON());
+setInterval(function() {
+  console.log(collection.toJSON());
 }, 1000);
 ```
 
-This will print something like this:
+This will output something like this every second:
+
+```
+{ requestsPerSecond:
+   { mean: 1710.2180279856818,
+     count: 10511,
+     '1MinuteRate': 168.08263156623656,
+     '5MinuteRate': 34.74630977619571,
+     '15MinuteRate': 11.646507524106095 } }
+```
+
+**Step 3:** Profit!
 
 ## Todo
 
