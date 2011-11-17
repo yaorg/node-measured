@@ -186,6 +186,10 @@ http.createServer(function(req, res) {
 * `update(value)` Updates the internal histogram with `value` and marks one
   event on the internal meter.
 
+## Todo
+
+* Implement a graphite reporter and feature it in the usage section.
+
 ## License
 
 This module is licensed under the MIT license.
