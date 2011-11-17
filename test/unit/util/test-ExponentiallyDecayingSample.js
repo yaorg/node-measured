@@ -1,8 +1,8 @@
 var common = require('../../common');
 var test   = require('utest');
 var assert = require('assert');
-var EDS = common.betterMetrics.ExponentiallyDecayingSample;
-var units = common.betterMetrics.units;
+var EDS    = common.betterMetrics.ExponentiallyDecayingSample;
+var units  = common.betterMetrics.units;
 
 test('ExponentiallyDecayingSample', {
   'returns an empty array for toJSON by default': function() {
