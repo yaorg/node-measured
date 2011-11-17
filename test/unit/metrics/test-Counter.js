@@ -1,16 +1,22 @@
-var common = require('../../common');
-var test   = require('utest');
-var assert = require('assert');
+var common  = require('../../common');
+var test    = require('utest');
+var assert  = require('assert');
+var Counter = common.betterMetrics.Counter;
 
 var counter;
 test('Counter', {
   before: function() {
-    counter = new common.betterMetrics.Counter();
+    counter = new Counter();
   },
 
   'has initial value of 0': function() {
-    var json    = counter.toJSON();
+    var json = counter.toJSON();
     assert.deepEqual(json, {count: 0});
+  },
+
+  'can be initialized with a given count': function() {
+    var counter = new Counter({count: 5});
+    assert.equal(counter.toJSON()['count'], 5);
   },
 
   '#inc works incrementally': function() {

@@ -55,6 +55,41 @@ This will output something like this every second:
 
 [graphite]: http://graphite.wikidot.com/
 
+## Metrics
+
+The following metrics are available (both standalone and on the Collection API):
+
+### Gauge
+
+Values that can be read instantly. Example:
+
+var gauge = new metrics.Gauge({read: function() {
+  return process.memoryUsage().rss;
+});
+
+There is currently no callback support for Gauges because otherwise it would be
+very difficult to report the metrics inside a collection within a regular
+interval.
+
+**Options:**
+
+* **read:** A function that returns the current value of the Gauge.
+
+## Counter
+
+Things that increment or decrement. For example sessions on a server:
+
+var sessions = new metrics.Counter();
+counter.inc();
+
+**Options:**
+
+* **count:** An initial count to initialize the counter with.
+
+## Meter
+
+Things that are measured as a rate, typically in seconds.
+
 ## Todo
 
 * Finish Readme : )

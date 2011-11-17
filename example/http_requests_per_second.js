@@ -10,4 +10,4 @@ http.createServer(function(req, res) {
 
 setInterval(function() {
   console.log(collection.toJSON());
-}, 1000);
+}, 1000
