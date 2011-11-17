@@ -1,4 +1,3 @@
-exports.units = require('./lib/units');
 exports.Collection = require('./lib/Collection');
 
 var metrics = require('./lib/metrics');
