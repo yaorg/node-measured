@@ -17,12 +17,14 @@ test('Collection', {
     b.inc(5);
 
     assert.deepEqual(collection.toJSON(), {
-      'a': {
-        count: 3,
-      },
-      'b': {
-        count: 5,
-      },
+      'counters': {
+        'a': {
+          count: 3,
+        },
+        'b': {
+          count: 5,
+        },
+      }
     });
   },
 
