@@ -3,9 +3,9 @@
   "name": "felix-metrics",
   "description": "This is an alternative port of Coda Hale's metrics library.",
   "version": "0.0.6",
-  "homepage": "https://github.com/felixge/node-better-metrics",
+  "homepage": "https://github.com/felixge/node-felix-metrics",
   "repository": {
-    "url": "git://github.com/felixge/node-better-metrics.git"
+    "url": "git://github.com/felixge/node-felix-metrics.git"
   },
   "main": "./index",
   "scripts": {
