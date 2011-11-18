@@ -20,6 +20,10 @@ test('Timer', {
     });
   },
 
+  'can be initialized without options': function() {
+    timer = new Timer();
+  },
+
   '#update() marks the meter': function() {
     timer.update(5);
 
