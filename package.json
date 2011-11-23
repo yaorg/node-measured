@@ -2,7 +2,7 @@
   "author": "Felix Geisendörfer <felix@debuggable.com> (http://debuggable.com/)",
   "name": "felix-metrics",
   "description": "This is an alternative port of Coda Hale's metrics library.",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "homepage": "https://github.com/felixge/node-felix-metrics",
   "repository": {
     "url": "git://github.com/felixge/node-felix-metrics.git"
