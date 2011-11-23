@@ -28,7 +28,7 @@ var http       = require('http');
 
 var rps = collection.meter('requestsPerSecond');
 http.createServer(function(req, res) {
-  meter.mark();
+  rps.mark();
   res.end('Thanks');
 }).listen(3000);
 ```
