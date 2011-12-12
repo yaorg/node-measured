@@ -66,7 +66,7 @@ The following metrics are available (both standalone and on the Collection API):
 Values that can be read instantly. Example:
 
 ```js
-var gauge = new metrics.Gauge({read: function() {
+var gauge = new metrics.Gauge(function() {
   return process.memoryUsage().rss;
 });
 ```
@@ -77,7 +77,7 @@ interval.
 
 **Options:**
 
-* `read` A function that returns the current value of the Gauge.
+* Gauges take a function as parameter which needs to return their current value.
 
 **Methods:**
 
