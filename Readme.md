@@ -18,12 +18,12 @@ npm install measured
 
 ## Usage
 
-**Step 1:** Add metrics to your code. For example, lets track the requests/sec
-of a http server:
+**Step 1:** Add measurements to your code. For example, lets track the
+requests/sec of a http server:
 
 ```js
-var metrics    = require('measured');
-var collection = new metrics.Collection('http');
+var measured   = require('measured');
+var collection = new measured.Collection('http');
 var http       = require('http');
 
 var rps = collection.meter('requestsPerSecond');
@@ -33,7 +33,7 @@ http.createServer(function(req, res) {
 }).listen(3000);
 ```
 
-**Step 2:** Show the collected metrics (more advanced examples follow later):
+**Step 2:** Show the collected measurements (more advanced examples follow later):
 
 ```js
 setInterval(function() {
