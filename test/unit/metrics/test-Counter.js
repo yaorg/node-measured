@@ -51,11 +51,14 @@ test('Counter', {
     assert.equal(counter.toJSON()['count'], -2);
   },
 
-  '#clear works': function() {
+  '#reset works': function() {
     counter.inc(23);
     assert.equal(counter.toJSON()['count'], 23);
 
-    counter.clear();
+    counter.reset();
     assert.equal(counter.toJSON()['count'], 0);
+
+    counter.reset(50);
+    assert.equal(counter.toJSON()['count'], 50);
   }
 });

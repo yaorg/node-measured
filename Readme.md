@@ -105,6 +105,7 @@ http.createServer(function(req, res) {
 
 * `inc(n)` Increment the counter by `n`. Defaults to `1`.
 * `dec(n)` Decrement the counter by `n`. Defaults to `1`.
+* `reset(count)` Resets the counter back to `count` Defaults to `0`.
 
 ### Meter
 
