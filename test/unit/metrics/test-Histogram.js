@@ -28,7 +28,6 @@ test('Histogram', {
   },
 });
 
-var histogram;
 var sample;
 test('Histogram#update', {
   before: function() {
@@ -150,5 +149,30 @@ test('Histogram#percentiles', {
 
     var percentiles = histogram.percentiles([0.99]);
     assert.equal(percentiles[0.99], 99.99);
+  },
+});
+
+test('Histogram#clear', {
+  before: function() {
+    histogram = new Histogram({sample: sample});
+  },
+
+  'resets all values': function() {
+    histogram.update(5);
+    histogram.update(2);
+    var json = histogram.toJSON();
+
+    for (var key in json) {
+      var value = json[key];
+      assert.ok(typeof value === 'number');
+    }
+
+    histogram.reset();
+    var json = histogram.toJSON();
+
+    for (var key in json) {
+      var value = json[key];
+      assert.ok(value === 0 || value === null);
+    }
   },
 });

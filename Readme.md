@@ -148,6 +148,8 @@ http.createServer(function(req, res) {
 
 * `update(value, timestamp)` Pushes `value` into the sample. `timestamp`
   defaults to `Date.now()`.
+* `reset()` Resets all histogram values. If you passed in a custom sample
+  instance, it will be replaced with the default one (patch welcome).
 
 ### Timers
 
