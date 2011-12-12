@@ -1,6 +1,6 @@
-# felix-metrics
+# measured
 
-[![Build Status](https://secure.travis-ci.org/felixge/node-felix-metrics.png)](http://travis-ci.org/felixge/node-felix-metrics)
+[![Build Status](https://secure.travis-ci.org/felixge/node-measured.png)](http://travis-ci.org/felixge/node-measured)
 
 This is an alternative port of Coda Hale's [metrics library][codametrics].
 
@@ -13,7 +13,7 @@ because I wanted to fully understand the underlaying Math and algorithms.
 ## Install
 
 ```
-npm install felix-metrics
+npm install measured
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ npm install felix-metrics
 of a http server:
 
 ```js
-var metrics    = require('felix-metrics');
+var metrics    = require('measured');
 var collection = new metrics.Collection('http');
 var http       = require('http');
 
