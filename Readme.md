@@ -127,6 +127,8 @@ http.createServer(function(req, res) {
 **Methods:**
 
 * `mark(n)` Register `n` events as having just occured. Defaults to `1.
+* `reset()` Resets all values. Meters initialized with custom options will
+  be reset to the default settings (patch welcome).
 
 ### Histogram
 
@@ -149,8 +151,8 @@ http.createServer(function(req, res) {
 
 * `update(value, timestamp)` Pushes `value` into the sample. `timestamp`
   defaults to `Date.now()`.
-* `reset()` Resets all histogram values. If you passed in a custom sample
-  instance, it will be replaced with the default one (patch welcome).
+* `reset()` Resets all values. Histograms initialized with custom options will
+  be reset to the default settings (patch welcome).
 
 ### Timers
 
@@ -190,6 +192,8 @@ http.createServer(function(req, res) {
 * `start()` Returns a `Stopwatch`.
 * `update(value)` Updates the internal histogram with `value` and marks one
   event on the internal meter.
+* `reset()` Resets all values. Timers initialized with custom options will
+  be reset to the default settings (patch welcome).
 
 ## Todo
 

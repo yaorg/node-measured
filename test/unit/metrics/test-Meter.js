@@ -13,9 +13,9 @@ test('Meter', {
 
   'all values are correctly initialized': function() {
     assert.deepEqual(meter.toJSON(), {
-      mean           : 0,
-      count          : 0,
-      snapshot       : null,
+      'mean'         : 0,
+      'count'        : 0,
+      'value'        : null,
       '1MinuteRate'  : 0,
       '5MinuteRate'  : 0,
       '15MinuteRate' : 0,
@@ -59,20 +59,38 @@ test('Meter', {
     clock.restore();
   },
 
-  'snapshot is a sum': function() {
+  'value is a sum': function() {
     meter.mark(1);
     meter.mark(2);
     meter.mark(3);
 
-    assert.equal(meter.toJSON()['snapshot'], 6);
+    assert.equal(meter.toJSON()['value'], 6);
   },
 
-  'snapshot resets by reading it': function() {
+  'value resets by reading it': function() {
     meter.mark(1);
     meter.mark(2);
     meter.mark(3);
 
     meter.toJSON();
-    assert.strictEqual(meter.toJSON()['snapshot'], null);
+    assert.strictEqual(meter.toJSON()['value'], null);
+  },
+
+  '#reset resets all values': function() {
+    meter.mark(1);
+    var json = meter.toJSON();
+
+    for (var key in json) {
+      var value = json[key];
+      assert.ok(typeof value === 'number');
+    }
+
+    meter.reset();
+    var json = meter.toJSON();
+
+    for (var key in json) {
+      var value = json[key];
+      assert.ok(value === 0 || value === null);
+    }
   },
 });

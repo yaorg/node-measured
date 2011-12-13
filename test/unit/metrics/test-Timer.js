@@ -63,4 +63,11 @@ test('Timer', {
 
     clock.restore();
   },
+
+  '#reset is delegated to histogram and meter': function() {
+    timer.reset();
+
+    assert.ok(meter.reset.calledOnce);
+    assert.ok(histogram.reset.calledOnce);
+  },
 });

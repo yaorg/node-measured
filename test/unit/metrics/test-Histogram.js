@@ -152,7 +152,7 @@ test('Histogram#percentiles', {
   },
 });
 
-test('Histogram#clear', {
+test('Histogram#reset', {
   before: function() {
     histogram = new Histogram({sample: sample});
   },
