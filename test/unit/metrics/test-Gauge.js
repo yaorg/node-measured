@@ -10,7 +10,7 @@ test('Gauge', {
       return i++;
     });
 
-    assert.equal(gauge.toJSON()['value'], 0);
-    assert.equal(gauge.toJSON()['value'], 1);
+    assert.equal(gauge.toJSON(), 0);
+    assert.equal(gauge.toJSON(), 1);
   },
 });
