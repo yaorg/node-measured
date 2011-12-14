@@ -15,7 +15,7 @@ test('Meter', {
     assert.deepEqual(meter.toJSON(), {
       'mean'         : 0,
       'count'        : 0,
-      'value'        : null,
+      'currentRate'  : 0,
       '1MinuteRate'  : 0,
       '5MinuteRate'  : 0,
       '15MinuteRate' : 0,
@@ -59,21 +59,44 @@ test('Meter', {
     clock.restore();
   },
 
-  'value is a sum': function() {
+  'currentRate is the observed rate since the last toJSON call': function() {
+    var clock = sinon.useFakeTimers();
     meter.mark(1);
     meter.mark(2);
     meter.mark(3);
 
-    assert.equal(meter.toJSON()['value'], 6);
+    clock.tick(3000);
+
+    assert.equal(meter.toJSON()['currentRate'], 2);
+
+    clock.restore();
   },
 
-  'value resets by reading it': function() {
+  'currentRate resets by reading it': function() {
     meter.mark(1);
     meter.mark(2);
     meter.mark(3);
 
     meter.toJSON();
-    assert.strictEqual(meter.toJSON()['value'], null);
+    assert.strictEqual(meter.toJSON()['currentRate'], 0);
+  },
+
+  'currentRate also resets internal duration timer by reading it': function() {
+    var clock = sinon.useFakeTimers();
+    meter.mark(1);
+    meter.mark(2);
+    meter.mark(3);
+    clock.tick(1000);
+    meter.toJSON();
+
+    clock.tick(1000);
+    meter.toJSON();
+
+    meter.mark(1);
+    clock.tick(1000);
+    assert.strictEqual(meter.toJSON()['currentRate'], 1);
+
+    clock.restore();
   },
 
   '#reset resets all values': function() {
