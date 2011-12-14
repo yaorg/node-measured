@@ -47,6 +47,7 @@ This will output something like this every second:
 { requestsPerSecond:
    { mean: 1710.2180279856818,
      count: 10511,
+     'currentRate': 1941.4893498239829,
      '1MinuteRate': 168.08263156623656,
      '5MinuteRate': 34.74630977619571,
      '15MinuteRate': 11.646507524106095 } }
