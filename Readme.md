@@ -83,6 +83,10 @@ interval.
 
 None.
 
+**toJSON Output:**
+
+Gauges directly return their currently value.
+
 ### Counter
 
 Things that increment or decrement. Example:
@@ -107,6 +111,10 @@ http.createServer(function(req, res) {
 * `dec(n)` Decrement the counter by `n`. Defaults to `1`.
 * `reset(count)` Resets the counter back to `count` Defaults to `0`.
 
+**toJSON Output:**
+
+Counters directly return their currently value.
+
 ### Meter
 
 Things that are measured as events / interval. Example:
@@ -130,9 +138,19 @@ http.createServer(function(req, res) {
 * `reset()` Resets all values. Meters initialized with custom options will
   be reset to the default settings (patch welcome).
 
+**toJSON Output:**
+
+* `mean`: The average rate since the meter was started.
+* `value`: Not implemented in a good way yet, don't use.
+* `count`: The total of all values added to the meter.
+* `1MinuteRate`: The rate of the meter biased towards the last 1 minute.
+* `5MinuteRate`: The rate of the meter biased towards the last 5 minutes.
+* `15MinuteRate`: The rate of the meter biased towards the last 15 minutes.
+
 ### Histogram
 
-Things that are measured as distributions of scalars. Example:
+Keeps a resevoir of statistically relevant values biased towards the last 5
+minutes to explore their distribution. Example:
 
 ```js
 var histogram = new metrics.Histogram();
@@ -153,6 +171,21 @@ http.createServer(function(req, res) {
   defaults to `Date.now()`.
 * `reset()` Resets all values. Histograms initialized with custom options will
   be reset to the default settings (patch welcome).
+
+**toJSON Output:**
+
+* `min`: The lowest observed value.
+* `max`: The highest observed value.
+* `sum`: The sum of all observed values.
+* `variance`: The variance of all observed values.
+* `mean`: The average of all observed values.
+* `stddev`: The stddev of all observed values.
+* `count`: The number of observed values.
+* `median`: 50% of all values in the resevoir are at or below this value.
+* `p75`: See median, 75% percentile.
+* `p95`: See median, 95% percentile.
+* `p99`: See median, 99% percentile.
+* `p999`: See median, 99.9% percentile.
 
 ### Timers
 
@@ -194,6 +227,11 @@ http.createServer(function(req, res) {
   event on the internal meter.
 * `reset()` Resets all values. Timers initialized with custom options will
   be reset to the default settings (patch welcome).
+
+**toJSON Output:**
+
+* `meter`: See Meter toJSON output docs above.
+* `histogram`: See Histogram toJSON output docs above.
 
 ## Todo
 
