@@ -18,12 +18,8 @@ test('Collection', {
 
     assert.deepEqual(collection.toJSON(), {
       'counters': {
-        'a': {
-          count: 3,
-        },
-        'b': {
-          count: 5,
-        },
+        'a': 3,
+        'b': 5,
       }
     });
   },
