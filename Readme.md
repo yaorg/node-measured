@@ -236,7 +236,8 @@ http.createServer(function(req, res) {
 
 ## Todo
 
-* Implement a graphite reporter and feature it in the usage section.
+* Implement async gauges
+* Document using this with graphite / zabbix
 
 ## License
 
