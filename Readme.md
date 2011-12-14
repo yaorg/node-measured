@@ -5,7 +5,8 @@
 This is an alternative port of Coda Hale's [metrics library][codametrics].
 
 I created this despite the existing [metrics port][existingmetrics] for node.js
-because I wanted to fully understand the underlaying Math and algorithms.
+to fully understand the underlaying algorithms, and to provide a solid, tested
+and documented module.
 
 [codametrics]:  https://github.com/codahale/metrics
 [existingmetrics]: https://github.com/mikejihbe/metrics
