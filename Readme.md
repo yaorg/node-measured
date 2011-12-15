@@ -238,6 +238,7 @@ http.createServer(function(req, res) {
 
 ## Todo
 
+* Implement flatten() so reporters can use it
 * Implement async gauges
 * Document using this with graphite / zabbix
 
