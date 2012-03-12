@@ -143,7 +143,6 @@ http.createServer(function(req, res) {
 **toJSON Output:**
 
 * `mean`: The average rate since the meter was started.
-* `value`: Not implemented in a good way yet, don't use.
 * `count`: The total of all values added to the meter.
 * `currentRate`: The rate of the meter since the last toJSON() call.
 * `1MinuteRate`: The rate of the meter biased towards the last 1 minute.
