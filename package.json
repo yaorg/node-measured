@@ -2,7 +2,7 @@
   "author": "Felix Geisendörfer <felix@debuggable.com> (http://debuggable.com/)",
   "name": "measured",
   "description": "This is an alternative port of Coda Hale's metrics library.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/felixge/node-measured",
   "repository": {
     "url": "git://github.com/felixge/node-measured.git"
@@ -19,5 +19,6 @@
     "urun": "0.0.4",
     "utest": "0.0.3",
     "sinon": "git://github.com/felixge/Sinon.JS.git#stub-prototype-properties"
-  }
+  },
+  "optionalDependencies": {}
 }
