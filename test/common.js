@@ -5,4 +5,4 @@ common.dir      = {};
 common.dir.root = path.dirname(__dirname);
 common.dir.lib  = path.join(common.dir.root, 'lib');
 
-common.betterMetrics = require(common.dir.root);
+common.measured = require(common.dir.root);

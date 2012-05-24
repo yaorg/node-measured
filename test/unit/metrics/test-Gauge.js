@@ -6,7 +6,7 @@ test('Gauge', {
   'reads value from function': function() {
     var i = 0;
 
-    var gauge = new common.betterMetrics.Gauge(function() {
+    var gauge = new common.measured.Gauge(function() {
       return i++;
     });
 

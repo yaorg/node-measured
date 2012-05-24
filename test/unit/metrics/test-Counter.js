@@ -1,7 +1,7 @@
 var common  = require('../../common');
 var test    = require('utest');
 var assert  = require('assert');
-var Counter = common.betterMetrics.Counter;
+var Counter = common.measured.Counter;
 
 var counter;
 test('Counter', {

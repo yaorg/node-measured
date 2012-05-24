@@ -1,7 +1,7 @@
 var common    = require('../../common');
 var test      = require('utest');
 var assert    = require('assert');
-var Stopwatch = common.betterMetrics.Stopwatch;
+var Stopwatch = common.measured.Stopwatch;
 var sinon     = require('sinon');
 
 var watch;

@@ -2,8 +2,8 @@ var common    = require('../../common');
 var test      = require('utest');
 var assert    = require('assert');
 var sinon     = require('sinon');
-var Histogram = common.betterMetrics.Histogram;
-var EDS       = common.betterMetrics.ExponentiallyDecayingSample;
+var Histogram = common.measured.Histogram;
+var EDS       = common.measured.ExponentiallyDecayingSample;
 
 var histogram;
 test('Histogram', {

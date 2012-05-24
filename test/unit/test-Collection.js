@@ -5,11 +5,11 @@ var assert = require('assert');
 var collection;
 test('Collection', {
   before: function() {
-    collection = new common.betterMetrics.Collection();
+    collection = common.measured.createCollection();
   },
 
   'with two counters': function() {
-    var collection = new common.betterMetrics.Collection('counters');
+    var collection = new common.measured.Collection('counters');
     var a = collection.counter('a');
     var b = collection.counter('b');
 

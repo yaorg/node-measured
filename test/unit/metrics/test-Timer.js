@@ -2,9 +2,9 @@ var common    = require('../../common');
 var test      = require('utest');
 var assert    = require('assert');
 var sinon     = require('sinon');
-var Timer     = common.betterMetrics.Timer;
-var Histogram = common.betterMetrics.Histogram;
-var Meter     = common.betterMetrics.Meter;
+var Timer     = common.measured.Timer;
+var Histogram = common.measured.Histogram;
+var Meter     = common.measured.Meter;
 
 var timer;
 var meter;

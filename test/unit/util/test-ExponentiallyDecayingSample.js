@@ -1,8 +1,8 @@
 var common = require('../../common');
 var test   = require('utest');
 var assert = require('assert');
-var EDS    = common.betterMetrics.ExponentiallyDecayingSample;
-var units  = common.betterMetrics.units;
+var EDS    = common.measured.ExponentiallyDecayingSample;
+var units  = common.measured.units;
 
 var sample;
 test('ExponentiallyDecayingSample#toSortedArray', {

@@ -2,12 +2,12 @@ var common = require('../../common');
 var test   = require('utest');
 var assert = require('assert');
 var sinon  = require('sinon');
-var units  = common.betterMetrics.units;
+var units  = common.measured.units;
 
 var meter;
 test('Meter', {
   before: function() {
-    meter = new common.betterMetrics.Meter();
+    meter = new common.measured.Meter();
     meter.start = function() {};
   },
 

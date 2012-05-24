@@ -1,7 +1,7 @@
 var common     = require('../../common');
 var test       = require('utest');
 var assert     = require('assert');
-var BinaryHeap = common.betterMetrics.BinaryHeap;
+var BinaryHeap = common.measured.BinaryHeap;
 
 test('BinaryHeap#toArray', {
   'is empty in the beginning': function() {
