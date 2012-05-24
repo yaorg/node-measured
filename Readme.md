@@ -23,13 +23,11 @@ npm install measured
 requests/sec of a http server:
 
 ```js
-var measured   = require('measured');
-var collection = new measured.Collection('http');
-var http       = require('http');
+var http  = require('http');
+var stats = require('measured').createCollection();
 
-var rps = collection.meter('requestsPerSecond');
 http.createServer(function(req, res) {
-  rps.mark();
+  stats.meter('requestsPerSecond').mark();
   res.end('Thanks');
 }).listen(3000);
 ```
