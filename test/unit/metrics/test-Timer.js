@@ -54,7 +54,7 @@ test('Timer', {
     var clock = sinon.useFakeTimers();
     clock.tick(10);
 
-    var watch = timer.start();
+    var watch = timer.start({getTime:Date.now});
     clock.tick(50);
     watch.end();
 
