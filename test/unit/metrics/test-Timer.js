@@ -9,8 +9,10 @@ var Meter     = common.measured.Meter;
 var timer;
 var meter;
 var histogram;
+var clock;
 test('Timer', {
   before: function() {
+    clock = sinon.useFakeTimers();
     meter     = sinon.stub(new Meter);
     histogram = sinon.stub(new Histogram);
 
@@ -18,6 +20,10 @@ test('Timer', {
       meter     : meter,
       histogram : histogram,
     });
+  },
+
+  after: function() {
+    clock.restore();
   },
 
   'can be initialized without options': function() {
@@ -51,7 +57,6 @@ test('Timer', {
   },
 
   '#start returns a Stopwatch which updates the timer': function() {
-    var clock = sinon.useFakeTimers();
     clock.tick(10);
 
     var watch = timer.start();
@@ -60,8 +65,6 @@ test('Timer', {
 
     assert.ok(meter.mark.calledOnce);
     assert.equal(histogram.update.args[0][0], 50);
-
-    clock.restore();
   },
 
   '#reset is delegated to histogram and meter': function() {
