@@ -137,6 +137,9 @@ http.createServer(function(req, res) {
 * `mark(n)` Register `n` events as having just occured. Defaults to `1.
 * `reset()` Resets all values. Meters initialized with custom options will
   be reset to the default settings (patch welcome).
+* `unref()` Unrefs the backing timer.  The meter will not keep the event loop
+  alive.  Idempotent.
+* `ref()` Refs the backing timer again.  Idempotent.
 
 **toJSON Output:**
 
