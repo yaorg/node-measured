@@ -5,10 +5,16 @@ var sinon  = require('sinon');
 var units  = common.measured.units;
 
 var meter;
+var clock;
 test('Meter', {
   before: function() {
+    clock = sinon.useFakeTimers();
     meter = new common.measured.Meter();
     meter.start = function() {};
+  },
+
+  after: function() {
+    clock.restore();
   },
 
   'all values are correctly initialized': function() {
@@ -43,8 +49,6 @@ test('Meter', {
   },
 
   'mean rate': function() {
-    var clock = sinon.useFakeTimers();
-
     meter.mark(5);
     clock.tick(5000);
 
@@ -55,12 +59,9 @@ test('Meter', {
 
     json = meter.toJSON();
     assert.equal(json['mean'], 0.5);
-
-    clock.restore();
   },
 
   'currentRate is the observed rate since the last toJSON call': function() {
-    var clock = sinon.useFakeTimers();
     meter.mark(1);
     meter.mark(2);
     meter.mark(3);
@@ -68,8 +69,6 @@ test('Meter', {
     clock.tick(3000);
 
     assert.equal(meter.toJSON()['currentRate'], 2);
-
-    clock.restore();
   },
 
   'currentRate resets by reading it': function() {
@@ -82,7 +81,6 @@ test('Meter', {
   },
 
   'currentRate also resets internal duration timer by reading it': function() {
-    var clock = sinon.useFakeTimers();
     meter.mark(1);
     meter.mark(2);
     meter.mark(3);
@@ -95,8 +93,6 @@ test('Meter', {
     meter.mark(1);
     clock.tick(1000);
     assert.strictEqual(meter.toJSON()['currentRate'], 1);
-
-    clock.restore();
   },
 
   '#reset resets all values': function() {
