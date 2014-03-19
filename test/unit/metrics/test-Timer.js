@@ -19,6 +19,7 @@ test('Timer', {
     timer = new Timer({
       meter     : meter,
       histogram : histogram,
+      getTime: Date.now
     });
   },
 
