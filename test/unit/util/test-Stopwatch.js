@@ -9,7 +9,7 @@ var clock;
 test('Stopwatch', {
   before: function() {
     clock = sinon.useFakeTimers();
-    watch = new Stopwatch();
+    watch = new Stopwatch({getTime: Date.now});
   },
 
   after: function() {
@@ -17,9 +17,6 @@ test('Stopwatch', {
   },
 
   'returns time on end': function() {
-    clock.tick(10);
-
-    var watch = new Stopwatch();
     clock.tick(100);
 
     var elapsed = watch.end();
@@ -27,7 +24,6 @@ test('Stopwatch', {
   },
 
   'emits time on end': function() {
-    var watch = new Stopwatch();
     clock.tick(20);
 
     var time;
@@ -41,7 +37,6 @@ test('Stopwatch', {
   },
 
   'becomes useless after being ended once': function() {
-    var watch = new Stopwatch();
     clock.tick(20);
 
     var time;

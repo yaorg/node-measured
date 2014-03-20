@@ -9,7 +9,7 @@ var clock;
 test('Meter', {
   before: function() {
     clock = sinon.useFakeTimers();
-    meter = new common.measured.Meter();
+    meter = new common.measured.Meter({getTime: Date.now});
   },
 
   after: function() {
