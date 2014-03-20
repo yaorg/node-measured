@@ -59,7 +59,7 @@ test('Timer', {
   '#start returns a Stopwatch which updates the timer': function() {
     clock.tick(10);
 
-    var watch = timer.start();
+    var watch = timer.start({getTime:Date.now});
     clock.tick(50);
     watch.end();
 
