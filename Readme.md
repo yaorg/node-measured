@@ -230,6 +230,9 @@ http.createServer(function(req, res) {
   event on the internal meter.
 * `reset()` Resets all values. Timers initialized with custom options will
   be reset to the default settings (patch welcome).
+* `unref()` Unrefs the backing timer.  The internal meter will not keep the event loop
+  alive. Idempotent.
+* `ref()` Refs the backing timer again. Idempotent.
 
 **toJSON Output:**
 
