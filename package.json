@@ -4,6 +4,7 @@
   "description": "This is an alternative port of Coda Hale's metrics library.",
   "version": "0.1.5",
   "homepage": "https://github.com/felixge/node-measured",
+  "license": "MIT",
   "repository": {
     "url": "git://github.com/felixge/node-measured.git"
   },
