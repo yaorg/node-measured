@@ -36,7 +36,7 @@ http.createServer(function(req, res) {
 
 ```js
 setInterval(function() {
-  console.log(collection.toJSON());
+  console.log(stats.toJSON());
 }, 1000);
 ```
 
@@ -66,7 +66,8 @@ The following metrics are available (both standalone and on the Collection API):
 Values that can be read instantly. Example:
 
 ```js
-var gauge = new metrics.Gauge(function() {
+var Measured = require('measured')
+var gauge = new Measured.Gauge(function() {
   return process.memoryUsage().rss;
 });
 ```
@@ -92,7 +93,8 @@ Gauges directly return their currently value.
 Things that increment or decrement. Example:
 
 ```js
-var activeUploads = new metrics.Counter();
+var Measured = require('measured')
+var activeUploads = new Measured.Counter();
 http.createServer(function(req, res) {
   activeUploads.inc();
   req.on('end', function() {
@@ -120,7 +122,8 @@ Counters directly return their currently value.
 Things that are measured as events / interval. Example:
 
 ```js
-var meter = new metrics.Meter();
+var Measured = require('measured')
+var meter = new Measured.Meter();
 http.createServer(function(req, res) {
   meter.mark();
 });
@@ -156,7 +159,8 @@ Keeps a resevoir of statistically relevant values biased towards the last 5
 minutes to explore their distribution. Example:
 
 ```js
-var histogram = new metrics.Histogram();
+var Measured = require('measured')
+var histogram = new Measured.Histogram();
 http.createServer(function(req, res) {
   if (req.headers['content-length']) {
     histogram.update(parseInt(req.headers['content-length'], 10));
@@ -197,7 +201,8 @@ well as distribution of scalar events. Since they are frequently used for
 tracking how long certain things take, they expose an API for that:
 
 ```js
-var timer = new metrics.Timer();
+var Measured = require('measured')
+var timer = new Measured.Timer();
 http.createServer(function(req, res) {
   var stopwatch = timer.start();
   req.on('end', function() {
@@ -210,7 +215,8 @@ But you can also use them as generic histograms that also track the rate of
 events:
 
 ```js
-var timer = new metrics.Timer();
+var Measured = require('measured')
+var timer = new Measured.Timer();
 http.createServer(function(req, res) {
   if (req.headers['content-length']) {
     timer.update(parseInt(req.headers['content-length'], 10));
