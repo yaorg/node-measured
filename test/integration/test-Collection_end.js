@@ -1,3 +1,5 @@
+'use strict';
+
 var common = require('../common');
 
 var collection = new common.measured.Collection();
