@@ -1,5 +1,10 @@
 # Changes
 
+## 1.0.0
+
+- Browserify support (Maximilian Antoni)
+- Change test framework to Mocha and Mochify (Maximilian Antoni)
+
 ## 0.1.5
 
 - Fix High Resolution Timer bug when the time is greater than one second (Yujie
