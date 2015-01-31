@@ -1,7 +1,15 @@
 SHELL := /bin/bash
-NPM = npm
 
-test:
-	@$(NPM) test
+version = $(shell node -p "require('./package.json').version")
 
-.PHONY: test
+default:
+	npm test
+
+install:
+	rm -rf node_modules
+	npm install
+
+release: default
+	git tag -a -m "Release ${version}" v${version}
+	git push --follow-tags
+	npm publish
