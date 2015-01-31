@@ -1,7 +1,7 @@
 SHELL := /bin/bash
-NODE = node
+NPM = npm
 
 test:
-	@$(NODE) ./test/run.js
+	@$(NPM) test
 
 .PHONY: test

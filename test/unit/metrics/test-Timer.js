@@ -1,63 +1,67 @@
+/*global describe, it, beforeEach, afterEach*/
+'use strict';
+
 var common    = require('../../common');
-var test      = require('utest');
 var assert    = require('assert');
 var sinon     = require('sinon');
 var Timer     = common.measured.Timer;
 var Histogram = common.measured.Histogram;
 var Meter     = common.measured.Meter;
 
-var timer;
-var meter;
-var histogram;
-var clock;
-test('Timer', {
-  before: function() {
-    clock = sinon.useFakeTimers();
-    meter     = sinon.stub(new Meter);
-    histogram = sinon.stub(new Histogram);
+describe('Timer', function () {
+  var timer;
+  var meter;
+  var histogram;
+  var clock;
+  beforeEach(function () {
+    clock     = sinon.useFakeTimers();
+    meter     = sinon.stub(new Meter());
+    histogram = sinon.stub(new Histogram());
 
     timer = new Timer({
       meter     : meter,
       histogram : histogram,
-      getTime: Date.now
+      getTime   : function () {
+        return new Date().getTime();
+      }
     });
-  },
+  });
 
-  after: function() {
+  afterEach(function () {
     clock.restore();
-  },
+  });
 
-  'can be initialized without options': function() {
+  it('can be initialized without options', function () {
     timer = new Timer();
-  },
+  });
 
-  '#update() marks the meter': function() {
+  it('#update() marks the meter', function () {
     timer.update(5);
 
     assert.ok(meter.mark.calledOnce);
-  },
+  });
 
-  '#update() updates the histogram': function() {
+  it('#update() updates the histogram', function () {
     timer.update(5);
 
     assert.ok(histogram.update.calledWith(5));
-  },
+  });
 
-  '#toJSON() contains meter info': function() {
+  it('#toJSON() contains meter info', function () {
     meter.toJSON.returns({a: 1, b: 2});
     var json = timer.toJSON();
 
-    assert.deepEqual(json['meter'], {a: 1, b: 2});
-  },
+    assert.deepEqual(json.meter, {a: 1, b: 2});
+  });
 
-  '#toJSON() contains histogram info': function() {
+  it('#toJSON() contains histogram info', function () {
     histogram.toJSON.returns({c: 3, d: 4});
     var json = timer.toJSON();
 
-    assert.deepEqual(json['histogram'], {c: 3, d: 4});
-  },
+    assert.deepEqual(json.histogram, {c: 3, d: 4});
+  });
 
-  '#start returns a Stopwatch which updates the timer': function() {
+  it('#start returns a Stopwatch which updates the timer', function () {
     clock.tick(10);
 
     var watch = timer.start();
@@ -66,12 +70,12 @@ test('Timer', {
 
     assert.ok(meter.mark.calledOnce);
     assert.equal(histogram.update.args[0][0], 50);
-  },
+  });
 
-  '#reset is delegated to histogram and meter': function() {
+  it('#reset is delegated to histogram and meter', function () {
     timer.reset();
 
     assert.ok(meter.reset.calledOnce);
     assert.ok(histogram.reset.calledOnce);
-  },
+  });
 });

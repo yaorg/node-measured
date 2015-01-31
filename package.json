@@ -4,21 +4,26 @@
   "description": "This is an alternative port of Coda Hale's metrics library.",
   "version": "0.1.5",
   "homepage": "https://github.com/felixge/node-measured",
-  "repository": {
-    "url": "git://github.com/felixge/node-measured.git"
+  "engines": {
+    "node": ">= 0.10"
   },
   "main": "./index",
   "scripts": {
-    "test": "make test"
+    "lint": "jslint --color './**/*.js'",
+    "test-node": "mocha './test/**/test-*.js'",
+    "test-browser": "mochify './test/**/test-*.js'",
+    "test": "npm run lint && npm run test-node && npm run test-browser"
   },
-  "engines": {
-    "node": "*"
+  "dependencies": {
+    "inherits": "^2.0"
   },
-  "dependencies": {},
   "devDependencies": {
-    "urun": "0.0.4",
-    "utest": "0.0.3",
-    "sinon": "git://github.com/felixge/Sinon.JS.git#stub-prototype-properties"
+    "jslint": "^0.7",
+    "mocha": "^2.1",
+    "mochify": "^2.1",
+    "sinon": "^1.12"
   },
-  "optionalDependencies": {}
+  "repository": {
+    "url": "git://github.com/felixge/node-measured.git"
+  }
 }
