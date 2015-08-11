@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.1
+
+- Fix `counter.inc(0)` and `counter.dec(0)` (Maximilian Antoni)
+
 ## 1.0.0
 
 - Browserify support (Maximilian Antoni)
