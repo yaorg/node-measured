@@ -37,6 +37,11 @@ describe('Counter', function () {
     assert.equal(counter.toJSON(), 2);
   });
 
+  it('#inc adds zero', function () {
+    counter.inc(0);
+    assert.equal(counter.toJSON(), 0);
+  });
+
   it('#dec works incrementally', function () {
     counter.dec(3);
     assert.equal(counter.toJSON(), -3);
@@ -51,6 +56,11 @@ describe('Counter', function () {
 
     counter.dec();
     assert.equal(counter.toJSON(), -2);
+  });
+
+  it('#dec substracts zero', function () {
+    counter.dec(0);
+    assert.equal(counter.toJSON(), 0);
   });
 
   it('#reset works', function () {
