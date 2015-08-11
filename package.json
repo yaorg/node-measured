@@ -10,10 +10,12 @@
   "main": "./index",
   "scripts": {
     "lint": "jslint --edition=latest --color './**/*.js'",
-    "test-node": "mocha './test/**/test-*.js'",
-    "test-browser": "mochify './test/**/test-*.js'",
+    "watch": "npm run test:node -- --watch",
+    "test:node": "mocha './test/**/test-*.js'",
+    "test:browser": "mochify './test/**/test-*.js'",
     "wd": "mochify --wd './test/**/test-*.js'",
-    "test": "npm run lint && npm run test-node && npm run test-browser"
+    "pretest": "npm run lint",
+    "test": "npm run test:node && npm run test:browser"
   },
   "dependencies": {
     "inherits": "^2.0"
