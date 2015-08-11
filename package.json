@@ -9,7 +9,7 @@
   },
   "main": "./index",
   "scripts": {
-    "lint": "jslint --color './**/*.js'",
+    "lint": "jslint --edition=latest --color './**/*.js'",
     "test-node": "mocha './test/**/test-*.js'",
     "test-browser": "mochify './test/**/test-*.js'",
     "wd": "mochify --wd './test/**/test-*.js'",
@@ -19,7 +19,7 @@
     "inherits": "^2.0"
   },
   "devDependencies": {
-    "jslint": "^0.7",
+    "jslint": "^0.8",
     "mocha": "^2.1",
     "mochify": "^2.1",
     "sinon": "^1.12"

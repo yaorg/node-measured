@@ -27,7 +27,7 @@ describe('Meter', function () {
       'currentRate'  : 0,
       '1MinuteRate'  : 0,
       '5MinuteRate'  : 0,
-      '15MinuteRate' : 0,
+      '15MinuteRate' : 0
     });
   });
 

@@ -21,7 +21,7 @@ describe('Collection', function () {
     assert.deepEqual(collection.toJSON(), {
       'counters': {
         'a': 3,
-        'b': 5,
+        'b': 5
       }
     });
   });
