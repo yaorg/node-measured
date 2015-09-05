@@ -1,5 +1,9 @@
 # Changes
 
+## 1.0.2
+
+- Add "files" list to package.json
+
 ## 1.0.1
 
 - Fix `counter.inc(0)` and `counter.dec(0)` (Maximilian Antoni)
