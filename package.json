@@ -29,5 +29,11 @@
   "repository": {
     "url": "git://github.com/felixge/node-measured.git"
   },
+  "files": [
+    "index.js",
+    "lib",
+    "Readme.md",
+    "CHANGES.md"
+  ],
   "license": "MIT"
 }
