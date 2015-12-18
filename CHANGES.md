@@ -1,5 +1,9 @@
 # Changes
 
+## 1.1.0
+
+- Add Histogram#hasValues (Fredrik Hörte)
+
 ## 1.0.2
 
 - Add "files" list to package.json
