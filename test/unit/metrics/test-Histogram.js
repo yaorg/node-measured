@@ -193,3 +193,20 @@ describe('Histogram#reset', function () {
     }
   });
 });
+
+describe('Histogram#hasValues', function () {
+
+  var histogram;
+  beforeEach(function () {
+    histogram = new Histogram();
+  });
+
+  it('has values', function() {
+    histogram.update(5);
+    assert.ok(histogram.hasValues());     
+  });
+
+  it('has no values', function() {
+    assert.equal(histogram.hasValues(), false);     
+  });
+});
