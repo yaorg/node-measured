@@ -201,12 +201,12 @@ describe('Histogram#hasValues', function () {
     histogram = new Histogram();
   });
 
-  it('has values', function() {
+  it('has values', function () {
     histogram.update(5);
-    assert.ok(histogram.hasValues());     
+    assert.ok(histogram.hasValues());
   });
 
-  it('has no values', function() {
-    assert.equal(histogram.hasValues(), false);     
+  it('has no values', function () {
+    assert.equal(histogram.hasValues(), false);
   });
 });
