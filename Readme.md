@@ -137,7 +137,7 @@ http.createServer(function(req, res) {
 
 **Methods:**
 
-* `mark(n)` Register `n` events as having just occured. Defaults to `1.
+* `mark(n)` Register `n` events as having just occured. Defaults to `1`.
 * `reset()` Resets all values. Meters initialized with custom options will
   be reset to the default settings (patch welcome).
 * `unref()` Unrefs the backing timer.  The meter will not keep the event loop
@@ -176,6 +176,7 @@ http.createServer(function(req, res) {
 
 * `update(value, timestamp)` Pushes `value` into the sample. `timestamp`
   defaults to `Date.now()`.
+* `hasValues()` Whether the histogram contains values.
 * `reset()` Resets all values. Histograms initialized with custom options will
   be reset to the default settings (patch welcome).
 
