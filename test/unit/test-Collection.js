@@ -34,6 +34,19 @@ describe('Collection', function () {
       ]);
     });
 
+    it('outputs a meter', function(){
+      var meter = collection.meter('my-meter');
+      meter.mark();
+
+      var result = collection.toFlatJSON()[0];
+      assert.ok(result.mean >= 0);
+      assert.ok(result.count >= 0);
+      assert.ok(result.currentRate >= 0);
+      assert.ok(result['1MinuteRate'] >= 0);
+      assert.ok(result['5MinuteRate'] >= 0);
+      assert.ok(result['15MinuteRate'] >= 0);
+    });
+
     /*
     var a,b,c,d,e,f;
     beforeEach(function(){
