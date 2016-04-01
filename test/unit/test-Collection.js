@@ -47,6 +47,19 @@ describe('Collection', function () {
       assert.ok(result['15MinuteRate'] >= 0);
     });
 
+    it('outputs a gauge', function(){
+      var expected = 42;
+      var gauge = new common.measured.Gauge(function(){
+        return expected;
+      });
+      
+      collection.register('my-gauge', gauge);  
+      var result = collection.toFlatJSON();
+      assert.deepEqual(result, [
+        {'type':'gauge','name':'my-gauge','value':expected,'group':'my-collection'},
+      ]); 
+    });
+
     /*
     var a,b,c,d,e,f;
     beforeEach(function(){
