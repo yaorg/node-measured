@@ -82,6 +82,37 @@ describe('Collection', function () {
       assert.equal(result.group,'my-collection');
       assert.equal(result.type,'histogram');
     });
+
+    it('outputs a timer', function(){
+      var timer = collection.timer('my-timer');
+      timer.update(1);
+      timer.update(1);
+
+      var result = collection.toFlatJSON()[0];
+      //Meter Stats
+      assert.ok(result.mean >= 0);
+      assert.ok(result.count >= 0);
+      assert.ok(result.currentRate >= 0);
+      assert.ok(result['1MinuteRate'] >= 0);
+      assert.ok(result['5MinuteRate'] >= 0);
+      assert.ok(result['15MinuteRate'] >= 0);
+      //Histogram Stats
+      assert.ok(result.min >= 0);
+      assert.ok(result.max >= 0);
+      assert.ok(result.sum >= 0);
+      assert.ok(result.variance >= 0);
+      assert.ok(result.mean >= 0);
+      assert.ok(result.stddev >= 0);
+      assert.ok(result.count >= 0);
+      assert.ok(result.median >= 0);
+      assert.ok(result.p75 >= 0);
+      assert.ok(result.p95 >= 0);
+      assert.ok(result.p99 >= 0);
+      assert.ok(result.p999 >= 0);
+      assert.ok(result.name,'my-timer');
+      assert.ok(result.group,'my-collection');
+      assert.ok(result.type,'timer');
+    });
   });
 
   it('returns same metric object when given the same name', function () {
