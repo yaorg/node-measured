@@ -60,6 +60,28 @@ describe('Collection', function () {
       ]); 
     });
     
+    it('outputs a histogram', function(){
+      var histogram = collection.histogram('my-histogram');
+      histogram.update(1);
+      histogram.update(1);
+
+      var result = collection.toFlatJSON()[0];
+      assert.equal(result.min, 1);
+      assert.equal(result.max, 1);
+      assert.equal(result.sum, 2);
+      assert.equal(result.variance, 0);
+      assert.equal(result.mean, 1);
+      assert.equal(result.stddev, 0);
+      assert.equal(result.count, 2);
+      assert.equal(result.median, 1);
+      assert.equal(result.p75, 1);
+      assert.equal(result.p95, 1);
+      assert.equal(result.p99, 1);
+      assert.equal(result.p999, 1);
+      assert.equal(result.name,'my-histogram');
+      assert.equal(result.group,'my-collection');
+      assert.equal(result.type,'histogram');
+    });
   });
 
   it('returns same metric object when given the same name', function () {
