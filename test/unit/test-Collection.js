@@ -40,16 +40,16 @@ describe('Collection', function () {
     }, /Collection\.NoMetricName/);
   });
 
-  describe.only('toFlatJSON', function(){
-    beforeEach(function(){
+  describe('toFlatJSON', function () {
+    beforeEach(function () {
       collection = new common.measured.Collection('my-collection');
     });
 
-    it('outputs an array', function(){
+    it('outputs an array', function () {
       assert.ok(Array.isArray(collection.toFlatJSON()));
     });
 
-    it('outputs two collections', function(){
+    it('outputs two collections', function () {
       var a = collection.counter('a');
       var b = collection.counter('b');
 
@@ -57,13 +57,20 @@ describe('Collection', function () {
       b.inc(5);
 
       var result = collection.toFlatJSON();
-      assert.deepEqual(result, [
-        {'type':'counter','name':'a','count':3,'group':'my-collection'},
-        {'type':'counter','name':'b','count':5,'group':'my-collection'},
-      ]);
+      assert.deepEqual(result, [{
+        'type': 'counter',
+        'name': 'a',
+        'count': 3,
+        'group': 'my-collection'
+      }, {
+        'type': 'counter',
+        'name': 'b',
+        'count': 5,
+        'group': 'my-collection'
+      }]);
     });
 
-    it('outputs a meter', function(){
+    it('outputs a meter', function () {
       var meter = collection.meter('my-meter');
       meter.mark();
 
@@ -76,20 +83,23 @@ describe('Collection', function () {
       assert.ok(result['15MinuteRate'] >= 0);
     });
 
-    it('outputs a gauge', function(){
+    it('outputs a gauge', function () {
       var expected = 42;
-      var gauge = new common.measured.Gauge(function(){
+      var gauge = new common.measured.Gauge(function () {
         return expected;
       });
-      
-      collection.register('my-gauge', gauge);  
+
+      collection.register('my-gauge', gauge);
       var result = collection.toFlatJSON();
-      assert.deepEqual(result, [
-        {'type':'gauge','name':'my-gauge','value':expected,'group':'my-collection'},
-      ]); 
+      assert.deepEqual(result, [{
+        'type': 'gauge',
+        'name': 'my-gauge',
+        'value': expected,
+        'group': 'my-collection'
+      }]);
     });
-    
-    it('outputs a histogram', function(){
+
+    it('outputs a histogram', function () {
       var histogram = collection.histogram('my-histogram');
       histogram.update(1);
       histogram.update(1);
@@ -107,12 +117,12 @@ describe('Collection', function () {
       assert.equal(result.p95, 1);
       assert.equal(result.p99, 1);
       assert.equal(result.p999, 1);
-      assert.equal(result.name,'my-histogram');
-      assert.equal(result.group,'my-collection');
-      assert.equal(result.type,'histogram');
+      assert.equal(result.name, 'my-histogram');
+      assert.equal(result.group, 'my-collection');
+      assert.equal(result.type, 'histogram');
     });
 
-    it('outputs a timer', function(){
+    it('outputs a timer', function () {
       var timer = collection.timer('my-timer');
       timer.update(1);
       timer.update(1);
@@ -138,9 +148,9 @@ describe('Collection', function () {
       assert.ok(result.p95 >= 0);
       assert.ok(result.p99 >= 0);
       assert.ok(result.p999 >= 0);
-      assert.ok(result.name,'my-timer');
-      assert.ok(result.group,'my-collection');
-      assert.ok(result.type,'timer');
+      assert.ok(result.name, 'my-timer');
+      assert.ok(result.group, 'my-collection');
+      assert.ok(result.type, 'timer');
     });
   });
 });
