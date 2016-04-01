@@ -252,6 +252,19 @@ http.createServer(function(req, res) {
 * Implement async gauges
 * Document using this with graphite / zabbix
 
+## Contributing
+
+Ensure that you run `npm test` before submitting pull requests.
+
+### Formatting code
+
+An easy way to ensure your code will lint correctly from a style perspective is using **js-beautify**.  The following command can be used on files which have been edited.
+
+```shell
+js-beautify -s 2 -jr <filename>
+```
+
 ## License
 
 This module is licensed under the MIT license.
+

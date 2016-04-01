@@ -1,6 +1,6 @@
 {
   "indent"   : 2,
-  "maxlen"   : 79,
+  "maxlen"   : 94,
   "node"     : true,
   "plusplus" : true,
   "vars"     : true,
