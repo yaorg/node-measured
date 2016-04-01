@@ -59,34 +59,7 @@ describe('Collection', function () {
         {'type':'gauge','name':'my-gauge','value':expected,'group':'my-collection'},
       ]); 
     });
-
-    /*
-    var a,b,c,d,e,f;
-    beforeEach(function(){
-      collection = new common.measured.Collection('counters');
-      var a = collection.counter('a');
-      var b = collection.counter('b');
-      var c = collection.histogram('c');
-      var d = collection.meter('d');
-      var gauge = new common.measured.Gauge(function(){
-        return 23;
-      });
-      var e = collection.register('e', gauge);
-      var f = collection.timer('f');
-      a.inc(3);
-      b.inc(5);
-      c.update(1);
-      d.mark();
-      f.update(1);
-    });
-
-    it('using toFlatJSON', function () {
-      var result = collection.toFlatJSON();
-      assert.equal(result.length, 6);
-      assert.equal(result[0].name, 'a');
-      assert.equal(result[0].type, 'counter');
-    });
-    */
+    
   });
 
   it('returns same metric object when given the same name', function () {
