@@ -31,6 +31,20 @@ describe('Meter', function () {
     });
   });
 
+  it('supports rates override from opts', function () {
+    var rate = sinon.stub().returns(666);
+    var properties = {
+      m1Rate: {rate: rate},
+      m5Rate: {rate: rate},
+      m15Rate: {rate: rate}
+    };
+    var json = new common.measured.Meter(properties).toJSON();
+
+    assert.equal(json['1MinuteRate'].toFixed(0), '666');
+    assert.equal(json['5MinuteRate'].toFixed(0), '666');
+    assert.equal(json['15MinuteRate'].toFixed(0), '666');
+  });
+
   it('decay over two marks and ticks', function () {
     meter.mark(5);
     meter._tick();
