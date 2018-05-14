@@ -1,6 +1,6 @@
 # measured
 
-[![Build Status](https://secure.travis-ci.org/felixge/node-measured.png)](http://travis-ci.org/felixge/node-measured)
+[![Build Status](https://secure.travis-ci.org/yaorg/node-measured.png)](http://travis-ci.org/yaorg/node-measured)
 
 This is an alternative port of Coda Hale's [metrics library][codametrics].
 
