@@ -168,7 +168,10 @@ describe('Histogram#weightedPercentiles', function () {
   var histogram;
   beforeEach(function () {
     sample    = sinon.stub(new EDS());
-    histogram = new Histogram({sample: sample});
+    histogram = new Histogram({
+      sample: sample,
+      percentilesMethod: Histogram.weightedPercentiles
+    });
 
     var values = [];
     var i;

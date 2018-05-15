@@ -171,6 +171,7 @@ http.createServer(function(req, res) {
 **Options:**
 
 * `sample` The sample resevoir to use. Defaults to an `ExponentiallyDecayingSample`.
+* `percentilesMethod` The function to use to calculate percentile values in `toJSON`. Defaults to `Histogram.percentiles` that does not take into account sample weights and can also be set to `Histogram.weightedPercentiles` that does and will be biased towards more recent values.
 
 **Methods:**
 
