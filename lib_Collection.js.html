@@ -36,26 +36,17 @@ const Timer = require('./metrics/Timer');
 const METRIC_TYPES = require('./metrics/Metric').METRIC_TYPES;
 
 /**
- * Validates that the provided name is valid
- * @param name The provided metric name param
- */
-const validateName = name => {
-  if (!name || typeof name !== 'string') {
-    throw new Error('You must supply a metric name');
-  }
-};
-
-/**
- * A Simple collection that stores names and a {@link Metric} implementation with a few convenience methods for
+ * A Simple collection that stores names and a {@link Metric} instances with a few convenience methods for
  * creating / registering and then gathering all data the registered metrics.
  */
 class Collection {
   /**
    * Creates a named collection of metrics
-   * @param name
+   * @param {string} name The name to use for this collection.
    * @example
+   * var { Collection } = require('measured');
    * const collection = new Collection('node-process-metrics');
-   * const gauge = collection.gauge(() => {
+   * const gauge = collection.gauge('node.process.heap_used', () => {
    *    return process.memoryUsage().heapUsed;
    * });
    */
@@ -74,6 +65,13 @@ class Collection {
    * register a metric that was created outside the provided convenience methods of this collection
    * @param name The metric name
    * @param metric The {@link Metric} implementation
+   * @example
+   * var { Collection, Gauge } = require('measured');
+   * const collection = new Collection('node-process-metrics');
+   * const gauge = new Gauge(() => {
+   *    return process.memoryUsage().heapUsed;
+   * });
+   * collection.register('node.process.heap_used', gauge);
    */
   register(name, metric) {
     this._metrics[name] = metric;
@@ -110,7 +108,7 @@ class Collection {
    * @return {Gauge}
    */
   gauge(name, readFn) {
-    validateName(name);
+    this._validateName(name);
 
     let gauge;
     this._getMetricForNameAndType(name, METRIC_TYPES.GAUGE).ifPresentOrElse(
@@ -130,7 +128,7 @@ class Collection {
    * @return {Counter}
    */
   counter(name, properties) {
-    validateName(name);
+    this._validateName(name);
 
     let counter;
     this._getMetricForNameAndType(name, METRIC_TYPES.COUNTER).ifPresentOrElse(
@@ -150,7 +148,7 @@ class Collection {
    * @return {Histogram}
    */
   histogram(name, properties) {
-    validateName(name);
+    this._validateName(name);
 
     let histogram;
     this._getMetricForNameAndType(name, METRIC_TYPES.HISTOGRAM).ifPresentOrElse(
@@ -170,7 +168,7 @@ class Collection {
    * @return {Timer}
    */
   timer(name, properties) {
-    validateName(name);
+    this._validateName(name);
 
     let timer;
     this._getMetricForNameAndType(name, METRIC_TYPES.TIMER).ifPresentOrElse(
@@ -190,7 +188,7 @@ class Collection {
    * @return {Meter}
    */
   meter(name, properties) {
-    validateName(name);
+    this._validateName(name);
 
     let meter;
     this._getMetricForNameAndType(name, METRIC_TYPES.METER).ifPresentOrElse(
@@ -210,7 +208,7 @@ class Collection {
    * @return {SettableGauge}
    */
   settableGauge(name, properties) {
-    validateName(name);
+    this._validateName(name);
 
     let settableGauge;
     this._getMetricForNameAndType(name, METRIC_TYPES.METER).ifPresentOrElse(
@@ -226,9 +224,10 @@ class Collection {
   /**
    * Checks the registry for a metric with a given name and type, if it exists in the registry as a
    * different type an error is thrown.
-   * @param name The metric name
-   * @param requestedType The metric type
+   * @param {string} name The metric name
+   * @param {string} requestedType The metric type
    * @return {Optional&lt;Metric>}
+   * @private
    */
   _getMetricForNameAndType(name, requestedType) {
     if (this._metrics[name]) {
@@ -244,6 +243,16 @@ class Collection {
     return Optional.empty();
   }
 
+  /**
+   * Validates that the provided name is valid
+   * @param name The provided metric name param
+   */
+   _validateName(name) {
+    if (!name || typeof name !== 'string') {
+      throw new Error('You must supply a metric name');
+    }
+  }
+  
   /**
    * Calls end on all metrics in the registry that support end()
    */
@@ -269,13 +278,13 @@ module.exports = Collection;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="Metric.html">Metric</a></li></ul><h3>Global</h3><ul><li><a href="global.html#validateName">validateName</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="Metric.html">Metric</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 15 2018 23:54:26 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 16 2018 00:18:57 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>

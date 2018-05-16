@@ -30,7 +30,7 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>Collection<span class="signature">(name)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">A Simple collection that stores names and a <a href="Metric.html">Metric</a> implementation with a few convenience methods for
+            <div class="class-description">A Simple collection that stores names and a <a href="Metric.html">Metric</a> instances with a few convenience methods for
 creating / registering and then gathering all data the registered metrics.</div>
         
     
@@ -95,13 +95,18 @@ creating / registering and then gathering all data the registered metrics.</div>
 
             <td class="type">
             
+                
+<span class="param-type">string</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last">The name to use for this collection.</td>
         </tr>
 
     
@@ -142,7 +147,7 @@ creating / registering and then gathering all data the registered metrics.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line24">line 24</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -196,7 +201,7 @@ creating / registering and then gathering all data the registered metrics.</div>
     
 
     
-    <h4 class="name" id="_getMetricForNameAndType"><span class="type-signature"></span>_getMetricForNameAndType<span class="signature">(name, requestedType)</span><span class="type-signature"> &rarr; {Optional.&lt;<a href="Metric.html">Metric</a>>}</span></h4>
+    <h4 class="name" id="_validateName"><span class="type-signature"></span>_validateName<span class="signature">(name)</span><span class="type-signature"></span></h4>
     
 
     
@@ -204,8 +209,7 @@ creating / registering and then gathering all data the registered metrics.</div>
 
 
 <div class="description">
-    Checks the registry for a metric with a given name and type, if it exists in the registry as a
-different type an error is thrown.
+    Validates that the provided name is valid
 </div>
 
 
@@ -252,25 +256,7 @@ different type an error is thrown.
 
             
 
-            <td class="description last">The metric name</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>requestedType</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The metric type</td>
+            <td class="description last">The provided metric name param</td>
         </tr>
 
     
@@ -311,7 +297,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line205">line 205</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line222">line 222</a>
     </li></ul></dd>
     
 
@@ -334,24 +320,6 @@ different type an error is thrown.
 
 
 
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Optional.&lt;<a href="Metric.html">Metric</a>></span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -487,7 +455,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line104">line 104</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line102">line 102</a>
     </li></ul></dd>
     
 
@@ -591,7 +559,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line222">line 222</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line231">line 231</a>
     </li></ul></dd>
     
 
@@ -749,7 +717,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line84">line 84</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -925,7 +893,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line124">line 124</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
@@ -1101,7 +1069,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line164">line 164</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -1267,7 +1235,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line50">line 50</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -1292,6 +1260,16 @@ different type an error is thrown.
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>var { Collection, Gauge } = require('measured');
+const collection = new Collection('node-process-metrics');
+const gauge = new Gauge(() => {
+   return process.memoryUsage().heapUsed;
+});
+collection.register('node.process.heap_used', gauge);</code></pre>
 
 
 
@@ -1425,7 +1403,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line184">line 184</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line182">line 182</a>
     </li></ul></dd>
     
 
@@ -1601,7 +1579,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line144">line 144</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line142">line 142</a>
     </li></ul></dd>
     
 
@@ -1705,7 +1683,7 @@ different type an error is thrown.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line58">line 58</a>
+        <a href="lib_Collection.js.html">lib/Collection.js</a>, <a href="lib_Collection.js.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -1771,13 +1749,13 @@ different type an error is thrown.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="Metric.html">Metric</a></li></ul><h3>Global</h3><ul><li><a href="global.html#validateName">validateName</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="Metric.html">Metric</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 15 2018 23:54:26 GMT-0700 (PDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed May 16 2018 00:18:57 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>
