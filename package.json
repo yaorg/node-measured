@@ -22,6 +22,7 @@
     "wd": "mochify --wd './test/**/test-*.js'",
     "jsdoc": "jsdoc --readme Readme.md --recurse --destination build/jsdoc/ lib/ index.js",
     "deploy-js-doc-to-github": "gh-pages -d build/jsdoc",
+    "travis-deploy-github-pages": "gh-pages -r \"https://${GH_TOKEN}@github.com/yaorg/node-measured.git\" -d build/jsdoc/ lib/ index.js",
     "test": "scripts/test.sh",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -49,7 +50,7 @@
     "sinon": "^5.0.7"
   },
   "repository": {
-    "url": "git://github.com/felixge/node-measured.git"
+    "url": "git://github.com/yaorg/node-measured.git"
   },
   "files": [
     "index.js",

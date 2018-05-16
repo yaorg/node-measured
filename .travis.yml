@@ -2,8 +2,9 @@ language: node_js
 node_js:
 - lts/*
 after_success:
-  - npm run coverage
-  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master" && npm run deploy-js-doc-to-github
+- npm run coverage
+- test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master"
+  && npm run deploy-js-doc-to-github
 deploy:
   provider: npm
   email: fieldju@gmail.com
@@ -12,3 +13,6 @@ deploy:
   on:
     tags: true
     repo: yaorg/node-measured
+env:
+  global:
+    secure: tr3Wo/f/Li3djNmtjMfgFwXQf5Qe3iTuOlDX8OXXFOuH+N1Jc1CMp3kcVt3xq46e2ONwP7d6CQDZomBAKNGKzqJaoD37btnx8ieaOr5bUhWEvtMCvNBQIaEJNv98r6VZBB9MetvrawJyKsQ855TZ+stariZA7AOZPg1Jdje60P4=
