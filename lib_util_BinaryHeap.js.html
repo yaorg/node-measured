@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib/util/BinaryHeap.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lib/util/BinaryHeap.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Based on http://en.wikipedia.org/wiki/Binary_Heap
+ * as well as http://eloquentjavascript.net/appendix2.html
+ */
+class BinaryHeap {
+  constructor(options) {
+    options = options || {};
+
+    this._elements = options.elements || [];
+    this._score = options.score || this._score;
+  }
+
+  /**
+   * Add elements to the binary heap.
+   * @param {any[]} elements
+   */
+  add(...elements) {
+    elements.forEach(element => {
+      this._elements.push(element);
+      this._bubble(this._elements.length - 1);
+    });
+  }
+
+  first() {
+    return this._elements[0];
+  }
+
+  removeFirst() {
+    const root = this._elements[0];
+    const last = this._elements.pop();
+
+    if (this._elements.length > 0) {
+      this._elements[0] = last;
+      this._sink(0);
+    }
+
+    return root;
+  }
+
+  clone() {
+    return new BinaryHeap({
+      elements: this.toArray(),
+      score: this._score
+    });
+  }
+
+  toSortedArray() {
+    const array = [];
+    const clone = this.clone();
+    let element;
+
+    while (true) {
+      element = clone.removeFirst();
+      if (element === undefined) {
+        break;
+      }
+
+      array.push(element);
+    }
+
+    return array;
+  }
+
+  toArray() {
+    return [].concat(this._elements);
+  }
+
+  size() {
+    return this._elements.length;
+  }
+
+  _bubble(bubbleIndex) {
+    const bubbleElement = this._elements[bubbleIndex];
+    const bubbleScore = this._score(bubbleElement);
+    let parentIndex;
+    let parentElement;
+    let parentScore;
+
+    while (bubbleIndex > 0) {
+      parentIndex = this._parentIndex(bubbleIndex);
+      parentElement = this._elements[parentIndex];
+      parentScore = this._score(parentElement);
+
+      if (bubbleScore &lt;= parentScore) {
+        break;
+      }
+
+      this._elements[parentIndex] = bubbleElement;
+      this._elements[bubbleIndex] = parentElement;
+      bubbleIndex = parentIndex;
+    }
+  }
+
+  _sink(sinkIndex) {
+    const sinkElement = this._elements[sinkIndex];
+    const sinkScore = this._score(sinkElement);
+    const { length } = this._elements;
+    let swapIndex;
+    let swapScore;
+    let swapElement;
+    let childIndexes;
+    let i;
+    let childIndex;
+    let childElement;
+    let childScore;
+
+    while (true) {
+      swapIndex = null;
+      swapScore = null;
+      swapElement = null;
+      childIndexes = this._childIndexes(sinkIndex);
+
+      for (i = 0; i &lt; childIndexes.length; i++) {
+        childIndex = childIndexes[i];
+
+        if (childIndex >= length) {
+          break;
+        }
+
+        childElement = this._elements[childIndex];
+        childScore = this._score(childElement);
+
+        if (childScore > sinkScore) {
+          if (swapScore === null || swapScore &lt; childScore) {
+            swapIndex = childIndex;
+            swapScore = childScore;
+            swapElement = childElement;
+          }
+        }
+      }
+
+      if (swapIndex === null) {
+        break;
+      }
+
+      this._elements[swapIndex] = sinkElement;
+      this._elements[sinkIndex] = swapElement;
+      sinkIndex = swapIndex;
+    }
+  }
+
+  _parentIndex(index) {
+    return Math.floor((index - 1) / 2);
+  }
+
+  _childIndexes(index) {
+    return [2 * index + 1, 2 * index + 2];
+  }
+
+  _score(element) {
+    return element.valueOf();
+  }
+}
+
+module.exports = BinaryHeap;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="Metric.html">Metric</a></li></ul><h3>Global</h3><ul><li><a href="global.html#validateName">validateName</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 15 2018 23:49:37 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

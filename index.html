@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h2>measured</h2><p><a href="http://travis-ci.org/yaorg/node-measured"><img src="https://secure.travis-ci.org/yaorg/node-measured.png" alt="Build Status"></a></p>
+<p>A Node library for measuring and reporting application-level metrics.</p>
+<p>Measured is heavily inspired by Coda Hale, Yammer Inc's <a href="https://github.com/dropwizard/metrics">Dropwizard Metrics Libraries</a> </p>
+<h3>Available packages</h3><h4>Measured Core</h4><p>The core measured library that has the Metric interfaces and implementations.</p>
+<h5>Install</h5><pre class="prettyprint source"><code>npm install @yaorg/measured-core</code></pre><h5>Metrics</h5><p>The core library has the following metrics classes:</p>
+<ul>
+<li><a href="Gauge.html">Gauge</a>, Values that can be read instantly via a supplied call back.</li>
+<li><a href="SettableGauge.html">SettableGauge</a>, Just like a Gauge but its value is set directly rather than supplied by a callback</li>
+<li><a href="Counter.html">Counter</a>, Counters are things that increment or decrement</li>
+<li><a href="Timer.html">Timer</a>, Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.</li>
+<li><a href="Histogram.html">Histogram</a>, Keeps a reservoir of statistically relevant values biased towards the last 5 minutes to explore their distribution.</li>
+<li><a href="Meter.html">Meter</a>, Things that are measured as events / interval.</li>
+</ul>
+<p>They can be created manually or with the including basic core registry called the <a href="Collection.html">Collection</a>.</p>
+<h5>Usage</h5><p><strong>Step 1:</strong> Add measurements to your code. For example, lets track the
+requests/sec of a http server:</p>
+<pre class="prettyprint source lang-js"><code>var http  = require('http');
+var stats = require('measured').createCollection();
+
+http.createServer(function(req, res) {
+  stats.meter('requestsPerSecond').mark();
+  res.end('Thanks');
+}).listen(3000);</code></pre><p><strong>Step 2:</strong> Show the collected measurements (more advanced examples follow later):</p>
+<pre class="prettyprint source lang-js"><code>setInterval(function() {
+  console.log(stats.toJSON());
+}, 1000);</code></pre><p>This will output something like this every second:</p>
+<pre class="prettyprint source"><code>{ requestsPerSecond:
+   { mean: 1710.2180279856818,
+     count: 10511,
+     'currentRate': 1941.4893498239829,
+     '1MinuteRate': 168.08263156623656,
+     '5MinuteRate': 34.74630977619571,
+     '15MinuteRate': 11.646507524106095 } }</code></pre><p><strong>Step 3:</strong> Aggregate the data into your backend of choice.
+Here are a few time series data aggregators.</p>
+<ul>
+<li><a href="http://graphite.wikidot.com/">Graphite</a><ul>
+<li>A free and open source, self hosted and managed solution for time series data.</li>
+</ul>
+</li>
+<li><a href="https://signalfx.com/">SignalFx</a><ul>
+<li>An enterprise SASS offering for time series data.</li>
+</ul>
+</li>
+<li><a href="https://www.datadoghq.com/">Datadog</a><ul>
+<li>An enterprise SASS offering for time series data.</li>
+</ul>
+</li>
+</ul>
+<h3>License</h3><p>This project Measured and all of its modules are licensed under the <a href="https://github.com/yaorg/node-measured/blob/master/Makefile">MIT license</a>.</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="Metric.html">Metric</a></li></ul><h3>Global</h3><ul><li><a href="global.html#validateName">validateName</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue May 15 2018 23:49:37 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
