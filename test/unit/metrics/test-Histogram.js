@@ -163,6 +163,45 @@ describe('Histogram#percentiles', function () {
   });
 });
 
+describe('Histogram#weightedPercentiles', function () {
+  var sample;
+  var histogram;
+  beforeEach(function () {
+    sample    = sinon.stub(new EDS());
+    histogram = new Histogram({
+      sample: sample,
+      percentilesMethod: Histogram.weightedPercentiles
+    });
+
+    var values = [];
+    var i;
+    for (i = 1; i <= 100; i++) {
+      values.push({ value: i, priority: 1 });
+    }
+
+    var swapWith;
+    var value;
+    for (i = 0; i < 100; i++) {
+      swapWith = Math.floor(Math.random() * 100);
+      value = values[i];
+
+      values[i] = values[swapWith];
+      values[swapWith] = value;
+    }
+
+    sample.toArrayWithWeights.returns(values);
+    sample.toArray.returns(values.map(function (item) { return item.value; }));
+  });
+
+  it('calculates single percentile correctly', function () {
+    var percentiles = histogram.percentiles([0.5]);
+    assert.equal(percentiles[0.5], 50.5);
+
+    percentiles = histogram.percentiles([0.99]);
+    assert.equal(percentiles[0.99], 99.99);
+  });
+});
+
 describe('Histogram#reset', function () {
   var sample;
   var histogram;

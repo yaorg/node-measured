@@ -1,5 +1,9 @@
 # Changes
 
+## 1.2.0
+
+- Add Histogram#weightedPercentiles and allow setting percentilesMethod in Histogram options. (Csaba Palfi)
+
 ## 1.1.0
 
 - Add Histogram#hasValues (Fredrik Hörte)
