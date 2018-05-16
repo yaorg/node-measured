@@ -83,4 +83,4 @@ See [Development and Contributing](https://github.com/yaorg/node-measured/blob/m
 
 ### License
 
-This project Measured and all of its modules are licensed under the [MIT license](https://github.com/yaorg/node-measured/blob/master/LICNESE).
+This project Measured and all of its modules are licensed under the [MIT license](https://github.com/yaorg/node-measured/blob/master/LICENSE).
