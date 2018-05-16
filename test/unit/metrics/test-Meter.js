@@ -3,40 +3,42 @@
 
 var common = require('../../common');
 var assert = require('assert');
-var sinon  = require('sinon');
-var units  = common.measured.units;
+var sinon = require('sinon');
+var units = common.measured.units;
 
-describe('Meter', function () {
+describe('Meter', function() {
   var meter;
   var clock;
-  beforeEach(function () {
+  beforeEach(function() {
     clock = sinon.useFakeTimers();
-    meter = new common.measured.Meter({getTime: function () {
-      return new Date().getTime();
-    }});
-  });
-
-  afterEach(function () {
-    clock.restore();
-  });
-
-  it('all values are correctly initialized', function () {
-    assert.deepEqual(meter.toJSON(), {
-      'mean'         : 0,
-      'count'        : 0,
-      'currentRate'  : 0,
-      '1MinuteRate'  : 0,
-      '5MinuteRate'  : 0,
-      '15MinuteRate' : 0
+    meter = new common.measured.Meter({
+      getTime: function() {
+        return new Date().getTime();
+      }
     });
   });
 
-  it('supports rates override from opts', function () {
+  afterEach(function() {
+    clock.restore();
+  });
+
+  it('all values are correctly initialized', function() {
+    assert.deepEqual(meter.toJSON(), {
+      mean: 0,
+      count: 0,
+      currentRate: 0,
+      '1MinuteRate': 0,
+      '5MinuteRate': 0,
+      '15MinuteRate': 0
+    });
+  });
+
+  it('supports rates override from opts', function() {
     var rate = sinon.stub().returns(666);
     var properties = {
-      m1Rate: {rate: rate},
-      m5Rate: {rate: rate},
-      m15Rate: {rate: rate}
+      m1Rate: { rate: rate },
+      m5Rate: { rate: rate },
+      m15Rate: { rate: rate }
     };
     var json = new common.measured.Meter(properties).toJSON();
 
@@ -45,7 +47,7 @@ describe('Meter', function () {
     assert.equal(json['15MinuteRate'].toFixed(0), '666');
   });
 
-  it('decay over two marks and ticks', function () {
+  it('decay over two marks and ticks', function() {
     meter.mark(5);
     meter._tick();
 
@@ -65,7 +67,7 @@ describe('Meter', function () {
     assert.equal(json['15MinuteRate'].toFixed(3), '0.017');
   });
 
-  it('mean rate', function () {
+  it('mean rate', function() {
     meter.mark(5);
     clock.tick(5000);
 
@@ -78,18 +80,17 @@ describe('Meter', function () {
     assert.equal(json.mean, 0.5);
   });
 
-  it('currentRate is the observed rate since the last toJSON call',
-    function () {
-      meter.mark(1);
-      meter.mark(2);
-      meter.mark(3);
+  it('currentRate is the observed rate since the last toJSON call', function() {
+    meter.mark(1);
+    meter.mark(2);
+    meter.mark(3);
 
-      clock.tick(3000);
+    clock.tick(3000);
 
-      assert.equal(meter.toJSON().currentRate, 2);
-    });
+    assert.equal(meter.toJSON().currentRate, 2);
+  });
 
-  it('currentRate resets by reading it', function () {
+  it('currentRate resets by reading it', function() {
     meter.mark(1);
     meter.mark(2);
     meter.mark(3);
@@ -98,23 +99,22 @@ describe('Meter', function () {
     assert.strictEqual(meter.toJSON().currentRate, 0);
   });
 
-  it('currentRate also resets internal duration timer by reading it',
-    function () {
-      meter.mark(1);
-      meter.mark(2);
-      meter.mark(3);
-      clock.tick(1000);
-      meter.toJSON();
+  it('currentRate also resets internal duration timer by reading it', function() {
+    meter.mark(1);
+    meter.mark(2);
+    meter.mark(3);
+    clock.tick(1000);
+    meter.toJSON();
 
-      clock.tick(1000);
-      meter.toJSON();
+    clock.tick(1000);
+    meter.toJSON();
 
-      meter.mark(1);
-      clock.tick(1000);
-      assert.strictEqual(meter.toJSON().currentRate, 1);
-    });
+    meter.mark(1);
+    clock.tick(1000);
+    assert.strictEqual(meter.toJSON().currentRate, 1);
+  });
 
-  it('#reset resets all values', function () {
+  it('#reset resets all values', function() {
     meter.mark(1);
     var json = meter.toJSON();
 

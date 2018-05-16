@@ -1,23 +1,39 @@
-# measured
+## [Docs are best viewed on the github page](https://yaorg.github.io/node-measured/)
+
+## Measured
 
 [![Build Status](https://secure.travis-ci.org/yaorg/node-measured.png)](http://travis-ci.org/yaorg/node-measured)
 
-This is an alternative port of Coda Hale's [metrics library][codametrics].
+A Node library for measuring and reporting application-level metrics.
 
-I created this despite the existing [metrics port][existingmetrics] for node.js
-to fully understand the underlaying algorithms, and to provide a solid, tested
-and documented module.
+Measured is heavily inspired by Coda Hale, Yammer Inc's [Dropwizard Metrics Libraries](https://github.com/dropwizard/metrics) 
 
-[codametrics]:  https://github.com/codahale/metrics
-[existingmetrics]: https://github.com/mikejihbe/metrics
+### Available packages
 
-## Install
+#### Measured Core
+
+The core measured library that has the Metric interfaces and implementations.
+
+##### Install
 
 ```
-npm install measured
+npm install @yaorg/measured-core
 ```
 
-## Usage
+##### Metrics
+
+The core library has the following metrics classes:
+
+- {@link Gauge}, Values that can be read instantly via a supplied call back.
+- {@link SettableGauge}, Just like a Gauge but its value is set directly rather than supplied by a callback
+- {@link Counter}, Counters are things that increment or decrement
+- {@link Timer}, Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.
+- {@link Histogram}, Keeps a reservoir of statistically relevant values biased towards the last 5 minutes to explore their distribution.
+- {@link Meter}, Things that are measured as events / interval.
+
+They can be created manually or with the including basic core registry called the {@link Collection}.
+
+##### Usage
 
 **Step 1:** Add measurements to your code. For example, lets track the
 requests/sec of a http server:
@@ -52,207 +68,37 @@ This will output something like this every second:
      '15MinuteRate': 11.646507524106095 } }
 ```
 
-**Step 3:** Aggregate the data into your backend of choice. I recommend
-[graphite][].
+**Step 3:** Aggregate the data into your backend of choice.
+Here are a few time series data aggregators.
+- [Graphite](http://graphite.wikidot.com/)
+    - A free and open source, self hosted and managed solution for time series data.
+- [SignalFx](https://signalfx.com/)
+    - An enterprise SASS offering for time series data.
+- [Datadog](https://www.datadoghq.com/)
+    - An enterprise SASS offering for time series data.
 
-[graphite]: http://graphite.wikidot.com/
+### Development
 
-## Metrics
+#### Building and deploying the docs
 
-The following metrics are available (both standalone and on the Collection API):
+Make sure you have the dependencies installed
 
-### Gauge
-
-Values that can be read instantly. Example:
-
-```js
-var Measured = require('measured')
-var gauge = new Measured.Gauge(function() {
-  return process.memoryUsage().rss;
-});
+```bash
+npm install
 ```
 
-There is currently no callback support for Gauges because otherwise it would be
-very difficult to report the metrics inside a collection within a regular
-interval.
+build the jsdoc site, the files will be outputed to `./build/jsdocs/`
 
-**Options:**
-
-* Gauges take a function as parameter which needs to return their current value.
-
-**Methods:**
-
-None.
-
-**toJSON Output:**
-
-Gauges directly return their currently value.
-
-### Counter
-
-Things that increment or decrement. Example:
-
-```js
-var Measured = require('measured')
-var activeUploads = new Measured.Counter();
-http.createServer(function(req, res) {
-  activeUploads.inc();
-  req.on('end', function() {
-    activeUploads.dec();
-  });
-});
+```bash
+npm run jsdoc
 ```
 
-**Options:**
+Verify that the site looks good and deploy to GitHub Pages
 
-* `count` An initial count for the counter. Defaults to `0`.
-
-**Methods:**
-
-* `inc(n)` Increment the counter by `n`. Defaults to `1`.
-* `dec(n)` Decrement the counter by `n`. Defaults to `1`.
-* `reset(count)` Resets the counter back to `count` Defaults to `0`.
-
-**toJSON Output:**
-
-Counters directly return their currently value.
-
-### Meter
-
-Things that are measured as events / interval. Example:
-
-```js
-var Measured = require('measured')
-var meter = new Measured.Meter();
-http.createServer(function(req, res) {
-  meter.mark();
-});
+```bash
+npm run deploy-js-doc-to-github
 ```
 
-**Options:**
+### License
 
-* `rateUnit` The rate unit. Defaults to `1000` (1 sec).
-* `tickInterval` The interval in which the averages are updated. Defaults to
-  `5000` (5 sec).
-
-**Methods:**
-
-* `mark(n)` Register `n` events as having just occured. Defaults to `1`.
-* `reset()` Resets all values. Meters initialized with custom options will
-  be reset to the default settings (patch welcome).
-* `unref()` Unrefs the backing timer.  The meter will not keep the event loop
-  alive.  Idempotent.
-* `ref()` Refs the backing timer again.  Idempotent.
-
-**toJSON Output:**
-
-* `mean`: The average rate since the meter was started.
-* `count`: The total of all values added to the meter.
-* `currentRate`: The rate of the meter since the last toJSON() call.
-* `1MinuteRate`: The rate of the meter biased towards the last 1 minute.
-* `5MinuteRate`: The rate of the meter biased towards the last 5 minutes.
-* `15MinuteRate`: The rate of the meter biased towards the last 15 minutes.
-
-### Histogram
-
-Keeps a resevoir of statistically relevant values biased towards the last 5
-minutes to explore their distribution. Example:
-
-```js
-var Measured = require('measured')
-var histogram = new Measured.Histogram();
-http.createServer(function(req, res) {
-  if (req.headers['content-length']) {
-    histogram.update(parseInt(req.headers['content-length'], 10));
-  }
-});
-```
-
-**Options:**
-
-* `sample` The sample resevoir to use. Defaults to an `ExponentiallyDecayingSample`.
-* `percentilesMethod` The function to use to calculate percentile values in `toJSON`. Defaults to `Histogram.percentiles` that does not take into account sample weights and can also be set to `Histogram.weightedPercentiles` that does and will be biased towards more recent values.
-
-**Methods:**
-
-* `update(value, timestamp)` Pushes `value` into the sample. `timestamp`
-  defaults to `Date.now()`.
-* `hasValues()` Whether the histogram contains values.
-* `reset()` Resets all values. Histograms initialized with custom options will
-  be reset to the default settings (patch welcome).
-
-**toJSON Output:**
-
-* `min`: The lowest observed value.
-* `max`: The highest observed value.
-* `sum`: The sum of all observed values.
-* `variance`: The variance of all observed values.
-* `mean`: The average of all observed values.
-* `stddev`: The stddev of all observed values.
-* `count`: The number of observed values.
-* `median`: 50% of all values in the resevoir are at or below this value.
-* `p75`: See median, 75% percentile.
-* `p95`: See median, 95% percentile.
-* `p99`: See median, 99% percentile.
-* `p999`: See median, 99.9% percentile.
-
-### Timers
-
-Timers are a combination of Meters and Histograms. They measure the rate as
-well as distribution of scalar events. Since they are frequently used for
-tracking how long certain things take, they expose an API for that:
-
-```js
-var Measured = require('measured')
-var timer = new Measured.Timer();
-http.createServer(function(req, res) {
-  var stopwatch = timer.start();
-  req.on('end', function() {
-    stopwatch.end();
-  });
-});
-```
-
-But you can also use them as generic histograms that also track the rate of
-events:
-
-```js
-var Measured = require('measured')
-var timer = new Measured.Timer();
-http.createServer(function(req, res) {
-  if (req.headers['content-length']) {
-    timer.update(parseInt(req.headers['content-length'], 10));
-  }
-});
-```
-
-**Options:**
-
-* `meter` The internal meter to use. Defaults to a new `Meter`.
-* `histogram` The internal histogram to use. Defaults to a new `Histogram`.
-
-**Methods:**
-
-* `start()` Returns a `Stopwatch`.
-* `update(value)` Updates the internal histogram with `value` and marks one
-  event on the internal meter.
-* `reset()` Resets all values. Timers initialized with custom options will
-  be reset to the default settings (patch welcome).
-* `unref()` Unrefs the backing timer.  The internal meter will not keep the event loop
-  alive. Idempotent.
-* `ref()` Refs the backing timer again. Idempotent.
-
-**toJSON Output:**
-
-* `meter`: See Meter toJSON output docs above.
-* `histogram`: See Histogram toJSON output docs above.
-
-## Todo
-
-* Implement flatten() so reporters can use it
-* Implement async gauges
-* Document using this with graphite / zabbix
-
-## License
-
-This module is licensed under the MIT license.
+This project Measured and all of its modules are licensed under the [MIT license](https://github.com/yaorg/node-measured/blob/master/Makefile).

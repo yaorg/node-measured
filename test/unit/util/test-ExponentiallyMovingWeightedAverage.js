@@ -6,8 +6,8 @@ var assert = require('assert');
 var units = common.measured.units;
 var EMWA = common.measured.ExponentiallyMovingWeightedAverage;
 
-describe('ExponentiallyMovingWeightedAverage', function () {
-  it('decay over several updates and ticks', function () {
+describe('ExponentiallyMovingWeightedAverage', function() {
+  it('decay over several updates and ticks', function() {
     var ewma = new EMWA(units.MINUTES, 5 * units.SECONDS);
 
     ewma.update(5);

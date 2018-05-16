@@ -1,2 +1,4 @@
 *.un~
 /node_modules/*
+.idea/
+build/
