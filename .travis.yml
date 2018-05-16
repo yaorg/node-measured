@@ -4,7 +4,7 @@ node_js:
 after_success:
 - npm run coverage
 - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master"
-  && npm run deploy-js-doc-to-github
+  && npm run travis-deploy-github-pages
 deploy:
   provider: npm
   email: fieldju@gmail.com

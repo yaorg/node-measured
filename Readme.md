@@ -17,7 +17,7 @@ The core measured library that has the Metric interfaces and implementations.
 ##### Install
 
 ```
-npm install @yaorg/measured-core
+npm install measured-core
 ```
 
 ##### Metrics
