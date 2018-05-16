@@ -1,7 +1,9 @@
 language: node_js
 node_js:
 - lts/*
-after_success: npm run coverage
+after_success:
+  - npm run coverage
+  - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master" && npm run deploy-js-doc-to-github
 deploy:
   provider: npm
   email: fieldju@gmail.com

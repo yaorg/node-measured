@@ -7,6 +7,9 @@
   "engines": {
     "node": ">= 5.12"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./index",
   "scripts": {
     "clean": "rm -fr build",
