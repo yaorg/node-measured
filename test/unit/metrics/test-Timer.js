@@ -78,4 +78,9 @@ describe('Timer', function() {
     assert.ok(meter.reset.calledOnce);
     assert.ok(histogram.reset.calledOnce);
   });
+
+  it('returns the expected type', () => {
+    const timer = new common.measured.Timer();
+    assert.equal(timer.getType(), 'Timer');
+  })
 });
