@@ -77,28 +77,10 @@ Here are a few time series data aggregators.
 - [Datadog](https://www.datadoghq.com/)
     - An enterprise SASS offering for time series data.
 
-### Development
+### Development and Contributing
 
-#### Building and deploying the docs
-
-Make sure you have the dependencies installed
-
-```bash
-npm install
-```
-
-build the jsdoc site, the files will be outputed to `./build/jsdocs/`
-
-```bash
-npm run jsdoc
-```
-
-Verify that the site looks good and deploy to GitHub Pages
-
-```bash
-npm run deploy-js-doc-to-github
-```
+See [Development and Contributing](https://github.com/yaorg/node-measured/blob/master/CONTRIBUTING.md)
 
 ### License
 
-This project Measured and all of its modules are licensed under the [MIT license](https://github.com/yaorg/node-measured/blob/master/Makefile).
+This project Measured and all of its modules are licensed under the [MIT license](https://github.com/yaorg/node-measured/blob/master/LICNESE).
