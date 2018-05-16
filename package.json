@@ -17,7 +17,7 @@
     "test:node:coverage": "nyc --report-dir build/coverage/ --reporter=html --reporter=text mocha './test/**/test-*.js'",
     "test:browser": "mochify './test/**/test-*.js'",
     "wd": "mochify --wd './test/**/test-*.js'",
-    "jsdoc": "jsdoc --readme README.md --recurse --destination build/jsdoc/ lib/ index.js",
+    "jsdoc": "jsdoc --readme ./README.md --recurse --destination ./build/jsdoc/ ./lib/ ./index.js",
     "deploy-js-doc-to-github": "gh-pages -d build/jsdoc",
     "test": "scripts/test.sh",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
