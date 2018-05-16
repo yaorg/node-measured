@@ -2,7 +2,7 @@
   "author": "Felix Geisendörfer <felix@debuggable.com> (http://debuggable.com/)",
   "name": "measured-core",
   "description": "A Node library for measuring and reporting application-level metrics.",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "homepage": "https://yaorg.github.io/node-measured/",
   "engines": {
     "node": ">= 5.12"
