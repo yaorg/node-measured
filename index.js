@@ -4,6 +4,7 @@ const Gauge = require('./lib/metrics/Gauge');
 const SettableGauge = require('./lib/metrics/SettableGauge');
 const Histogram = require('./lib/metrics/Histogram');
 const Meter = require('./lib/metrics/Meter');
+const NoOpMeter = require('./lib/metrics/NoOpMeter');
 const Timer = require('./lib/metrics/Timer');
 const BinaryHeap = require('./lib/util/BinaryHeap');
 const ExponentiallyDecayingSample = require('./lib/util/ExponentiallyDecayingSample');
@@ -52,6 +53,12 @@ module.exports = {
    * @type {Meter}
    */
   Meter,
+
+  /**
+   * See {@link NoOpMeter}
+   * @type {NoOpMeter}
+   */
+  NoOpMeter,
 
   /**
    * See {@link Timer}

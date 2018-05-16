@@ -75,7 +75,6 @@ describe('Counter', function() {
   });
 
   it('returns the expected type', () => {
-    const counter = new common.measured.Counter();
     assert.equal(counter.getType(), 'Counter');
   })
 });

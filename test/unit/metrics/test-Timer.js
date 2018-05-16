@@ -80,7 +80,6 @@ describe('Timer', function() {
   });
 
   it('returns the expected type', () => {
-    const timer = new common.measured.Timer();
     assert.equal(timer.getType(), 'Timer');
   })
 });
