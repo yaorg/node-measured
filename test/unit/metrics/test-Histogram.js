@@ -1,19 +1,19 @@
 /*global describe, it, beforeEach, afterEach*/
 'use strict';
 
-var common    = require('../../common');
-var assert    = require('assert');
-var sinon     = require('sinon');
+var common = require('../../common');
+var assert = require('assert');
+var sinon = require('sinon');
 var Histogram = common.measured.Histogram;
-var EDS       = common.measured.ExponentiallyDecayingSample;
+var EDS = common.measured.ExponentiallyDecayingSample;
 
-describe('Histogram', function () {
+describe('Histogram', function() {
   var histogram;
-  beforeEach(function () {
+  beforeEach(function() {
     histogram = new Histogram();
   });
 
-  it('all values are null in the beginning', function () {
+  it('all values are null in the beginning', function() {
     var json = histogram.toJSON();
     assert.strictEqual(json.min, null);
     assert.strictEqual(json.max, null);
@@ -30,22 +30,22 @@ describe('Histogram', function () {
   });
 });
 
-describe('Histogram#update', function () {
+describe('Histogram#update', function() {
   var sample;
   var histogram;
-  beforeEach(function () {
-    sample    = sinon.stub(new EDS());
-    histogram = new Histogram({sample: sample});
+  beforeEach(function() {
+    sample = sinon.stub(new EDS());
+    histogram = new Histogram({ sample: sample });
 
     sample.toArray.returns([]);
   });
 
-  it('updates underlaying sample', function () {
+  it('updates underlaying sample', function() {
     histogram.update(5);
     assert.ok(sample.update.calledWith(5));
   });
 
-  it('keeps track of min', function () {
+  it('keeps track of min', function() {
     histogram.update(5);
     histogram.update(3);
     histogram.update(6);
@@ -53,7 +53,7 @@ describe('Histogram#update', function () {
     assert.equal(histogram.toJSON().min, 3);
   });
 
-  it('keeps track of max', function () {
+  it('keeps track of max', function() {
     histogram.update(5);
     histogram.update(9);
     histogram.update(3);
@@ -61,7 +61,7 @@ describe('Histogram#update', function () {
     assert.equal(histogram.toJSON().max, 9);
   });
 
-  it('keeps track of sum', function () {
+  it('keeps track of sum', function() {
     histogram.update(5);
     histogram.update(1);
     histogram.update(12);
@@ -69,7 +69,7 @@ describe('Histogram#update', function () {
     assert.equal(histogram.toJSON().sum, 18);
   });
 
-  it('keeps track of count', function () {
+  it('keeps track of count', function() {
     histogram.update(5);
     histogram.update(1);
     histogram.update(12);
@@ -77,7 +77,7 @@ describe('Histogram#update', function () {
     assert.equal(histogram.toJSON().count, 3);
   });
 
-  it('keeps track of mean', function () {
+  it('keeps track of mean', function() {
     histogram.update(5);
     histogram.update(1);
     histogram.update(12);
@@ -85,7 +85,7 @@ describe('Histogram#update', function () {
     assert.equal(histogram.toJSON().mean, 6);
   });
 
-  it('keeps track of variance (example without variance)', function () {
+  it('keeps track of variance (example without variance)', function() {
     histogram.update(5);
     histogram.update(5);
     histogram.update(5);
@@ -93,7 +93,7 @@ describe('Histogram#update', function () {
     assert.equal(histogram.toJSON().variance, 0);
   });
 
-  it('keeps track of variance (example with variance)', function () {
+  it('keeps track of variance (example with variance)', function() {
     histogram.update(1);
     histogram.update(2);
     histogram.update(3);
@@ -102,7 +102,7 @@ describe('Histogram#update', function () {
     assert.equal(histogram.toJSON().variance.toFixed(3), '1.667');
   });
 
-  it('keeps track of stddev', function () {
+  it('keeps track of stddev', function() {
     histogram.update(1);
     histogram.update(2);
     histogram.update(3);
@@ -111,7 +111,7 @@ describe('Histogram#update', function () {
     assert.equal(histogram.toJSON().stddev.toFixed(3), '1.291');
   });
 
-  it('keeps track of percentiles', function () {
+  it('keeps track of percentiles', function() {
     var values = [];
     var i;
     for (i = 1; i <= 100; i++) {
@@ -128,12 +128,12 @@ describe('Histogram#update', function () {
   });
 });
 
-describe('Histogram#percentiles', function () {
+describe('Histogram#percentiles', function() {
   var sample;
   var histogram;
-  beforeEach(function () {
-    sample    = sinon.stub(new EDS());
-    histogram = new Histogram({sample: sample});
+  beforeEach(function() {
+    sample = sinon.stub(new EDS());
+    histogram = new Histogram({ sample: sample });
 
     var values = [];
     var i;
@@ -154,20 +154,20 @@ describe('Histogram#percentiles', function () {
     sample.toArray.returns(values);
   });
 
-  it('calculates single percentile correctly', function () {
-    var percentiles = histogram.percentiles([0.5]);
+  it('calculates single percentile correctly', function() {
+    var percentiles = histogram._percentiles([0.5]);
     assert.equal(percentiles[0.5], 50.5);
 
-    percentiles = histogram.percentiles([0.99]);
+    percentiles = histogram._percentiles([0.99]);
     assert.equal(percentiles[0.99], 99.99);
   });
 });
 
-describe('Histogram#weightedPercentiles', function () {
+describe('Histogram#weightedPercentiles', function() {
   var sample;
   var histogram;
-  beforeEach(function () {
-    sample    = sinon.stub(new EDS());
+  beforeEach(function() {
+    sample = sinon.stub(new EDS());
     histogram = new Histogram({
       sample: sample,
       percentilesMethod: Histogram.weightedPercentiles
@@ -190,27 +190,31 @@ describe('Histogram#weightedPercentiles', function () {
     }
 
     sample.toArrayWithWeights.returns(values);
-    sample.toArray.returns(values.map(function (item) { return item.value; }));
+    sample.toArray.returns(
+      values.map(function(item) {
+        return item.value;
+      })
+    );
   });
 
-  it('calculates single percentile correctly', function () {
-    var percentiles = histogram.percentiles([0.5]);
+  it('calculates single percentile correctly', function() {
+    var percentiles = histogram._percentiles([0.5]);
     assert.equal(percentiles[0.5], 50.5);
 
-    percentiles = histogram.percentiles([0.99]);
+    percentiles = histogram._percentiles([0.99]);
     assert.equal(percentiles[0.99], 99.99);
   });
 });
 
-describe('Histogram#reset', function () {
+describe('Histogram#reset', function() {
   var sample;
   var histogram;
-  beforeEach(function () {
-    sample    = new EDS();
-    histogram = new Histogram({sample: sample});
+  beforeEach(function() {
+    sample = new EDS();
+    histogram = new Histogram({ sample: sample });
   });
 
-  it('resets all values', function () {
+  it('resets all values', function() {
     histogram.update(5);
     histogram.update(2);
     var json = histogram.toJSON();
@@ -233,19 +237,18 @@ describe('Histogram#reset', function () {
   });
 });
 
-describe('Histogram#hasValues', function () {
-
+describe('Histogram#hasValues', function() {
   var histogram;
-  beforeEach(function () {
+  beforeEach(function() {
     histogram = new Histogram();
   });
 
-  it('has values', function () {
+  it('has values', function() {
     histogram.update(5);
     assert.ok(histogram.hasValues());
   });
 
-  it('has no values', function () {
+  it('has no values', function() {
     assert.equal(histogram.hasValues(), false);
   });
 });

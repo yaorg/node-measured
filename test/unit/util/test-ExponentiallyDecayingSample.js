@@ -3,25 +3,25 @@
 
 var common = require('../../common');
 var assert = require('assert');
-var EDS    = common.measured.ExponentiallyDecayingSample;
-var units  = common.measured.units;
+var EDS = common.measured.ExponentiallyDecayingSample;
+var units = common.measured.units;
 
-describe('ExponentiallyDecayingSample#toSortedArray', function () {
+describe('ExponentiallyDecayingSample#toSortedArray', function() {
   var sample;
-  beforeEach(function () {
+  beforeEach(function() {
     sample = new EDS({
       size: 3,
-      random: function () {
+      random: function() {
         return 1;
       }
     });
   });
 
-  it('returns an empty array by default', function () {
+  it('returns an empty array by default', function() {
     assert.deepEqual(sample.toSortedArray(), []);
   });
 
-  it('is always sorted by priority', function () {
+  it('is always sorted by priority', function() {
     sample.update('a', Date.now() + 3000);
     sample.update('b', Date.now() + 2000);
     sample.update('c', Date.now());
@@ -30,22 +30,22 @@ describe('ExponentiallyDecayingSample#toSortedArray', function () {
   });
 });
 
-describe('ExponentiallyDecayingSample#toArray', function () {
+describe('ExponentiallyDecayingSample#toArray', function() {
   var sample;
-  beforeEach(function () {
+  beforeEach(function() {
     sample = new EDS({
       size: 3,
-      random: function () {
+      random: function() {
         return 1;
       }
     });
   });
 
-  it('returns an empty array by default', function () {
+  it('returns an empty array by default', function() {
     assert.deepEqual(sample.toArray(), []);
   });
 
-  it('may return an unsorted array', function () {
+  it('may return an unsorted array', function() {
     sample.update('a', Date.now() + 3000);
     sample.update('b', Date.now() + 2000);
     sample.update('c', Date.now());
@@ -54,31 +54,31 @@ describe('ExponentiallyDecayingSample#toArray', function () {
   });
 });
 
-describe('ExponentiallyDecayingSample#update', function () {
+describe('ExponentiallyDecayingSample#update', function() {
   var sample;
-  beforeEach(function () {
+  beforeEach(function() {
     sample = new EDS({
       size: 2,
-      random: function () {
+      random: function() {
         return 1;
       }
     });
   });
 
-  it('can add one item', function () {
+  it('can add one item', function() {
     sample.update('a');
 
     assert.deepEqual(sample.toSortedArray(), ['a']);
   });
 
-  it('sorts items according to priority ascending', function () {
+  it('sorts items according to priority ascending', function() {
     sample.update('a', Date.now());
     sample.update('b', Date.now() + 1000);
 
     assert.deepEqual(sample.toSortedArray(), ['a', 'b']);
   });
 
-  it('pops items with lowest priority', function () {
+  it('pops items with lowest priority', function() {
     sample.update('a', Date.now());
     sample.update('b', Date.now() + 1000);
     sample.update('c', Date.now() + 2000);
@@ -86,7 +86,7 @@ describe('ExponentiallyDecayingSample#update', function () {
     assert.deepEqual(sample.toSortedArray(), ['b', 'c']);
   });
 
-  it('items with too low of a priority do not make it in', function () {
+  it('items with too low of a priority do not make it in', function() {
     sample.update('a', Date.now() + 1000);
     sample.update('b', Date.now() + 2000);
     sample.update('c', Date.now());
@@ -95,18 +95,18 @@ describe('ExponentiallyDecayingSample#update', function () {
   });
 });
 
-describe('ExponentiallyDecayingSample#_rescale', function () {
+describe('ExponentiallyDecayingSample#_rescale', function() {
   var sample;
-  beforeEach(function () {
+  beforeEach(function() {
     sample = new EDS({
       size: 2,
-      random: function () {
+      random: function() {
         return 1;
       }
     });
   });
 
-  it('works as expected', function () {
+  it('works as expected', function() {
     sample.update('a', Date.now() + 50 * units.MINUTES);
     sample.update('b', Date.now() + 55 * units.MINUTES);
 

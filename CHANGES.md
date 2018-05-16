@@ -1,5 +1,14 @@
 # Changes
 
+## 1.3.0
+
+- Add SettableGauge, a gauge that can have it's value set directly, useful for async situations
+- Converts Files to ES6, using modified AirBnB eslint rules.
+- Remove documentation from README and annotated all the classes so that documentation is generated from code rather than manually curated.
+- Add tasks to create documentation static html site
+- Renamed `measured` package name to `@yaorg/measured-core` to reflect new org and the fact that it is the core library.
+- Configure Travis to do npm releases when tags are published
+
 ## 1.2.0
 
 - Add Histogram#weightedPercentiles and allow setting percentilesMethod in Histogram options. (Csaba Palfi)

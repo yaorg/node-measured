@@ -4,11 +4,11 @@
 var common = require('../../common');
 var assert = require('assert');
 
-describe('Gauge', function () {
-  it('reads value from function', function () {
+describe('Gauge', function() {
+  it('reads value from function', function() {
     var i = 0;
 
-    var gauge = new common.measured.Gauge(function () {
+    var gauge = new common.measured.Gauge(function() {
       return i++;
     });
 
