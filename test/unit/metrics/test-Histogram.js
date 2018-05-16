@@ -251,4 +251,9 @@ describe('Histogram#hasValues', function() {
   it('has no values', function() {
     assert.equal(histogram.hasValues(), false);
   });
+
+  it('returns the expected type', () => {
+    const histogram = new common.measured.Histogram();
+    assert.equal(histogram.getType(), 'Histogram');
+  })
 });

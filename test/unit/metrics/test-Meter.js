@@ -136,4 +136,9 @@ describe('Meter', function() {
       }
     }
   });
+
+  it('returns the expected type', () => {
+    const meter = new common.measured.Meter();
+    assert.equal(meter.getType(), 'Meter');
+  })
 });

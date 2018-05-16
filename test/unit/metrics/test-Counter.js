@@ -73,4 +73,9 @@ describe('Counter', function() {
     counter.reset(50);
     assert.equal(counter.toJSON(), 50);
   });
+
+  it('returns the expected type', () => {
+    const counter = new common.measured.Counter();
+    assert.equal(counter.getType(), 'Counter');
+  })
 });

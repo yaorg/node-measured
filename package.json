@@ -14,17 +14,19 @@
     "lint": "eslint lib/**/*.js",
     "watch": "npm run test:node -- --watch",
     "test:node": "mocha './test/**/test-*.js'",
+    "test:node:coverage": "nyc --report-dir build/coverage/ --reporter=html --reporter=text mocha './test/**/test-*.js'",
     "test:browser": "mochify './test/**/test-*.js'",
     "wd": "mochify --wd './test/**/test-*.js'",
-    "pretest": "npm run lint",
-    "test": "npm run test:node && npm run test:browser",
     "jsdoc": "jsdoc --readme README.md --recurse --destination build/jsdoc/ lib/ index.js",
-    "deploy-js-doc-to-github": "gh-pages -d build/jsdoc"
+    "deploy-js-doc-to-github": "gh-pages -d build/jsdoc",
+    "test": "scripts/test.sh",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
     "binary-search": "^1.3.2"
   },
   "devDependencies": {
+    "coveralls": "^3.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -36,7 +38,9 @@
     "jsdoc": "^3.5.5",
     "jslint": "^0.8",
     "mocha": "^5.1.1",
+    "mocha-lcov-reporter": "^1.3.0",
     "mochify": "^5.6.1",
+    "nyc": "^11.8.0",
     "optional-js": "^2.0.0",
     "prettier": "^1.12.1",
     "sinon": "^5.0.7"

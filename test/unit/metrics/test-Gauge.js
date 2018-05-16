@@ -15,4 +15,9 @@ describe('Gauge', function() {
     assert.equal(gauge.toJSON(), 0);
     assert.equal(gauge.toJSON(), 1);
   });
+
+  it('returns the expected type', () => {
+    const gauge = new common.measured.SettableGauge();
+    assert.equal(gauge.getType(), 'Gauge');
+  })
 });

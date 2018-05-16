@@ -2,7 +2,7 @@
 
 ## Measured
 
-[![Build Status](https://secure.travis-ci.org/yaorg/node-measured.png)](http://travis-ci.org/yaorg/node-measured)
+[![Build Status](https://secure.travis-ci.org/yaorg/node-measured.png)](http://travis-ci.org/yaorg/node-measured) [![Coverage Status](https://coveralls.io/repos/github/yaorg/node-measured/badge.svg?branch=master)](https://coveralls.io/github/yaorg/node-measured?branch=master)
 
 A Node library for measuring and reporting application-level metrics.
 
