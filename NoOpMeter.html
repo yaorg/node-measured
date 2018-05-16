@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Counter</title>
+    <title>JSDoc: Class: NoOpMeter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Counter</h1>
+    <h1 class="page-title">Class: NoOpMeter</h1>
 
     
 
@@ -28,9 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Counter<span class="signature">(properties)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>NoOpMeter<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Counters are things that increment or decrement</div>
+            <div class="class-description">A No-Op Impl of Meter that can be used with a timer, to only create histogram data.
+This is useful for some time series aggregators that can calculate rates for you just off of sent count.</div>
         
     
 </header>
@@ -45,7 +46,7 @@
     
 
     
-    <h4 class="name" id="Counter"><span class="type-signature"></span>new Counter<span class="signature">(properties)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="NoOpMeter"><span class="type-signature"></span>new NoOpMeter<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -58,55 +59,6 @@
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>properties</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#CounterProperties">CounterProperties</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">see <a href="global.html#CounterProperties">CounterProperties</a></td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -149,7 +101,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_metrics_Counter.js.html">lib/metrics/Counter.js</a>, <a href="lib_metrics_Counter.js.html#line16">line 16</a>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line17">line 17</a>
     </li></ul></dd>
     
 
@@ -178,14 +130,12 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>var Measured = require('measured')
-var activeUploads = new Measured.Counter();
-http.createServer(function(req, res) {
-   activeUploads.inc();
-   req.on('end', function() {
-        activeUploads.dec();
-   });
-});</code></pre>
+    <pre class="prettyprint"><code>const { NoOpMeter, Timer } = require('measured')
+const meter = new NoOpMeter();
+const timer = new Timer({meter: meter});
+...
+// do some stuff with the timer and stopwatch api
+...</code></pre>
 
 
 
@@ -215,7 +165,7 @@ http.createServer(function(req, res) {
     
 
     
-    <h4 class="name" id="dec"><span class="type-signature"></span>dec<span class="signature">(n)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="currentRate"><span class="type-signature"></span>currentRate<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -223,7 +173,7 @@ http.createServer(function(req, res) {
 
 
 <div class="description">
-    Decrements the counter
+    No-Op impl
 </div>
 
 
@@ -232,55 +182,6 @@ http.createServer(function(req, res) {
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>n</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Decrement the counter by n. Defaults to 1.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -316,7 +217,93 @@ http.createServer(function(req, res) {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_metrics_Counter.js.html">lib/metrics/Counter.js</a>, <a href="lib_metrics_Counter.js.html#line46">line 46</a>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line73">line 73</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="end"><span class="type-signature"></span>end<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    No-Op impl
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -461,7 +448,7 @@ http.createServer(function(req, res) {
     
 
     
-    <h4 class="name" id="inc"><span class="type-signature"></span>inc<span class="signature">(n)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="mark"><span class="type-signature"></span>mark<span class="signature">(n)</span><span class="type-signature"></span></h4>
     
 
     
@@ -469,7 +456,7 @@ http.createServer(function(req, res) {
 
 
 <div class="description">
-    Increments the counter.
+    No-Op impl
 </div>
 
 
@@ -521,7 +508,7 @@ http.createServer(function(req, res) {
 
             
 
-            <td class="description last">Increment the counter by n. Defaults to 1.</td>
+            <td class="description last">Number of events to mark.</td>
         </tr>
 
     
@@ -562,7 +549,7 @@ http.createServer(function(req, res) {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_metrics_Counter.js.html">lib/metrics/Counter.js</a>, <a href="lib_metrics_Counter.js.html#line38">line 38</a>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -596,7 +583,7 @@ http.createServer(function(req, res) {
     
 
     
-    <h4 class="name" id="reset"><span class="type-signature"></span>reset<span class="signature">(count)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="meanRate"><span class="type-signature"></span>meanRate<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -604,7 +591,7 @@ http.createServer(function(req, res) {
 
 
 <div class="description">
-    Resets the counter back to count Defaults to 0.
+    No-Op impl
 </div>
 
 
@@ -615,53 +602,90 @@ http.createServer(function(req, res) {
 
 
 
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>count</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
 
 
-            
-            </td>
 
-            
 
-            
-
-            <td class="description last">Resets the counter back to count Defaults to 0.</td>
-        </tr>
+<dl class="details">
 
     
-    </tbody>
-</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="ref"><span class="type-signature"></span>ref<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    No-Op impl
+</div>
+
+
+
+
+
+
+
 
 
 
@@ -697,7 +721,7 @@ http.createServer(function(req, res) {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_metrics_Counter.js.html">lib/metrics/Counter.js</a>, <a href="lib_metrics_Counter.js.html#line54">line 54</a>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -731,7 +755,7 @@ http.createServer(function(req, res) {
     
 
     
-    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="reset"><span class="type-signature"></span>reset<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -739,7 +763,179 @@ http.createServer(function(req, res) {
 
 
 <div class="description">
-    Counters directly return their currently value.
+    No-Op impl
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line59">line 59</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="start"><span class="type-signature"></span>start<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    No-Op impl
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns an empty object
 </div>
 
 
@@ -790,7 +986,7 @@ http.createServer(function(req, res) {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_metrics_Counter.js.html">lib/metrics/Counter.js</a>, <a href="lib_metrics_Counter.js.html#line30">line 30</a>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line81">line 81</a>
     </li></ul></dd>
     
 
@@ -824,13 +1020,99 @@ http.createServer(function(req, res) {
     </dt>
     <dd>
         
-<span class="param-type">number</span>
+<span class="param-type">Object</span>
 
 
     </dd>
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="unref"><span class="type-signature"></span>unref<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    No-Op impl
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_metrics_NoOpMeter.js.html">lib/metrics/NoOpMeter.js</a>, <a href="lib_metrics_NoOpMeter.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
