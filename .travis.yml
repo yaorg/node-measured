@@ -1,4 +1,12 @@
 language: node_js
 node_js:
-  - lts/*
+- lts/*
 after_success: npm run coverage
+deploy:
+  provider: npm
+  email: fieldju@gmail.com
+  api_key:
+    secure: Z4h5kSmH7zEoEEwg6JlrlUxsFOj1ZqY7xoMJuMqWmiNqgWyoXxD9vCKvOSILh1oupiWIgaDFmSifYmPLbbmHWoMHQiwEvH8+rNYgDL3+hS8jm21tI4U4M7URShrPc6yLw1y3cHmNo6JGCZl8x4ZGiAsPw4vQqw0G/+PipMKdBwE=
+  on:
+    tags: true
+    repo: yaorg/node-measured
