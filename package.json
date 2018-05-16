@@ -3,7 +3,7 @@
   "name": "@yaorg/measured-core",
   "description": "A Node library for measuring and reporting application-level metrics.",
   "version": "1.3.0",
-  "homepage": "https://github.com/yaorg/node-measured",
+  "homepage": "https://yaorg.github.io/node-measured/",
   "engines": {
     "node": ">= 5.12"
   },
@@ -18,7 +18,8 @@
     "wd": "mochify --wd './test/**/test-*.js'",
     "pretest": "npm run lint",
     "test": "npm run test:node && npm run test:browser",
-    "jsdoc": "jsdoc --readme README.md --recurse --destination build/jsdoc/ lib/ index.js"
+    "jsdoc": "jsdoc --readme README.md --recurse --destination build/jsdoc/ lib/ index.js",
+    "deploy-js-doc-to-github": "gh-pages -d build/jsdoc"
   },
   "dependencies": {
     "binary-search": "^1.3.2"
@@ -31,6 +32,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.8.1",
+    "gh-pages": "^1.1.0",
     "jsdoc": "^3.5.5",
     "jslint": "^0.8",
     "mocha": "^5.1.1",

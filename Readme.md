@@ -1,4 +1,6 @@
-## measured
+## [Docs are best viewed on the github page](https://yaorg.github.io/node-measured/)
+
+## Measured
 
 [![Build Status](https://secure.travis-ci.org/yaorg/node-measured.png)](http://travis-ci.org/yaorg/node-measured)
 
@@ -74,6 +76,28 @@ Here are a few time series data aggregators.
     - An enterprise SASS offering for time series data.
 - [Datadog](https://www.datadoghq.com/)
     - An enterprise SASS offering for time series data.
+
+### Development
+
+#### Building and deploying the docs
+
+Make sure you have the dependencies installed
+
+```bash
+npm install
+```
+
+build the jsdoc site, the files will be outputed to `./build/jsdocs/`
+
+```bash
+npm run jsdoc
+```
+
+Verify that the site looks good and deploy to GitHub Pages
+
+```bash
+npm run deploy-js-doc-to-github
+```
 
 ### License
 
