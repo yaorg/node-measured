@@ -28,6 +28,11 @@ describe('Histogram', function() {
     assert.strictEqual(json.p99, null);
     assert.strictEqual(json.p999, null);
   });
+
+
+  it('returns the expected type', () => {
+    assert.equal(histogram.getType(), 'Histogram');
+  })
 });
 
 describe('Histogram#update', function() {
@@ -251,9 +256,4 @@ describe('Histogram#hasValues', function() {
   it('has no values', function() {
     assert.equal(histogram.hasValues(), false);
   });
-
-  it('returns the expected type', () => {
-    const histogram = new common.measured.Histogram();
-    assert.equal(histogram.getType(), 'Histogram');
-  })
 });

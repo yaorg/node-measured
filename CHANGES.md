@@ -1,5 +1,10 @@
 # Changes
 
+## 1.4.0
+
+- Add NoOpMeter, a meter that doesn't do anything, this is usful to use in a Timer if you want access to the 
+  Stopwatch api for histogram data and don't want to deal with the overhead of a meter.
+
 ## 1.3.0
 
 - Add SettableGauge, a gauge that can have it's value set directly, useful for async situations
