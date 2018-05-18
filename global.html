@@ -208,7 +208,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_Counter.js.html">lerna-test-core/lib/metrics/Counter.js</a>, <a href="lerna-test-core_lib_metrics_Counter.js.html#line68">line 68</a>
+        <a href="metrics_Counter.js.html">metrics/Counter.js</a>, <a href="metrics_Counter.js.html#line68">line 68</a>
     </li></ul></dd>
     
 
@@ -227,87 +227,6 @@
     
     <pre class="prettyprint"><code>// Creates a counter that starts at 5.
 const counter = new Counter({ count: 5 })</code></pre>
-
-
-
-            
-                
-<h4 class="name" id="Dimensions">Dimensions</h4>
-
-
-
-
-<div class="description">
-    A Dictionary of string, string key value pairs
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object.&lt;string, string></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-reporting_lib_@types_types.js.html">lerna-test-reporting/lib/@types/types.js</a>, <a href="lerna-test-reporting_lib_@types_types.js.html#line12">line 12</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>{
-  path: "/api/foo"
-  method: "GET"
-  statusCode: "200"
-}</code></pre>
 
 
 
@@ -690,7 +609,7 @@ const counter = new Counter({ count: 5 })</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_Histogram.js.html">lerna-test-core/lib/metrics/Histogram.js</a>, <a href="lerna-test-core_lib_metrics_Histogram.js.html#line238">line 238</a>
+        <a href="metrics_Histogram.js.html">metrics/Histogram.js</a>, <a href="metrics_Histogram.js.html#line238">line 238</a>
     </li></ul></dd>
     
 
@@ -814,7 +733,7 @@ const counter = new Counter({ count: 5 })</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_Histogram.js.html">lerna-test-core/lib/metrics/Histogram.js</a>, <a href="lerna-test-core_lib_metrics_Histogram.js.html#line229">line 229</a>
+        <a href="metrics_Histogram.js.html">metrics/Histogram.js</a>, <a href="metrics_Histogram.js.html#line229">line 229</a>
     </li></ul></dd>
     
 
@@ -1053,7 +972,7 @@ const counter = new Counter({ count: 5 })</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_Meter.js.html">lerna-test-core/lib/metrics/Meter.js</a>, <a href="lerna-test-core_lib_metrics_Meter.js.html#line167">line 167</a>
+        <a href="metrics_Meter.js.html">metrics/Meter.js</a>, <a href="metrics_Meter.js.html#line167">line 167</a>
     </li></ul></dd>
     
 
@@ -1196,7 +1115,7 @@ const counter = new Counter({ count: 5 })</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_Meter.js.html">lerna-test-core/lib/metrics/Meter.js</a>, <a href="lerna-test-core_lib_metrics_Meter.js.html#line156">line 156</a>
+        <a href="metrics_Meter.js.html">metrics/Meter.js</a>, <a href="metrics_Meter.js.html#line156">line 156</a>
     </li></ul></dd>
     
 
@@ -1214,483 +1133,6 @@ const counter = new Counter({ count: 5 })</code></pre>
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>const meter = new Meter({ rateUnit: 1000, tickInterval: 5000})</code></pre>
-
-
-
-            
-                
-<h4 class="name" id="MetricValueTypeWrapper">MetricValueTypeWrapper</h4>
-
-
-
-
-<div class="description">
-    Wrapper object to wrap metric value and SFX metadata needed to send metric value to SFX data ingestion.
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>metric</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The metric name to report to SignalFx</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the value to report to SignalFx</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>type</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The mapped SignalFx metric type</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-signalfx-reporter_lib_SignalFxMetricsReporter.js.html">lerna-test-signalfx-reporter/lib/SignalFxMetricsReporter.js</a>, <a href="lerna-test-signalfx-reporter_lib_SignalFxMetricsReporter.js.html#line265">line 265</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-            
-                
-<h4 class="name" id="MetricWrapper">MetricWrapper</h4>
-
-
-
-
-<div class="description">
-    A wrapper object around a <a href="Metric.html">Metric</a>, <a href="global.html#Dimensions">Dimensions</a> and the metric name
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>name</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The supplied name of the Metric</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>metric</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Metric.html">Metric</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The <a href="Metric.html">Metric</a> object</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>dimensions</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The <a href="global.html#Dimensions">Dimensions</a> for the given <a href="Metric.html">Metric</a></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-reporting_lib_@types_types.js.html">lerna-test-reporting/lib/@types/types.js</a>, <a href="lerna-test-reporting_lib_@types_types.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-            
-                
-<h4 class="name" id="SelfReportingMetricsRegistryOptions">SelfReportingMetricsRegistryOptions</h4>
-
-
-
-
-<div class="description">
-    Configurable options for the Self Reporting Metrics Registry
-</div>
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>logger</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Logger</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the Logger to use</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logLevel</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The Log level to use if defaulting to included logger</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html">lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</a>, <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html#line183">line 183</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
 
 
 
@@ -1802,7 +1244,7 @@ const counter = new Counter({ count: 5 })</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_SettableGauge.js.html">lerna-test-core/lib/metrics/SettableGauge.js</a>, <a href="lerna-test-core_lib_metrics_SettableGauge.js.html#line46">line 46</a>
+        <a href="metrics_SettableGauge.js.html">metrics/SettableGauge.js</a>, <a href="metrics_SettableGauge.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -1821,153 +1263,6 @@ const counter = new Counter({ count: 5 })</code></pre>
     
     <pre class="prettyprint"><code>// Creates a counter that starts at 5.
 const settableGauge = new SettableGauge({ initialValue: 500 })</code></pre>
-
-
-
-            
-                
-<h4 class="name" id="SignalFxMetricsReporterOptions">SignalFxMetricsReporterOptions</h4>
-
-
-
-
-<div class="description">
-    Options for creating a <a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>defaultDimensions</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A dictionary of dimensions to include with every metric reported</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logger</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Logger</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The logger to use, if not supplied a new Buynan logger will be created</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-signalfx-reporter_lib_SignalFxMetricsReporter.js.html">lerna-test-signalfx-reporter/lib/SignalFxMetricsReporter.js</a>, <a href="lerna-test-signalfx-reporter_lib_SignalFxMetricsReporter.js.html#line276">line 276</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
 
 
 
@@ -2075,7 +1370,7 @@ const settableGauge = new SettableGauge({ initialValue: 500 })</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_util_Stopwatch.js.html">lerna-test-core/lib/util/Stopwatch.js</a>, <a href="lerna-test-core_lib_util_Stopwatch.js.html#line53">line 53</a>
+        <a href="util_Stopwatch.js.html">util/Stopwatch.js</a>, <a href="util_Stopwatch.js.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -2241,7 +1536,7 @@ const settableGauge = new SettableGauge({ initialValue: 500 })</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_Timer.js.html">lerna-test-core/lib/metrics/Timer.js</a>, <a href="lerna-test-core_lib_metrics_Timer.js.html#line122">line 122</a>
+        <a href="metrics_Timer.js.html">metrics/Timer.js</a>, <a href="metrics_Timer.js.html#line122">line 122</a>
     </li></ul></dd>
     
 
@@ -2271,13 +1566,13 @@ const settableGauge = new SettableGauge({ initialValue: 500 })</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="IntervalBasedMetricsReporter.html">IntervalBasedMetricsReporter</a></li><li><a href="Metric.html">Metric</a></li><li><a href="Reporter.html">Reporter</a></li></ul><h3><a href="global.html">Global</a></h3>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="Metric.html">Metric</a></li></ul><h3><a href="global.html">Global</a></h3>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri May 18 2018 17:36:52 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri May 18 2018 14:23:05 GMT-0700 (PDT)
 </footer>
 
 <script> prettyPrint(); </script>
