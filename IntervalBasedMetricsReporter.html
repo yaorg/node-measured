@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ExponentiallyMovingWeightedAverage</title>
+    <title>JSDoc: Interface: IntervalBasedMetricsReporter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ExponentiallyMovingWeightedAverage</h1>
+    <h1 class="page-title">Interface: IntervalBasedMetricsReporter</h1>
 
     
 
@@ -28,9 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ExponentiallyMovingWeightedAverage<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">ExponentiallyMovingWeightedAverage</div>
+        <h2>IntervalBasedMetricsReporter</h2>
         
     
 </header>
@@ -39,27 +37,61 @@
     <div class="container-overview">
     
         
+            <div class="description">The interface for an Interval Based Metrics Reporter.
+Must impl reportMetricOnInterval(metricKey: string, intervalInSeconds: number).</div>
+        
+
+        
+
+
+    <h5 class="subsection-title">Properties:</h5>
 
     
-    <h2>Constructor</h2>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
 
-    
-    <h4 class="name" id="ExponentiallyMovingWeightedAverage"><span class="type-signature"></span>new ExponentiallyMovingWeightedAverage<span class="signature">()</span><span class="type-signature"></span></h4>
-    
+        <tr>
+            
+                <td class="name"><code>reportMetricOnInterval</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Informs the reporter to report a metric on a given interval in seconds.</td>
+        </tr>
 
     
-
-
-
-
-
-
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -93,7 +125,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_util_ExponentiallyMovingWeightedAverage.js.html">lerna-test-core/lib/util/ExponentiallyMovingWeightedAverage.js</a>, <a href="lerna-test-core_lib_util_ExponentiallyMovingWeightedAverage.js.html#line8">line 8</a>
+        <a href="lerna-test-reporting_lib_@types_types.js.html">lerna-test-reporting/lib/@types/types.js</a>, <a href="lerna-test-reporting_lib_@types_types.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -105,22 +137,7 @@
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     
     </div>
 

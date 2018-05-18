@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ExponentiallyMovingWeightedAverage</title>
+    <title>JSDoc: Source: lerna-test-core/lib/metrics/Metric.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,135 +17,47 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ExponentiallyMovingWeightedAverage</h1>
+    <h1 class="page-title">Source: lerna-test-core/lib/metrics/Metric.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ExponentiallyMovingWeightedAverage<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description">ExponentiallyMovingWeightedAverage</div>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="ExponentiallyMovingWeightedAverage"><span class="type-signature"></span>new ExponentiallyMovingWeightedAverage<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_util_ExponentiallyMovingWeightedAverage.js.html">lerna-test-core/lib/util/ExponentiallyMovingWeightedAverage.js</a>, <a href="lerna-test-core_lib_util_ExponentiallyMovingWeightedAverage.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Interface for Metric types
+ *
+ * @interface Metric
+ */
+// eslint-disable-next-line no-unused-vars
+class Metric {
+  /**
+   * @return {any} Returns the data from the Metric
+   */
+  toJSON() {}
+
+  /**
+   * @return {string} The type of the Metric Impl
+   */
+  getType() {}
+}
+
+const METRIC_TYPES = {
+  COUNTER: 'Counter',
+  GAUGE: 'Gauge',
+  HISTOGRAM: 'Histogram',
+  METER: 'Meter',
+  TIMER: 'Timer'
+};
+
+module.exports = {
+  METRIC_TYPES
+};
+</code></pre>
+        </article>
+    </section>
 
 
 

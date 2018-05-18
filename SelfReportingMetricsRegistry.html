@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: SelfReportingMetricsRegistry</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: SelfReportingMetricsRegistry</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>SelfReportingMetricsRegistry<span class="signature">(registry, reporter, options)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">A dimensional aware self-reporting metrics registry</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="SelfReportingMetricsRegistry"><span class="type-signature"></span>new SelfReportingMetricsRegistry<span class="signature">(registry, reporter, options)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>registry</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Metrics Registry to use, defaults to {@see DimensionAwareMetricsRegistry}</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reporter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="IntervalBasedMetricsReporter.html">IntervalBasedMetricsReporter</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Metrics Reporter</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#SelfReportingMetricsRegistryOptions">SelfReportingMetricsRegistryOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Configurable options for the Self Reporting Metrics Registry</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html">lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</a>, <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getOrCreateCounter"><span class="type-signature"></span>getOrCreateCounter<span class="signature">(name, dimensions, publishingIntervalInSeconds)</span><span class="type-signature"> &rarr; {<a href="Counter.html">Counter</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates a <a href="Counter.html">Counter</a> or get the existing Counter for a given name and dimension combo
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Metric name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">any custom <a href="global.html#Dimensions">Dimensions</a> for the Metric</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>publishingIntervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a optional custom publishing interval</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html">lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</a>, <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html#line140">line 140</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Counter.html">Counter</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getOrCreateGauge"><span class="type-signature"></span>getOrCreateGauge<span class="signature">(name, callback, dimensions, publishingIntervalInSeconds)</span><span class="type-signature"> &rarr; {<a href="Gauge.html">Gauge</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates a <a href="Gauge.html">Gauge</a> or get the existing Gauge for a given name and dimension combo
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Metric name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback that will return a value to report to signal fx</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">any custom <a href="global.html#Dimensions">Dimensions</a> for the Metric</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>publishingIntervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a optional custom publishing interval</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html">lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</a>, <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html#line96">line 96</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Gauge.html">Gauge</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// https://nodejs.org/api/process.html#process_process_memoryusage
+// Report heap total and heap used at the default interval
+registry.getOrCreateGauge(
+  'process-memory-heap-total',
+  () => {
+    return process.memoryUsage().heapTotal
+  }
+);
+registry.getOrCreateGauge(
+  'process-memory-heap-used',
+  () => {
+    return process.memoryUsage().heapUsed
+  }
+)</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getOrCreateHistogram"><span class="type-signature"></span>getOrCreateHistogram<span class="signature">(name, dimensions, publishingIntervalInSeconds)</span><span class="type-signature"> &rarr; {<a href="Histogram.html">Histogram</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates a <a href="Histogram.html">Histogram</a> or get the existing Histogram for a given name and dimension combo
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Metric name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">any custom <a href="global.html#Dimensions">Dimensions</a> for the Metric</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>publishingIntervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a optional custom publishing interval</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html">lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</a>, <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html#line117">line 117</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Histogram.html">Histogram</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getOrCreateTimer"><span class="type-signature"></span>getOrCreateTimer<span class="signature">(name, dimensions, publishingIntervalInSeconds)</span><span class="type-signature"> &rarr; {<a href="Timer.html">Timer</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates a <a href="Timer.html">Timer</a> or get the existing Timer for a given name and dimension combo.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Metric name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">any custom <a href="global.html#Dimensions">Dimensions</a> for the Metric</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>publishingIntervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a optional custom publishing interval</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html">lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</a>, <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html#line163">line 163</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Timer.html">Timer</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="register"><span class="type-signature"></span>register<span class="signature">(name, metric, dimensions, publishingIntervalInSeconds)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Registers a manually created Metric.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Metric name</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>metric</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Metric.html">Metric</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The <a href="Metric.html">Metric</a> to register</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">any custom <a href="global.html#Dimensions">Dimensions</a> for the Metric</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>publishingIntervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">a optional custom publishing interval</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html">lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</a>, <a href="lerna-test-reporting_lib_SelfReportingMetricsRegistry.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const settableGauge = new SettableGauge(5);
+// register the gauge and have it report to every 10 seconds
+registry.register('my-gauge', settableGauge, {}, 10);
+interval(() => {
+   // such as cpu % used
+   determineAValueThatCannotBeSync((value) => {
+     settableGauge.update(value);
+   })
+}, 10000)</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="IntervalBasedMetricsReporter.html">IntervalBasedMetricsReporter</a></li><li><a href="Metric.html">Metric</a></li><li><a href="Reporter.html">Reporter</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri May 18 2018 05:21:50 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

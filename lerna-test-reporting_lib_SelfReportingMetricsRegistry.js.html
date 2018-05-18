@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lerna-test-reporting/lib/SelfReportingMetricsRegistry.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const bunyan = require('bunyan');
+const { Gauge } = require('lerna-test-core');
+const { Timer } = require('lerna-test-core');
+const { Counter } = require('lerna-test-core');
+const { Histogram } = require('lerna-test-core');
+const {
+  validateSelfReportingMetricsRegistryParameters,
+  validateRegisterOptions,
+  validateGaugeOptions,
+  validateCounterOptions,
+  validateHistogramOptions,
+  validateTimerOptions
+} = require('./validators/inputValidators');
+
+/**
+ * A dimensional aware self-reporting metrics registry
+ */
+class SelfReportingMetricsRegistry {
+  /**
+   * @param {DimensionAwareMetricsRegistry} registry The Metrics Registry to use, defaults to {@see DimensionAwareMetricsRegistry}
+   * @param {IntervalBasedMetricsReporter} reporter The Metrics Reporter
+   * @param {SelfReportingMetricsRegistryOptions} options Configurable options for the Self Reporting Metrics Registry
+   */
+  constructor(registry, reporter, options) {
+    options = options || {};
+    validateSelfReportingMetricsRegistryParameters(registry, reporter, options.logger);
+
+    this._registry = registry;
+    this._reporter = reporter;
+    if (options.logger !== undefined) {
+      this._log = options.logger;
+    } else {
+      this._log = bunyan.createLogger({
+        name: 'SelfReportingMetricsRegistry',
+        level: options.logLevel || 'info'
+      });
+    }
+  }
+
+  /**
+   * Registers a manually created Metric.
+   *
+   * @param {string} name The Metric name
+   * @param {Metric} metric The {@link Metric} to register
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @example
+   * const settableGauge = new SettableGauge(5);
+   * // register the gauge and have it report to every 10 seconds
+   * registry.register('my-gauge', settableGauge, {}, 10);
+   * interval(() => {
+   *    // such as cpu % used
+   *    determineAValueThatCannotBeSync((value) => {
+   *      settableGauge.update(value);
+   *    })
+   * }, 10000)
+   */
+  register(name, metric, dimensions, publishingIntervalInSeconds) {
+    validateRegisterOptions(name, metric, dimensions, publishingIntervalInSeconds);
+
+    if (this._registry.hasMetric(name, dimensions)) {
+      throw new Error(
+        `Metric with name: ${name} and dimensions: ${JSON.stringify(dimensions)} has already been registered`
+      );
+    } else {
+      const key = this._registry.putMetric(name, metric, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+    }
+    return metric;
+  }
+
+  /**
+   * Creates a {@link Gauge} or get the existing Gauge for a given name and dimension combo
+   *
+   * @param {string} name The Metric name
+   * @param {function} callback The callback that will return a value to report to signal fx
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {Gauge}
+   * @example
+   * // https://nodejs.org/api/process.html#process_process_memoryusage
+   * // Report heap total and heap used at the default interval
+   * registry.getOrCreateGauge(
+   *   'process-memory-heap-total',
+   *   () => {
+   *     return process.memoryUsage().heapTotal
+   *   }
+   * );
+   * registry.getOrCreateGauge(
+   *   'process-memory-heap-used',
+   *   () => {
+   *     return process.memoryUsage().heapUsed
+   *   }
+   * )
+   */
+  getOrCreateGauge(name, callback, dimensions, publishingIntervalInSeconds) {
+    validateGaugeOptions(name, callback, dimensions, publishingIntervalInSeconds);
+    let gauge;
+    if (this._registry.hasMetric(name, dimensions)) {
+      gauge = this._registry.getMetric(name, dimensions);
+    } else {
+      gauge = new Gauge(callback);
+      const key = this._registry.putMetric(name, gauge, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+    }
+    return gauge;
+  }
+
+  /**
+   * Creates a {@link Histogram} or get the existing Histogram for a given name and dimension combo
+   *
+   * @param {string} name The Metric name
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {Histogram}
+   */
+  getOrCreateHistogram(name, dimensions, publishingIntervalInSeconds) {
+    validateHistogramOptions(name, dimensions, publishingIntervalInSeconds);
+
+    let histogram;
+    if (this._registry.hasMetric(name, dimensions)) {
+      histogram = this._registry.getMetric(name, dimensions);
+    } else {
+      histogram = new Histogram();
+      const key = this._registry.putMetric(name, histogram, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+    }
+
+    return histogram;
+  }
+
+  /**
+   * Creates a {@link Counter} or get the existing Counter for a given name and dimension combo
+   *
+   * @param {string} name The Metric name
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {Counter}
+   */
+  getOrCreateCounter(name, dimensions, publishingIntervalInSeconds) {
+    validateCounterOptions(name, dimensions, publishingIntervalInSeconds);
+
+    let counter;
+    if (this._registry.hasMetric(name, dimensions)) {
+      counter = this._registry.getMetric(name, dimensions);
+    } else {
+      counter = new Counter();
+      const key = this._registry.putMetric(name, counter, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+    }
+
+    return counter;
+  }
+
+  /**
+   * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo.
+   *
+   * @param {string} name The Metric name
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {Timer}
+   */
+  getOrCreateTimer(name, dimensions, publishingIntervalInSeconds) {
+    validateTimerOptions(name, dimensions, publishingIntervalInSeconds);
+
+    let timer;
+    if (this._registry.hasMetric(name, dimensions)) {
+      timer = this._registry.getMetric(name, dimensions);
+    } else {
+      timer = new Timer();
+      const key = this._registry.putMetric(name, timer, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+    }
+
+    return timer;
+  }
+}
+
+module.exports = {
+  SelfReportingMetricsRegistry
+};
+
+/**
+ * Configurable options for the Self Reporting Metrics Registry
+ *
+ * @interface SelfReportingMetricsRegistryOptions
+ * @typedef SelfReportingMetricsRegistryOptions
+ * @property {Logger} logger the Logger to use
+ * @property {string} logLevel The Log level to use if defaulting to included logger
+ */
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-measured.html">measured</a></li><li><a href="module-units.html">units</a></li></ul><h3>Classes</h3><ul><li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li></ul><h3>Interfaces</h3><ul><li><a href="IntervalBasedMetricsReporter.html">IntervalBasedMetricsReporter</a></li><li><a href="Metric.html">Metric</a></li><li><a href="Reporter.html">Reporter</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri May 18 2018 05:21:50 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

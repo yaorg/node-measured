@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: SettableGauge</title>
+    <title>JSDoc: Class: SignalFxMetricsReporter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: SettableGauge</h1>
+    <h1 class="page-title">Class: SignalFxMetricsReporter</h1>
 
     
 
@@ -28,10 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>SettableGauge<span class="signature">(options)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>SignalFxMetricsReporter<span class="signature">(signalFxClient, registry, options)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Works like a <a href="Gauge.html">Gauge</a>, but rather than getting its value from a callback, the value
-is set when needed. This can be useful for setting a gauges value for asynchronous operations.</div>
+            <div class="class-description">A Interval Based Metrics Reporter that is aware of Measure metrics types and reports them to Signal Fx</div>
         
     
 </header>
@@ -46,7 +45,7 @@ is set when needed. This can be useful for setting a gauges value for asynchrono
     
 
     
-    <h4 class="name" id="SettableGauge"><span class="type-signature"></span>new SettableGauge<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="SignalFxMetricsReporter"><span class="type-signature"></span>new SignalFxMetricsReporter<span class="signature">(signalFxClient, registry, options)</span><span class="type-signature"></span></h4>
     
 
     
@@ -86,13 +85,13 @@ is set when needed. This can be useful for setting a gauges value for asynchrono
 
         <tr>
             
-                <td class="name"><code>options</code></td>
+                <td class="name"><code>signalFxClient</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#SettableGaugeProperties">SettableGaugeProperties</a></span>
+<span class="param-type">SignalFxClient</span>
 
 
             
@@ -102,7 +101,53 @@ is set when needed. This can be useful for setting a gauges value for asynchrono
 
             
 
-            <td class="description last">See <a href="global.html#SettableGaugeProperties">SettableGaugeProperties</a>.</td>
+            <td class="description last">The configured signal fx client.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>registry</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The Metrics registry.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#SignalFxMetricsReporterOptions">SignalFxMetricsReporterOptions</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">See <a href="global.html#SignalFxMetricsReporterOptions">SignalFxMetricsReporterOptions</a>.</td>
         </tr>
 
     
@@ -130,7 +175,7 @@ is set when needed. This can be useful for setting a gauges value for asynchrono
     <dt class="implements">Implements:</dt>
     <dd class="implements"><ul>
         
-            <li><a href="Metric.html">Metric</a></li>
+            <li><a href="Reporter.html">Reporter</a></li>
         
     </ul></dd>
     
@@ -150,7 +195,7 @@ is set when needed. This can be useful for setting a gauges value for asynchrono
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_SettableGauge.js.html">lerna-test-core/lib/metrics/SettableGauge.js</a>, <a href="lerna-test-core_lib_metrics_SettableGauge.js.html#line16">line 16</a>
+        <a href="lerna-test-signalfx-reporter_lib_SignalFxMetricsReporter.js.html">lerna-test-signalfx-reporter/lib/SignalFxMetricsReporter.js</a>, <a href="lerna-test-signalfx-reporter_lib_SignalFxMetricsReporter.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -175,17 +220,6 @@ is set when needed. This can be useful for setting a gauges value for asynchrono
 
 
 
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>const settableGauge = new SettableGauge();
-// Update the settable gauge ever 10'ish seconds
-setInterval(() => {
-    calculateSomethingAsync().then((value) => {
-        settableGauge.setValue(value);
-    });
-}, 10000);</code></pre>
 
 
 
@@ -215,130 +249,95 @@ setInterval(() => {
     
 
     
-    <h4 class="name" id="getType"><span class="type-signature"></span>getType<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    <h4 class="name" id="reportMetricOnInterval"><span class="type-signature"></span>reportMetricOnInterval<span class="signature">(metricKey, intervalInSeconds)</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="Metric.html#getType">Metric#getType</a></li>
-        
-    </ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_Metric.js.html">lerna-test-core/lib/metrics/Metric.js</a>, <a href="lerna-test-core_lib_metrics_Metric.js.html#line16">line 16</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The type of the Metric Impl
+<div class="description">
+    Informs the reporter to report a metric on a given interval in seconds.
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
         
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>metricKey</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    </dd>
-</dl>
+            
+            </td>
 
-    
-
-
-
-
-
-        
             
 
-    
+            
+
+            <td class="description last">The metric key for the metric in the metric registry.</td>
+        </tr>
 
     
-    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
-    
+
+        <tr>
+            
+                <td class="name"><code>intervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The interval in seconds to report the metric on.</td>
+        </tr>
 
     
-
-
-
-
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -361,7 +360,7 @@ setInterval(() => {
     <dt class="implements">Implements:</dt>
     <dd class="implements"><ul>
         
-            <li><a href="Metric.html#toJSON">Metric#toJSON</a></li>
+            <li><a href="Reporter.html#reportMetricOnInterval">Reporter#reportMetricOnInterval</a></li>
         
     </ul></dd>
     
@@ -381,7 +380,7 @@ setInterval(() => {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_metrics_SettableGauge.js.html">lerna-test-core/lib/metrics/SettableGauge.js</a>, <a href="lerna-test-core_lib_metrics_SettableGauge.js.html#line32">line 32</a>
+        <a href="lerna-test-signalfx-reporter_lib_SignalFxMetricsReporter.js.html">lerna-test-signalfx-reporter/lib/SignalFxMetricsReporter.js</a>, <a href="lerna-test-signalfx-reporter_lib_SignalFxMetricsReporter.js.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -404,28 +403,6 @@ setInterval(() => {
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    Settable Gauges directly return there current value.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 

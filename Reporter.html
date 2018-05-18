@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: BinaryHeap</title>
+    <title>JSDoc: Interface: Reporter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: BinaryHeap</h1>
+    <h1 class="page-title">Interface: Reporter</h1>
 
     
 
@@ -28,10 +28,10 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>BinaryHeap<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2>Reporter</h2>
         
-            <div class="class-description">Based on http://en.wikipedia.org/wiki/Binary_Heap
-as well as http://eloquentjavascript.net/appendix2.html</div>
+            <div class="class-description">The interface for a Self Reporting Metrics Registry Reporter
+<a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></div>
         
     
 </header>
@@ -41,28 +41,7 @@ as well as http://eloquentjavascript.net/appendix2.html</div>
     
         
 
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="BinaryHeap"><span class="type-signature"></span>new BinaryHeap<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
 <dl class="details">
@@ -94,7 +73,7 @@ as well as http://eloquentjavascript.net/appendix2.html</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_util_BinaryHeap.js.html">lerna-test-core/lib/util/BinaryHeap.js</a>, <a href="lerna-test-core_lib_util_BinaryHeap.js.html#line5">line 5</a>
+        <a href="lerna-test-reporting_lib_reporters_Reporter.js.html">lerna-test-reporting/lib/reporters/Reporter.js</a>, <a href="lerna-test-reporting_lib_reporters_Reporter.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -106,22 +85,7 @@ as well as http://eloquentjavascript.net/appendix2.html</div>
 </dl>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     
     </div>
 
@@ -148,7 +112,7 @@ as well as http://eloquentjavascript.net/appendix2.html</div>
     
 
     
-    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(&hellip;elements)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="reportMetricOnInterval"><span class="type-signature"></span>reportMetricOnInterval<span class="signature">(metricKey, intervalInSeconds)</span><span class="type-signature"></span></h4>
     
 
     
@@ -156,7 +120,7 @@ as well as http://eloquentjavascript.net/appendix2.html</div>
 
 
 <div class="description">
-    Add elements to the binary heap.
+    Informs the reporter to report a metric on a given interval in seconds.
 </div>
 
 
@@ -180,8 +144,6 @@ as well as http://eloquentjavascript.net/appendix2.html</div>
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -194,33 +156,46 @@ as well as http://eloquentjavascript.net/appendix2.html</div>
 
         <tr>
             
-                <td class="name"><code>elements</code></td>
+                <td class="name"><code>metricKey</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Array.&lt;any></span>
+<span class="param-type">string</span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
 
-                
+            
 
+            <td class="description last">The metric key for the metric in the metric registry.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>intervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
                 
-                    &lt;repeatable><br>
-                
-                </td>
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last">The interval in seconds to report the metric on.</td>
         </tr>
 
     
@@ -261,7 +236,7 @@ as well as http://eloquentjavascript.net/appendix2.html</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lerna-test-core_lib_util_BinaryHeap.js.html">lerna-test-core/lib/util/BinaryHeap.js</a>, <a href="lerna-test-core_lib_util_BinaryHeap.js.html#line17">line 17</a>
+        <a href="lerna-test-reporting_lib_reporters_Reporter.js.html">lerna-test-reporting/lib/reporters/Reporter.js</a>, <a href="lerna-test-reporting_lib_reporters_Reporter.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
