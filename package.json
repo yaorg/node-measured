@@ -2,6 +2,7 @@
   "private": true,
   "devDependencies": {
     "coveralls": "^3.0.1",
+    "documentation": "^6.3.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -26,17 +27,21 @@
     "test:node:coverage": "nyc --report-dir build/coverage/ --reporter=html --reporter=text lerna exec yarn test:node",
     "test:browser": "lerna exec yarn test:browser",
     "test": "yarn test:node:coverage && yarn test:browser",
-    "posttest": "yarn jsdoc",
+    "posttest": "yarn generate-docs",
     "format": "lerna exec yarn format",
     "clean": "rm -fr build && lerna exec yarn clean",
     "jsdoc": "jsdoc --readme ./README.md --recurse --destination build/jsdoc/ packages/**/lib/",
-    "deploy-js-doc-to-github": "gh-pages -d build/jsdoc",
+    "generate-docs": "mkdir -p build/docs/ && lerna exec yarn generate-docs",
+    "deploy-js-doc-to-github": "gh-pages -d build/docs",
     "travis-deploy-github-pages": "gh-pages -r \"https://${GH_TOKEN}@github.com/yaorg/node-measured.git\" -d build/jsdoc/ lib/ index.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "url": "git://github.com/yaorg/node-measured.git"
   },
+  "homepage": "https://yaorg.github.io/node-measured/",
   "license": "MIT",
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }

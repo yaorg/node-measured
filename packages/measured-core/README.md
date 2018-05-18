@@ -8,18 +8,20 @@ The core measured library that has the Metric interfaces and implementations.
 npm install measured-core
 ```
 
+##### [Full API Docs](https://yaorg.github.io/node-measured/core/index.html)
+
 ##### Metrics
 
 The core library has the following metrics classes:
 
-- {@link Gauge}, Values that can be read instantly via a supplied call back.
-- {@link SettableGauge}, Just like a Gauge but its value is set directly rather than supplied by a callback
-- {@link Counter}, Counters are things that increment or decrement
-- {@link Timer}, Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.
-- {@link Histogram}, Keeps a reservoir of statistically relevant values biased towards the last 5 minutes to explore their distribution.
-- {@link Meter}, Things that are measured as events / interval.
+- [Gauge](https://yaorg.github.io/node-measured/core/index.html#gauge), Values that can be read instantly via a supplied call back.
+- [SettableGauge](https://yaorg.github.io/node-measured/core/index.html#settablegauge), Just like a Gauge but its value is set directly rather than supplied by a callback
+- [Counter](https://yaorg.github.io/node-measured/core/index.html#counter), Counters are things that increment or decrement
+- [Timer](https://yaorg.github.io/node-measured/core/index.html#timer), Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.
+- [Histogram](https://yaorg.github.io/node-measured/core/index.html#histogram), Keeps a reservoir of statistically relevant values biased towards the last 5 minutes to explore their distribution.
+- [Meter](https://yaorg.github.io/node-measured/core/index.html#meter), Things that are measured as events / interval.
 
-They can be created manually or with the including basic core registry called the {@link Collection}.
+They can be created manually or with the including basic core registry called the [Collection](https://yaorg.github.io/node-measured/core/index.html#collection).
 
 ##### Usage
 

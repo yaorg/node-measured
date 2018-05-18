@@ -7,7 +7,7 @@ const HOURS = 60 * MINUTES;
 const DAYS = 24 * HOURS;
 
 /**
- * Time units, as found in Java: {@link http=//download.oracle.com/javase/6/docs/api/java/util/concurrent/TimeUnit.html}
+ * Time units, as found in Java: {@link http://download.oracle.com/javase/6/docs/api/java/util/concurrent/TimeUnit.html}
  * @module units
  */
 module.exports = {
