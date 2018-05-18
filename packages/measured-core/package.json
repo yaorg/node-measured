@@ -31,8 +31,7 @@
   },
   "files": [
     "lib",
-    "README.md",
-    "CHANGES.md"
+    "README.md"
   ],
   "license": "MIT",
   "devDependencies": {
