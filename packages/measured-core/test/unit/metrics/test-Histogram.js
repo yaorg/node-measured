@@ -29,10 +29,9 @@ describe('Histogram', function() {
     assert.strictEqual(json.p999, null);
   });
 
-
   it('returns the expected type', () => {
     assert.equal(histogram.getType(), 'Histogram');
-  })
+  });
 });
 
 describe('Histogram#update', function() {

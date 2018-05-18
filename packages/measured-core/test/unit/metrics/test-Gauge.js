@@ -19,5 +19,5 @@ describe('Gauge', function() {
   it('returns the expected type', () => {
     const gauge = new common.measured.SettableGauge();
     assert.equal(gauge.getType(), 'Gauge');
-  })
+  });
 });

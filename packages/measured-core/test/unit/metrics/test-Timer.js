@@ -81,5 +81,5 @@ describe('Timer', function() {
 
   it('returns the expected type', () => {
     assert.equal(timer.getType(), 'Timer');
-  })
+  });
 });
