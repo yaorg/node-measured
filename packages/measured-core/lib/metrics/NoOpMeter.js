@@ -1,4 +1,4 @@
-const { METRIC_TYPES } = require('./Metric');
+const { MetricTypes } = require('./Metric');
 
 /**
  * A No-Op Impl of Meter that can be used with a timer, to only create histogram data.
@@ -66,10 +66,11 @@ class NoOpMeter {
   }
 
   /**
-   * @inheritDoc
+   * The type of the Metric Impl. {@link MetricTypes}.
+   * @return {string} The type of the Metric Impl.
    */
   getType() {
-    return METRIC_TYPES.METER;
+    return MetricTypes.METER;
   }
 }
 

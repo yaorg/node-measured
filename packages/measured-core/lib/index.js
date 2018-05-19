@@ -11,6 +11,7 @@ const ExponentiallyDecayingSample = require('./util/ExponentiallyDecayingSample'
 const ExponentiallyMovingWeightedAverage = require('./util/ExponentiallyMovingWeightedAverage');
 const Stopwatch = require('./util/Stopwatch');
 const units = require('./util/units');
+const { MetricTypes } = require('./metrics/Metric');
 
 /**
  * The main measured module that is referenced when require('measured') is used.
@@ -89,6 +90,12 @@ module.exports = {
    * @type {Stopwatch}
    */
   Stopwatch,
+
+  /**
+   * See {@link MetricTypes}
+   * @type {MetricTypes}
+   */
+  MetricTypes,
 
   /**
    * See {@link units}

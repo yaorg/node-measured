@@ -1,4 +1,4 @@
-const { METRIC_TYPES } = require('./Metric');
+const { MetricTypes } = require('./Metric');
 const Histogram = require('./Histogram');
 const Meter = require('./Meter');
 const Stopwatch = require('../util/Stopwatch');
@@ -97,8 +97,8 @@ class Timer {
   /**
    * toJSON output:
    *
-   * <li> meter: {@see Meter} toJSON output docs above.
-   * <li> histogram: {@see Histogram} toJSON output docs above.
+   * <li> meter: See <a href="#meter">Meter</a>#toJSON output docs above.</li>
+   * <li> histogram: See <a href="#histogram">Histogram</a>#toJSON output docs above.</a></li>
    *
    * @return {any}
    */
@@ -110,10 +110,11 @@ class Timer {
   }
 
   /**
-   * @inheritDoc
+   * The type of the Metric Impl. {@link MetricTypes}.
+   * @return {string} The type of the Metric Impl.
    */
   getType() {
-    return METRIC_TYPES.TIMER;
+    return MetricTypes.TIMER;
   }
 }
 
@@ -123,7 +124,7 @@ module.exports = Timer;
  * @interface TimerProperties
  * @typedef TimerProperties
  * @type {Object}
- * @property {number} meter The internal meter to use. Defaults to a new {@link Meter}.
- * @property {number} histogram The internal histogram to use. Defaults to a new {@link Histogram}.
+ * @property {Meter} meter The internal meter to use. Defaults to a new {@link Meter}.
+ * @property {Histogram} histogram The internal histogram to use. Defaults to a new {@link Histogram}.
  * @property {function} getTime optional function override for supplying time to the {@link Stopwatch}
  */

@@ -1,4 +1,4 @@
-const { METRIC_TYPES } = require('./Metric');
+const { MetricTypes } = require('./Metric');
 
 /**
  * Works like a {@link Gauge}, but rather than getting its value from a callback, the value
@@ -34,10 +34,11 @@ class SettableGauge {
   }
 
   /**
-   * @inheritDoc
+   * The type of the Metric Impl. {@link MetricTypes}.
+   * @return {string} The type of the Metric Impl.
    */
   getType() {
-    return METRIC_TYPES.GAUGE;
+    return MetricTypes.GAUGE;
   }
 }
 
@@ -51,7 +52,7 @@ module.exports = SettableGauge;
  * @type {Object}
  * @property {number} initialValue An initial value to use for this settable gauge. Defaults to 0.
  * @example
- * // Creates a counter that starts at 5.
+ * // Creates a Gauge that with an initial value of 500.
  * const settableGauge = new SettableGauge({ initialValue: 500 })
  *
  */

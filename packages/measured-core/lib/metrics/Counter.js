@@ -1,4 +1,4 @@
-const { METRIC_TYPES } = require('./Metric');
+const { MetricTypes } = require('./Metric');
 
 /**
  * Counters are things that increment or decrement
@@ -56,10 +56,11 @@ class Counter {
   }
 
   /**
-   * @inheritDoc
+   * The type of the Metric Impl. {@link MetricTypes}.
+   * @return {string} The type of the Metric Impl.
    */
   getType() {
-    return METRIC_TYPES.COUNTER;
+    return MetricTypes.COUNTER;
   }
 }
 

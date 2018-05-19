@@ -1,4 +1,4 @@
-const { METRIC_TYPES } = require('./Metric');
+const { MetricTypes } = require('./Metric');
 const units = require('../util/units');
 const EWMA = require('../util/ExponentiallyMovingWeightedAverage');
 
@@ -144,10 +144,11 @@ class Meter {
   }
 
   /**
-   * @inheritDoc
+   * The type of the Metric Impl. {@link MetricTypes}.
+   * @return {string} The type of the Metric Impl.
    */
   getType() {
-    return METRIC_TYPES.METER;
+    return MetricTypes.METER;
   }
 }
 

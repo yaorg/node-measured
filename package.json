@@ -31,9 +31,9 @@
     "format": "lerna exec yarn format",
     "clean": "rm -fr build && lerna exec yarn clean",
     "jsdoc": "jsdoc --readme ./README.md --recurse --destination build/jsdoc/ packages/**/lib/",
-    "generate-docs": "mkdir -p build/docs/ && lerna exec yarn generate-docs",
+    "generate-docs": "rm -fr build/docs && mkdir -p build/docs && lerna exec yarn generate-docs",
     "deploy-js-doc-to-github": "gh-pages -d build/docs",
-    "travis-deploy-github-pages": "gh-pages -r \"https://${GH_TOKEN}@github.com/yaorg/node-measured.git\" -d build/docs/",
+    "travis-deploy-github-pages": "gh-pages -r \"https://${GH_TOKEN}@github.com/yaorg/node-measured.git\" -d build/docs",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {

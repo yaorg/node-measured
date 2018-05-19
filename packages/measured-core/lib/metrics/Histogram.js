@@ -1,4 +1,4 @@
-const { METRIC_TYPES } = require('./Metric');
+const { MetricTypes } = require('./Metric');
 const binarySearch = require('binary-search');
 const EDS = require('../util/ExponentiallyDecayingSample');
 
@@ -217,10 +217,11 @@ class Histogram {
   }
 
   /**
-   * @inheritDoc
+   * The type of the Metric Impl. {@link MetricTypes}.
+   * @return {string} The type of the Metric Impl.
    */
   getType() {
-    return METRIC_TYPES.HISTOGRAM;
+    return MetricTypes.HISTOGRAM;
   }
 }
 
