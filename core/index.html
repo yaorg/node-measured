@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>measured-core 1.4.0 | Documentation</title>
+  <title>measured-core 1.5.0 | Documentation</title>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' type='text/css' rel='stylesheet' />
   <link href='assets/style.css' type='text/css' rel='stylesheet' />
@@ -14,7 +14,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>measured-core</h3>
-          <div class='mb1'><code>1.4.0</code></div>
+          <div class='mb1'><code>1.5.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -361,9 +361,9 @@
               
                 
                 <li><a
-                  href='#histogramproperties'
+                  href='#histogramdata'
                   class="">
-                  HistogramProperties
+                  HistogramData
                   
                 </a>
                 
@@ -371,9 +371,9 @@
               
                 
                 <li><a
-                  href='#histogramdata'
+                  href='#histogramproperties'
                   class="">
-                  HistogramData
+                  HistogramProperties
                   
                 </a>
                 
@@ -433,9 +433,9 @@
               
                 
                 <li><a
-                  href='#meterdata'
+                  href='#meterproperties'
                   class="">
-                  MeterData
+                  MeterProperties
                   
                 </a>
                 
@@ -443,9 +443,9 @@
               
                 
                 <li><a
-                  href='#meterproperties'
+                  href='#meterdata'
                   class="">
-                  MeterProperties
+                  MeterData
                   
                 </a>
                 
@@ -3401,70 +3401,6 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='histogramproperties'>
-      HistogramProperties
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Properties to create a <a href="#histogram">Histogram</a> with.</p>
-
-
-  <div class='pre p1 fill-light mt0'>HistogramProperties</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>sample</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-          : The sample reservoir to use. Defaults to an ExponentiallyDecayingSample.
-
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='histogramdata'>
       HistogramData
     </h3>
@@ -3578,6 +3514,70 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
         <div class='space-bottom0'>
           <span class='code bold'>p999</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
           : See median, 99.9% percentile.
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='histogramproperties'>
+      HistogramProperties
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Properties to create a <a href="#histogram">Histogram</a> with.</p>
+
+
+  <div class='pre p1 fill-light mt0'>HistogramProperties</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>sample</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+          : The sample reservoir to use. Defaults to an ExponentiallyDecayingSample.
 
           
         </div>
@@ -3936,6 +3936,82 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='meterproperties'>
+      MeterProperties
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>MeterProperties</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>rateUnit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The rate unit. Defaults to 1000 (1 sec).
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>tickInterval</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The interval in which the averages are updated. Defaults to 5000 (5 sec).
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> meter = <span class="hljs-keyword">new</span> Meter({ <span class="hljs-attr">rateUnit</span>: <span class="hljs-number">1000</span>, <span class="hljs-attr">tickInterval</span>: <span class="hljs-number">5000</span>})</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='meterdata'>
       MeterData
     </h3>
@@ -4018,82 +4094,6 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='meterproperties'>
-      MeterProperties
-    </h3>
-    
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>MeterProperties</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>rateUnit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          : The rate unit. Defaults to 1000 (1 sec).
-
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>tickInterval</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          : The interval in which the averages are updated. Defaults to 5000 (5 sec).
-
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> meter = <span class="hljs-keyword">new</span> Meter({ <span class="hljs-attr">rateUnit</span>: <span class="hljs-number">1000</span>, <span class="hljs-attr">tickInterval</span>: <span class="hljs-number">5000</span>})</pre>
-    
   
 
   
