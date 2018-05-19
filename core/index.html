@@ -433,9 +433,9 @@
               
                 
                 <li><a
-                  href='#meterdata'
+                  href='#meterproperties'
                   class="">
-                  MeterData
+                  MeterProperties
                   
                 </a>
                 
@@ -443,9 +443,9 @@
               
                 
                 <li><a
-                  href='#meterproperties'
+                  href='#meterdata'
                   class="">
-                  MeterProperties
+                  MeterData
                   
                 </a>
                 
@@ -3936,6 +3936,82 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='meterproperties'>
+      MeterProperties
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>MeterProperties</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>rateUnit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The rate unit. Defaults to 1000 (1 sec).
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>tickInterval</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The interval in which the averages are updated. Defaults to 5000 (5 sec).
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> meter = <span class="hljs-keyword">new</span> Meter({ <span class="hljs-attr">rateUnit</span>: <span class="hljs-number">1000</span>, <span class="hljs-attr">tickInterval</span>: <span class="hljs-number">5000</span>})</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='meterdata'>
       MeterData
     </h3>
@@ -4018,82 +4094,6 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='meterproperties'>
-      MeterProperties
-    </h3>
-    
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>MeterProperties</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>rateUnit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          : The rate unit. Defaults to 1000 (1 sec).
-
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>tickInterval</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          : The interval in which the averages are updated. Defaults to 5000 (5 sec).
-
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> meter = <span class="hljs-keyword">new</span> Meter({ <span class="hljs-attr">rateUnit</span>: <span class="hljs-number">1000</span>, <span class="hljs-attr">tickInterval</span>: <span class="hljs-number">5000</span>})</pre>
-    
   
 
   
