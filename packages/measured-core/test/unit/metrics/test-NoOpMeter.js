@@ -10,11 +10,11 @@ describe('NoOpMeter', () => {
     meter = new common.measured.NoOpMeter();
   });
 
-  it ('always returns empty object', () => {
+  it('always returns empty object', () => {
     assert.deepEqual(meter.toJSON(), {});
-  })
+  });
 
   it('returns the expected type', () => {
     assert.equal(meter.getType(), 'Meter');
-  })
+  });
 });

@@ -1,18 +1,20 @@
 language: node_js
 node_js:
 - lts/*
+before_install:
+- sudo apt-get -qq update
+- sudo apt-get install -y gawk jq
 after_success:
-- npm run coverage
+- yarn coverage
+# Deploy documentation site every commit to master
 - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master"
-  && npm run travis-deploy-github-pages
-deploy:
-  provider: npm
-  email: fieldju@gmail.com
-  api_key:
-    secure: Z4h5kSmH7zEoEEwg6JlrlUxsFOj1ZqY7xoMJuMqWmiNqgWyoXxD9vCKvOSILh1oupiWIgaDFmSifYmPLbbmHWoMHQiwEvH8+rNYgDL3+hS8jm21tI4U4M7URShrPc6yLw1y3cHmNo6JGCZl8x4ZGiAsPw4vQqw0G/+PipMKdBwE=
-  on:
-    tags: true
-    repo: yaorg/node-measured
+  && yarn travis-deploy-github-pages
+# Trigger publish script on tagged builds
+- test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && scripts/publish.sh
+sudo: required
+addons:
+  chrome: stable
 env:
   global:
-    secure: tr3Wo/f/Li3djNmtjMfgFwXQf5Qe3iTuOlDX8OXXFOuH+N1Jc1CMp3kcVt3xq46e2ONwP7d6CQDZomBAKNGKzqJaoD37btnx8ieaOr5bUhWEvtMCvNBQIaEJNv98r6VZBB9MetvrawJyKsQ855TZ+stariZA7AOZPg1Jdje60P4=
+  - secure: S5UUBCJPljTUXznK0CAc7WHwlkn5uMNSymiJqDZX+7FhVVwybWvpl24edzOX/wjAoID1VSI8A2u5DOwNMFG/bWitzdNin+LdEg0gGa4MBK0ysS9Dkavv9MQrVEDwOiFELXVQUlt24fEHiQqL12iEmJS1a8GYCxtZLt0DeP6feQs=
+  - secure: htcr11/RhghV9ImZAZ6PH6jOw4ZNyVVfGELKe/S7uoLlSElAx3yJ2fguFLRcFyoX/UuwDibuWKJ0tS0j644B+NNFEeaI4GjOa1rWuEwhX2MSHJnVWAvtJiF7jBtfiRuEjz7wrq3KYCffjS3loJx5+8D70GQI4dM0E4WbzyJBOb4=

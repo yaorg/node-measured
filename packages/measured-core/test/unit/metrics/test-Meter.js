@@ -139,5 +139,5 @@ describe('Meter', function() {
 
   it('returns the expected type', () => {
     assert.equal(meter.getType(), 'Meter');
-  })
+  });
 });

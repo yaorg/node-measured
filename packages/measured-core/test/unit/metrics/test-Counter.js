@@ -76,5 +76,5 @@ describe('Counter', function() {
 
   it('returns the expected type', () => {
     assert.equal(counter.getType(), 'Counter');
-  })
+  });
 });

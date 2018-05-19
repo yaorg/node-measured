@@ -5,7 +5,7 @@ const SettableGauge = require('./metrics/SettableGauge');
 const Histogram = require('./metrics/Histogram');
 const Meter = require('./metrics/Meter');
 const Timer = require('./metrics/Timer');
-const METRIC_TYPES = require('./metrics/Metric').METRIC_TYPES;
+const { METRIC_TYPES } = require('./metrics/Metric');
 
 /**
  * A Simple collection that stores names and a {@link Metric} instances with a few convenience methods for
@@ -14,8 +14,8 @@ const METRIC_TYPES = require('./metrics/Metric').METRIC_TYPES;
  * var { Collection } = require('measured');
  * const collection = new Collection('node-process-metrics');
  * const gauge = collection.gauge('node.process.heap_used', () => {
-   *    return process.memoryUsage().heapUsed;
-   * });
+ *    return process.memoryUsage().heapUsed;
+ * });
  */
 class Collection {
   /**
@@ -56,12 +56,11 @@ class Collection {
   toJSON() {
     const json = {};
 
-    let metric;
-    for (metric in this._metrics) {
-      if (this._metrics.hasOwnProperty(metric)) {
+    Object.keys(this._metrics).forEach(metric => {
+      if (Object.prototype.hasOwnProperty.call(this._metrics, metric)) {
         json[metric] = this._metrics[metric].toJSON();
       }
-    }
+    });
 
     if (!this.name) {
       return json;
@@ -84,7 +83,9 @@ class Collection {
 
     let gauge;
     this._getMetricForNameAndType(name, METRIC_TYPES.GAUGE).ifPresentOrElse(
-      registeredMetric => (gauge = registeredMetric),
+      registeredMetric => {
+        gauge = registeredMetric;
+      },
       () => {
         gauge = new Gauge(readFn);
         this.register(name, gauge);
@@ -104,7 +105,9 @@ class Collection {
 
     let counter;
     this._getMetricForNameAndType(name, METRIC_TYPES.COUNTER).ifPresentOrElse(
-      registeredMetric => (counter = registeredMetric),
+      registeredMetric => {
+        counter = registeredMetric;
+      },
       () => {
         counter = new Counter(properties);
         this.register(name, counter);
@@ -124,7 +127,9 @@ class Collection {
 
     let histogram;
     this._getMetricForNameAndType(name, METRIC_TYPES.HISTOGRAM).ifPresentOrElse(
-      registeredMetric => (histogram = registeredMetric),
+      registeredMetric => {
+        histogram = registeredMetric;
+      },
       () => {
         histogram = new Histogram(properties);
         this.register(name, histogram);
@@ -144,7 +149,9 @@ class Collection {
 
     let timer;
     this._getMetricForNameAndType(name, METRIC_TYPES.TIMER).ifPresentOrElse(
-      registeredMetric => (timer = registeredMetric),
+      registeredMetric => {
+        timer = registeredMetric;
+      },
       () => {
         timer = new Timer(properties);
         this.register(name, timer);
@@ -164,7 +171,9 @@ class Collection {
 
     let meter;
     this._getMetricForNameAndType(name, METRIC_TYPES.METER).ifPresentOrElse(
-      registeredMetric => (meter = registeredMetric),
+      registeredMetric => {
+        meter = registeredMetric;
+      },
       () => {
         meter = new Meter(properties);
         this.register(name, meter);
@@ -184,7 +193,9 @@ class Collection {
 
     let settableGauge;
     this._getMetricForNameAndType(name, METRIC_TYPES.METER).ifPresentOrElse(
-      registeredMetric => (settableGauge = registeredMetric),
+      registeredMetric => {
+        settableGauge = registeredMetric;
+      },
       () => {
         settableGauge = new SettableGauge(properties);
         this.register(name, settableGauge);
@@ -216,22 +227,23 @@ class Collection {
   }
 
   /**
-   * Validates that the provided name is valid
-   * @param name The provided metric name param
+   * Validates that the provided name is valid.
+   *
+   * @param name The provided metric name param.
    * @private
    */
-   _validateName(name) {
+  _validateName(name) {
     if (!name || typeof name !== 'string') {
       throw new Error('You must supply a metric name');
     }
   }
-  
+
   /**
    * Calls end on all metrics in the registry that support end()
    */
   end() {
     const metrics = this._metrics;
-    Object.keys(metrics).forEach(function(name) {
+    Object.keys(metrics).forEach(name => {
       const metric = metrics[name];
       if (metric.end) {
         metric.end();

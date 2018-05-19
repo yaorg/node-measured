@@ -15,73 +15,54 @@ const { METRIC_TYPES } = require('./Metric');
  */
 // eslint-disable-next-line padded-blocks
 class NoOpMeter {
-
   /**
    * No-Op impl
    * @param {number} n Number of events to mark.
    */
   // eslint-disable-next-line no-unused-vars
-  mark(n) {
-
-  }
+  mark(n) {}
 
   /**
    * No-Op impl
    */
-  start() {
-
-  }
+  start() {}
 
   /**
    * No-Op impl
    */
-  end() {
-
-  }
+  end() {}
 
   /**
    * No-Op impl
    */
-  ref() {
-
-  }
+  ref() {}
 
   /**
    * No-Op impl
    */
-  unref() {
-
-  }
+  unref() {}
 
   /**
    * No-Op impl
    */
-  reset() {
-
-  }
+  reset() {}
 
   /**
    * No-Op impl
    */
-  meanRate() {
-
-  }
+  meanRate() {}
 
   /**
    * No-Op impl
    */
-  currentRate() {
-
-  }
+  currentRate() {}
 
   /**
    * Returns an empty object
    * @return {{}}
    */
   toJSON() {
-    return {
-
-    };
+    return {};
   }
 
   /**

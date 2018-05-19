@@ -10,4 +10,4 @@ common.dir.lib  = path.join(common.dir.root, 'lib');
 
 common.measured = require(common.dir.root);
 */
-exports.measured = require('../index');
+exports.measured = require('../lib/index');

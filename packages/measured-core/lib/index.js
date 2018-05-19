@@ -1,16 +1,16 @@
-const Collection = require('./lib/Collection');
-const Counter = require('./lib/metrics/Counter');
-const Gauge = require('./lib/metrics/Gauge');
-const SettableGauge = require('./lib/metrics/SettableGauge');
-const Histogram = require('./lib/metrics/Histogram');
-const Meter = require('./lib/metrics/Meter');
-const NoOpMeter = require('./lib/metrics/NoOpMeter');
-const Timer = require('./lib/metrics/Timer');
-const BinaryHeap = require('./lib/util/BinaryHeap');
-const ExponentiallyDecayingSample = require('./lib/util/ExponentiallyDecayingSample');
-const ExponentiallyMovingWeightedAverage = require('./lib/util/ExponentiallyMovingWeightedAverage');
-const Stopwatch = require('./lib/util/Stopwatch');
-const units = require('./lib/util/units');
+const Collection = require('./Collection');
+const Counter = require('./metrics/Counter');
+const Gauge = require('./metrics/Gauge');
+const SettableGauge = require('./metrics/SettableGauge');
+const Histogram = require('./metrics/Histogram');
+const Meter = require('./metrics/Meter');
+const NoOpMeter = require('./metrics/NoOpMeter');
+const Timer = require('./metrics/Timer');
+const BinaryHeap = require('./util/BinaryHeap');
+const ExponentiallyDecayingSample = require('./util/ExponentiallyDecayingSample');
+const ExponentiallyMovingWeightedAverage = require('./util/ExponentiallyMovingWeightedAverage');
+const Stopwatch = require('./util/Stopwatch');
+const units = require('./util/units');
 
 /**
  * The main measured module that is referenced when require('measured') is used.
