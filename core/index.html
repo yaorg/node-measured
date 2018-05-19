@@ -433,9 +433,9 @@
               
                 
                 <li><a
-                  href='#meterproperties'
+                  href='#meterdata'
                   class="">
-                  MeterProperties
+                  MeterData
                   
                 </a>
                 
@@ -443,9 +443,9 @@
               
                 
                 <li><a
-                  href='#meterdata'
+                  href='#meterproperties'
                   class="">
-                  MeterData
+                  MeterProperties
                   
                 </a>
                 
@@ -872,7 +872,7 @@
 creating / registering and then gathering all data the registered metrics.</p>
 
 
-  <div class='pre p1 fill-light mt0'>new Collection(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  <div class='pre p1 fill-light mt0'>new Collection(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</div>
   
   
 
@@ -889,7 +889,7 @@ creating / registering and then gathering all data the registered metrics.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>?)</code>
 	    The name to use for this collection.
 
           </div>
@@ -1141,7 +1141,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>counter(name, properties)</span>
+            <span class='code strong strong truncate'>counter(name, properties?)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1152,7 +1152,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
   <p>Gets or creates and registers a <a href="#counter">Counter</a></p>
 
 
-  <div class='pre p1 fill-light mt0'>counter(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#counterproperties">CounterProperties</a>): <a href="#counter">Counter</a></div>
+  <div class='pre p1 fill-light mt0'>counter(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#counterproperties">CounterProperties</a>?): <a href="#counter">Counter</a></div>
   
   
 
@@ -1178,7 +1178,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#counterproperties">CounterProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#counterproperties">CounterProperties</a>?)</code>
 	    See 
 <a href="#counterproperties">CounterProperties</a>
 
@@ -1219,7 +1219,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>histogram(name, properties)</span>
+            <span class='code strong strong truncate'>histogram(name, properties?)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1230,7 +1230,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
   <p>Gets or creates and registers a <a href="#histogram">Histogram</a></p>
 
 
-  <div class='pre p1 fill-light mt0'>histogram(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#histogramproperties">HistogramProperties</a>): <a href="#histogram">Histogram</a></div>
+  <div class='pre p1 fill-light mt0'>histogram(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#histogramproperties">HistogramProperties</a>?): <a href="#histogram">Histogram</a></div>
   
   
 
@@ -1256,7 +1256,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#histogramproperties">HistogramProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#histogramproperties">HistogramProperties</a>?)</code>
 	    See 
 <a href="#histogramproperties">HistogramProperties</a>
 
@@ -1297,7 +1297,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>timer(name, properties)</span>
+            <span class='code strong strong truncate'>timer(name, properties?)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1308,7 +1308,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
   <p>Gets or creates and registers a <a href="#timer">Timer</a></p>
 
 
-  <div class='pre p1 fill-light mt0'>timer(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#timerproperties">TimerProperties</a>): <a href="#timer">Timer</a></div>
+  <div class='pre p1 fill-light mt0'>timer(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#timerproperties">TimerProperties</a>?): <a href="#timer">Timer</a></div>
   
   
 
@@ -1334,7 +1334,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#timerproperties">TimerProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#timerproperties">TimerProperties</a>?)</code>
 	    See 
 <a href="#timerproperties">TimerProperties</a>
 
@@ -1375,7 +1375,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>meter(name, properties)</span>
+            <span class='code strong strong truncate'>meter(name, properties?)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1386,7 +1386,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
   <p>Gets or creates and registers a <a href="#meter">Meter</a></p>
 
 
-  <div class='pre p1 fill-light mt0'>meter(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#meterproperties">MeterProperties</a>): <a href="#meter">Meter</a></div>
+  <div class='pre p1 fill-light mt0'>meter(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#meterproperties">MeterProperties</a>?): <a href="#meter">Meter</a></div>
   
   
 
@@ -1412,7 +1412,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#meterproperties">MeterProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#meterproperties">MeterProperties</a>?)</code>
 	    See 
 <a href="#meterproperties">MeterProperties</a>
 
@@ -1453,7 +1453,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>settableGauge(name, properties)</span>
+            <span class='code strong strong truncate'>settableGauge(name, properties?)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1464,7 +1464,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
   <p>Gets or creates and registers a <a href="#settablegauge">SettableGauge</a></p>
 
 
-  <div class='pre p1 fill-light mt0'>settableGauge(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#settablegaugeproperties">SettableGaugeProperties</a>): <a href="#settablegauge">SettableGauge</a></div>
+  <div class='pre p1 fill-light mt0'>settableGauge(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#settablegaugeproperties">SettableGaugeProperties</a>?): <a href="#settablegauge">SettableGauge</a></div>
   
   
 
@@ -1490,7 +1490,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#settablegaugeproperties">SettableGaugeProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#settablegaugeproperties">SettableGaugeProperties</a>?)</code>
 	    See 
 <a href="#settablegaugeproperties">SettableGaugeProperties</a>
 
@@ -2441,7 +2441,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
   <p>Counters are things that increment or decrement</p>
 
 
-  <div class='pre p1 fill-light mt0'>new Counter(properties: <a href="#counterproperties">CounterProperties</a>)</div>
+  <div class='pre p1 fill-light mt0'>new Counter(properties: <a href="#counterproperties">CounterProperties</a>?)</div>
   
   
 
@@ -2458,7 +2458,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#counterproperties">CounterProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#counterproperties">CounterProperties</a>?)</code>
 	    see 
 <a href="#counterproperties">CounterProperties</a>
 
@@ -3065,7 +3065,7 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   <p>Keeps a reservoir of statistically relevant values biased towards the last 5 minutes to explore their distribution.</p>
 
 
-  <div class='pre p1 fill-light mt0'>new Histogram(properties: <a href="#histogramproperties">HistogramProperties</a>)</div>
+  <div class='pre p1 fill-light mt0'>new Histogram(properties: <a href="#histogramproperties">HistogramProperties</a>?)</div>
   
   
 
@@ -3082,7 +3082,7 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#histogramproperties">HistogramProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#histogramproperties">HistogramProperties</a>?)</code>
 	    see 
 <a href="#histogramproperties">HistogramProperties</a>
 .
@@ -3617,7 +3617,7 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   <p>Things that are measured as events / interval.</p>
 
 
-  <div class='pre p1 fill-light mt0'>new Meter(properties: <a href="#meterproperties">MeterProperties</a>)</div>
+  <div class='pre p1 fill-light mt0'>new Meter(properties: <a href="#meterproperties">MeterProperties</a>?)</div>
   
   
 
@@ -3634,7 +3634,7 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#meterproperties">MeterProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#meterproperties">MeterProperties</a>?)</code>
 	    see 
 <a href="#meterproperties">MeterProperties</a>
 .
@@ -3936,82 +3936,6 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='meterproperties'>
-      MeterProperties
-    </h3>
-    
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>MeterProperties</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>rateUnit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          : The rate unit. Defaults to 1000 (1 sec).
-
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>tickInterval</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          : The interval in which the averages are updated. Defaults to 5000 (5 sec).
-
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> meter = <span class="hljs-keyword">new</span> Meter({ <span class="hljs-attr">rateUnit</span>: <span class="hljs-number">1000</span>, <span class="hljs-attr">tickInterval</span>: <span class="hljs-number">5000</span>})</pre>
-    
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
     <h3 class='fl m0' id='meterdata'>
       MeterData
     </h3>
@@ -4094,6 +4018,82 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='meterproperties'>
+      MeterProperties
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>MeterProperties</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>rateUnit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The rate unit. Defaults to 1000 (1 sec).
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>tickInterval</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The interval in which the averages are updated. Defaults to 5000 (5 sec).
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> meter = <span class="hljs-keyword">new</span> Meter({ <span class="hljs-attr">rateUnit</span>: <span class="hljs-number">1000</span>, <span class="hljs-attr">tickInterval</span>: <span class="hljs-number">5000</span>})</pre>
+    
   
 
   
@@ -4942,7 +4942,7 @@ This is useful for some time series aggregators that can calculate rates for you
 is set when needed. This can be useful for setting a gauges value for asynchronous operations.</p>
 
 
-  <div class='pre p1 fill-light mt0'>new SettableGauge(options: <a href="#settablegaugeproperties">SettableGaugeProperties</a>)</div>
+  <div class='pre p1 fill-light mt0'>new SettableGauge(options: <a href="#settablegaugeproperties">SettableGaugeProperties</a>?)</div>
   
   
 
@@ -4959,7 +4959,7 @@ is set when needed. This can be useful for setting a gauges value for asynchrono
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>options</span> <code class='quiet'>(<a href="#settablegaugeproperties">SettableGaugeProperties</a>)</code>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="#settablegaugeproperties">SettableGaugeProperties</a>?)</code>
 	    See 
 <a href="#settablegaugeproperties">SettableGaugeProperties</a>
 .
@@ -5205,7 +5205,7 @@ Since they are frequently used for tracking how long certain things take, they e
 But you can also use them as generic histograms that also track the rate of events: See example 2.
 
 
-  <div class='pre p1 fill-light mt0'>new Timer(properties: <a href="#timerproperties">TimerProperties</a>)</div>
+  <div class='pre p1 fill-light mt0'>new Timer(properties: <a href="#timerproperties">TimerProperties</a>?)</div>
   
   
 
@@ -5222,7 +5222,7 @@ But you can also use them as generic histograms that also track the rate of even
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#timerproperties">TimerProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#timerproperties">TimerProperties</a>?)</code>
 	    See 
 <a href="#timerproperties">TimerProperties</a>
 .
@@ -6203,6 +6203,13 @@ as well as <a href="http://eloquentjavascript.net/appendix2.html">http://eloquen
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> TimeUnit = <span class="hljs-built_in">require</span>(<span class="hljs-string">'measured-core'</span>).unit
+setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {}, <span class="hljs-number">5</span> * TimeUnit.MINUTES)</pre>
+    
   
 
   
