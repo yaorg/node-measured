@@ -18,6 +18,7 @@
     "mochify": "^5.6.1",
     "nyc": "^11.8.0",
     "prettier": "^1.12.1",
+    "showdown": "^1.8.6",
     "sinon": "^5.0.7"
   },
   "scripts": {
@@ -31,7 +32,7 @@
     "format": "lerna exec yarn format",
     "clean": "rm -fr build && lerna exec yarn clean",
     "jsdoc": "jsdoc --readme ./README.md --recurse --destination build/jsdoc/ packages/**/lib/",
-    "generate-docs": "rm -fr build/docs && mkdir -p build/docs && lerna exec yarn generate-docs",
+    "generate-docs": "rm -fr build/docs && mkdir -p build/docs/packages/measured-core && lerna exec yarn generate-docs && showdown makehtml -i Readme.md -o build/docs/index.html && showdown makehtml -i packages/measured-core/README.md -o build/docs/packages/measured-core/index.html",
     "deploy-js-doc-to-github": "gh-pages -d build/docs",
     "travis-deploy-github-pages": "gh-pages -r \"https://${GH_TOKEN}@github.com/yaorg/node-measured.git\" -d build/docs",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
