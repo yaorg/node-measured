@@ -1,16 +1,18 @@
-## Measured Core
+# Measured Core
 
 The core measured library that has the Metric interfaces and implementations.
 
-##### Install
+## Install
 
 ```
 npm install measured-core
 ```
 
-##### [Full API Docs](https://yaorg.github.io/node-measured/core/index.html)
+## Docs
 
-##### Metrics
+### See the full [API Docs here](https://yaorg.github.io/node-measured/core/index.html).
+
+### Metrics
 
 The core library has the following metrics classes:
 
@@ -23,7 +25,7 @@ The core library has the following metrics classes:
 
 They can be created manually or with the including basic core registry called the [Collection](https://yaorg.github.io/node-measured/core/index.html#collection).
 
-##### Usage
+## Usage
 
 **Step 1:** Add measurements to your code. For example, lets track the
 requests/sec of a http server:
