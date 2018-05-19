@@ -16,7 +16,7 @@ const EDS = require('../util/ExponentiallyDecayingSample');
  */
 class Histogram {
   /**
-   @param {HistogramProperties} properties see {@link HistogramProperties}.
+   @param {HistogramProperties} [properties] see {@link HistogramProperties}.
    */
   constructor(properties) {
     this._properties = properties || {};

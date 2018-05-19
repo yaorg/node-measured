@@ -35,7 +35,7 @@ const Stopwatch = require('../util/Stopwatch');
  */
 class Timer {
   /**
-   * @param {TimerProperties} properties See {@link TimerProperties}.
+   * @param {TimerProperties} [properties] See {@link TimerProperties}.
    */
   constructor(properties) {
     properties = properties || {};

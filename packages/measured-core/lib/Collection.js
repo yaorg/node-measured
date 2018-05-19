@@ -20,7 +20,7 @@ const { MetricTypes } = require('./metrics/Metric');
 class Collection {
   /**
    * Creates a named collection of metrics
-   * @param {string} name The name to use for this collection.
+   * @param {string} [name] The name to use for this collection.
    */
   constructor(name) {
     this.name = name;
@@ -97,7 +97,7 @@ class Collection {
   /**
    * Gets or creates and registers a {@link Counter}
    * @param {string} name The metric name
-   * @param {CounterProperties} properties See {@link CounterProperties}
+   * @param {CounterProperties} [properties] See {@link CounterProperties}
    * @return {Counter}
    */
   counter(name, properties) {
@@ -119,7 +119,7 @@ class Collection {
   /**
    * Gets or creates and registers a {@link Histogram}
    * @param {string} name The metric name
-   * @param {HistogramProperties} properties See {@link HistogramProperties}
+   * @param {HistogramProperties} [properties] See {@link HistogramProperties}
    * @return {Histogram}
    */
   histogram(name, properties) {
@@ -141,7 +141,7 @@ class Collection {
   /**
    * Gets or creates and registers a {@link Timer}
    * @param {string} name The metric name
-   * @param {TimerProperties} properties See {@link TimerProperties}
+   * @param {TimerProperties} [properties] See {@link TimerProperties}
    * @return {Timer}
    */
   timer(name, properties) {
@@ -163,7 +163,7 @@ class Collection {
   /**
    * Gets or creates and registers a {@link Meter}
    * @param {string} name The metric name
-   * @param {MeterProperties} properties See {@link MeterProperties}
+   * @param {MeterProperties} [properties] See {@link MeterProperties}
    * @return {Meter}
    */
   meter(name, properties) {
@@ -185,7 +185,7 @@ class Collection {
   /**
    * Gets or creates and registers a {@link SettableGauge}
    * @param {string} name The metric name
-   * @param {SettableGaugeProperties} properties See {@link SettableGaugeProperties}
+   * @param {SettableGaugeProperties} [properties] See {@link SettableGaugeProperties}
    * @return {SettableGauge}
    */
   settableGauge(name, properties) {

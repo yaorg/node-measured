@@ -17,7 +17,7 @@ const TICK_INTERVAL = 5 * units.SECONDS;
  */
 class Meter {
   /**
-   * @param {MeterProperties} properties see {@link MeterProperties}.
+   * @param {MeterProperties} [properties] see {@link MeterProperties}.
    */
   constructor(properties) {
     this._properties = properties || {};

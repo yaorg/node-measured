@@ -15,7 +15,7 @@ const { MetricTypes } = require('./Metric');
  */
 class SettableGauge {
   /**
-   * @param {SettableGaugeProperties} options See {@link SettableGaugeProperties}.
+   * @param {SettableGaugeProperties} [options] See {@link SettableGaugeProperties}.
    */
   constructor(options) {
     options = options || {};

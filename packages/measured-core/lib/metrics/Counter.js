@@ -15,7 +15,7 @@ const { MetricTypes } = require('./Metric');
  */
 class Counter {
   /**
-   * @param {CounterProperties} properties see {@link CounterProperties}
+   * @param {CounterProperties} [properties] see {@link CounterProperties}
    */
   constructor(properties) {
     properties = properties || {};
