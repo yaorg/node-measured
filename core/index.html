@@ -185,6 +185,12 @@
                       </a></li>
                     
                       <li><a
+                        href='#measuredmetrictypes'
+                        class='regular pre-open'>
+                        .MetricTypes
+                      </a></li>
+                    
+                      <li><a
                         href='#measuredunits'
                         class='regular pre-open'>
                         .units
@@ -355,9 +361,9 @@
               
                 
                 <li><a
-                  href='#histogramdata'
+                  href='#histogramproperties'
                   class="">
-                  HistogramData
+                  HistogramProperties
                   
                 </a>
                 
@@ -365,9 +371,9 @@
               
                 
                 <li><a
-                  href='#histogramproperties'
+                  href='#histogramdata'
                   class="">
-                  HistogramProperties
+                  HistogramData
                   
                 </a>
                 
@@ -427,9 +433,9 @@
               
                 
                 <li><a
-                  href='#meterproperties'
+                  href='#meterdata'
                   class="">
-                  MeterProperties
+                  MeterData
                   
                 </a>
                 
@@ -437,9 +443,9 @@
               
                 
                 <li><a
-                  href='#meterdata'
+                  href='#meterproperties'
                   class="">
-                  MeterData
+                  MeterProperties
                   
                 </a>
                 
@@ -476,6 +482,16 @@
                   
                   
                 </div>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#metrictypes'
+                  class="">
+                  MetricTypes
+                  
+                </a>
                 
                 </li>
               
@@ -1292,7 +1308,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
   <p>Gets or creates and registers a <a href="#timer">Timer</a></p>
 
 
-  <div class='pre p1 fill-light mt0'>timer(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#histogramproperties">HistogramProperties</a>): <a href="#timer">Timer</a></div>
+  <div class='pre p1 fill-light mt0'>timer(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, properties: <a href="#timerproperties">TimerProperties</a>): <a href="#timer">Timer</a></div>
   
   
 
@@ -1318,7 +1334,7 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#histogramproperties">HistogramProperties</a>)</code>
+            <span class='code bold'>properties</span> <code class='quiet'>(<a href="#timerproperties">TimerProperties</a>)</code>
 	    See 
 <a href="#timerproperties">TimerProperties</a>
 
@@ -2227,6 +2243,57 @@ collection.register(<span class="hljs-string">'node.process.heap_used'</span>, g
       </div>
     </div>
   
+    <div class='border-bottom' id='measuredmetrictypes'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>MetricTypes</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>See <a href="#metrictypes">MetricTypes</a></p>
+
+
+  <div class='pre p1 fill-light mt0'>MetricTypes</div>
+  
+    <p>
+      Type:
+      <a href="#metrictypes">MetricTypes</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='measuredunits'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -2675,23 +2742,32 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
+  <p>The type of the Metric Impl. <a href="#metrictypes">MetricTypes</a>.</p>
 
-  <div class='pre p1 fill-light mt0'>getType()</div>
-  
-  
 
-  
-  
-  
-  
+  <div class='pre p1 fill-light mt0'>getType(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
   
+  
+  
+  
+  
+  
 
   
 
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The type of the Metric Impl.
+
+      
+    
   
 
   
@@ -2921,23 +2997,32 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
+  <p>The type of the Metric Impl. <a href="#metrictypes">MetricTypes</a>.</p>
 
-  <div class='pre p1 fill-light mt0'>getType()</div>
-  
-  
 
-  
-  
-  
-  
+  <div class='pre p1 fill-light mt0'>getType(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
   
+  
+  
+  
+  
+  
 
   
 
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The type of the Metric Impl.
+
+      
+    
   
 
   
@@ -3259,23 +3344,32 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
+  <p>The type of the Metric Impl. <a href="#metrictypes">MetricTypes</a>.</p>
 
-  <div class='pre p1 fill-light mt0'>getType()</div>
-  
-  
 
-  
-  
-  
-  
+  <div class='pre p1 fill-light mt0'>getType(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
   
+  
+  
+  
+  
+  
 
   
 
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The type of the Metric Impl.
+
+      
+    
   
 
   
@@ -3293,6 +3387,70 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
     </div>
   
 </div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='histogramproperties'>
+      HistogramProperties
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Properties to create a <a href="#histogram">Histogram</a> with.</p>
+
+
+  <div class='pre p1 fill-light mt0'>HistogramProperties</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>sample</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+          : The sample reservoir to use. Defaults to an ExponentiallyDecayingSample.
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -3420,70 +3578,6 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
         <div class='space-bottom0'>
           <span class='code bold'>p999</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
           : See median, 99.9% percentile.
-
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='histogramproperties'>
-      HistogramProperties
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>Properties to create a <a href="#histogram">Histogram</a> with.</p>
-
-
-  <div class='pre p1 fill-light mt0'>HistogramProperties</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>sample</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-          : The sample reservoir to use. Defaults to an ExponentiallyDecayingSample.
 
           
         </div>
@@ -3785,23 +3879,32 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
+  <p>The type of the Metric Impl. <a href="#metrictypes">MetricTypes</a>.</p>
 
-  <div class='pre p1 fill-light mt0'>getType()</div>
-  
-  
 
-  
-  
-  
-  
+  <div class='pre p1 fill-light mt0'>getType(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
   
+  
+  
+  
+  
+  
 
   
 
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The type of the Metric Impl.
+
+      
+    
   
 
   
@@ -3819,82 +3922,6 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
     </div>
   
 </div>
-
-  
-
-  
-</section>
-
-          
-        
-          
-            <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='meterproperties'>
-      MeterProperties
-    </h3>
-    
-    
-  </div>
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>MeterProperties</div>
-  
-    <p>
-      Type:
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Properties</div>
-    <div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>rateUnit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          : The rate unit. Defaults to 1000 (1 sec).
-
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <span class='code bold'>tickInterval</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
-          : The interval in which the averages are updated. Defaults to 5000 (5 sec).
-
-          
-        </div>
-      
-    </div>
-  
-
-  
-
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Example</div>
-    
-      
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> meter = <span class="hljs-keyword">new</span> Meter({ <span class="hljs-attr">rateUnit</span>: <span class="hljs-number">1000</span>, <span class="hljs-attr">tickInterval</span>: <span class="hljs-number">5000</span>})</pre>
-    
-  
-
-  
 
   
 
@@ -4008,6 +4035,82 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='meterproperties'>
+      MeterProperties
+    </h3>
+    
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>MeterProperties</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>rateUnit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The rate unit. Defaults to 1000 (1 sec).
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>tickInterval</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          : The interval in which the averages are updated. Defaults to 5000 (5 sec).
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">const</span> meter = <span class="hljs-keyword">new</span> Meter({ <span class="hljs-attr">rateUnit</span>: <span class="hljs-number">1000</span>, <span class="hljs-attr">tickInterval</span>: <span class="hljs-number">5000</span>})</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='metric'>
       Metric
     </h3>
@@ -4016,7 +4119,17 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   </div>
   
 
-  <p>Interface for Metric types</p>
+  <p>Interface for Metric types.</p>
+<p>Implementations</p>
+<p>
+<li><a href="#counter">Counter</a>, things that increment or decrement.</li>
+<li><a href="#gauge">Gauge</a>, values that can be read instantly via a supplied call back.</li>
+<li><a href="#histogram">Histogram</a>, keeps a reservoir of statistically relevant values to explore their distribution.</li>
+<li><a href="#meter">Meter</a>, things that are measured as events / interval.</li>
+<li><a href="#noopmeter">NoOpMeter</a>, an empty impl of meter, useful for supplying to a Timer, when you only care about the Histogram.</li>
+<li><a href="#settablegauge">SettableGauge</a>, just like a Gauge but its value is set directly rather than supplied by a callback.</li>
+<li><a href="#timer">Timer</a>, timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.</li>
+</p>
 
 
   <div class='pre p1 fill-light mt0'>Metric</div>
@@ -4058,7 +4171,9 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
+  <p>Please note that dispite its name, this method can return raw numbers on
+certain implementations such as counters and gauges.</p>
+
 
   <div class='pre p1 fill-light mt0'>toJSON(): any</div>
   
@@ -4111,7 +4226,8 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
+  <p>The type of the Metric Impl. <a href="#metrictypes">MetricTypes</a>.</p>
+
 
   <div class='pre p1 fill-light mt0'>getType(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
@@ -4132,7 +4248,7 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
-        The type of the Metric Impl
+        The type of the Metric Impl.
 
       
     
@@ -4153,6 +4269,98 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
     </div>
   
 </div>
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='metrictypes'>
+      MetricTypes
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>An enum like object that is the set of core metric types that all implementors of <a href="#metric">Metric</a> are.</p>
+
+
+  <div class='pre p1 fill-light mt0'>MetricTypes</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>The</span> <code class='quiet'>(COUNTER)</code>
+          : type for Counters.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>The</span> <code class='quiet'>(GAUGE)</code>
+          : type for Gauges.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>The</span> <code class='quiet'>(HISTOGRAM)</code>
+          : type for Histograms.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>The</span> <code class='quiet'>(METER)</code>
+          : type for Meters.
+
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>The</span> <code class='quiet'>(TIMER)</code>
+          : type for Timers.
+
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -4665,23 +4873,32 @@ This is useful for some time series aggregators that can calculate rates for you
 
   
 
-  
+  <p>The type of the Metric Impl. <a href="#metrictypes">MetricTypes</a>.</p>
 
-  <div class='pre p1 fill-light mt0'>getType()</div>
-  
-  
 
-  
-  
-  
-  
+  <div class='pre p1 fill-light mt0'>getType(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
   
+  
+  
+  
+  
+  
 
   
 
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The type of the Metric Impl.
+
+      
+    
   
 
   
@@ -4845,23 +5062,32 @@ setInterval(<span class="hljs-function"><span class="hljs-params">()</span> =&gt
 
   
 
-  
+  <p>The type of the Metric Impl. <a href="#metrictypes">MetricTypes</a>.</p>
 
-  <div class='pre p1 fill-light mt0'>getType()</div>
-  
-  
 
-  
-  
-  
-  
+  <div class='pre p1 fill-light mt0'>getType(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
   
+  
+  
+  
+  
+  
 
   
 
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The type of the Metric Impl.
+
+      
+    
   
 
   
@@ -4944,7 +5170,7 @@ setInterval(<span class="hljs-function"><span class="hljs-params">()</span> =&gt
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Creates a counter that starts at 5.</span>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Creates a Gauge that with an initial value of 500.</span>
 <span class="hljs-keyword">const</span> settableGauge = <span class="hljs-keyword">new</span> SettableGauge({ <span class="hljs-attr">initialValue</span>: <span class="hljs-number">500</span> })</pre>
     
   
@@ -5307,8 +5533,8 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
   
 
   <p>toJSON output:</p>
-<li> meter: {@see Meter} toJSON output docs above.
-<li> histogram: {@see Histogram} toJSON output docs above.
+<li> meter: See <a href="#meter">Meter</a>#toJSON output docs above.</li>
+<li> histogram: See <a href="#histogram">Histogram</a>#toJSON output docs above.</a></li>
 
 
   <div class='pre p1 fill-light mt0'>toJSON(): any</div>
@@ -5362,23 +5588,32 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
 
   
 
-  
+  <p>The type of the Metric Impl. <a href="#metrictypes">MetricTypes</a>.</p>
 
-  <div class='pre p1 fill-light mt0'>getType()</div>
-  
-  
 
-  
-  
-  
-  
+  <div class='pre p1 fill-light mt0'>getType(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
   
+  
+  
+  
+  
+  
 
   
 
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        The type of the Metric Impl.
+
+      
+    
   
 
   
@@ -5443,7 +5678,7 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
     <div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>meter</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          <span class='code bold'>meter</span> <code class='quiet'>(<a href="#meter">Meter</a>)</code>
           : The internal meter to use. Defaults to a new 
 <a href="#meter">Meter</a>
 .
@@ -5452,7 +5687,7 @@ http.createServer(<span class="hljs-function"><span class="hljs-keyword">functio
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>histogram</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+          <span class='code bold'>histogram</span> <code class='quiet'>(<a href="#histogram">Histogram</a>)</code>
           : The internal histogram to use. Defaults to a new 
 <a href="#histogram">Histogram</a>
 .
