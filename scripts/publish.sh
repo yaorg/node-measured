@@ -12,7 +12,7 @@
 
 set -e
 
-LATEST_RELEASE_DATA=$(curl -s --header "Accept: application/json" -L https://github.com/yaorg/lerna-playground/releases/latest)
+LATEST_RELEASE_DATA=$(curl -s --header "Accept: application/json" -L https://github.com/yaorg/node-measured/releases/latest)
 LATEST_GITHUB_RELEASE=$(echo $LATEST_RELEASE_DATA | jq --raw-output ".tag_name" | sed 's/v\(.*\)/\1/')
 CURRENT_VERSION=$(cat lerna.json | jq --raw-output ".version")
 
@@ -78,7 +78,7 @@ echo
 
 echo "Re-wireing origin remote to use GH_TOKEN"
 git remote rm origin
-git remote add origin https://fieldju:${GH_TOKEN}@github.com/yaorg/lerna-playground.git
+git remote add origin https://fieldju:${GH_TOKEN}@github.com/yaorg/node-measured.git
 git fetch --all
 git checkout master
 
@@ -94,5 +94,5 @@ echo 'registry=http://registry.npmjs.org' >> .npmrc
 lerna publish --cd-version ${CD_VERSION} --yes --force-publish
 
 echo "Re-binding orphaned github release to tag, so that it shows up as latest release rather than draft release"
-RELEASE_ID=$(curl -s --header "Accept: application/vnd.github.v3+json" -H "Authorization: token ${GH_TOKEN}" -L https://api.github.com/repos/yaorg/lerna-playground/releases | jq --arg RELEASE ${RELEASE} -r '.[] | select(.name==$RELEASE) | .id')
-curl --request PATCH --data '{"draft":"false"}' -s --header "Accept: application/vnd.github.v3+json" -H "Authorization: token ${GH_TOKEN}" -L https://api.github.com/repos/yaorg/lerna-playground/releases/${RELEASE_ID}
+RELEASE_ID=$(curl -s --header "Accept: application/vnd.github.v3+json" -H "Authorization: token ${GH_TOKEN}" -L https://api.github.com/repos/yaorg/node-measured/releases | jq --arg RELEASE ${RELEASE} -r '.[] | select(.name==$RELEASE) | .id')
+curl --request PATCH --data '{"draft":"false"}' -s --header "Accept: application/vnd.github.v3+json" -H "Authorization: token ${GH_TOKEN}" -L https://api.github.com/repos/yaorg/node-measured/releases/${RELEASE_ID}
