@@ -5,7 +5,7 @@ const SettableGauge = require('./metrics/SettableGauge');
 const Histogram = require('./metrics/Histogram');
 const Meter = require('./metrics/Meter');
 const Timer = require('./metrics/Timer');
-const { METRIC_TYPES } = require('./metrics/Metric');
+const { MetricTypes } = require('./metrics/Metric');
 
 /**
  * A Simple collection that stores names and a {@link Metric} instances with a few convenience methods for
@@ -26,7 +26,7 @@ class Collection {
     this.name = name;
 
     /**
-     * internal map of metric name to {@see Metric}
+     * internal map of metric name to {@link Metric}
      * @type {Object.<string, Metric>}
      * @private
      */
@@ -82,7 +82,7 @@ class Collection {
     this._validateName(name);
 
     let gauge;
-    this._getMetricForNameAndType(name, METRIC_TYPES.GAUGE).ifPresentOrElse(
+    this._getMetricForNameAndType(name, MetricTypes.GAUGE).ifPresentOrElse(
       registeredMetric => {
         gauge = registeredMetric;
       },
@@ -104,7 +104,7 @@ class Collection {
     this._validateName(name);
 
     let counter;
-    this._getMetricForNameAndType(name, METRIC_TYPES.COUNTER).ifPresentOrElse(
+    this._getMetricForNameAndType(name, MetricTypes.COUNTER).ifPresentOrElse(
       registeredMetric => {
         counter = registeredMetric;
       },
@@ -126,7 +126,7 @@ class Collection {
     this._validateName(name);
 
     let histogram;
-    this._getMetricForNameAndType(name, METRIC_TYPES.HISTOGRAM).ifPresentOrElse(
+    this._getMetricForNameAndType(name, MetricTypes.HISTOGRAM).ifPresentOrElse(
       registeredMetric => {
         histogram = registeredMetric;
       },
@@ -141,14 +141,14 @@ class Collection {
   /**
    * Gets or creates and registers a {@link Timer}
    * @param {string} name The metric name
-   * @param {HistogramProperties} properties See {@link TimerProperties}
+   * @param {TimerProperties} properties See {@link TimerProperties}
    * @return {Timer}
    */
   timer(name, properties) {
     this._validateName(name);
 
     let timer;
-    this._getMetricForNameAndType(name, METRIC_TYPES.TIMER).ifPresentOrElse(
+    this._getMetricForNameAndType(name, MetricTypes.TIMER).ifPresentOrElse(
       registeredMetric => {
         timer = registeredMetric;
       },
@@ -170,7 +170,7 @@ class Collection {
     this._validateName(name);
 
     let meter;
-    this._getMetricForNameAndType(name, METRIC_TYPES.METER).ifPresentOrElse(
+    this._getMetricForNameAndType(name, MetricTypes.METER).ifPresentOrElse(
       registeredMetric => {
         meter = registeredMetric;
       },
@@ -192,7 +192,7 @@ class Collection {
     this._validateName(name);
 
     let settableGauge;
-    this._getMetricForNameAndType(name, METRIC_TYPES.METER).ifPresentOrElse(
+    this._getMetricForNameAndType(name, MetricTypes.METER).ifPresentOrElse(
       registeredMetric => {
         settableGauge = registeredMetric;
       },

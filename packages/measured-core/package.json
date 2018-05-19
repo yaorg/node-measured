@@ -20,7 +20,7 @@
     "test": "../../scripts/test.sh",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "jsdoc": "jsdoc --readme ../../README.md --recurse --destination build/jsdoc/ lib/",
-    "generate-docs": "documentation build lib/** -f html -o build/doc && cp -R build/doc ../../build/docs/core"
+    "generate-docs": "documentation build lib/** -f html -o build/doc && mkdir -p ../../build/docs/core && cp -R build/doc/* ../../build/docs/core"
   },
   "dependencies": {
     "binary-search": "^1.3.3",
