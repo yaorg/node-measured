@@ -1,0 +1,41 @@
+{
+  "name": "measured-reporting",
+  "description": "The classes needed to create self reporting dimension aware metrics registries",
+  "version": "1.5.0",
+  "homepage": "https://yaorg.github.io/node-measured/",
+  "engines": {
+    "node": ">= 5.12"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./lib/index.js",
+  "scripts": {
+    "clean": "rm -fr build",
+    "format": "prettier --write '**/*.{ts,js}'",
+    "lint": "eslint lib --ext .js",
+    "test:node": "mocha './test/**/test-*.js'",
+    "test:node:coverage": "nyc --report-dir build/coverage/ --reporter=html --reporter=text mocha './test/**/test-*.js'",
+    "test:browser": "mochify './test/**/test-*.js'",
+    "test": "../../scripts/test.sh",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "jsdoc": "jsdoc --readme ../../README.md --recurse --destination build/jsdoc/ lib/",
+    "generate-docs": "documentation build lib/** -f html -o build/doc && mkdir -p ../../build/docs/core && cp -R build/doc/* ../../build/docs/core"
+  },
+  "repository": {
+    "url": "git://github.com/yaorg/node-measured.git"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "measured-core": "^1.5.0",
+    "optional-js": "^2.0.0"
+  },
+  "files": [
+    "lib",
+    "README.md"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "jsdoc": "^3.5.5"
+  }
+}
