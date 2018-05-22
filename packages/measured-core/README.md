@@ -16,18 +16,33 @@ npm install measured-core
 
 The core library has the following metrics classes:
 
-- [Gauge](https://yaorg.github.io/node-measured/packages/measured-core/Gauge.html): Values that can be read instantly via a supplied call back.
-- [SettableGauge](https://yaorg.github.io/node-measured/packages/measured-core/Settablegauge.html): Just like a Gauge but its value is set directly rather than supplied by a callback.
-- [Counter](https://yaorg.github.io/node-measured/packages/measured-core/Counter.html): Counters are things that increment or decrement.
-- [Timer](https://yaorg.github.io/node-measured/packages/measured-core/Timer.html): Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.
-- [Histogram](https://yaorg.github.io/node-measured/packages/measured-core/Histogram.html), Keeps a reservoir of statistically relevant values to explore their distribution.
-- [Meter](https://yaorg.github.io/node-measured/packages/measured-core/Meter.html): Things that are measured as events / interval.
+#### [Gauge](https://yaorg.github.io/node-measured/packages/measured-core/Gauge.html)
+Values that can be read instantly via a supplied call back.
+
+#### [SettableGauge](https://yaorg.github.io/node-measured/packages/measured-core/SettableGauge.html)
+Just like a Gauge but its value is set directly rather than supplied by a callback.
+
+#### [Counter](https://yaorg.github.io/node-measured/packages/measured-core/Counter.html)
+Counters are things that increment or decrement.
+
+#### [Timer](https://yaorg.github.io/node-measured/packages/measured-core/Timer.html)
+Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.
+
+#### [Histogram](https://yaorg.github.io/node-measured/packages/measured-core/Histogram.html)
+Keeps a reservoir of statistically relevant values to explore their distribution.
+
+#### [Meter](https://yaorg.github.io/node-measured/packages/measured-core/Meter.html)
+Things that are measured as events / interval.
 
 ### Registry
 
-The core library comes with a basic registry class called [Collection](https://yaorg.github.io/node-measured/packages/measured-core/Collection.html): that is not aware of dimensions / tags and leaves reporting up to you.
+The core library comes with a basic registry class 
 
-**See the [measured-reporting](../measured-reporting/) module for more advanced and featured registries.**
+#### [Collection](https://yaorg.github.io/node-measured/packages/measured-core/Collection.html)
+
+that is not aware of dimensions / tags and leaves reporting up to you.
+
+#### See the [measured-reporting](../measured-reporting/) module for more advanced and featured registries.
 
 ### Other
 

@@ -16,7 +16,7 @@ cp ${ROOT_DIR}/documentation/assets/measured.* ${ROOT_DIR}/build/docs/img/
 export PACKAGE_NAME=root
 jsdoc --recurse --configure ./.jsdoc.json \
 --tutorials ${ROOT_DIR}/tutorials \
---template ${ROOT_DIR}/documentation/docstrap/template \
+--template ${ROOT_DIR}/documentation/docstrap_customized/template \
 --readme ${ROOT_DIR}/Readme.md \
 --destination build/docs/ \
 ${ROOT_DIR}/packages/**/lib/
@@ -25,7 +25,7 @@ ${ROOT_DIR}/packages/**/lib/
 export PACKAGE_NAME=measured-core
 jsdoc --recurse --configure ${ROOT_DIR}/.jsdoc.json \
 --tutorials ${ROOT_DIR}/tutorials \
---template ${ROOT_DIR}/documentation/docstrap/template \
+--template ${ROOT_DIR}/documentation/docstrap_customized/template \
 --readme ${ROOT_DIR}/packages/measured-core/README.md \
 --destination build/docs/packages/measured-core/ \
 ${ROOT_DIR}/packages/measured-core/lib/
@@ -34,7 +34,7 @@ ${ROOT_DIR}/packages/measured-core/lib/
 export PACKAGE_NAME=measured-reporting
 jsdoc --recurse --configure ${ROOT_DIR}/.jsdoc.json \
 --tutorials ${ROOT_DIR}/tutorials \
---template ${ROOT_DIR}/documentation/docstrap/template \
+--template ${ROOT_DIR}/documentation/docstrap_customized/template \
 --readme ${ROOT_DIR}/packages/measured-reporting/README.md \
 --destination build/docs/packages/measured-reporting/ \
 ${ROOT_DIR}/packages/measured-reporting/lib/
@@ -43,7 +43,7 @@ ${ROOT_DIR}/packages/measured-reporting/lib/
 export PACKAGE_NAME=measured-signalfx-reporter
 jsdoc --recurse --configure ${ROOT_DIR}/.jsdoc.json \
 --tutorials ${ROOT_DIR}/tutorials \
---template ${ROOT_DIR}/documentation/docstrap/template \
+--template ${ROOT_DIR}/documentation/docstrap_customized/template \
 --readme ${ROOT_DIR}/packages/measured-signalfx-reporter/README.md \
 --destination build/docs/packages/measured-signalfx-reporter/ \
 ${ROOT_DIR}/packages/measured-signalfx-reporter/lib/
