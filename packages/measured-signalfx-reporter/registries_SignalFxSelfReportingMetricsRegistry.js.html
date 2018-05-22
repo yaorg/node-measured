@@ -94,15 +94,6 @@ const { validateTimerOptions } = require('measured-reporting').inputValidators;
  * @extends {SelfReportingMetricsRegistry}
  */
 class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry {
-
-  /**
-   * @param {Reporter} reporter The Metrics Reporter
-   * @param {SelfReportingMetricsRegistryOptions} [options] Configurable options for the Self Reporting Metrics Registry
-   */
-  constructor(reporter, options) {
-    super(reporter, options)
-  }
-
   /**
    * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo with a NoOpMeter
    *
