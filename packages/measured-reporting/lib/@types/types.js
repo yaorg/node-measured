@@ -23,11 +23,3 @@
  *   statusCode: "200"
  * }
  */
-
-/**
- * The interface for an Interval Based Metrics Reporter.
- * Must impl reportMetricOnInterval(metricKey: string, intervalInSeconds: number).
- *
- * @interface IntervalBasedMetricsReporter
- * @property {function} reportMetricOnInterval Informs the reporter to report a metric on a given interval in seconds.
- */

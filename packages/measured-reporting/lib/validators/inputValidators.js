@@ -76,6 +76,19 @@ module.exports = {
   },
 
   /**
+   * Validates the create settable gauge Options.
+   *
+   * @param {string} name The metric name
+   * @param {Dimensions} dimensions The optional custom dimensions
+   * @param {number} publishingIntervalInSeconds the optional publishing interval
+   */
+  validateSettableGaugeOptions: (name, dimensions, publishingIntervalInSeconds) => {
+    module.exports.validateMetricName(name);
+    module.exports.validateOptionalDimensions(dimensions);
+    module.exports.validateOptionalPublishingInterval(publishingIntervalInSeconds);
+  },
+
+  /**
    * Validates the metric name.
    *
    * @param name The metric name.

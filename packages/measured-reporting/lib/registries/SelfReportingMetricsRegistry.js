@@ -1,16 +1,14 @@
 const bunyan = require('bunyan');
-const { Gauge } = require('measured-core');
-const { Timer } = require('measured-core');
-const { Counter } = require('measured-core');
-const { Meter } = require('measured-core');
-const { Histogram } = require('measured-core');
+const { SettableGauge, Gauge, Timer, Counter, Meter, Histogram } = require('measured-core');
+const DimensionAwareMetricsRegistry = require('./DimensionAwareMetricsRegistry');
 const {
   validateSelfReportingMetricsRegistryParameters,
   validateRegisterOptions,
   validateGaugeOptions,
   validateCounterOptions,
   validateHistogramOptions,
-  validateTimerOptions
+  validateTimerOptions,
+  validateSettableGaugeOptions
 } = require('../validators/inputValidators');
 
 /**
@@ -18,24 +16,34 @@ const {
  */
 class SelfReportingMetricsRegistry {
   /**
-   * @param {IntervalBasedMetricsReporter} reporter The Metrics Reporter
-   * @param {SelfReportingMetricsRegistryOptions} options Configurable options for the Self Reporting Metrics Registry
+   * @param {Reporter} reporter The Metrics Reporter
+   * @param {SelfReportingMetricsRegistryOptions} [options] Configurable options for the Self Reporting Metrics Registry
    */
   constructor(reporter, options) {
     options = options || {};
     validateSelfReportingMetricsRegistryParameters(reporter, options.logger);
 
-    this._metrics = {};
-
+    /**
+     * @type {Reporter}
+     * @private
+     */
     this._reporter = reporter;
-    if (options.logger !== undefined) {
-      this._log = options.logger;
-    } else {
-      this._log = bunyan.createLogger({
-        name: 'SelfReportingMetricsRegistry',
-        level: options.logLevel || 'info'
-      });
-    }
+
+    /**
+     * @type {DimensionAwareMetricsRegistry}
+     * @protected
+     */
+    this._registry = options.registry || new DimensionAwareMetricsRegistry();
+    this._reporter.setRegistry(this._registry);
+
+    /**
+     * Loggers to use, defaults to a new bunyan logger if nothing is supplied in options
+     * @type {Logger}
+     * @protected
+     */
+    this._log =
+      options.logger ||
+      bunyan.createLogger({ name: 'SelfReportingMetricsRegistry', level: options.logLevel || 'info' });
   }
 
   /**
@@ -43,8 +51,8 @@ class SelfReportingMetricsRegistry {
    *
    * @param {string} name The Metric name
    * @param {Metric} metric The {@link Metric} to register
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @example
    * const settableGauge = new SettableGauge(5);
    * // register the gauge and have it report to every 10 seconds
@@ -59,24 +67,24 @@ class SelfReportingMetricsRegistry {
   register(name, metric, dimensions, publishingIntervalInSeconds) {
     validateRegisterOptions(name, metric, dimensions, publishingIntervalInSeconds);
 
-    if (this.hasMetric(name, dimensions)) {
+    if (this._registry.hasMetric(name, dimensions)) {
       throw new Error(
         `Metric with name: ${name} and dimensions: ${JSON.stringify(dimensions)} has already been registered`
       );
     } else {
-      const key = this._putMetric(name, metric, dimensions);
+      const key = this._registry.putMetric(name, metric, dimensions);
       this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
     }
     return metric;
   }
 
   /**
-   * Creates a {@link Gauge} or get the existing Gauge for a given name and dimension combo
+   * Creates a {@link Gauge} or gets the existing Gauge for a given name and dimension combo
    *
    * @param {string} name The Metric name
    * @param {function} callback The callback that will return a value to report to signal fx
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Gauge}
    * @example
    * // https://nodejs.org/api/process.html#process_process_memoryusage
@@ -97,18 +105,18 @@ class SelfReportingMetricsRegistry {
   getOrCreateGauge(name, callback, dimensions, publishingIntervalInSeconds) {
     validateGaugeOptions(name, callback, dimensions, publishingIntervalInSeconds);
     let gauge;
-    if (this.hasMetric(name, dimensions)) {
-      gauge = this.getMetric(name, dimensions);
+    if (this._registry.hasMetric(name, dimensions)) {
+      gauge = this._registry.getMetric(name, dimensions);
     } else {
       gauge = new Gauge(callback);
-      const key = this._putMetric(name, gauge, dimensions);
+      const key = this._registry.putMetric(name, gauge, dimensions);
       this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
     }
     return gauge;
   }
 
   /**
-   * Creates a {@link Histogram} or get the existing Histogram for a given name and dimension combo
+   * Creates a {@link Histogram} or gets the existing Histogram for a given name and dimension combo
    *
    * @param {string} name The Metric name
    * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
@@ -119,11 +127,11 @@ class SelfReportingMetricsRegistry {
     validateHistogramOptions(name, dimensions, publishingIntervalInSeconds);
 
     let histogram;
-    if (this.hasMetric(name, dimensions)) {
-      histogram = this.getMetric(name, dimensions);
+    if (this._registry.hasMetric(name, dimensions)) {
+      histogram = this._registry.getMetric(name, dimensions);
     } else {
       histogram = new Histogram();
-      const key = this._putMetric(name, histogram, dimensions);
+      const key = this._registry.putMetric(name, histogram, dimensions);
       this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
     }
 
@@ -131,7 +139,7 @@ class SelfReportingMetricsRegistry {
   }
 
   /**
-   * Creates a {@link Meter} or get the existing Meter for a given name and dimension combo
+   * Creates a {@link Meter} or gets the existing Meter for a given name and dimension combo
    *
    * @param {string} name The Metric name
    * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
@@ -139,14 +147,14 @@ class SelfReportingMetricsRegistry {
    * @return {Meter}
    */
   getOrCreateMeter(name, dimensions, publishingIntervalInSeconds) {
-    validateHistogramOptions(name, dimensions, publishingIntervalInSeconds);
+    // todo validate options
 
     let meter;
-    if (this.hasMetric(name, dimensions)) {
-      meter = this.getMetric(name, dimensions);
+    if (this._registry.hasMetric(name, dimensions)) {
+      meter = this._registry.getMetric(name, dimensions);
     } else {
       meter = new Meter();
-      const key = this._putMetric(name, meter, dimensions);
+      const key = this._registry.putMetric(name, meter, dimensions);
       this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
     }
 
@@ -154,7 +162,7 @@ class SelfReportingMetricsRegistry {
   }
 
   /**
-   * Creates a {@link Counter} or get the existing Counter for a given name and dimension combo
+   * Creates a {@link Counter} or gets the existing Counter for a given name and dimension combo
    *
    * @param {string} name The Metric name
    * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
@@ -165,11 +173,11 @@ class SelfReportingMetricsRegistry {
     validateCounterOptions(name, dimensions, publishingIntervalInSeconds);
 
     let counter;
-    if (this.hasMetric(name, dimensions)) {
-      counter = this.getMetric(name, dimensions);
+    if (this._registry.hasMetric(name, dimensions)) {
+      counter = this._registry.getMetric(name, dimensions);
     } else {
       counter = new Counter();
-      const key = this._putMetric(name, counter, dimensions);
+      const key = this._registry.putMetric(name, counter, dimensions);
       this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
     }
 
@@ -177,7 +185,7 @@ class SelfReportingMetricsRegistry {
   }
 
   /**
-   * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo.
+   * Creates a {@link Timer} or gets the existing Timer for a given name and dimension combo.
    *
    * @param {string} name The Metric name
    * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
@@ -188,11 +196,11 @@ class SelfReportingMetricsRegistry {
     validateTimerOptions(name, dimensions, publishingIntervalInSeconds);
 
     let timer;
-    if (this.hasMetric(name, dimensions)) {
-      timer = this.getMetric(name, dimensions);
+    if (this._registry.hasMetric(name, dimensions)) {
+      timer = this._registry.getMetric(name, dimensions);
     } else {
       timer = new Timer();
-      const key = this._putMetric(name, timer, dimensions);
+      const key = this._registry.putMetric(name, timer, dimensions);
       this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
     }
 
@@ -200,83 +208,44 @@ class SelfReportingMetricsRegistry {
   }
 
   /**
-   * Checks to see if a metric with the given name and dimensions is present.
+   * Creates a {@link SettableGauge} or gets the existing SettableGauge for a given name and dimension combo.
    *
-   * @param {string} name The metric name
-   * @param {Dimensions} dimensions The dimensions for the metric
-   * @returns {boolean} true if the metric with given dimensions is present
-   * @protected
+   * @param name
+   * @param dimensions
+   * @param publishingIntervalInSeconds
    */
-  hasMetric(name, dimensions) {
-    const key = this._generateStorageKey(name, dimensions);
-    return Object.prototype.hasOwnProperty.call(this._metrics, key);
-  }
+  getOrCreateSettableGauge(name, dimensions, publishingIntervalInSeconds) {
+    validateSettableGaugeOptions(name, dimensions, publishingIntervalInSeconds);
 
-  /**
-   * Retrieves a metric with a given name and dimensions is present.
-   *
-   * @param {string} name The metric name
-   * @param {Dimensions} dimensions The dimensions for the metric
-   * @returns {Metric} a wrapper object around name, dimension and {@link Metric}
-   * @protected
-   */
-  getMetric(name, dimensions) {
-    const key = this._generateStorageKey(name, dimensions);
-    return this._metrics[key].metricImpl;
-  }
-
-  /**
-   * Retrieves a metric by the calculated key (name / dimension combo).
-   *
-   * @param {string} key The registered key for the given registered {@link MetricWrapper}
-   * @returns {MetricWrapper} a wrapper object around name, dimension and {@link Metric}
-   * @protected
-   */
-  getMetricWrapperByKey(key) {
-    return this._metrics[key];
-  }
-
-  /**
-   * Upserts a {@link Metric} in the internal storage map for a given name, dimension combo
-   *
-   * @param {string} name The metric name
-   * @param {Metric} metric The {@link Metric} impl
-   * @param {Dimensions} dimensions The dimensions for the metric
-   * @return {string} The registry key for the metric, dimension combo
-   * @protected
-   */
-  _putMetric(name, metric, dimensions) {
-    const key = this._generateStorageKey(name, dimensions);
-    this._metrics[key] = {
-      name: name,
-      metricImpl: metric,
-      dimensions: dimensions || {}
-    };
-    return key;
-  }
-
-  /**
-   * Generates a unique key off of the metric name and custom dimensions for internal use in the registry maps.
-   *
-   * @param {string} name The metric name
-   * @param {Dimensions} dimensions The dimensions for the metric
-   * @return {string} a unique key based off of the metric nae and dimensions
-   * @protected
-   */
-  _generateStorageKey(name, dimensions) {
-    let key = name;
-    if (dimensions) {
-      Object.keys(dimensions).forEach(dimensionKey => {
-        key = `${key}-${dimensions[dimensionKey]}`;
-      });
+    let settableGauge;
+    if (this._registry.hasMetric(name, dimensions)) {
+      settableGauge = this._registry.getMetric(name, dimensions);
+    } else {
+      settableGauge = new SettableGauge();
+      const key = this._registry.putMetric(name, settableGauge, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
     }
-    return key;
+
+    return settableGauge;
+  }
+
+  /**
+   * Calls end on all metrics in the registry that support end() and calls end on the reporter
+   */
+  shutdown() {
+    // shutdown the reporter
+    this._reporter.shutdown();
+    // shutdown any metrics that have an end method
+    this._registry.allKeys().forEach(key => {
+      const metricWrapper = this._registry.getMetricWrapperByKey(key);
+      if (metricWrapper.metric.end) {
+        metricWrapper.metric.end();
+      }
+    });
   }
 }
 
-module.exports = {
-  SelfReportingMetricsRegistry
-};
+module.exports = SelfReportingMetricsRegistry;
 
 /**
  * Configurable options for the Self Reporting Metrics Registry
@@ -285,4 +254,5 @@ module.exports = {
  * @typedef SelfReportingMetricsRegistryOptions
  * @property {Logger} logger the Logger to use
  * @property {string} logLevel The Log level to use if defaulting to included logger
+ * @property {DimensionAwareMetricsRegistry} registry The registry to use, defaults to new DimensionAwareMetricsRegistry
  */
