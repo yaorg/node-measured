@@ -7,6 +7,15 @@ const { validateTimerOptions } = require('measured-reporting').inputValidators;
  * @extends {SelfReportingMetricsRegistry}
  */
 class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry {
+
+  /**
+   * @param {Reporter} reporter The Metrics Reporter
+   * @param {SelfReportingMetricsRegistryOptions} [options] Configurable options for the Self Reporting Metrics Registry
+   */
+  constructor(reporter, options) {
+    super(reporter, options)
+  }
+
   /**
    * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo with a NoOpMeter
    *
@@ -19,11 +28,11 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
     validateTimerOptions(name, dimensions, publishingIntervalInSeconds);
 
     let timer;
-    if (this.hasMetric(name, dimensions)) {
-      timer = this.getMetric(name, dimensions);
+    if (this._registry.hasMetric(name, dimensions)) {
+      timer = this._registry.getMetric(name, dimensions);
     } else {
       timer = new Timer({ meter: new NoOpMeter() });
-      const key = this._putMetric(name, timer, dimensions);
+      const key = this._registry.putMetric(name, timer, dimensions);
       this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
     }
 
@@ -44,3 +53,5 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
     return new NoOpMeter();
   }
 }
+
+module.exports = SignalFxSelfReportingMetricsRegistry;

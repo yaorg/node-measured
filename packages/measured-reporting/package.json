@@ -18,9 +18,7 @@
     "test:node:coverage": "nyc --report-dir build/coverage/ --reporter=html --reporter=text mocha './test/**/test-*.js'",
     "test:browser": "exit 0",
     "test": "yarn test:node:coverage",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "jsdoc": "jsdoc --readme ../../README.md --recurse --destination build/jsdoc/ lib/",
-    "generate-docs": "documentation build lib/** -f html -o build/doc && mkdir -p ../../build/docs/core && cp -R build/doc/* ../../build/docs/core"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "url": "git://github.com/yaorg/node-measured.git"

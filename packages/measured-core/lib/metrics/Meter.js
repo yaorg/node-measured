@@ -123,6 +123,9 @@ class Meter {
     return currentRate || 0;
   }
 
+  /**
+   * @return {MeterData}
+   */
   toJSON() {
     return {
       mean: this.meanRate(),

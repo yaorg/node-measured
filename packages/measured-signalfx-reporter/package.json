@@ -19,8 +19,7 @@
     "test:browser": "exit 0",
     "test": "yarn test:node:coverage",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "jsdoc": "jsdoc --readme ../../README.md --recurse --destination build/jsdoc/ lib/",
-    "generate-docs": "documentation build lib/** -f html -o build/doc && mkdir -p ../../build/docs/core && cp -R build/doc/* ../../build/docs/core"
+    "uat:server": "node --inspect test/user-acceptance-test/index.js | ../../node_modules/.bin/bunyan"
   },
   "repository": {
     "url": "git://github.com/yaorg/node-measured.git"
@@ -38,6 +37,7 @@
   "license": "MIT",
   "devDependencies": {
     "express": "^4.16.3",
-    "jsdoc": "^3.5.5"
+    "jsdoc": "^3.5.5",
+    "signalfx": "^6.0.0"
   }
 }

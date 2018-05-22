@@ -1,20 +1,24 @@
+### Using Measured to instrument OS, Process and Express Metrics.
+
+This tutorial shows how to use the measured libraries to fully instrument OS and Node Process metrics as well as create an express middleware.
+
+The middleware will measure request count, latency distributions (req/res time histogram) and add dimensions to make it filterable by request method, response status code, request uri path.
+
+```javascript
 const os = require('os');
 const signalfx = require('signalfx');
 const express = require('express');
-const bunyan = require('bunyan');
-const { SignalFxMetricsReporter, SignalFxSelfReportingMetricsRegistry } = require('../../lib');
-const { Stopwatch } = require('../../../measured-core/lib');
-const libraryMetadata = require('../../package');
-
-const log = bunyan.createLogger({ name: 'SelfReportingMetricsRegistry', level: 'info' });
+const { SignalFxMetricsReporter, SignalFxSelfReportingMetricsRegistry } = require('measured-signalfx-reporter');
+const { Stopwatch } = require('measured-core');
+const libraryMetadata = require('./package'); // get metadata from package.json
 
 const library = libraryMetadata.name;
 const version = libraryMetadata.version;
 
-// Set things to report at a high frequency for this UAT test, this is probably more frequent than you would want
-// for prod, as it would more DPM than you probably meant
-const PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS = 5;
-const REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS = 1;
+// report process and os stats 1x per minute
+const PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS = 1;
+// Report the request count and histogram stats every 10 seconds
+const REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS = 10;
 
 const defaultDimensions = {
   app: library,
@@ -53,17 +57,16 @@ const signalFxClient = new signalfx.Ingest(apiKeyResolver(), {
 // create the signal fx reporter with the client
 const signalFxReporter = new SignalFxMetricsReporter(signalFxClient, {
   defaultDimensions: defaultDimensions,
-  defaultReportingIntervalInSeconds: 10,
-  logLevel: 'debug'
+  defaultReportingIntervalInSeconds: 10
 });
 // create the self reporting metrics registry with the signal fx reporter
-const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter, {logLevel: 'debug'});
+const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter);
 
 metricsRegistry.getOrCreateGauge(
   'os-1m-load-average',
   () => {
     // os.loadavg returns an array [1, 5, 15] mins intervals
-    return os.loadavg()[0];
+    return os.loadavg()[0]
   },
   {},
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
@@ -72,7 +75,7 @@ metricsRegistry.getOrCreateGauge(
 metricsRegistry.getOrCreateGauge(
   'os-free-mem-bytes',
   () => {
-    return os.freemem();
+    return os.freemem()
   },
   {},
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
@@ -81,7 +84,7 @@ metricsRegistry.getOrCreateGauge(
 metricsRegistry.getOrCreateGauge(
   'os-total-mem-bytes',
   () => {
-    return os.totalmem();
+    return os.totalmem()
   },
   {},
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
@@ -91,7 +94,7 @@ metricsRegistry.getOrCreateGauge(
 metricsRegistry.getOrCreateGauge(
   'process-memory-rss',
   () => {
-    return process.memoryUsage().rss;
+    return process.memoryUsage().rss
   },
   {},
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
@@ -101,7 +104,7 @@ metricsRegistry.getOrCreateGauge(
 metricsRegistry.getOrCreateGauge(
   'process-memory-heap-total',
   () => {
-    return process.memoryUsage().heapTotal;
+    return process.memoryUsage().heapTotal
   },
   {},
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
@@ -111,7 +114,7 @@ metricsRegistry.getOrCreateGauge(
 metricsRegistry.getOrCreateGauge(
   'process-memory-heap-used',
   () => {
-    return process.memoryUsage().heapUsed;
+    return process.memoryUsage().heapUsed
   },
   {},
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
@@ -121,8 +124,8 @@ metricsRegistry.getOrCreateGauge(
 metricsRegistry.getOrCreateGauge(
   'process-memory-external',
   () => {
-    const mem = process.memoryUsage();
-    return mem.hasOwnProperty('external') ? mem.external : 0;
+    const mem = process.memoryUsage() as any
+    return mem.hasOwnProperty('external') ? mem.external : 0
   },
   {},
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
@@ -132,7 +135,7 @@ metricsRegistry.getOrCreateGauge(
 metricsRegistry.getOrCreateGauge(
   'process-uptime-seconds',
   () => {
-    return Math.floor(process.uptime());
+    return Math.floor(process.uptime())
   },
   {},
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
@@ -189,3 +192,4 @@ app.get('/path2', (req, res) => {
 });
 
 app.listen(8080, () => log.info('Example app listening on port 8080!'));
+```

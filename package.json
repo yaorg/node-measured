@@ -2,7 +2,6 @@
   "private": true,
   "devDependencies": {
     "coveralls": "^3.0.1",
-    "documentation": "^6.3.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -11,6 +10,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.8.1",
     "gh-pages": "^1.1.0",
+    "ink-docstrap": "^1.3.2",
     "jsdoc": "^3.5.5",
     "lerna": "^2.11.0",
     "mocha": "^5.1.1",
@@ -31,9 +31,8 @@
     "posttest": "yarn generate-docs",
     "format": "lerna exec yarn format",
     "clean": "rm -fr build && lerna exec yarn clean",
-    "jsdoc": "jsdoc --readme ./README.md --recurse --destination build/jsdoc/ packages/**/lib/",
-    "generate-docs": "rm -fr build/docs && mkdir -p build/docs/packages/measured-core && lerna exec yarn generate-docs && showdown makehtml -i Readme.md -o build/docs/index.html && showdown makehtml -i packages/measured-core/README.md -o build/docs/packages/measured-core/index.html",
-    "deploy-js-doc-to-github": "gh-pages -d build/docs",
+    "generate-docs": "./scripts/generate-docs.sh",
+    "deploy-docs": "gh-pages -d build/docs",
     "travis-deploy-github-pages": "gh-pages -r \"https://${GH_TOKEN}@github.com/yaorg/node-measured.git\" -d build/docs",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },

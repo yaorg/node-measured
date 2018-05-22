@@ -15,7 +15,7 @@ const { MetricTypes } = require('./metrics/Metric');
 
 /**
  * The main measured module that is referenced when require('measured') is used.
- * @module measured
+ * @module measured-core
  */
 module.exports = {
   /**

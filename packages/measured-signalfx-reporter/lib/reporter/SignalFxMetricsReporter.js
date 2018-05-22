@@ -23,7 +23,7 @@ class SignalFxMetricsReporter extends Reporter {
    * @protected
    */
   _reportMetrics(metrics) {
-    this._log.debug('sendMetrics() called');
+    this._log.debug('_reportMetrics() called');
 
     let signalFxDataPointRequest = {};
 
@@ -53,10 +53,10 @@ class SignalFxMetricsReporter extends Reporter {
   _processMetric(metric, currentBuiltRequest) {
     const newRequest = Object.assign({}, currentBuiltRequest);
 
-    const { metricName, metricImpl } = metric;
+    const { name, metricImpl } = metric;
     const mergedDimensions = this._getDimensions(metric);
 
-    const valuesToProcess = this._getValuesToProcessForType(metricName, metricImpl);
+    const valuesToProcess = this._getValuesToProcessForType(name, metricImpl);
 
     valuesToProcess.forEach(metricValueTypeWrapper => {
       const signalFxDataPointMetric = {
@@ -118,7 +118,7 @@ class SignalFxMetricsReporter extends Reporter {
   _getValuesToProcessForTimer(name, timer) {
     let valuesToProcess = [];
     // only grab histogram data as Meters can be accomplished with signal fx using the count from the histogram
-    valuesToProcess = valuesToProcess.concat(this._getValuesToProcessForHistogram(name, timer.toJSON().histogram));
+    valuesToProcess = valuesToProcess.concat(this._getValuesToProcessForHistogram(name, timer._histogram));
     return valuesToProcess;
   }
 
@@ -171,32 +171,32 @@ class SignalFxMetricsReporter extends Reporter {
     const valuesToProcess = [];
     valuesToProcess.push({
       metric: `${name}.count`,
-      value: data.count,
+      value: data.count || 0,
       type: SIGNAL_FX_CUMULATIVE_COUNTER
     });
     valuesToProcess.push({
       metric: `${name}.max`,
-      value: data.max,
+      value: data.max || 0,
       type: SIGNAL_FX_GAUGE
     });
     valuesToProcess.push({
       metric: `${name}.min`,
-      value: data.min,
+      value: data.min || 0,
       type: SIGNAL_FX_GAUGE
     });
     valuesToProcess.push({
       metric: `${name}.mean`,
-      value: data.mean,
+      value: data.mean || 0,
       type: SIGNAL_FX_GAUGE
     });
     valuesToProcess.push({
       metric: `${name}.p95`,
-      value: data.p95,
+      value: data.p95 || 0,
       type: SIGNAL_FX_GAUGE
     });
     valuesToProcess.push({
       metric: `${name}.p99`,
-      value: data.p99,
+      value: data.p99 || 0,
       type: SIGNAL_FX_GAUGE
     });
     return valuesToProcess;
@@ -207,9 +207,7 @@ class SignalFxMetricsReporter extends Reporter {
 const SIGNAL_FX_GAUGE = 'gauges';
 const SIGNAL_FX_CUMULATIVE_COUNTER = 'cumulative_counters';
 
-module.exports = {
-  SignalFxMetricsReporter
-};
+module.exports = SignalFxMetricsReporter;
 
 /**
  * Wrapper object to wrap metric value and SFX metadata needed to send metric value to SFX data ingestion.

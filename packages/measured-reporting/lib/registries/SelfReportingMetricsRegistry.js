@@ -32,7 +32,7 @@ class SelfReportingMetricsRegistry {
 
     /**
      * @type {Reporter}
-     * @private
+     * @protected
      */
     this._reporter = reporter;
 
