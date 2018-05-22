@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Index</title>
+	<title>Measured Class: Gauge</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -87,76 +87,438 @@
 		<div id="main">
 			
 
+	<h1 class="page-title">Class: Gauge</h1>
+<section>
+
+<header>
+    
+        <h2>
+        Gauge
+        </h2>
+        
+            <div class="class-description"><p>Values that can be read instantly</p></div>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+<hr>
+<dt>
+    <h4 class="name" id="Gauge"><span class="type-signature"></span>new Gauge(readFn)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>readFn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A function that returns the numeric value for this gauge.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
 	
+
+	
+
+	
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="Metric.html">Metric</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
 	
 
 
 
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="metrics_Gauge.js.html">metrics/Gauge.js</a>,
+				 <a href="metrics_Gauge.js.html#sunlight-1-line-12">line 12</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">var Measured = require(&#x27;measured&#x27;)
+var gauge = new Measured.Gauge(function() {
+    return process.memoryUsage().rss;
+});</pre>
 
 
+    
+</dd>
 
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id="getType"><span class="type-signature"></span>getType()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>The type of the Metric Impl. <a href="MetricTypes.html">MetricTypes</a>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="Metric.html#getType">Metric#getType</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
 	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="metrics_Gauge.js.html">metrics/Gauge.js</a>,
+				 <a href="metrics_Gauge.js.html#sunlight-1-line-32">line 32</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The type of the Metric Impl.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>This is sync for now, but maybe async gauges would be useful as well?</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="Metric.html#toJSON">Metric#toJSON</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
 	
 
 
 
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="metrics_Gauge.js.html">metrics/Gauge.js</a>,
+				 <a href="metrics_Gauge.js.html#sunlight-1-line-24">line 24</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
 
 
-    <section class="readme-section">
-        <article><h1>Measured Core</h1><p>The core measured library that has the Metric interfaces and implementations.</p>
-<h2>Install</h2><pre class="prettyprint source"><code>npm install measured-core</code></pre><h2>What is in this package</h2><h3>Metric Implemenations</h3><p>The core library has the following metrics classes:</p>
-<ul>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Gauge.html">Gauge</a>, Values that can be read instantly via a supplied call back.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Settablegauge.html">SettableGauge</a>, Just like a Gauge but its value is set directly rather than supplied by a callback.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Counter.html">Counter</a>, Counters are things that increment or decrement.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Timer.html">Timer</a>, Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Histogram.html">Histogram</a>, Keeps a reservoir of statistically relevant values to explore their distribution.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Meter.html">Meter</a>, Things that are measured as events / interval.</li>
-</ul>
-<h3>Registry</h3><p>The core library comes with a basic registry class called <a href="https://yaorg.github.io/node-measured/packages/measured-core/Collection.html">Collection</a>, that is not aware of dimensions / tags and leaves reporting up to you.</p>
-<p><strong>See the <a href="../measured-reporting/">measured-reporting</a> module for more advanced and featured registries.</strong></p>
-<h3>Other</h3><p>See The <a href="https://yaorg.github.io/node-measured/packages/measured-core/module-measured-core.html">measured-core</a> modules for the full list of exports for require('measured-core').</p>
-<h2>Usage</h2><p><strong>Step 1:</strong> Add measurements to your code. For example, lets track the<br>requests/sec of a http server:</p>
-<pre class="prettyprint source lang-js"><code>var http  = require('http');
-var stats = require('measured').createCollection();
+    
 
-http.createServer(function(req, res) {
-  stats.meter('requestsPerSecond').mark();
-  res.end('Thanks');
-}).listen(3000);</code></pre><p><strong>Step 2:</strong> Show the collected measurements (more advanced examples follow later):</p>
-<pre class="prettyprint source lang-js"><code>setInterval(function() {
-  console.log(stats.toJSON());
-}, 1000);</code></pre><p>This will output something like this every second:</p>
-<pre class="prettyprint source"><code>{ requestsPerSecond:
-   { mean: 1710.2180279856818,
-     count: 10511,
-     'currentRate': 1941.4893498239829,
-     '1MinuteRate': 168.08263156623656,
-     '5MinuteRate': 34.74630977619571,
-     '15MinuteRate': 11.646507524106095 } }</code></pre><p><strong>Step 3:</strong> Aggregate the data into your backend of choice.<br>Here are a few time series data aggregators.</p>
-<ul>
-<li><a href="http://graphite.wikidot.com/">Graphite</a><ul>
-<li>A free and open source, self hosted and managed solution for time series data.</li>
-</ul>
-</li>
-<li><a href="https://signalfx.com/">SignalFx</a><ul>
-<li>An enterprise SASS offering for time series data.</li>
-</ul>
-</li>
-<li><a href="https://www.datadoghq.com/">Datadog</a><ul>
-<li>An enterprise SASS offering for time series data.</li>
-</ul>
-</li>
-</ul></article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Gauges directly return the value from the callback which should be a number.</p>
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Index</title>
+	<title>Measured Source: registryies/SignalFxSelfReportingMetricsRegistry.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="./"><img class="branding-logo" src="./img/measured.png"
+		<a class="navbar-brand" href="../../"><img class="branding-logo" src="../../img/measured.png"
 		alt="logo"/>Measured</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -32,23 +32,9 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
-				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-units.html">units</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
+					<li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li>
 				</ul>
 			</li>
 			
@@ -82,45 +68,65 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	
-	
+		<h1 class="page-title">Source: registryies/SignalFxSelfReportingMetricsRegistry.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const { NoOpMeter, Timer } = require('measured-core');
+const { SelfReportingMetricsRegistry } = require('measured-reporting');
+const { validateTimerOptions } = require('measured-reporting').inputValidators;
 
+/**
+ * A SignalFx Self Reporting Metrics Registry that disallows the use of meters as they waste DPM and accomplished using a counter.
+ * @extends {SelfReportingMetricsRegistry}
+ */
+class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry {
+  /**
+   * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo with a NoOpMeter
+   *
+   * @param {string} name The Metric name
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {Timer}
+   */
+  getOrCreateTimer(name, dimensions, publishingIntervalInSeconds) {
+    validateTimerOptions(name, dimensions, publishingIntervalInSeconds);
 
+    let timer;
+    if (this.hasMetric(name, dimensions)) {
+      timer = this.getMetric(name, dimensions);
+    } else {
+      timer = new Timer({ meter: new NoOpMeter() });
+      const key = this._putMetric(name, timer, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+    }
 
+    return timer;
+  }
 
-
-
-
-
-
-
-
-	
-	
-
-
-
-
-
-    <section class="readme-section">
-        <article><h1>Measured</h1><p><a href="http://travis-ci.org/yaorg/node-measured"><img src="https://secure.travis-ci.org/yaorg/node-measured.png?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/yaorg/node-measured?branch=master"><img src="https://coveralls.io/repos/github/yaorg/node-measured/badge.svg?branch=master" alt="Coverage Status"></a></p>
-<p>A Node library for measuring and reporting application-level metrics.</p>
-<p>Measured is heavily inspired by Coda Hale, Yammer Inc's <a href="https://github.com/dropwizard/metrics">Dropwizard Metrics Libraries</a> </p>
-<h2>Available packages</h2><h3><a href="packages/measured-core">Measured Core</a></h3><p>The core library with the Metric implementation classes.</p>
-<h3><a href="packages/measured-reporting">Measured Reporting</a></h3><p>Contains the classes needed to create a dimension aware, self reporting metrics registry.</p>
-<h3><a href="packages/measured-signalfx-reporter">Measured SignalFx Reporter</a></h3><p>A reporter that can be used with measured-reporting to send metrics to SignalFx.</p>
-<h3>Measured DataDog reporter</h3><p>Not implemented, community contribution wanted.</p>
-<h3>Measured Graphite reporter</h3><p>Not implemented, community contribution wanted.</p>
-<h2>Development and Contributing</h2><p>See <a href="https://github.com/yaorg/node-measured/blob/master/CONTRIBUTING.md">Development and Contributing</a></p>
-<h2>License</h2><p>This project Measured and all of its modules are licensed under the <a href="https://github.com/yaorg/node-measured/blob/master/LICENSE">MIT license</a>.</p></article>
-    </section>
-
-
+  /**
+   * You should use counters and implements meter functionality in your Dashboard.
+   * @param {string} name The Metric name
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {NoOpMeter|*}
+   */
+  getOrCreateMeter(name, dimensions, publishingIntervalInSeconds) {
+    this._log.error(
+      'Meters will not get reported using the SignalFx reporter as they waste DPM, please use a counter instead'
+    );
+    return new NoOpMeter();
+  }
+}
+</pre>
+    </article>
+</section>
 
 
 
@@ -131,10 +137,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>

@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Index</title>
+	<title>Measured Source: measured-reporting/lib/reporters/Reporter.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -82,45 +82,180 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	
-	
+		<h1 class="page-title">Source: measured-reporting/lib/reporters/Reporter.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const bunyan = require('bunyan');
+const Optional = require('optional-js');
+const { validateReporterParameters } = require('../validators/inputValidators');
 
+const DEFAULT_REPORTING_INTERVAL_IN_SECONDS = 10;
 
+/**
+ * The abstract reporter that specific implementations can extend to create a Self Reporting Metrics Registry Reporter.
+ *
+ * {@link SelfReportingMetricsRegistry}
+ * @abstract
+ */
+class Reporter {
+  /**
+   * @param {ReporterOptions} [options] The optional params to supply when creating a reporter.
+   */
+  constructor(options) {
+    if (this.constructor === Reporter) {
+      throw new TypeError("Can't instantiate abstract class!");
+    }
 
+    options = options || {};
+    validateReporterParameters(options);
 
+    /**
+     * Map of intervals to metric keys, this will be used to look up what metrics should be reported at a given interval.
+     * @type {Object.&lt;number, Set&lt;string>>}
+     * @protected
+     */
+    this._intervalToMetric = {};
+    this._intervals = [];
 
+    /**
+     * Map of default dimensions, that should be sent with every metric
+     * @type {Dimensions}
+     * @protected
+     */
+    this._defaultDimensions = options.defaultDimensions || {};
 
+    /**
+     * Loggers to use, defaults to a new bunyan logger if nothing is supplied in options
+     * @type {Logger}
+     * @protected
+     */
+    this._log = options.logger || bunyan.createLogger({ name: 'Reporter', level: 'info' });
 
+    this._defaultReportingIntervalInSeconds =
+      options.defaultReportingIntervalInSeconds || DEFAULT_REPORTING_INTERVAL_IN_SECONDS;
+  }
 
+  /**
+   * Sets the registry, this must be called before reportMetricOnInterval.
+   *
+   * @param {DimensionAwareMetricsRegistry} registry
+   */
+  setRegistry(registry) {
+    this._registry = registry;
+  }
 
+  /**
+   * Informs the reporter to report a metric on a given interval in seconds.
+   *
+   * @param {string} metricKey The metric key for the metric in the metric registry.
+   * @param {number} intervalInSeconds The interval in seconds to report the metric on.
+   */
+  reportMetricOnInterval(metricKey, intervalInSeconds) {
+    intervalInSeconds = intervalInSeconds || this._defaultReportingIntervalInSeconds;
 
+    if (!this._registry) {
+      throw new Error(
+        'You must call setRegistry(registry) before telling a Reporter to report a metric on an interval.'
+      );
+    }
 
-	
-	
+    if (Object.prototype.hasOwnProperty.call(this._intervalToMetric, intervalInSeconds)) {
+      this._intervalToMetric[intervalInSeconds].add(metricKey);
+    } else {
+      this._intervalToMetric[intervalInSeconds] = new Set([metricKey]);
+      this._reportMetricsWithInterval(intervalInSeconds);
+      this._createIntervalCallback(intervalInSeconds);
+    }
+  }
 
+  /**
+   * Creates the timed callback loop for the given interval.
+   *
+   * @param {number} intervalInSeconds the interval in seconds for the timeout callback
+   * @protected
+   */
+  _createIntervalCallback(intervalInSeconds) {
+    this._log.debug(`createTimedCallback() called with intervalInSeconds: ${intervalInSeconds}`);
+    this._intervals.push(
+      setInterval(() => {
+        this._reportMetricsWithInterval(intervalInSeconds);
+      }, intervalInSeconds * 1000)
+    );
+  }
 
+  /**
+   * Gathers all the metrics that have been registered to report on the given interval.
+   *
+   * @param {number} interval The interval to look up what metrics to report
+   * @protected
+   */
+  _reportMetricsWithInterval(interval) {
+    this._log.debug(`sendMetricsWithInterval() called with intervalInSeconds: ${interval}`);
+    try {
+      Optional.of(this._intervalToMetric[interval]).ifPresent(metrics => {
+        const metricsToSend = [];
+        metrics.forEach(metricKey => {
+          metricsToSend.push(this._registry.getMetricWrapperByKey(metricKey));
+          this._reportMetrics(metricsToSend);
+        });
+      });
+    } catch (error) {
+      this._log.error('Failed to send metrics to signal fx', error);
+    }
+  }
 
+  /**
+   * This method gets called with an array of {@link MetricWrapper} on an interval, when metrics should be reported.
+   *
+   * @param {MetricWrapper[]} metrics The array of metrics to report.
+   * @protected
+   * @abstract
+   */
+  _reportMetrics(metrics) {
+    throw new TypeError('Abstract method _reportMetrics(metrics) must be implemented in implementation class');
+  }
 
+  /**
+   *
+   * @param {MetricWrapper} metric The Wrapped Metric Object.
+   * @return {Dimensions} The left merged default dimensions with the metric specific dimensions
+   * @protected
+   */
+  _getDimensions(metric) {
+    return Object.assign({}, this._defaultDimensions, metric.dimensions);
+  }
 
-    <section class="readme-section">
-        <article><h1>Measured</h1><p><a href="http://travis-ci.org/yaorg/node-measured"><img src="https://secure.travis-ci.org/yaorg/node-measured.png?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/yaorg/node-measured?branch=master"><img src="https://coveralls.io/repos/github/yaorg/node-measured/badge.svg?branch=master" alt="Coverage Status"></a></p>
-<p>A Node library for measuring and reporting application-level metrics.</p>
-<p>Measured is heavily inspired by Coda Hale, Yammer Inc's <a href="https://github.com/dropwizard/metrics">Dropwizard Metrics Libraries</a> </p>
-<h2>Available packages</h2><h3><a href="packages/measured-core">Measured Core</a></h3><p>The core library with the Metric implementation classes.</p>
-<h3><a href="packages/measured-reporting">Measured Reporting</a></h3><p>Contains the classes needed to create a dimension aware, self reporting metrics registry.</p>
-<h3><a href="packages/measured-signalfx-reporter">Measured SignalFx Reporter</a></h3><p>A reporter that can be used with measured-reporting to send metrics to SignalFx.</p>
-<h3>Measured DataDog reporter</h3><p>Not implemented, community contribution wanted.</p>
-<h3>Measured Graphite reporter</h3><p>Not implemented, community contribution wanted.</p>
-<h2>Development and Contributing</h2><p>See <a href="https://github.com/yaorg/node-measured/blob/master/CONTRIBUTING.md">Development and Contributing</a></p>
-<h2>License</h2><p>This project Measured and all of its modules are licensed under the <a href="https://github.com/yaorg/node-measured/blob/master/LICENSE">MIT license</a>.</p></article>
-    </section>
+  /**
+   * Clears the intervals that are running to report metrics at an interval, and resets the state.
+   */
+  shutdown() {
+    this._intervals.forEach(interval => clearInterval(interval));
+    this._intervals = [];
+    this._intervalToMetric = {};
+  }
+}
 
+/**
+ * Options for creating a {@link Reporter}
+ * @interface ReporterOptions
+ * @typedef ReporterOptions
+ * @type {Object}
+ * @property {Dimensions} defaultDimensions A dictionary of dimensions to include with every metric reported
+ * @property {Logger} logger The logger to use, if not supplied a new Buynan logger will be created
+ * @property {number} defaultReportingIntervalInSeconds The default reporting interval to use if non is supplied when registering a metric, defaults to 10 seconds.
+ */
 
+module.exports = Reporter;
+</pre>
+    </article>
+</section>
 
 
 
@@ -131,10 +266,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>

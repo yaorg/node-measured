@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Index</title>
+	<title>Measured Class: SettableGauge</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -87,41 +87,449 @@
 		<div id="main">
 			
 
+	<h1 class="page-title">Class: SettableGauge</h1>
+<section>
+
+<header>
+    
+        <h2>
+        SettableGauge
+        </h2>
+        
+            <div class="class-description"><p>Works like a <a href="Gauge.html">Gauge</a>, but rather than getting its value from a callback, the value<br>is set when needed. This can be useful for setting a gauges value for asynchronous operations.</p></div>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+<hr>
+<dt>
+    <h4 class="name" id="SettableGauge"><span class="type-signature"></span>new SettableGauge( [options])</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#SettableGaugeProperties">SettableGaugeProperties</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>See <a href="global.html#SettableGaugeProperties">SettableGaugeProperties</a>.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
 	
+
+	
+
+	
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="Metric.html">Metric</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
 	
 
 
 
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-core_lib_metrics_SettableGauge.js.html">measured-core/lib/metrics/SettableGauge.js</a>,
+				 <a href="measured-core_lib_metrics_SettableGauge.js.html#sunlight-1-line-16">line 16</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
 
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const settableGauge = new SettableGauge();
+// Update the settable gauge ever 10&#x27;ish seconds
+setInterval(() =&gt; {
+    calculateSomethingAsync().then((value) =&gt; {
+        settableGauge.setValue(value);
+    });
+}, 10000);</pre>
 
 
+    
+</dd>
 
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id="getType"><span class="type-signature"></span>getType()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>The type of the Metric Impl. <a href="MetricTypes.html">MetricTypes</a>.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="Metric.html#getType">Metric#getType</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
 
 
 
 	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-core_lib_metrics_SettableGauge.js.html">measured-core/lib/metrics/SettableGauge.js</a>,
+				 <a href="measured-core_lib_metrics_SettableGauge.js.html#sunlight-1-line-40">line 40</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The type of the Metric Impl.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="Metric.html#toJSON">Metric#toJSON</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
 	
 
 
 
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-core_lib_metrics_SettableGauge.js.html">measured-core/lib/metrics/SettableGauge.js</a>,
+				 <a href="measured-core_lib_metrics_SettableGauge.js.html#sunlight-1-line-32">line 32</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
 
 
-    <section class="readme-section">
-        <article><h1>Measured</h1><p><a href="http://travis-ci.org/yaorg/node-measured"><img src="https://secure.travis-ci.org/yaorg/node-measured.png?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/yaorg/node-measured?branch=master"><img src="https://coveralls.io/repos/github/yaorg/node-measured/badge.svg?branch=master" alt="Coverage Status"></a></p>
-<p>A Node library for measuring and reporting application-level metrics.</p>
-<p>Measured is heavily inspired by Coda Hale, Yammer Inc's <a href="https://github.com/dropwizard/metrics">Dropwizard Metrics Libraries</a> </p>
-<h2>Available packages</h2><h3><a href="packages/measured-core">Measured Core</a></h3><p>The core library with the Metric implementation classes.</p>
-<h3><a href="packages/measured-reporting">Measured Reporting</a></h3><p>Contains the classes needed to create a dimension aware, self reporting metrics registry.</p>
-<h3><a href="packages/measured-signalfx-reporter">Measured SignalFx Reporter</a></h3><p>A reporter that can be used with measured-reporting to send metrics to SignalFx.</p>
-<h3>Measured DataDog reporter</h3><p>Not implemented, community contribution wanted.</p>
-<h3>Measured Graphite reporter</h3><p>Not implemented, community contribution wanted.</p>
-<h2>Development and Contributing</h2><p>See <a href="https://github.com/yaorg/node-measured/blob/master/CONTRIBUTING.md">Development and Contributing</a></p>
-<h2>License</h2><p>This project Measured and all of its modules are licensed under the <a href="https://github.com/yaorg/node-measured/blob/master/LICENSE">MIT license</a>.</p></article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Settable Gauges directly return there current value.</p>
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

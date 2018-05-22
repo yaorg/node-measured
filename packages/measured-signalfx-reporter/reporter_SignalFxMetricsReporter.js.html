@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Measured Source: reporter/SignalFxMetricsReporter.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="../../"><img class="branding-logo" src="../../img/measured.png"
+		alt="logo"/>Measured</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">Global</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: reporter/SignalFxMetricsReporter.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const { Reporter } = require('measured-reporting');
+const { MetricTypes } = require('measured-core');
+const { validateSignalFxClient } = require('../validators/inputValidators');
+
+/**
+ * A Reporter that reports metrics to Signal Fx
+ * @extends {Reporter}
+ */
+class SignalFxMetricsReporter extends Reporter {
+  /**
+   * @param {SignalFxClient} signalFxClient The configured signal fx client.
+   * @param {ReporterOptions} options See {@link ReporterOptions}.
+   */
+  constructor(signalFxClient, options) {
+    super(options);
+    validateSignalFxClient(signalFxClient);
+    this._signalFxClient = signalFxClient;
+  }
+
+  /**
+   * Sends metrics to signal fx, converting name and dimensions and {@link Metric} to data signal fx can ingest
+   * @param {MetricWrapper[]} metrics The array of metrics to send to signal fx.
+   * @protected
+   */
+  _reportMetrics(metrics) {
+    this._log.debug('sendMetrics() called');
+
+    let signalFxDataPointRequest = {};
+
+    metrics.forEach(metric => {
+      if (!metric) {
+        this._log.warn('Metric was null when it should not have been');
+        return;
+      }
+      signalFxDataPointRequest = this._processMetric(metric, signalFxDataPointRequest);
+    });
+
+    this._log.debug('Sending data to Signal Fx');
+
+    this._signalFxClient.send(signalFxDataPointRequest).catch(error => {
+      this._log.error('Failed to send metrics to signal fx error:', error);
+    });
+  }
+
+  /**
+   * Method for getting raw signal fx api request values from the Timer Object.
+   *
+   * @param {MetricWrapper} metric metric The Wrapped Metric Object.
+   * @param {any} currentBuiltRequest The signal fx request that is being built.
+   * @return {any} the currentBuiltRequest The signal fx request that is being built with the given metric in it.
+   * @protected
+   */
+  _processMetric(metric, currentBuiltRequest) {
+    const newRequest = Object.assign({}, currentBuiltRequest);
+
+    const { metricName, metricImpl } = metric;
+    const mergedDimensions = this._getDimensions(metric);
+
+    const valuesToProcess = this._getValuesToProcessForType(metricName, metricImpl);
+
+    valuesToProcess.forEach(metricValueTypeWrapper => {
+      const signalFxDataPointMetric = {
+        metric: metricValueTypeWrapper.metric,
+        value: metricValueTypeWrapper.value,
+        dimensions: mergedDimensions
+      };
+
+      if (Object.prototype.hasOwnProperty.call(newRequest, metricValueTypeWrapper.type)) {
+        newRequest[metricValueTypeWrapper.type].push(signalFxDataPointMetric);
+      } else {
+        newRequest[metricValueTypeWrapper.type] = [signalFxDataPointMetric];
+      }
+    });
+
+    return newRequest;
+  }
+
+  /**
+   * Maps Measured Metrics Object JSON outputs to there respective signal fx metrics using logic from
+   * com.signalfx.codahale.reporter.AggregateMetricSenderSessionWrapper in the java lib to derive naming
+   *
+   * @param {string} name The registered metric base name
+   * @param {Metric} metric The metric.
+   * @return {MetricValueTypeWrapper[]} an array of MetricValueTypeWrapper that can be used to
+   * build the sig fx data point request
+   * @protected
+   */
+  _getValuesToProcessForType(name, metric) {
+    const type = metric.getType();
+    switch (type) {
+      case MetricTypes.TIMER:
+        return this._getValuesToProcessForTimer(name, metric);
+      case MetricTypes.GAUGE:
+        return this._getValuesToProcessForGauge(name, metric);
+      case MetricTypes.COUNTER:
+        return this._getValuesToProcessForCounter(name, metric);
+      case MetricTypes.HISTOGRAM:
+        return this._getValuesToProcessForHistogram(name, metric);
+      case MetricTypes.METER:
+        this._log.warn(
+          'Meters are not implemented in the signal fx reporter as you can use a counter and reduce your DPM'
+        );
+        return [];
+      default:
+        this._log.error(`Metric Type: ${type} has not been implemented to report to signal fx`);
+        return [];
+    }
+  }
+
+  /**
+   * Maps and Filters values from a Timer to a set of metrics to report to SigFx.
+   *
+   * @param {string} name The registry name
+   * @param {Timer} timer The Timer
+   * @return {MetricValueTypeWrapper[]} Returns an array of MetricValueTypeWrapper to use to build the request
+   * @protected
+   */
+  _getValuesToProcessForTimer(name, timer) {
+    let valuesToProcess = [];
+    // only grab histogram data as Meters can be accomplished with signal fx using the count from the histogram
+    valuesToProcess = valuesToProcess.concat(this._getValuesToProcessForHistogram(name, timer.toJSON().histogram));
+    return valuesToProcess;
+  }
+
+  /**
+   * Maps and Filters values from a Gauge to a set of metrics to report to SigFx.
+   *
+   * @param {string} name The registry name
+   * @param {Gauge} gauge The Gauge
+   * @return {MetricValueTypeWrapper[]} Returns an array of MetricValueTypeWrapper to use to build the request
+   * @protected
+   */
+  _getValuesToProcessForGauge(name, gauge) {
+    const valuesToProcess = [];
+    valuesToProcess.push({
+      metric: `${name}`,
+      value: gauge.toJSON(),
+      type: SIGNAL_FX_GAUGE
+    });
+    return valuesToProcess;
+  }
+
+  /**
+   * Maps and Filters values from a Counter to a set of metrics to report to SigFx.
+   *
+   * @param {string} name The registry name
+   * @param {Counter} counter The data from the measure metric object
+   * @return {MetricValueTypeWrapper[]} Returns an array of MetricValueTypeWrapper to use to build the request
+   * @protected
+   */
+  _getValuesToProcessForCounter(name, counter) {
+    const valuesToProcess = [];
+    valuesToProcess.push({
+      metric: `${name}.count`,
+      value: counter.toJSON(),
+      type: SIGNAL_FX_CUMULATIVE_COUNTER
+    });
+    return valuesToProcess;
+  }
+
+  /**
+   * Maps and Filters values from a Histogram to a set of metrics to report to SigFx.
+   *
+   * @param {string} name The registry name
+   * @param {Histogram} histogram The Histogram
+   * @return {MetricValueTypeWrapper[]} Returns an array of MetricValueTypeWrapper to use to build the request
+   * @protected
+   */
+  _getValuesToProcessForHistogram(name, histogram) {
+    const data = histogram.toJSON();
+    const valuesToProcess = [];
+    valuesToProcess.push({
+      metric: `${name}.count`,
+      value: data.count,
+      type: SIGNAL_FX_CUMULATIVE_COUNTER
+    });
+    valuesToProcess.push({
+      metric: `${name}.max`,
+      value: data.max,
+      type: SIGNAL_FX_GAUGE
+    });
+    valuesToProcess.push({
+      metric: `${name}.min`,
+      value: data.min,
+      type: SIGNAL_FX_GAUGE
+    });
+    valuesToProcess.push({
+      metric: `${name}.mean`,
+      value: data.mean,
+      type: SIGNAL_FX_GAUGE
+    });
+    valuesToProcess.push({
+      metric: `${name}.p95`,
+      value: data.p95,
+      type: SIGNAL_FX_GAUGE
+    });
+    valuesToProcess.push({
+      metric: `${name}.p99`,
+      value: data.p99,
+      type: SIGNAL_FX_GAUGE
+    });
+    return valuesToProcess;
+  }
+}
+
+// const SIGNAL_FX_COUNTER = 'counters';
+const SIGNAL_FX_GAUGE = 'gauges';
+const SIGNAL_FX_CUMULATIVE_COUNTER = 'cumulative_counters';
+
+module.exports = {
+  SignalFxMetricsReporter
+};
+
+/**
+ * Wrapper object to wrap metric value and SFX metadata needed to send metric value to SFX data ingestion.
+ *
+ * @interface MetricValueTypeWrapper
+ * @typedef MetricValueTypeWrapper
+ * @type {Object}
+ * @property {string} metric The metric name to report to SignalFx
+ * @property {number} value the value to report to SignalFx
+ * @property {string} type The mapped SignalFx metric type
+ */
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors.
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Tue May 22nd 2018
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

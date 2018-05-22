@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Index</title>
+	<title>Measured Class: ExponentiallyDecayingSample</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="../../"><img class="branding-logo" src="../../img/measured.png"
+		<a class="navbar-brand" href="./"><img class="branding-logo" src="./img/measured.png"
 		alt="logo"/>Measured</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -41,7 +41,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
 				</ul>
 			</li>
 			
@@ -87,76 +87,130 @@
 		<div id="main">
 			
 
+	<h1 class="page-title">Class: ExponentiallyDecayingSample</h1>
+<section>
+
+<header>
+    
+        <h2>
+        ExponentiallyDecayingSample
+        </h2>
+        
+            <div class="class-description"><p>ExponentiallyDecayingSample</p></div>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+<hr>
+<dt>
+    <h4 class="name" id="ExponentiallyDecayingSample"><span class="type-signature"></span>new ExponentiallyDecayingSample()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
 	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
 	
 
 
 
-
-
-
-
-
-
-
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-core_lib_util_ExponentiallyDecayingSample.js.html">measured-core/lib/util/ExponentiallyDecayingSample.js</a>,
+				 <a href="measured-core_lib_util_ExponentiallyDecayingSample.js.html#sunlight-1-line-11">line 11</a>
+			</li>
+		</ul>
+	</dd>
+	
 
 	
+
 	
 
+	
+</dl>
 
 
+    
 
+    
 
-    <section class="readme-section">
-        <article><h1>Measured Core</h1><p>The core measured library that has the Metric interfaces and implementations.</p>
-<h2>Install</h2><pre class="prettyprint source"><code>npm install measured-core</code></pre><h2>What is in this package</h2><h3>Metric Implemenations</h3><p>The core library has the following metrics classes:</p>
-<ul>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Gauge.html">Gauge</a>, Values that can be read instantly via a supplied call back.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Settablegauge.html">SettableGauge</a>, Just like a Gauge but its value is set directly rather than supplied by a callback.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Counter.html">Counter</a>, Counters are things that increment or decrement.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Timer.html">Timer</a>, Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Histogram.html">Histogram</a>, Keeps a reservoir of statistically relevant values to explore their distribution.</li>
-<li><a href="https://yaorg.github.io/node-measured/packages/measured-core/Meter.html">Meter</a>, Things that are measured as events / interval.</li>
-</ul>
-<h3>Registry</h3><p>The core library comes with a basic registry class called <a href="https://yaorg.github.io/node-measured/packages/measured-core/Collection.html">Collection</a>, that is not aware of dimensions / tags and leaves reporting up to you.</p>
-<p><strong>See the <a href="../measured-reporting/">measured-reporting</a> module for more advanced and featured registries.</strong></p>
-<h3>Other</h3><p>See The <a href="https://yaorg.github.io/node-measured/packages/measured-core/module-measured-core.html">measured-core</a> modules for the full list of exports for require('measured-core').</p>
-<h2>Usage</h2><p><strong>Step 1:</strong> Add measurements to your code. For example, lets track the<br>requests/sec of a http server:</p>
-<pre class="prettyprint source lang-js"><code>var http  = require('http');
-var stats = require('measured').createCollection();
+    
 
-http.createServer(function(req, res) {
-  stats.meter('requestsPerSecond').mark();
-  res.end('Thanks');
-}).listen(3000);</code></pre><p><strong>Step 2:</strong> Show the collected measurements (more advanced examples follow later):</p>
-<pre class="prettyprint source lang-js"><code>setInterval(function() {
-  console.log(stats.toJSON());
-}, 1000);</code></pre><p>This will output something like this every second:</p>
-<pre class="prettyprint source"><code>{ requestsPerSecond:
-   { mean: 1710.2180279856818,
-     count: 10511,
-     'currentRate': 1941.4893498239829,
-     '1MinuteRate': 168.08263156623656,
-     '5MinuteRate': 34.74630977619571,
-     '15MinuteRate': 11.646507524106095 } }</code></pre><p><strong>Step 3:</strong> Aggregate the data into your backend of choice.<br>Here are a few time series data aggregators.</p>
-<ul>
-<li><a href="http://graphite.wikidot.com/">Graphite</a><ul>
-<li>A free and open source, self hosted and managed solution for time series data.</li>
-</ul>
-</li>
-<li><a href="https://signalfx.com/">SignalFx</a><ul>
-<li>An enterprise SASS offering for time series data.</li>
-</ul>
-</li>
-<li><a href="https://www.datadoghq.com/">Datadog</a><ul>
-<li>An enterprise SASS offering for time series data.</li>
-</ul>
-</li>
-</ul></article>
-    </section>
+    
 
+    
 
+    
 
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

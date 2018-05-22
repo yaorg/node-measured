@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Index</title>
+	<title>Measured Source: measured-core/lib/metrics/Meter.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -82,45 +82,198 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	
-	
+		<h1 class="page-title">Source: measured-core/lib/metrics/Meter.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const { MetricTypes } = require('./Metric');
+const units = require('../util/units');
+const EWMA = require('../util/ExponentiallyMovingWeightedAverage');
 
+const RATE_UNIT = units.SECONDS;
+const TICK_INTERVAL = 5 * units.SECONDS;
 
+/**
+ * Things that are measured as events / interval.
+ * @implements {Metric}
+ * @example
+ * var Measured = require('measured')
+ * var meter = new Measured.Meter();
+ * http.createServer(function(req, res) {
+ *     meter.mark();
+ * });
+ */
+class Meter {
+  /**
+   * @param {MeterProperties} [properties] see {@link MeterProperties}.
+   */
+  constructor(properties) {
+    this._properties = properties || {};
+    this._initializeState();
+  }
 
+  /**
+   * Initializes the state of this Metric
+   * @private
+   */
+  _initializeState() {
+    this._rateUnit = this._properties.rateUnit || RATE_UNIT;
+    this._tickInterval = this._properties.tickInterval || TICK_INTERVAL;
+    if (this._properties.getTime) {
+      this._getTime = this._properties.getTime;
+    }
 
+    this._m1Rate = this._properties.m1Rate || new EWMA(units.MINUTES, this._tickInterval);
+    this._m5Rate = this._properties.m5Rate || new EWMA(5 * units.MINUTES, this._tickInterval);
+    this._m15Rate = this._properties.m15Rate || new EWMA(15 * units.MINUTES, this._tickInterval);
+    this._count = 0;
+    this._currentSum = 0;
+    this._startTime = this._getTime();
+    this._lastToJSON = this._getTime();
+    this._interval = setInterval(this._tick.bind(this), TICK_INTERVAL);
+  }
 
+  /**
+   * Register n events as having just occured. Defaults to 1.
+   * @param {number} n
+   */
+  mark(n) {
+    if (!this._interval) {
+      this.start();
+    }
 
+    n = n || 1;
 
+    this._count += n;
+    this._currentSum += n;
+    this._m1Rate.update(n);
+    this._m5Rate.update(n);
+    this._m15Rate.update(n);
+  }
 
+  start() {}
 
+  end() {
+    clearInterval(this._interval);
+    this._interval = null;
+  }
 
+  /**
+   * Refs the backing timer again. Idempotent.
+   */
+  ref() {
+    if (this._interval &amp;&amp; this._interval.ref) {
+      this._interval.ref();
+    }
+  }
 
-	
-	
+  /**
+   * Unrefs the backing timer. The meter will not keep the event loop alive. Idempotent.
+   */
+  unref() {
+    if (this._interval &amp;&amp; this._interval.unref) {
+      this._interval.unref();
+    }
+  }
 
+  _tick() {
+    this._m1Rate.tick();
+    this._m5Rate.tick();
+    this._m15Rate.tick();
+  }
 
+  /**
+   * Resets all values. Meters initialized with custom options will be reset to the default settings (patch welcome).
+   */
+  reset() {
+    this.end();
+    this._initializeState();
+  }
 
+  meanRate() {
+    if (this._count === 0) {
+      return 0;
+    }
 
+    const elapsed = this._getTime() - this._startTime;
+    return this._count / elapsed * this._rateUnit;
+  }
 
-    <section class="readme-section">
-        <article><h1>Measured</h1><p><a href="http://travis-ci.org/yaorg/node-measured"><img src="https://secure.travis-ci.org/yaorg/node-measured.png?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/yaorg/node-measured?branch=master"><img src="https://coveralls.io/repos/github/yaorg/node-measured/badge.svg?branch=master" alt="Coverage Status"></a></p>
-<p>A Node library for measuring and reporting application-level metrics.</p>
-<p>Measured is heavily inspired by Coda Hale, Yammer Inc's <a href="https://github.com/dropwizard/metrics">Dropwizard Metrics Libraries</a> </p>
-<h2>Available packages</h2><h3><a href="packages/measured-core">Measured Core</a></h3><p>The core library with the Metric implementation classes.</p>
-<h3><a href="packages/measured-reporting">Measured Reporting</a></h3><p>Contains the classes needed to create a dimension aware, self reporting metrics registry.</p>
-<h3><a href="packages/measured-signalfx-reporter">Measured SignalFx Reporter</a></h3><p>A reporter that can be used with measured-reporting to send metrics to SignalFx.</p>
-<h3>Measured DataDog reporter</h3><p>Not implemented, community contribution wanted.</p>
-<h3>Measured Graphite reporter</h3><p>Not implemented, community contribution wanted.</p>
-<h2>Development and Contributing</h2><p>See <a href="https://github.com/yaorg/node-measured/blob/master/CONTRIBUTING.md">Development and Contributing</a></p>
-<h2>License</h2><p>This project Measured and all of its modules are licensed under the <a href="https://github.com/yaorg/node-measured/blob/master/LICENSE">MIT license</a>.</p></article>
-    </section>
+  currentRate() {
+    const currentSum = this._currentSum;
+    const duration = this._getTime() - this._lastToJSON;
+    const currentRate = currentSum / duration * this._rateUnit;
 
+    this._currentSum = 0;
+    this._lastToJSON = this._getTime();
 
+    // currentRate could be NaN if duration was 0, so fix that
+    return currentRate || 0;
+  }
+
+  toJSON() {
+    return {
+      mean: this.meanRate(),
+      count: this._count,
+      currentRate: this.currentRate(),
+      '1MinuteRate': this._m1Rate.rate(this._rateUnit),
+      '5MinuteRate': this._m5Rate.rate(this._rateUnit),
+      '15MinuteRate': this._m15Rate.rate(this._rateUnit)
+    };
+  }
+
+  _getTime() {
+    if (!process.hrtime) {
+      return new Date().getTime();
+    }
+
+    const hrtime = process.hrtime();
+    return hrtime[0] * 1000 + hrtime[1] / (1000 * 1000);
+  }
+
+  /**
+   * The type of the Metric Impl. {@link MetricTypes}.
+   * @return {string} The type of the Metric Impl.
+   */
+  getType() {
+    return MetricTypes.METER;
+  }
+}
+
+module.exports = Meter;
+
+/**
+ *
+ * @interface MeterProperties
+ * @typedef MeterProperties
+ * @type {Object}
+ * @property {number} rateUnit The rate unit. Defaults to 1000 (1 sec).
+ * @property {number} tickInterval The interval in which the averages are updated. Defaults to 5000 (5 sec).
+ * @example
+ * const meter = new Meter({ rateUnit: 1000, tickInterval: 5000})
+ */
+
+/**
+ * The data returned from Meter::toJSON()
+ * @interface MeterData
+ * @typedef MeterData
+ * @typedef {object}
+ * @property {number} mean The average rate since the meter was started.
+ * @property {number} count The total of all values added to the meter.
+ * @property {number} currentRate The rate of the meter since the last toJSON() call.
+ * @property {number} 1MinuteRate The rate of the meter biased towards the last 1 minute.
+ * @property {number} 5MinuteRate The rate of the meter biased towards the last 5 minutes.
+ * @property {number} 15MinuteRate The rate of the meter biased towards the last 15 minutes.
+ */
+</pre>
+    </article>
+</section>
 
 
 
@@ -131,10 +284,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>
