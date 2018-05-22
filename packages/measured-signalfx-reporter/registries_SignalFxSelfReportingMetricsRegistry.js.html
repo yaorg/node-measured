@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Modules</title>
+	<title>Measured Source: registries/SignalFxSelfReportingMetricsRegistry.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="./"><img class="branding-logo" src="./img/measured.png"
+		<a class="navbar-brand" href="../../"><img class="branding-logo" src="../../img/measured.png"
 		alt="logo"/>Measured</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -32,23 +32,9 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
-				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-units.html">units</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
+					<li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li>
 				</ul>
 			</li>
 			
@@ -89,145 +75,77 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	<h1 class="page-title">Modules</h1>
+		<h1 class="page-title">Source: registries/SignalFxSelfReportingMetricsRegistry.js</h1>
+    
 <section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const { NoOpMeter, Timer } = require('measured-core');
+const { SelfReportingMetricsRegistry } = require('measured-reporting');
+const { validateTimerOptions } = require('measured-reporting').inputValidators;
 
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
+/**
+ * A SignalFx Self Reporting Metrics Registry that disallows the use of meters as they waste DPM and accomplished using a counter.
+ * @extends {SelfReportingMetricsRegistry}
+ */
+class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry {
 
+  /**
+   * @param {Reporter} reporter The Metrics Reporter
+   * @param {SelfReportingMetricsRegistryOptions} [options] Configurable options for the Self Reporting Metrics Registry
+   */
+  constructor(reporter, options) {
+    super(reporter, options)
+  }
 
-<article>
-    <div class="container-overview">
-    
-        
+  /**
+   * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo with a NoOpMeter
+   *
+   * @param {string} name The Metric name
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {Timer}
+   */
+  getOrCreateTimer(name, dimensions, publishingIntervalInSeconds) {
+    validateTimerOptions(name, dimensions, publishingIntervalInSeconds);
 
-        
-<dl class="details">
-    
+    let timer;
+    if (this._registry.hasMetric(name, dimensions)) {
+      timer = this._registry.getMetric(name, dimensions);
+    } else {
+      timer = new Timer({ meter: new NoOpMeter() });
+      const key = this._registry.putMetric(name, timer, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+    }
 
-	
+    return timer;
+  }
 
-	
+  /**
+   * You should use counters and implements meter functionality in your Dashboard.
+   * @param {string} name The Metric name
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {NoOpMeter|*}
+   */
+  getOrCreateMeter(name, dimensions, publishingIntervalInSeconds) {
+    this._log.error(
+      'Meters will not get reported using the SignalFx reporter as they waste DPM, please use a counter instead'
+    );
+    return new NoOpMeter();
+  }
+}
 
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="BinaryHeap.html">BinaryHeap</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Collection.html">Collection</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Counter.html">Counter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></dt>
-            <dd></dd>
-        
-            <dt><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Gauge.html">Gauge</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Histogram.html">Histogram</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Meter.html">Meter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="NoOpMeter.html">NoOpMeter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Reporter.html">Reporter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SettableGauge.html">SettableGauge</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Stopwatch.html">Stopwatch</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Timer.html">Timer</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
+module.exports = SignalFxSelfReportingMetricsRegistry;
+</pre>
+    </article>
 </section>
+
 
 
 
@@ -237,10 +155,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>

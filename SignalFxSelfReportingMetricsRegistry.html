@@ -53,6 +53,13 @@
 			</li>
 			
 			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-SignalFx Express Full End to End Example.html">SignalFx Express Full End to End Example</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
 					<li><a href="global.html">Global</a></li>
@@ -108,7 +115,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="SignalFxSelfReportingMetricsRegistry"><span class="type-signature"></span>new SignalFxSelfReportingMetricsRegistry()</h4>
+    <h4 class="name" id="SignalFxSelfReportingMetricsRegistry"><span class="type-signature"></span>new SignalFxSelfReportingMetricsRegistry(reporter [, options])</h4>
     
     
 </dt>
@@ -121,6 +128,100 @@
     
 
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reporter</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Reporter.html">Reporter</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The Metrics Reporter</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#SelfReportingMetricsRegistryOptions">SelfReportingMetricsRegistryOptions</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Configurable options for the Self Reporting Metrics Registry</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -158,8 +259,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_registryies_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registryies/SignalFxSelfReportingMetricsRegistry.js</a>,
-				 <a href="measured-signalfx-reporter_lib_registryies_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-9">line 9</a>
+				<a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registries/SignalFxSelfReportingMetricsRegistry.js</a>,
+				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-9">line 9</a>
 			</li>
 		</ul>
 	</dd>
@@ -212,6 +313,272 @@
 
     
 
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+<hr>
+<dt class="name" id="_log">
+    <h4 id="_log"><span class="type-signature">&lt;protected> </span>_log<span class="type-signature"> :Logger</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Loggers to use, defaults to a new bunyan logger if nothing is supplied in options</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Logger</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="SelfReportingMetricsRegistry.html#_log">SelfReportingMetricsRegistry#_log</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html">measured-reporting/lib/registries/SelfReportingMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-51">line 51</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="_registry">
+    <h4 id="_registry"><span class="type-signature">&lt;protected> </span>_registry<span class="type-signature"> :<a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="SelfReportingMetricsRegistry.html#_registry">SelfReportingMetricsRegistry#_registry</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html">measured-reporting/lib/registries/SelfReportingMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-43">line 43</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="_reporter">
+    <h4 id="_reporter"><span class="type-signature">&lt;protected> </span>_reporter<span class="type-signature"> :<a href="Reporter.html">Reporter</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="Reporter.html">Reporter</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="SelfReportingMetricsRegistry.html#_reporter">SelfReportingMetricsRegistry#_reporter</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html">measured-reporting/lib/registries/SelfReportingMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-37">line 37</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
     
 
     
@@ -1104,8 +1471,8 @@ registry.getOrCreateGauge(
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_registryies_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registryies/SignalFxSelfReportingMetricsRegistry.js</a>,
-				 <a href="measured-signalfx-reporter_lib_registryies_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-40">line 40</a>
+				<a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registries/SignalFxSelfReportingMetricsRegistry.js</a>,
+				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-49">line 49</a>
 			</li>
 		</ul>
 	</dd>
@@ -1495,8 +1862,8 @@ registry.getOrCreateGauge(
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_registryies_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registryies/SignalFxSelfReportingMetricsRegistry.js</a>,
-				 <a href="measured-signalfx-reporter_lib_registryies_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-18">line 18</a>
+				<a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registries/SignalFxSelfReportingMetricsRegistry.js</a>,
+				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-27">line 27</a>
 			</li>
 		</ul>
 	</dd>
@@ -1961,7 +2328,7 @@ interval(() =&gt; {
 
 
 	<span class="copyright">
-	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors.
+	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors. </br>Icon by <a href="http://www.simpleicon.com/">SimpleIcon</a> <a href="https://creativecommons.org/licenses/by/3.0">[CC BY 3.0]</a>, <a href="https://commons.wikimedia.org/wiki/File:Simpleicons_Business_line-graphic-with-two-lines.svg">via Wikimedia Commons</a>
 	</span>
 
 <span class="jsdoc-message">

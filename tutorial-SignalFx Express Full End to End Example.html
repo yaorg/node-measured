@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Modules</title>
+	<title>Measured Tutorial: SignalFx Express Full End to End Example</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -89,158 +89,216 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
-			
-
-	<h1 class="page-title">Modules</h1>
-<section>
+			<section class="tutorial-section">
 
 <header>
     
-        <h2>
-        
-        </h2>
-        
-    
+
+    <h2>SignalFx Express Full End to End Example</h2>
 </header>
 
-
 <article>
-    <div class="container-overview">
-    
-        
+    <h3>Using Measured to instrument OS, Process and Express Metrics.</h3><p>This tutorial shows how to use the measured libraries to fully instrument OS and Node Process metrics as well as create an express middleware.</p>
+<p>The middleware will measure request count, latency distributions (req/res time histogram) and add dimensions to make it filterable by request method, response status code, request uri path.</p>
+<pre class="prettyprint source lang-javascript"><code>const os = require('os');
+const signalfx = require('signalfx');
+const express = require('express');
+const { SignalFxMetricsReporter, SignalFxSelfReportingMetricsRegistry } = require('measured-reporting');
+const { Stopwatch } = require('measured-core');
+const libraryMetadata = require('./package'); // get metadata from package.json
 
-        
-<dl class="details">
-    
+const library = libraryMetadata.name;
+const version = libraryMetadata.version;
 
-	
+// report process and os stats 1x per minute
+const PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS = 1;
+// Report the request count and histogram stats every 10 seconds
+const REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS = 10;
 
-	
+const defaultDimensions = {
+  app: library,
+  app_version: version,
+  env: 'test'
+};
 
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
+/**
+ * Get your api key from a secrets provider of some kind.
+ *
+ * Good examples:
+ *
+ * &lt;li> S3 with KMS
+ * &lt;li> Cerberus
+ * &lt;li> AWS Secrets Manager
+ * &lt;li> Vault
+ * &lt;li> Confidant
+ *
+ * Bad examples:
+ *
+ * &lt;li> Checked into SCM in plaintext as a property
+ * &lt;li> Set as a plaintext environment variable
+ *
+ * @return {string} Returns the resolved Signal Fx Api Key
+ */
+const apiKeyResolver = () => {
+  // https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/
+  return process.env.SIGNALFX_API_KEY
+};
 
 
-        
-    
-    </div>
+// create the signal fx client
+const signalFxClient = new signalfx.Ingest(apiKeyResolver(), {
+  userAgents: library
+});
+// create the signal fx reporter with the client
+const signalFxReporter = new SignalFxMetricsReporter(signalFxClient, {
+  defaultDimensions: defaultDimensions,
+  defaultReportingIntervalInSeconds: 10
+});
+// create the self reporting metrics registry with the signal fx reporter
+const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter);
 
-    
+metricsRegistry.getOrCreateGauge(
+  'os-1m-load-average',
+  () => {
+    // os.loadavg returns an array [1, 5, 15] mins intervals
+    return os.loadavg()[0]
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-    
+metricsRegistry.getOrCreateGauge(
+  'os-free-mem-bytes',
+  () => {
+    return os.freemem()
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-    
-        <h3 class="subsection-title">Classes</h3>
+metricsRegistry.getOrCreateGauge(
+  'os-total-mem-bytes',
+  () => {
+    return os.totalmem()
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-        <dl>
-            <dt><a href="BinaryHeap.html">BinaryHeap</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Collection.html">Collection</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Counter.html">Counter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></dt>
-            <dd></dd>
-        
-            <dt><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Gauge.html">Gauge</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Histogram.html">Histogram</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Meter.html">Meter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="NoOpMeter.html">NoOpMeter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Reporter.html">Reporter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SettableGauge.html">SettableGauge</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Stopwatch.html">Stopwatch</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Timer.html">Timer</a></dt>
-            <dd></dd>
-        </dl>
-    
+// https://nodejs.org/api/process.html#process_process_memoryusage
+metricsRegistry.getOrCreateGauge(
+  'process-memory-rss',
+  () => {
+    return process.memoryUsage().rss
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-    
+// https://nodejs.org/api/process.html#process_process_memoryusage
+metricsRegistry.getOrCreateGauge(
+  'process-memory-heap-total',
+  () => {
+    return process.memoryUsage().heapTotal
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-    
+// https://nodejs.org/api/process.html#process_process_memoryusage
+metricsRegistry.getOrCreateGauge(
+  'process-memory-heap-used',
+  () => {
+    return process.memoryUsage().heapUsed
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-    
+// https://nodejs.org/api/process.html#process_process_memoryusage
+metricsRegistry.getOrCreateGauge(
+  'process-memory-external',
+  () => {
+    const mem = process.memoryUsage() as any
+    return mem.hasOwnProperty('external') ? mem.external : 0
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-    
+// https://nodejs.org/api/process.html#process_process_uptime
+metricsRegistry.getOrCreateGauge(
+  'process-uptime-seconds',
+  () => {
+    return Math.floor(process.uptime())
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-    
+// Now that we have some base system and process metrics wired up,
+// lets wire up an express middleware that will track request count, latency statics and give us all this
+// information filterable by http method, response status code and URI path.
 
-    
+/**
+ * This middleware is a little interesting because we need to track the time elapsed before we know the status code dimension.
+ * So we will create the Stopwatch manually rather that using the API available on the Timer object itself, see api docs for more info.
+ *
+ * @param metricsRegistry the self reporting metrics registry
+ * @return {Function} Express Middleware
+ */
+const createExpressMiddleware = metricsRegistry => {
+  return (req, res, next) => {
+    const stopwatch = new Stopwatch();
+
+    req.on('end', () => {
+      const customDimensions = {
+        statusCode: `${res.statusCode}`,
+        path: req.route ? req.route.path : '_unknown',
+        method: req.method
+      };
+
+      // create the timer for the request count/latency histogram
+      const requestTimer = metricsRegistry.getOrCreateTimer(
+        'request',
+        customDimensions,
+        REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS
+      );
+
+      // stop the request latency counter
+      const time = stopwatch.end();
+      requestTimer.update(time)
+    });
+    next()
+  }
+};
+
+const app = express();
+// wire up the metrics middleware
+app.use(createExpressMiddleware(metricsRegistry));
+
+
+app.get('/hello', (req, res) => {
+  res.send('hello world')
+});
+
+app.get('/path2', (req, res) => {
+  res.send('path2')
+});
+
+app.listen(8080, () => log.info('Example app listening on port 8080!'));</code></pre>
 </article>
 
 </section>
-
-
-
 
 		</div>
 	</div>
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>

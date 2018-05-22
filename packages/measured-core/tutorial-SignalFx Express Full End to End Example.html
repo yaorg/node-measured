@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Source: metrics/NoOpMeter.js</title>
+	<title>Measured Tutorial: SignalFx Express Full End to End Example</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -92,97 +92,207 @@
 	<div class="col-md-12">
 	
 		<div id="main">
-			
+			<section class="tutorial-section">
 
-		<h1 class="page-title">Source: metrics/NoOpMeter.js</h1>
+<header>
     
-<section>
-    <article>
-        <pre
-            class="sunlight-highlight-javascript linenums">const { MetricTypes } = require('./Metric');
+
+    <h2>SignalFx Express Full End to End Example</h2>
+</header>
+
+<article>
+    <h3>Using Measured to instrument OS, Process and Express Metrics.</h3><p>This tutorial shows how to use the measured libraries to fully instrument OS and Node Process metrics as well as create an express middleware.</p>
+<p>The middleware will measure request count, latency distributions (req/res time histogram) and add dimensions to make it filterable by request method, response status code, request uri path.</p>
+<pre class="prettyprint source lang-javascript"><code>const os = require('os');
+const signalfx = require('signalfx');
+const express = require('express');
+const { SignalFxMetricsReporter, SignalFxSelfReportingMetricsRegistry } = require('measured-reporting');
+const { Stopwatch } = require('measured-core');
+const libraryMetadata = require('./package'); // get metadata from package.json
+
+const library = libraryMetadata.name;
+const version = libraryMetadata.version;
+
+// report process and os stats 1x per minute
+const PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS = 1;
+// Report the request count and histogram stats every 10 seconds
+const REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS = 10;
+
+const defaultDimensions = {
+  app: library,
+  app_version: version,
+  env: 'test'
+};
 
 /**
- * A No-Op Impl of Meter that can be used with a timer, to only create histogram data.
- * This is useful for some time series aggregators that can calculate rates for you just off of sent count.
+ * Get your api key from a secrets provider of some kind.
  *
- * @implements {Metric}
- * @example
- * const { NoOpMeter, Timer } = require('measured')
- * const meter = new NoOpMeter();
- * const timer = new Timer({meter: meter});
- * ...
- * // do some stuff with the timer and stopwatch api
- * ...
+ * Good examples:
+ *
+ * &lt;li> S3 with KMS
+ * &lt;li> Cerberus
+ * &lt;li> AWS Secrets Manager
+ * &lt;li> Vault
+ * &lt;li> Confidant
+ *
+ * Bad examples:
+ *
+ * &lt;li> Checked into SCM in plaintext as a property
+ * &lt;li> Set as a plaintext environment variable
+ *
+ * @return {string} Returns the resolved Signal Fx Api Key
  */
-// eslint-disable-next-line padded-blocks
-class NoOpMeter {
-  /**
-   * No-Op impl
-   * @param {number} n Number of events to mark.
-   */
-  // eslint-disable-next-line no-unused-vars
-  mark(n) {}
+const apiKeyResolver = () => {
+  // https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/
+  return process.env.SIGNALFX_API_KEY
+};
 
-  /**
-   * No-Op impl
-   */
-  start() {}
 
-  /**
-   * No-Op impl
-   */
-  end() {}
+// create the signal fx client
+const signalFxClient = new signalfx.Ingest(apiKeyResolver(), {
+  userAgents: library
+});
+// create the signal fx reporter with the client
+const signalFxReporter = new SignalFxMetricsReporter(signalFxClient, {
+  defaultDimensions: defaultDimensions,
+  defaultReportingIntervalInSeconds: 10
+});
+// create the self reporting metrics registry with the signal fx reporter
+const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter);
 
-  /**
-   * No-Op impl
-   */
-  ref() {}
+metricsRegistry.getOrCreateGauge(
+  'os-1m-load-average',
+  () => {
+    // os.loadavg returns an array [1, 5, 15] mins intervals
+    return os.loadavg()[0]
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-  /**
-   * No-Op impl
-   */
-  unref() {}
+metricsRegistry.getOrCreateGauge(
+  'os-free-mem-bytes',
+  () => {
+    return os.freemem()
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-  /**
-   * No-Op impl
-   */
-  reset() {}
+metricsRegistry.getOrCreateGauge(
+  'os-total-mem-bytes',
+  () => {
+    return os.totalmem()
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-  /**
-   * No-Op impl
-   */
-  meanRate() {}
+// https://nodejs.org/api/process.html#process_process_memoryusage
+metricsRegistry.getOrCreateGauge(
+  'process-memory-rss',
+  () => {
+    return process.memoryUsage().rss
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-  /**
-   * No-Op impl
-   */
-  currentRate() {}
+// https://nodejs.org/api/process.html#process_process_memoryusage
+metricsRegistry.getOrCreateGauge(
+  'process-memory-heap-total',
+  () => {
+    return process.memoryUsage().heapTotal
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
 
-  /**
-   * Returns an empty object
-   * @return {{}}
-   */
-  toJSON() {
-    return {};
+// https://nodejs.org/api/process.html#process_process_memoryusage
+metricsRegistry.getOrCreateGauge(
+  'process-memory-heap-used',
+  () => {
+    return process.memoryUsage().heapUsed
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
+
+// https://nodejs.org/api/process.html#process_process_memoryusage
+metricsRegistry.getOrCreateGauge(
+  'process-memory-external',
+  () => {
+    const mem = process.memoryUsage() as any
+    return mem.hasOwnProperty('external') ? mem.external : 0
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
+
+// https://nodejs.org/api/process.html#process_process_uptime
+metricsRegistry.getOrCreateGauge(
+  'process-uptime-seconds',
+  () => {
+    return Math.floor(process.uptime())
+  },
+  {},
+  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
+);
+
+// Now that we have some base system and process metrics wired up,
+// lets wire up an express middleware that will track request count, latency statics and give us all this
+// information filterable by http method, response status code and URI path.
+
+/**
+ * This middleware is a little interesting because we need to track the time elapsed before we know the status code dimension.
+ * So we will create the Stopwatch manually rather that using the API available on the Timer object itself, see api docs for more info.
+ *
+ * @param metricsRegistry the self reporting metrics registry
+ * @return {Function} Express Middleware
+ */
+const createExpressMiddleware = metricsRegistry => {
+  return (req, res, next) => {
+    const stopwatch = new Stopwatch();
+
+    req.on('end', () => {
+      const customDimensions = {
+        statusCode: `${res.statusCode}`,
+        path: req.route ? req.route.path : '_unknown',
+        method: req.method
+      };
+
+      // create the timer for the request count/latency histogram
+      const requestTimer = metricsRegistry.getOrCreateTimer(
+        'request',
+        customDimensions,
+        REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS
+      );
+
+      // stop the request latency counter
+      const time = stopwatch.end();
+      requestTimer.update(time)
+    });
+    next()
   }
+};
 
-  /**
-   * The type of the Metric Impl. {@link MetricTypes}.
-   * @return {string} The type of the Metric Impl.
-   */
-  getType() {
-    return MetricTypes.METER;
-  }
-}
+const app = express();
+// wire up the metrics middleware
+app.use(createExpressMiddleware(metricsRegistry));
 
-module.exports = NoOpMeter;
-</pre>
-    </article>
+
+app.get('/hello', (req, res) => {
+  res.send('hello world')
+});
+
+app.get('/path2', (req, res) => {
+  res.send('path2')
+});
+
+app.listen(8080, () => log.info('Example app listening on port 8080!'));</code></pre>
+</article>
+
 </section>
-
-
-
-
 
 		</div>
 	</div>

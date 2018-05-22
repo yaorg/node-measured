@@ -53,6 +53,13 @@
 			</li>
 			
 			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-SignalFx Express Full End to End Example.html">SignalFx Express Full End to End Example</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
 					<li><a href="global.html">Global</a></li>
@@ -382,15 +389,15 @@
         
             
 <hr>
-<dt class="name" id="_intervalToMetric">
-    <h4 id="_intervalToMetric"><span class="type-signature">&lt;protected> </span>_intervalToMetric<span class="type-signature"> :Object.&lt;number, Set.&lt;string>></span></h4>
+<dt class="name" id="_defaultReportingIntervalInSeconds">
+    <h4 id="_defaultReportingIntervalInSeconds"><span class="type-signature">&lt;protected> </span>_defaultReportingIntervalInSeconds<span class="type-signature"> :number</span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Map of intervals to metric keys, this will be used to look up what metrics should be reported at a given interval.</p>
+        <p>the default interval a number in seconds.</p>
     </div>
     
 
@@ -399,7 +406,7 @@
         <ul>
             <li>
                 
-<span class="param-type">Object.&lt;number, Set.&lt;string>></span>
+<span class="param-type">number</span>
 
 
 
@@ -420,7 +427,7 @@
 	<dd class="inherited-from">
 		<ul class="dummy">
 			<li>
-				<a href="Reporter.html#_intervalToMetric">Reporter#_intervalToMetric</a>
+				<a href="Reporter.html#_defaultReportingIntervalInSeconds">Reporter#_defaultReportingIntervalInSeconds</a>
 			</li>
 		</ul>
 	</dd>
@@ -452,7 +459,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-30">line 30</a>
+				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-54">line 54</a>
 			</li>
 		</ul>
 	</dd>
@@ -566,320 +573,6 @@
         <h3 class="subsection-title">Methods</h3>
 
         <dl>
-            
-<hr>
-<dt>
-    <h4 class="name" id="_createIntervalCallback"><span class="type-signature">&lt;protected> </span>_createIntervalCallback(intervalInSeconds)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Creates the timed callback loop for the given interval.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>intervalInSeconds</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>the interval in seconds for the timeout callback</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#_createIntervalCallback">Reporter#_createIntervalCallback</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-90">line 90</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="_getDimensions"><span class="type-signature">&lt;protected> </span>_getDimensions(metric)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>metric</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#MetricWrapper">MetricWrapper</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The Wrapped Metric Object.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#_getDimensions">Reporter#_getDimensions</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-137">line 137</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>The left merged default dimensions with the metric specific dimensions</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
             
 <hr>
 <dt>
@@ -2142,153 +1835,6 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="_reportMetricsWithInterval"><span class="type-signature">&lt;protected> </span>_reportMetricsWithInterval(interval)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Gathers all the metrics that have been registered to report on the given interval.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>interval</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The interval to look up what metrics to report</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#_reportMetricsWithInterval">Reporter#_reportMetricsWithInterval</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-105">line 105</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
     <h4 class="name" id="reportMetricOnInterval"><span class="type-signature"></span>reportMetricOnInterval(metricKey, intervalInSeconds)</h4>
     
     
@@ -2427,7 +1973,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-66">line 66</a>
+				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-73">line 73</a>
 			</li>
 		</ul>
 	</dd>
@@ -2574,7 +2120,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-56">line 56</a>
+				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-63">line 63</a>
 			</li>
 		</ul>
 	</dd>
@@ -2671,7 +2217,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-144">line 144</a>
+				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-153">line 153</a>
 			</li>
 		</ul>
 	</dd>
@@ -2748,7 +2294,7 @@
 
 
 	<span class="copyright">
-	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors.
+	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors. </br>Icon by <a href="http://www.simpleicon.com/">SimpleIcon</a> <a href="https://creativecommons.org/licenses/by/3.0">[CC BY 3.0]</a>, <a href="https://commons.wikimedia.org/wiki/File:Simpleicons_Business_line-graphic-with-two-lines.svg">via Wikimedia Commons</a>
 	</span>
 
 <span class="jsdoc-message">

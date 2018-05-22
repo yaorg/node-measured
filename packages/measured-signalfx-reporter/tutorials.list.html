@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Source: registryies/SignalFxSelfReportingMetricsRegistry.js</title>
+	<title>Measured Tutorials</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -39,6 +39,13 @@
 			</li>
 			
 			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-SignalFx Express Full End to End Example.html">SignalFx Express Full End to End Example</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
 					<li><a href="global.html">Global</a></li>
@@ -68,66 +75,103 @@
 <div class="row">
 
 	
-	<div class="col-md-12">
+	<div class="col-md-8">
 	
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: registryies/SignalFxSelfReportingMetricsRegistry.js</h1>
-    
+	<h1 class="page-title">Tutorials</h1>
 <section>
-    <article>
-        <pre
-            class="sunlight-highlight-javascript linenums">const { NoOpMeter, Timer } = require('measured-core');
-const { SelfReportingMetricsRegistry } = require('measured-reporting');
-const { validateTimerOptions } = require('measured-reporting').inputValidators;
 
-/**
- * A SignalFx Self Reporting Metrics Registry that disallows the use of meters as they waste DPM and accomplished using a counter.
- * @extends {SelfReportingMetricsRegistry}
- */
-class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry {
-  /**
-   * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo with a NoOpMeter
-   *
-   * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
-   * @return {Timer}
-   */
-  getOrCreateTimer(name, dimensions, publishingIntervalInSeconds) {
-    validateTimerOptions(name, dimensions, publishingIntervalInSeconds);
+<header>
+    
+        <h2>
+        
+        </h2>
+        
+    
+</header>
 
-    let timer;
-    if (this.hasMetric(name, dimensions)) {
-      timer = this.getMetric(name, dimensions);
-    } else {
-      timer = new Timer({ meter: new NoOpMeter() });
-      const key = this._putMetric(name, timer, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
-    }
 
-    return timer;
-  }
+<article>
+    <div class="container-overview">
+    
+        
 
-  /**
-   * You should use counters and implements meter functionality in your Dashboard.
-   * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
-   * @return {NoOpMeter|*}
-   */
-  getOrCreateMeter(name, dimensions, publishingIntervalInSeconds) {
-    this._log.error(
-      'Meters will not get reported using the SignalFx reporter as they waste DPM, please use a counter instead'
-    );
-    return new NoOpMeter();
-  }
-}
-</pre>
-    </article>
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></dt>
+            <dd></dd>
+        
+            <dt><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
 </section>
-
 
 
 
@@ -137,6 +181,10 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
 
 	<div class="clearfix"></div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
 	
 
 </div>
@@ -163,7 +211,7 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
 
 
 	<span class="copyright">
-	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors.
+	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors. </br>Icon by <a href="http://www.simpleicon.com/">SimpleIcon</a> <a href="https://creativecommons.org/licenses/by/3.0">[CC BY 3.0]</a>, <a href="https://commons.wikimedia.org/wiki/File:Simpleicons_Business_line-graphic-with-two-lines.svg">via Wikimedia Commons</a>
 	</span>
 
 <span class="jsdoc-message">
