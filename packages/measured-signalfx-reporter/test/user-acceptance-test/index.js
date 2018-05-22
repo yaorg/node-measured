@@ -42,9 +42,8 @@ const defaultDimensions = {
  */
 const apiKeyResolver = () => {
   // https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/
-  return process.env.SIGNALFX_API_KEY
+  return process.env.SIGNALFX_API_KEY;
 };
-
 
 // create the signal fx client
 const signalFxClient = new signalfx.Ingest(apiKeyResolver(), {
@@ -57,7 +56,7 @@ const signalFxReporter = new SignalFxMetricsReporter(signalFxClient, {
   logLevel: 'debug'
 });
 // create the self reporting metrics registry with the signal fx reporter
-const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter, {logLevel: 'debug'});
+const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter, { logLevel: 'debug' });
 
 metricsRegistry.getOrCreateGauge(
   'os-1m-load-average',
@@ -169,23 +168,22 @@ const createExpressMiddleware = metricsRegistry => {
 
       // stop the request latency counter
       const time = stopwatch.end();
-      requestTimer.update(time)
+      requestTimer.update(time);
     });
-    next()
-  }
+    next();
+  };
 };
 
 const app = express();
 // wire up the metrics middleware
 app.use(createExpressMiddleware(metricsRegistry));
 
-
 app.get('/hello', (req, res) => {
-  res.send('hello world')
+  res.send('hello world');
 });
 
 app.get('/path2', (req, res) => {
-  res.send('path2')
+  res.send('path2');
 });
 
 app.listen(8080, () => log.info('Example app listening on port 8080!'));

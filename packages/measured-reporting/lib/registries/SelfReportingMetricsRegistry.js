@@ -1,12 +1,5 @@
 const bunyan = require('bunyan');
-const {
-  SettableGauge,
-  Gauge,
-  Timer,
-  Counter,
-  Meter,
-  Histogram
-} = require('measured-core');
+const { SettableGauge, Gauge, Timer, Counter, Meter, Histogram } = require('measured-core');
 const DimensionAwareMetricsRegistry = require('./DimensionAwareMetricsRegistry');
 const {
   validateSelfReportingMetricsRegistryParameters,
@@ -155,7 +148,6 @@ class SelfReportingMetricsRegistry {
    */
   getOrCreateMeter(name, dimensions, publishingIntervalInSeconds) {
     // todo validate options
-
     let meter;
     if (this._registry.hasMetric(name, dimensions)) {
       meter = this._registry.getMetric(name, dimensions);

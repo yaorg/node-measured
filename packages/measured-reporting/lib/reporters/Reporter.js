@@ -42,9 +42,7 @@ class Reporter {
      * @type {Logger}
      * @protected
      */
-    this._log =
-      options.logger ||
-      bunyan.createLogger({ name: 'Reporter', level: options.logLevel || 'info' });
+    this._log = options.logger || bunyan.createLogger({ name: 'Reporter', level: options.logLevel || 'info' });
 
     /**
      * the default interval a number in seconds.
