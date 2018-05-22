@@ -44,7 +44,8 @@ class Reporter {
      */
     this._log = options.logger || bunyan.createLogger({ name: 'Reporter', level: 'info' });
 
-    this._defaultReportingIntervalInSeconds = options.defaultReportingIntervalInSeconds || DEFAULT_REPORTING_INTERVAL_IN_SECONDS;
+    this._defaultReportingIntervalInSeconds =
+      options.defaultReportingIntervalInSeconds || DEFAULT_REPORTING_INTERVAL_IN_SECONDS;
   }
 
   /**
@@ -88,9 +89,11 @@ class Reporter {
    */
   _createIntervalCallback(intervalInSeconds) {
     this._log.debug(`createTimedCallback() called with intervalInSeconds: ${intervalInSeconds}`);
-    this._intervals.push(setInterval(() => {
-      this._reportMetricsWithInterval(intervalInSeconds);
-    }, intervalInSeconds * 1000));
+    this._intervals.push(
+      setInterval(() => {
+        this._reportMetricsWithInterval(intervalInSeconds);
+      }, intervalInSeconds * 1000)
+    );
   }
 
   /**
@@ -122,7 +125,7 @@ class Reporter {
    * @abstract
    */
   _reportMetrics(metrics) {
-      throw new TypeError('Abstract method _reportMetrics(metrics) must be implemented in implementation class');
+    throw new TypeError('Abstract method _reportMetrics(metrics) must be implemented in implementation class');
   }
 
   /**

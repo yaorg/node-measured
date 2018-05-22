@@ -31,8 +31,8 @@ describe('Reporter', () => {
   let metricKey;
   let metricInterval = 1;
   let metricDimensions = {
-      hostname: 'instance-hostname',
-      foo: 'bar'
+    hostname: 'instance-hostname',
+    foo: 'bar'
   };
   let registry;
 
@@ -44,16 +44,16 @@ describe('Reporter', () => {
   });
 
   it('throws an error if you try to instantiate the abstract class', () => {
-    assert.throws(()=>{
+    assert.throws(() => {
       new Reporter();
-    }, 'Can\'t instantiate abstract class!')
+    }, "Can't instantiate abstract class!");
   });
 
   it('throws an error if _reportMetrics is not implemented', () => {
     class BadImpl extends Reporter {}
     assert.throws(() => {
       const badImpl = new BadImpl();
-      badImpl._reportMetrics([])
+      badImpl._reportMetrics([]);
     }, /method _reportMetrics\(metrics\) must be implemented/);
   });
 
@@ -72,16 +72,17 @@ describe('Reporter', () => {
   });
 
   it('should report 5 times in a  5 second window with a metric set to be reporting every 1 second', (done, fail) => {
-    reportAndWait(reporter, metricKey, metricInterval).then(() => {
+    reportAndWait(reporter, metricKey, metricInterval)
+      .then(() => {
         reporter.shutdown();
         const numberOfReports = reporter.getReportedMetrics().length;
         assert.equal(numberOfReports, 5);
         done();
-      }
-    ).catch(() => {
-      reporter.shutdown();
-      assert.fail("","","")
-    });
+      })
+      .catch(() => {
+        reporter.shutdown();
+        assert.fail('', '', '');
+      });
   }).timeout(10000);
 
   it('should only create 1 interval for 2 metrics with the same reporting interval', () => {
@@ -91,7 +92,7 @@ describe('Reporter', () => {
 
     const intervalCount = reporter._intervals.length;
     assert.equal(1, intervalCount);
-    reporter.shutdown()
+    reporter.shutdown();
   });
 
   it('should left merge dimensions with the metric dimensions taking precedence when _getDimensions is called', () => {
@@ -99,26 +100,26 @@ describe('Reporter', () => {
       hostname: 'instance-hostname',
       foo: 'bar'
     };
-    reporter = new TestReporter({defaultDimensions});
+    reporter = new TestReporter({ defaultDimensions });
     const customDimensions = {
       foo: 'bam',
       region: 'us-west-2'
     };
-    const merged = reporter._getDimensions({dimensions: customDimensions});
+    const merged = reporter._getDimensions({ dimensions: customDimensions });
     const expected = {
       hostname: 'instance-hostname',
       foo: 'bam',
       region: 'us-west-2'
     };
-    assert.deepEqual(expected, merged)
+    assert.deepEqual(expected, merged);
   });
 });
 
 const reportAndWait = (reporter, metricKey, metricInterval) => {
-  return new Promise((resolve => {
+  return new Promise(resolve => {
     reporter.reportMetricOnInterval(metricKey, metricInterval);
     setTimeout(() => {
-      resolve()
-    }, 5 * TimeUnits.SECONDS)
-  }));
+      resolve();
+    }, 5 * TimeUnits.SECONDS);
+  });
 };

@@ -4,7 +4,6 @@ const { Counter } = require('measured-core');
 const DimensionAwareMetricsRegistry = require('../../../lib/registries/DimensionAwareMetricsRegistry');
 
 describe('DimensionAwareMetricsRegistry', () => {
-
   let registry;
   beforeEach(() => {
     registry = new DimensionAwareMetricsRegistry();
@@ -25,7 +24,7 @@ describe('DimensionAwareMetricsRegistry', () => {
     registry.putMetric(metricName, counter, dimensions);
     assert(registry.hasMetric(metricName, dimensions));
     assert(counter === registry.getMetric(metricName, dimensions));
-    assert.equal(10, registry.getMetric(metricName, dimensions).toJSON())
+    assert.equal(10, registry.getMetric(metricName, dimensions).toJSON());
   });
 
   it('getMetricByKey() returns the proper metric wrapper', () => {
@@ -44,7 +43,6 @@ describe('DimensionAwareMetricsRegistry', () => {
     const wrapper = registry.getMetricWrapperByKey(key);
     assert.deepEqual(counter, wrapper.metricImpl);
     assert.deepEqual(dimensions, wrapper.dimensions);
-    assert.equal(metricName, wrapper.name)
-  })
-
+    assert.equal(metricName, wrapper.name);
+  });
 });

@@ -18,14 +18,14 @@ describe('SelfReportingMetricsRegistry', () => {
       setRegistry() {}
     };
     mockReporter = sinon.mock(reporter);
-    selfReportingRegistry = new SelfReportingMetricsRegistry(reporter, {registry});
+    selfReportingRegistry = new SelfReportingMetricsRegistry(reporter, { registry });
   });
 
   it('throws an error if a metric has already been registered', () => {
-    registry.putMetric('my-metric', new Counter, {});
+    registry.putMetric('my-metric', new Counter(), {});
     assert.throws(() => {
-      selfReportingRegistry.register('my-metric', new Counter, {})
-    })
+      selfReportingRegistry.register('my-metric', new Counter(), {});
+    });
   });
 
   it('#register registers the metric and informs the reporter to report', () => {
@@ -33,7 +33,10 @@ describe('SelfReportingMetricsRegistry', () => {
     const reportInterval = 1;
     const metricKey = metricName;
 
-    mockReporter.expects('reportMetricOnInterval').once().withArgs(metricKey, reportInterval);
+    mockReporter
+      .expects('reportMetricOnInterval')
+      .once()
+      .withArgs(metricKey, reportInterval);
 
     selfReportingRegistry.register(metricKey, new Counter(), {}, reportInterval);
 
@@ -41,7 +44,6 @@ describe('SelfReportingMetricsRegistry', () => {
 
     mockReporter.restore();
     mockReporter.verify();
-
   });
 
   it('#getOrCreateGauge creates a gauge and when called a second time returns the same gauge', () => {
@@ -53,7 +55,7 @@ describe('SelfReportingMetricsRegistry', () => {
     mockReporter.restore();
     mockReporter.verify();
 
-    assert.deepEqual(gauge, theSameGauge)
+    assert.deepEqual(gauge, theSameGauge);
   });
 
   it('#getOrCreateHistogram creates and registers the metric and when called a second time returns the same metric', () => {
@@ -65,7 +67,7 @@ describe('SelfReportingMetricsRegistry', () => {
     mockReporter.restore();
     mockReporter.verify();
 
-    assert.deepEqual(metric, theSameMetric)
+    assert.deepEqual(metric, theSameMetric);
   });
 
   it('#getOrCreateMeter creates and registers the metric and when called a second time returns the same metric', () => {
@@ -78,7 +80,7 @@ describe('SelfReportingMetricsRegistry', () => {
     mockReporter.verify();
 
     assert.deepEqual(metric, theSameMetric);
-    metric.end()
+    metric.end();
   });
 
   it('#getOrCreateCounter creates and registers the metric and when called a second time returns the same metric', () => {
@@ -90,7 +92,7 @@ describe('SelfReportingMetricsRegistry', () => {
     mockReporter.restore();
     mockReporter.verify();
 
-    assert.deepEqual(metric, theSameMetric)
+    assert.deepEqual(metric, theSameMetric);
   });
 
   it('#getOrCreateTimer creates and registers the metric and when called a second time returns the same metric', () => {
@@ -103,7 +105,7 @@ describe('SelfReportingMetricsRegistry', () => {
     mockReporter.verify();
 
     assert.deepEqual(metric, theSameMetric);
-    metric.end()
+    metric.end();
   });
 
   it('#getOrCreateSettableGauge creates and registers the metric and when called a second time returns the same metric', () => {
@@ -115,6 +117,6 @@ describe('SelfReportingMetricsRegistry', () => {
     mockReporter.restore();
     mockReporter.verify();
 
-    assert.deepEqual(metric, theSameMetric)
+    assert.deepEqual(metric, theSameMetric);
   });
 });

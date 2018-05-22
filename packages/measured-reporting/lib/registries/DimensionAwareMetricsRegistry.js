@@ -60,7 +60,7 @@ class DimensionAwareMetricsRegistry {
   }
 
   allKeys() {
-    return Object.keys(this._metrics)
+    return Object.keys(this._metrics);
   }
 
   /**
