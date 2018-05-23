@@ -20,7 +20,7 @@ Measured is heavily inspired by Coda Hale, Yammer Inc's [Dropwizard Metrics Libr
 
 ### [Measured SignalFx Reporter](packages/measured-signalfx-reporter)
 
-**A reporter that can be used with measured-reporting to send metrics to SignalFx.**
+**A reporter that can be used with measured-reporting to send metrics to [SignalFx](https://signalfx.com/).**
 [![npm](https://img.shields.io/npm/v/measured-signalfx-reporter.svg)](https://www.npmjs.com/package/measured-signalfx-reporter) 
 
 ### Measured Datadog reporter
