@@ -45,4 +45,44 @@ describe('DimensionAwareMetricsRegistry', () => {
     assert.deepEqual(dimensions, wrapper.dimensions);
     assert.equal(metricName, wrapper.name);
   });
+
+  it('#_generateStorageKey generates the same key for a metric name and dimensions with different ordering', () => {
+    const metricName = 'the-metric-name';
+    const demensions1 = {
+      foo: 'bar',
+      bam: 'boo'
+    };
+    const demensions2 = {
+      bam: 'boo',
+      foo: 'bar'
+    };
+
+    const key1 = registry._generateStorageKey(metricName, demensions1);
+    const key2 = registry._generateStorageKey(metricName, demensions2);
+
+    assert.equal(key1, key2);
+  });
+
+  it('#_generateStorageKey generates the same key for a metric name and dimensions when called 2x', () => {
+    const metricName = 'the-metric-name';
+    const demensions1 = {
+      foo: 'bar',
+      bam: 'boo'
+    };
+
+    const key1 = registry._generateStorageKey(metricName, demensions1);
+    const key2 = registry._generateStorageKey(metricName, demensions1);
+
+    assert.equal(key1, key2);
+  });
+
+  it('#_generateStorageKey generates the same key for a metric name and no dimensions when called 2x', () => {
+    const metricName = 'the-metric-name';
+    const demensions1 = {};
+
+    const key1 = registry._generateStorageKey(metricName, demensions1);
+    const key2 = registry._generateStorageKey(metricName, demensions1);
+
+    assert.equal(key1, key2);
+  });
 });

@@ -1,6 +1,5 @@
 /**
- * Simple registry that stores Metrics by name and dimension
- * @private
+ * Simple registry that stores Metrics by name and dimensions.
  */
 class DimensionAwareMetricsRegistry {
   constructor() {
@@ -59,6 +58,10 @@ class DimensionAwareMetricsRegistry {
     return key;
   }
 
+  /**
+   * Returns an array of all keys of metrics stored in this registry.
+   * @return {string[]} all keys of metrics stored in this registry.
+   */
   allKeys() {
     return Object.keys(this._metrics);
   }
@@ -74,7 +77,9 @@ class DimensionAwareMetricsRegistry {
   _generateStorageKey(name, dimensions) {
     let key = name;
     if (dimensions) {
-      Object.keys(dimensions).forEach(dimensionKey => {
+      Object.keys(dimensions)
+        .sort()
+        .forEach(dimensionKey => {
         key = `${key}-${dimensions[dimensionKey]}`;
       });
     }
