@@ -8,10 +8,10 @@ const DAYS = 24 * HOURS;
 
 /**
  * Time units, as found in Java: {@link http://download.oracle.com/javase/6/docs/api/java/util/concurrent/TimeUnit.html}
- * @module units
+ * @module timeUnits
  * @example
- * const TimeUnit = require('measured-core').unit
- * setTimeout(() => {}, 5 * TimeUnit.MINUTES)
+ * const timeUnit = require('measured-core').unit
+ * setTimeout(() => {}, 5 * timeUnit.MINUTES)
  */
 module.exports = {
   /**
