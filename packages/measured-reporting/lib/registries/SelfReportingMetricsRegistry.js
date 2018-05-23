@@ -21,7 +21,7 @@ class SelfReportingMetricsRegistry {
    */
   constructor(reporter, options) {
     options = options || {};
-    validateSelfReportingMetricsRegistryParameters(reporter, options.logger);
+    validateSelfReportingMetricsRegistryParameters(reporter, options);
 
     /**
      * @type {Reporter}

@@ -24,6 +24,7 @@ class Reporter {
 
     /**
      * Map of intervals to metric keys, this will be used to look up what metrics should be reported at a given interval.
+     *
      * @type {Object.<number, Set<string>>}
      * @private
      */
@@ -31,7 +32,8 @@ class Reporter {
     this._intervals = [];
 
     /**
-     * Map of default dimensions, that should be sent with every metric
+     * Map of default dimensions, that should be sent with every metric.
+     *
      * @type {Dimensions}
      * @protected
      */
@@ -45,7 +47,9 @@ class Reporter {
     this._log = options.logger || bunyan.createLogger({ name: 'Reporter', level: options.logLevel || 'info' });
 
     /**
-     * the default interval a number in seconds.
+     * The default reporting interval, a number in seconds.
+     * If not overridden via the {@see ReporterOptions}, defaults to 10 seconds.
+     *
      * @type {number}
      * @protected
      */

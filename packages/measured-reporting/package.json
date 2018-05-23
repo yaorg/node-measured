@@ -34,6 +34,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "jsdoc": "^3.5.5"
+    "jsdoc": "^3.5.5",
+    "loglevel": "^1.6.1",
+    "winston": "^2.4.2"
   }
 }
