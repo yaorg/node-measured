@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Class: Reporter</title>
+	<title>Measured Class: DimensionAwareMetricsRegistry</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -94,17 +94,16 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: Reporter</h1>
+	<h1 class="page-title">Class: DimensionAwareMetricsRegistry</h1>
 <section>
 
 <header>
     
         <h2>
-        Reporter
+        DimensionAwareMetricsRegistry
         </h2>
         
-            <div class="class-description"><p>The abstract reporter that specific implementations can extend to create a Self Reporting Metrics Registry Reporter.</p>
-<p><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></p></div>
+            <div class="class-description"><p>Simple registry that stores Metrics by name and dimensions.</p></div>
         
     
 </header>
@@ -116,7 +115,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="Reporter"><span class="type-signature">&lt;abstract> </span>new Reporter( [options])</h4>
+    <h4 class="name" id="DimensionAwareMetricsRegistry"><span class="type-signature"></span>new DimensionAwareMetricsRegistry()</h4>
     
     
 </dt>
@@ -129,68 +128,6 @@
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#ReporterOptions">ReporterOptions</a></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>The optional params to supply when creating a reporter.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -228,8 +165,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-13">line 13</a>
+				<a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html">measured-reporting/lib/registries/DimensionAwareMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html#sunlight-1-line-4">line 4</a>
 			</li>
 		</ul>
 	</dd>
@@ -271,253 +208,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Members</h3>
-
-        <dl>
-            
-<hr>
-<dt class="name" id="_defaultDimensions">
-    <h4 id="_defaultDimensions"><span class="type-signature">&lt;protected> </span>_defaultDimensions<span class="type-signature"> :<a href="global.html#Dimensions">Dimensions</a></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Map of default dimensions, that should be sent with every metric</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-38">line 38</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="_defaultReportingIntervalInSeconds">
-    <h4 id="_defaultReportingIntervalInSeconds"><span class="type-signature">&lt;protected> </span>_defaultReportingIntervalInSeconds<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>the default interval a number in seconds.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-52">line 52</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="_log">
-    <h4 id="_log"><span class="type-signature">&lt;protected> </span>_log<span class="type-signature"> :Logger</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Loggers to use, defaults to a new bunyan logger if nothing is supplied in options</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Logger</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-45">line 45</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        </dl>
     
 
     
@@ -527,69 +217,23 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="_getDimensions"><span class="type-signature">&lt;protected> </span>_getDimensions(metric)</h4>
+    <h4 class="name" id="allKeys"><span class="type-signature"></span>allKeys()</h4>
     
     
 </dt>
 <dd>
 
     
-
+    <div class="description">
+        <p>Returns an array of all keys of metrics stored in this registry.</p>
+    </div>
     
 
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>metric</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#MetricWrapper">MetricWrapper</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The Wrapped Metric Object.</p></td>
-        </tr>
 
     
-    </tbody>
-</table>
-
     
 
     
@@ -627,8 +271,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-144">line 144</a>
+				<a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html">measured-reporting/lib/registries/DimensionAwareMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html#sunlight-1-line-65">line 65</a>
 			</li>
 		</ul>
 	</dd>
@@ -657,7 +301,7 @@
     
             
 <div class="param-desc">
-    <p>The left merged default dimensions with the metric specific dimensions</p>
+    <p>all keys of metrics stored in this registry.</p>
 </div>
 
 
@@ -668,7 +312,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+<span class="param-type">Array.&lt;string></span>
 
 
 
@@ -685,7 +329,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="_reportMetrics"><span class="type-signature">&lt;abstract, protected> </span>_reportMetrics(metrics)</h4>
+    <h4 class="name" id="getMetric"><span class="type-signature"></span>getMetric(name, dimensions)</h4>
     
     
 </dt>
@@ -693,8 +337,7 @@
 
     
     <div class="description">
-        <p>This method gets called with an array of <a href="global.html#MetricWrapper">MetricWrapper</a> on an interval, when metrics should be reported.</p>
-<p>This is the main method that needs to get implemented when created an aggregator specific reporter.</p>
+        <p>Retrieves a metric with a given name and dimensions is present.</p>
     </div>
     
 
@@ -729,145 +372,7 @@
 
         <tr>
             
-                <td class="name"><code>metrics</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;<a href="global.html#MetricWrapper">MetricWrapper</a>></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The array of metrics to report.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-134">line 134</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="reportMetricOnInterval"><span class="type-signature"></span>reportMetricOnInterval(metricKey, intervalInSeconds)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Informs the reporter to report a metric on a given interval in seconds.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>metricKey</code></td>
+                <td class="name"><code>name</code></td>
             
 
             <td class="type">
@@ -884,20 +389,20 @@
 
             
 
-            <td class="description last"><p>The metric key for the metric in the metric registry.</p></td>
+            <td class="description last"><p>The metric name</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>intervalInSeconds</code></td>
+                <td class="name"><code>dimensions</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
 
 
 
@@ -908,7 +413,7 @@
 
             
 
-            <td class="description last"><p>The interval in seconds to report the metric on.</p></td>
+            <td class="description last"><p>The dimensions for the metric</p></td>
         </tr>
 
     
@@ -952,8 +457,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-71">line 71</a>
+				<a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html">measured-reporting/lib/registries/DimensionAwareMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html#sunlight-1-line-28">line 28</a>
 			</li>
 		</ul>
 	</dd>
@@ -978,6 +483,30 @@
     
 
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>a wrapper object around name, dimension and <a href="Metric.html">Metric</a></p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Metric.html">Metric</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
 
     
 </dd>
@@ -986,7 +515,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="setRegistry"><span class="type-signature"></span>setRegistry(registry)</h4>
+    <h4 class="name" id="getMetricWrapperByKey"><span class="type-signature"></span>getMetricWrapperByKey(key)</h4>
     
     
 </dt>
@@ -994,7 +523,7 @@
 
     
     <div class="description">
-        <p>Sets the registry, this must be called before reportMetricOnInterval.</p>
+        <p>Retrieves a metric by the calculated key (name / dimension combo).</p>
     </div>
     
 
@@ -1029,13 +558,13 @@
 
         <tr>
             
-                <td class="name"><code>registry</code></td>
+                <td class="name"><code>key</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></span>
+<span class="param-type">string</span>
 
 
 
@@ -1046,7 +575,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>The registered key for the given registered <a href="global.html#MetricWrapper">MetricWrapper</a></p></td>
         </tr>
 
     
@@ -1090,8 +619,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-61">line 61</a>
+				<a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html">measured-reporting/lib/registries/DimensionAwareMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html#sunlight-1-line-39">line 39</a>
 			</li>
 		</ul>
 	</dd>
@@ -1116,6 +645,30 @@
     
 
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>a wrapper object around name, dimension and <a href="Metric.html">Metric</a></p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#MetricWrapper">MetricWrapper</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
 
     
 </dd>
@@ -1124,7 +677,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="shutdown"><span class="type-signature"></span>shutdown()</h4>
+    <h4 class="name" id="hasMetric"><span class="type-signature"></span>hasMetric(name, dimensions)</h4>
     
     
 </dt>
@@ -1132,7 +685,7 @@
 
     
     <div class="description">
-        <p>Clears the intervals that are running to report metrics at an interval, and resets the state.</p>
+        <p>Checks to see if a metric with the given name and dimensions is present.</p>
     </div>
     
 
@@ -1141,6 +694,80 @@
     
 
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The metric name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The dimensions for the metric</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -1178,8 +805,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-151">line 151</a>
+				<a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html">measured-reporting/lib/registries/DimensionAwareMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html#sunlight-1-line-16">line 16</a>
 			</li>
 		</ul>
 	</dd>
@@ -1204,6 +831,240 @@
     
 
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>true if the metric with given dimensions is present</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="putMetric"><span class="type-signature"></span>putMetric(name, metric, dimensions)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Upserts a <a href="Metric.html">Metric</a> in the internal storage map for a given name, dimension combo</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The metric name</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>metric</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Metric.html">Metric</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <a href="Metric.html">Metric</a> impl</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The dimensions for the metric</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html">measured-reporting/lib/registries/DimensionAwareMetricsRegistry.js</a>,
+				 <a href="measured-reporting_lib_registries_DimensionAwareMetricsRegistry.js.html#sunlight-1-line-51">line 51</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The registry key for the metric, dimension combo</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
 
     
 </dd>
