@@ -14,14 +14,13 @@ const units = require('./util/units');
 const { MetricTypes } = require('./metrics/Metric');
 
 /**
- * The main measured module that is referenced when require('measured') is used.
+ * The main measured-core module that is referenced when require('measured-core') is used.
  * @module measured-core
  */
 module.exports = {
   /**
    * See {@link Collection}
    * @type {Collection}
-   * @augments Collection
    */
   Collection,
 
@@ -104,7 +103,7 @@ module.exports = {
   units,
 
   /**
-   * Creates a named collection. See {@Collection} for more details
+   * Creates a named collection. See {@link Collection} for more details
    *
    * @param name The name for the collection
    * @return {Collection}

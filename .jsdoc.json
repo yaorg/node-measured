@@ -24,7 +24,8 @@
       "measured-core": "../../",
       "measured-reporting": "../../",
       "measured-signalfx-reporter": "../../"
-    }
+    },
+    "analytics":{"ua":"UA-119781742-1", "domain":"yaorg.github.io"}
   },
   "markdown": {
     "parser": "gfm",

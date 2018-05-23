@@ -3,7 +3,6 @@ const Optional = require('optional-js');
 /**
  * This module contains various validators to validate publicly exposed input
  * @module inputValidators
- * @private
  */
 module.exports = {
   /**

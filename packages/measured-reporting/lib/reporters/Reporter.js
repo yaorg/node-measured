@@ -139,7 +139,7 @@ class Reporter {
    *
    * @param {MetricWrapper} metric The Wrapped Metric Object.
    * @return {Dimensions} The left merged default dimensions with the metric specific dimensions
-   * @private
+   * @protected
    */
   _getDimensions(metric) {
     return Object.assign({}, this._defaultDimensions, metric.dimensions);

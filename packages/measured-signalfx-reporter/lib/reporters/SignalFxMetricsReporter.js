@@ -9,7 +9,7 @@ const { validateSignalFxClient } = require('../validators/inputValidators');
 class SignalFxMetricsReporter extends Reporter {
   /**
    * @param {SignalFxClient} signalFxClient The configured signal fx client.
-   * @param {ReporterOptions} options See {@link ReporterOptions}.
+   * @param {ReporterOptions} [options] See {@link ReporterOptions}.
    */
   constructor(signalFxClient, options) {
     super(options);
@@ -167,6 +167,7 @@ class SignalFxMetricsReporter extends Reporter {
    * @protected
    */
   _getValuesToProcessForHistogram(name, histogram) {
+    // TODO add full list of histogram metrics but enable filter
     const data = histogram.toJSON();
     const valuesToProcess = [];
     valuesToProcess.push({

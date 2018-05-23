@@ -11,8 +11,9 @@ const log = bunyan.createLogger({ name: 'SelfReportingMetricsRegistry', level: '
 const library = libraryMetadata.name;
 const version = libraryMetadata.version;
 
-// Set things to report at a high frequency for this UAT test, this is probably more frequent than you would want
-// for prod, as it would more DPM than you probably meant
+// Set things to report at a high frequency for this UAT test server.
+// This is probably more frequent than you would want for prod, as it would use more DPM than you probably meant.
+// This really depends on your data resolution requirements and scale.
 const PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS = 5;
 const REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS = 1;
 
@@ -45,19 +46,22 @@ const apiKeyResolver = () => {
   return process.env.SIGNALFX_API_KEY;
 };
 
-// create the signal fx client
+// Create the signal fx client
 const signalFxClient = new signalfx.Ingest(apiKeyResolver(), {
   userAgents: library
 });
-// create the signal fx reporter with the client
+
+// Create the signal fx reporter with the client
 const signalFxReporter = new SignalFxMetricsReporter(signalFxClient, {
   defaultDimensions: defaultDimensions,
   defaultReportingIntervalInSeconds: 10,
   logLevel: 'debug'
 });
-// create the self reporting metrics registry with the signal fx reporter
+
+// Create the self reporting metrics registry with the signal fx reporter
 const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter, { logLevel: 'debug' });
 
+// Create a gauge to track the 1 minute load average from the Node OS API.
 metricsRegistry.getOrCreateGauge(
   'os-1m-load-average',
   () => {
@@ -68,6 +72,7 @@ metricsRegistry.getOrCreateGauge(
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
 );
 
+// Create a gauge to track the amount of free memory for the system from the Node OS API.
 metricsRegistry.getOrCreateGauge(
   'os-free-mem-bytes',
   () => {
@@ -77,6 +82,7 @@ metricsRegistry.getOrCreateGauge(
   PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
 );
 
+// Create a gauge to track the amount of memory used for the system from the Node OS API.
 metricsRegistry.getOrCreateGauge(
   'os-total-mem-bytes',
   () => {
