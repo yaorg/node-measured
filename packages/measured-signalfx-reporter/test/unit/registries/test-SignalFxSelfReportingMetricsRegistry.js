@@ -22,7 +22,7 @@ describe('SignalFxSelfReportingMetricsRegistry', () => {
     registry = new SignalFxSelfReportingMetricsRegistry(reporter);
   });
 
-  it('#getOrCreateTimer uses a no-op timer', () => {
+  it('#getOrCreateTimer uses a no-op meter', () => {
     mockReporter.expects('reportMetricOnInterval').once();
     const timer = registry.getOrCreateTimer('my-timer');
     assert.equal(timer._meter.constructor.name, 'NoOpMeter');
@@ -30,7 +30,7 @@ describe('SignalFxSelfReportingMetricsRegistry', () => {
     assert(timer === theSameTimer);
   });
 
-  it('#getOrCreateMeter uses a no-op timer', () => {
+  it('#getOrCreateMeter uses a no-op meter', () => {
     mockReporter.expects('reportMetricOnInterval').never();
     const meter = registry.getOrCreateMeter('my-meter');
     assert.equal(meter.constructor.name, 'NoOpMeter');
