@@ -111,18 +111,22 @@ module.exports = {
    */
   validateMetric: metric => {
     if (!metric) {
-      throw new TypeError("The metric was undefined, when it was required");
+      throw new TypeError('The metric was undefined, when it was required');
     }
     if (typeof metric.toJSON !== 'function') {
-      throw new TypeError(`Metrics must implement toJSON(), see the Metric interface in the docs.`);
+      throw new TypeError('Metrics must implement toJSON(), see the Metric interface in the docs.');
     }
     if (typeof metric.getType !== 'function') {
-      throw new TypeError(`Metrics must implement getType(), see the Metric interface in the docs.`);
+      throw new TypeError('Metrics must implement getType(), see the Metric interface in the docs.');
     }
     const type = metric.getType();
 
-    if (! metricTypeValues.includes(type)) {
-      throw new TypeError(`Metric#getType(), must return a type defined in MetricsTypes. Found: ${type}, Valid values: ${metricTypeValues.join(", ")}`);
+    if (!metricTypeValues.includes(type)) {
+      throw new TypeError(
+        `Metric#getType(), must return a type defined in MetricsTypes. Found: ${type}, Valid values: ${metricTypeValues.join(
+          ', '
+        )}`
+      );
     }
   },
 
@@ -155,7 +159,7 @@ module.exports = {
       }
 
       if (Array.isArray(dimensions)) {
-        throw new TypeError('dimensions where detected to be an array, expected Object<string, string>')
+        throw new TypeError('dimensions where detected to be an array, expected Object<string, string>');
       }
 
       Object.keys(dimensions).forEach(key => {
@@ -220,13 +224,17 @@ module.exports = {
    */
   validateReporterInstance: reporter => {
     if (!reporter) {
-      throw new TypeError("The reporter was undefined, when it was required");
+      throw new TypeError('The reporter was undefined, when it was required');
     }
     if (typeof reporter.setRegistry !== 'function') {
-      throw new TypeError(`A reporter must implement setRegistry(registry), see the abstract Reporter class in the docs.`);
+      throw new TypeError(
+        'A reporter must implement setRegistry(registry), see the abstract Reporter class in the docs.'
+      );
     }
     if (typeof reporter.reportMetricOnInterval !== 'function') {
-      throw new TypeError(`A reporter must implement reportMetricOnInterval(metricKey, intervalInSeconds), see the abstract Reporter class in the docs.`);
+      throw new TypeError(
+        'A reporter must implement reportMetricOnInterval(metricKey, intervalInSeconds), see the abstract Reporter class in the docs.'
+      );
     }
   },
 

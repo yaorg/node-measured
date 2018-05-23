@@ -13,21 +13,29 @@ describe('SignalFxMetricsReporter', () => {
   let signalFxClient;
   let clientSpy;
   beforeEach(() => {
-    signalFxClient = {send: (data) => {
-        return new Promise((resolve) => {
-          resolve()
+    signalFxClient = {
+      send: data => {
+        return new Promise(resolve => {
+          resolve();
         });
-      }};
+      }
+    };
     clientSpy = sinon.spy(signalFxClient, 'send');
     // noinspection JSCheckFunctionSignatures
-    reporter = new SignalFxMetricsReporter(signalFxClient)
+    reporter = new SignalFxMetricsReporter(signalFxClient);
   });
 
   it('#_reportMetrics sends the expected data to signal fx for a histogram', () => {
     const metric = new Histogram();
     const metricMock = sinon.mock(metric);
-    metricMock.expects('getType').once().returns(MetricTypes.HISTOGRAM);
-    metricMock.expects('toJSON').once().returns({
+    metricMock
+      .expects('getType')
+      .once()
+      .returns(MetricTypes.HISTOGRAM);
+    metricMock
+      .expects('toJSON')
+      .once()
+      .returns({
         min: 1,
         max: 10,
         sum: 100,
@@ -40,7 +48,7 @@ describe('SignalFxMetricsReporter', () => {
         p95: 6,
         p99: 7,
         p999: 9
-    });
+      });
 
     const metricWrapper = {
       name: name,
@@ -74,23 +82,27 @@ describe('SignalFxMetricsReporter', () => {
           metric: `${name}.p99`,
           value: '7',
           dimensions: dimensions
-        },
+        }
       ],
       cumulative_counters: [
         {
           metric: `${name}.count`,
           value: '20',
           dimensions: dimensions
-        },
+        }
       ]
     };
 
     reporter._reportMetrics([metricWrapper]);
 
-    assert(clientSpy.withArgs(sinon.match((actual) => {
-      assert.deepEqual(expected, actual);
-      return true;
-    })).calledOnce);
+    assert(
+      clientSpy.withArgs(
+        sinon.match(actual => {
+          assert.deepEqual(expected, actual);
+          return true;
+        })
+      ).calledOnce
+    );
   });
 
   it('#_reportMetrics sends the expected data to signal fx for a gauge', () => {
@@ -114,14 +126,18 @@ describe('SignalFxMetricsReporter', () => {
 
     reporter._reportMetrics([metricWrapper]);
 
-    assert(clientSpy.withArgs(sinon.match((actual) => {
-      assert.deepEqual(expected, actual);
-      return true;
-    })).calledOnce);
+    assert(
+      clientSpy.withArgs(
+        sinon.match(actual => {
+          assert.deepEqual(expected, actual);
+          return true;
+        })
+      ).calledOnce
+    );
   });
 
   it('#_reportMetrics sends the expected data to signal fx for a counter', () => {
-    const metric = new Counter({count:5});
+    const metric = new Counter({ count: 5 });
 
     const metricWrapper = {
       name: name,
@@ -141,10 +157,14 @@ describe('SignalFxMetricsReporter', () => {
 
     reporter._reportMetrics([metricWrapper]);
 
-    assert(clientSpy.withArgs(sinon.match((actual) => {
-      assert.deepEqual(expected, actual);
-      return true;
-    })).calledOnce);
+    assert(
+      clientSpy.withArgs(
+        sinon.match(actual => {
+          assert.deepEqual(expected, actual);
+          return true;
+        })
+      ).calledOnce
+    );
   });
 
   it('#_reportMetrics sends the expected data to signal fx for a meter', () => {
@@ -160,26 +180,32 @@ describe('SignalFxMetricsReporter', () => {
 
     assert(clientSpy.withArgs({}).calledOnce);
 
-    metric.end()
+    metric.end();
   });
   it('#_reportMetrics sends the expected data to signal fx for an array multiple metrics', () => {
     const metric = new Histogram();
     const metricMock = sinon.mock(metric);
-    metricMock.expects('getType').once().returns(MetricTypes.HISTOGRAM);
-    metricMock.expects('toJSON').once().returns({
-      min: 1,
-      max: 10,
-      sum: 100,
-      variance: 55,
-      mean: 5,
-      stddev: 54,
-      count: 20,
-      median: 50,
-      p75: 4,
-      p95: 6,
-      p99: 7,
-      p999: 9
-    });
+    metricMock
+      .expects('getType')
+      .once()
+      .returns(MetricTypes.HISTOGRAM);
+    metricMock
+      .expects('toJSON')
+      .once()
+      .returns({
+        min: 1,
+        max: 10,
+        sum: 100,
+        variance: 55,
+        mean: 5,
+        stddev: 54,
+        count: 20,
+        median: 50,
+        p75: 4,
+        p95: 6,
+        p99: 7,
+        p999: 9
+      });
 
     const histogramWRapper = {
       name: name,
@@ -189,7 +215,7 @@ describe('SignalFxMetricsReporter', () => {
 
     const counterWrapper = {
       name: 'my-counter',
-      metricImpl: new Counter({count:6}),
+      metricImpl: new Counter({ count: 6 })
     };
 
     const gaugeWrapper = {
@@ -246,21 +272,26 @@ describe('SignalFxMetricsReporter', () => {
 
     reporter._reportMetrics([histogramWRapper, counterWrapper, gaugeWrapper]);
 
-    assert(clientSpy.withArgs(sinon.match((actual) => {
-      assert.deepEqual(expected, actual);
-      return true;
-    })).calledOnce);
+    assert(
+      clientSpy.withArgs(
+        sinon.match(actual => {
+          assert.deepEqual(expected, actual);
+          return true;
+        })
+      ).calledOnce
+    );
   });
 
   it('#_reportMetrics doesnt add metrics tp]o send if a bad metric was supplied', () => {
-    reporter._reportMetrics([{
-      name: 'something',
-      metricImpl: {getType: () => 'something random'}
-    }]);
+    reporter._reportMetrics([
+      {
+        name: 'something',
+        metricImpl: { getType: () => 'something random' }
+      }
+    ]);
 
     assert(clientSpy.withArgs({}).calledOnce);
   });
 
   it('#_reportMetrics sends the expected data to signal fx for a timer', () => {});
 });
-

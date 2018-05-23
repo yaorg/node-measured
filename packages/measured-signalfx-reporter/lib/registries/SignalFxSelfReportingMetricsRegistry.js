@@ -34,7 +34,9 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
   }
 
   /**
-   * You should use counters and implements meter functionality in your Dashboard.
+   * Meters are not reported to SignalFx.
+   * Meters do not make sense to use with SignalFx because the same values can be calculated
+   * using simple counters and aggregations within SignalFx itself.
    *
    * @param {string} name The Metric name
    * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric

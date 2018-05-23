@@ -36,4 +36,3 @@ describe('SignalFxSelfReportingMetricsRegistry', () => {
     assert.equal(meter.constructor.name, 'NoOpMeter');
   });
 });
-

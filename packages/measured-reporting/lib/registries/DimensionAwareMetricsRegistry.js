@@ -80,8 +80,8 @@ class DimensionAwareMetricsRegistry {
       Object.keys(dimensions)
         .sort()
         .forEach(dimensionKey => {
-        key = `${key}-${dimensions[dimensionKey]}`;
-      });
+          key = `${key}-${dimensions[dimensionKey]}`;
+        });
     }
     return key;
   }

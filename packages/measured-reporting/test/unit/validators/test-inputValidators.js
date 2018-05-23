@@ -39,14 +39,13 @@ describe('validateNumberReturningCallback', () => {
   it('throws an error if a non function is supplied', () => {
     assert.throws(() => {
       validateNumberReturningCallback({});
-    }, /must be function/)
-  })
+    }, /must be function/);
+  });
 });
 
 describe('validateOptionalLogger', () => {
-
   it('validates a Buynan logger', () => {
-    const logger = bunyan.createLogger({ name: 'bunyan-logger'});
+    const logger = bunyan.createLogger({ name: 'bunyan-logger' });
     validateOptionalLogger(logger);
   });
 
@@ -56,22 +55,21 @@ describe('validateOptionalLogger', () => {
 
   it('validates a Loglevel logger', () => {
     validateOptionalLogger(loglevel);
-
   });
 
   it('validates an artisanal logger', () => {
     validateOptionalLogger({
       debug: (...msgs) => {
-        console.log('debug: ', ...msgs)
+        console.log('debug: ', ...msgs);
       },
       info: (...msgs) => {
-        console.log('info: ', ...msgs)
+        console.log('info: ', ...msgs);
       },
       warn: (...msgs) => {
-        console.log('warn: ', ...msgs)
+        console.log('warn: ', ...msgs);
       },
       error: (...msgs) => {
-        console.log('error: ', ...msgs)
+        console.log('error: ', ...msgs);
       }
     });
   });
@@ -79,7 +77,7 @@ describe('validateOptionalLogger', () => {
   it('throws an error when a logger is missing an expected method', () => {
     assert.throws(() => {
       validateOptionalLogger({});
-    }, /The logger that was passed in does not support/)
+    }, /The logger that was passed in does not support/);
   });
 
   it('does not throw an error if a logger is not passed in as an arg', () => {
@@ -91,35 +89,40 @@ describe('validateMetric', () => {
   it('throws an error if the metric is undefined', () => {
     assert.throws(() => {
       validateMetric(undefined);
-    }, 'The metric was undefined, when it was required')
+    }, 'The metric was undefined, when it was required');
   });
 
   it('throws an error if the metric is null', () => {
     assert.throws(() => {
       validateMetric(null);
-    }, 'The metric was undefined, when it was required')
+    }, 'The metric was undefined, when it was required');
   });
 
   it('throws an error if toJSON is not a function', () => {
     assert.throws(() => {
       validateMetric({});
-    }, /must implement toJSON()/)
+    }, /must implement toJSON()/);
   });
 
   it('throws an error if getType is not a function', () => {
     assert.throws(() => {
-      validateMetric({toJSON: () => {}});
-    }, /must implement getType()/)
+      validateMetric({ toJSON: () => {} });
+    }, /must implement getType()/);
   });
 
   it('throws an error if #getType() does not return an expected value', () => {
     assert.throws(() => {
-      validateMetric({toJSON: () => {}, getType: () => {return 'foo'}});
-    }, /Metric#getType\(\), must return a type defined in MetricsTypes/)
+      validateMetric({
+        toJSON: () => {},
+        getType: () => {
+          return 'foo';
+        }
+      });
+    }, /Metric#getType\(\), must return a type defined in MetricsTypes/);
   });
 
   it('does nothing when a valid metric is supplied', () => {
-    validateMetric(new Counter())
+    validateMetric(new Counter());
   });
 });
 
@@ -127,29 +130,29 @@ describe('validateReporterInstance', () => {
   it('throws an error if undefined was passed in', () => {
     assert.throws(() => {
       validateReporterInstance(null);
-    }, /The reporter was undefined/)
+    }, /The reporter was undefined/);
   });
 
   it('throws an error if setRegistry is not a function', () => {
     assert.throws(() => {
       validateReporterInstance({});
-    }, /must implement setRegistry/)
+    }, /must implement setRegistry/);
   });
 
   it('throws an error if reportMetricOnInterval is not a function', () => {
     assert.throws(() => {
-      validateReporterInstance({setRegistry: () => {}});
-    }, /must implement reportMetricOnInterval/)
+      validateReporterInstance({ setRegistry: () => {} });
+    }, /must implement reportMetricOnInterval/);
   });
 
   it('does nothing for a valid reporter instance', () => {
-    validateReporterInstance({setRegistry: () => {}, reportMetricOnInterval: () => {}})
+    validateReporterInstance({ setRegistry: () => {}, reportMetricOnInterval: () => {} });
   });
 });
 
 describe('validateSelfReportingMetricsRegistryParameters', () => {
   it('does nothing when a reporter is passed in', () => {
-    validateSelfReportingMetricsRegistryParameters({setRegistry: () => {}, reportMetricOnInterval: () => {}})
+    validateSelfReportingMetricsRegistryParameters({ setRegistry: () => {}, reportMetricOnInterval: () => {} });
   });
 });
 
@@ -157,7 +160,7 @@ describe('validateOptionalPublishingInterval', () => {
   it('throws an error if validateOptionalPublishingInterval is not a number', () => {
     assert.throws(() => {
       validateOptionalPublishingInterval('1');
-    }, /must be of type number/)
+    }, /must be of type number/);
   });
 });
 
@@ -165,19 +168,19 @@ describe('validateOptionalDimensions', () => {
   it('throws an error if passed dimensions is not an object', () => {
     assert.throws(() => {
       validateOptionalDimensions(1);
-    }, /options.dimensions should be an object/)
+    }, /options.dimensions should be an object/);
   });
 
   it('throws an error if passed dimensions is not an object.<string, string>', () => {
     assert.throws(() => {
       validateOptionalDimensions(['thing', 'otherthing']);
-    }, /dimensions where detected to be an array/)
+    }, /dimensions where detected to be an array/);
   });
 
   it('throws an error if passed dimensions is not an object has non string values for demension keys', () => {
     assert.throws(() => {
-      validateOptionalDimensions({someKeyThatIsANumber: 1});
-    }, /should be of type string/)
+      validateOptionalDimensions({ someKeyThatIsANumber: 1 });
+    }, /should be of type string/);
   });
 });
 
@@ -185,7 +188,6 @@ describe('validateMetricName', () => {
   it('throw an error if a non-string is passed', () => {
     assert.throws(() => {
       validateMetricName({});
-    }, /options.name is a required option and must be of type string/)
-
+    }, /options.name is a required option and must be of type string/);
   });
 });
