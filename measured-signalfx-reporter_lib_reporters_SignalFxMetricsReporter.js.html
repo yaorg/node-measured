@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Source: reporter/SignalFxMetricsReporter.js</title>
+	<title>Measured Source: measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="../../"><img class="branding-logo" src="../../img/measured.png"
+		<a class="navbar-brand" href="./"><img class="branding-logo" src="./img/measured.png"
 		alt="logo"/>Measured</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -32,9 +32,23 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li>
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
 				</ul>
 			</li>
 			
@@ -80,7 +94,7 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: reporter/SignalFxMetricsReporter.js</h1>
+		<h1 class="page-title">Source: measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</h1>
     
 <section>
     <article>
@@ -96,7 +110,7 @@ const { validateSignalFxClient } = require('../validators/inputValidators');
 class SignalFxMetricsReporter extends Reporter {
   /**
    * @param {SignalFxClient} signalFxClient The configured signal fx client.
-   * @param {ReporterOptions} options See {@link ReporterOptions}.
+   * @param {ReporterOptions} [options] See {@link ReporterOptions}.
    */
   constructor(signalFxClient, options) {
     super(options);
@@ -254,6 +268,7 @@ class SignalFxMetricsReporter extends Reporter {
    * @protected
    */
   _getValuesToProcessForHistogram(name, histogram) {
+    // TODO add full list of histogram metrics but enable filter
     const data = histogram.toJSON();
     const valuesToProcess = [];
     valuesToProcess.push({

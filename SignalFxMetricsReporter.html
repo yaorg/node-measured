@@ -34,7 +34,7 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-units.html">units</a></li>
+					<li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
 				</ul>
 			</li>
 			
@@ -115,7 +115,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="SignalFxMetricsReporter"><span class="type-signature"></span>new SignalFxMetricsReporter(signalFxClient, options)</h4>
+    <h4 class="name" id="SignalFxMetricsReporter"><span class="type-signature"></span>new SignalFxMetricsReporter(signalFxClient [, options])</h4>
     
     
 </dt>
@@ -141,6 +141,8 @@
 
         <th>Type</th>
 
+        
+        <th>Argument</th>
         
 
         
@@ -168,6 +170,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -191,6 +201,16 @@
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -239,8 +259,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporter/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html#sunlight-1-line-9">line 9</a>
+				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
+				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-9">line 9</a>
 			</li>
 		</ul>
 	</dd>
@@ -576,6 +596,173 @@
             
 <hr>
 <dt>
+    <h4 class="name" id="_getDimensions"><span class="type-signature">&lt;protected> </span>_getDimensions(metric)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>metric</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#MetricWrapper">MetricWrapper</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Wrapped Metric Object.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
+	<dd class="inherited-from">
+		<ul class="dummy">
+			<li>
+				<a href="Reporter.html#_getDimensions">Reporter#_getDimensions</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
+				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-144">line 144</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The left merged default dimensions with the metric specific dimensions</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
     <h4 class="name" id="_getValuesToProcessForCounter"><span class="type-signature">&lt;protected> </span>_getValuesToProcessForCounter(name, counter)</h4>
     
     
@@ -704,8 +891,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporter/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html#sunlight-1-line-151">line 151</a>
+				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
+				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-151">line 151</a>
 			</li>
 		</ul>
 	</dd>
@@ -890,8 +1077,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporter/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html#sunlight-1-line-133">line 133</a>
+				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
+				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-133">line 133</a>
 			</li>
 		</ul>
 	</dd>
@@ -1076,8 +1263,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporter/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html#sunlight-1-line-169">line 169</a>
+				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
+				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-169">line 169</a>
 			</li>
 		</ul>
 	</dd>
@@ -1262,8 +1449,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporter/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html#sunlight-1-line-118">line 118</a>
+				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
+				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-118">line 118</a>
 			</li>
 		</ul>
 	</dd>
@@ -1448,8 +1635,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporter/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html#sunlight-1-line-88">line 88</a>
+				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
+				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-88">line 88</a>
 			</li>
 		</ul>
 	</dd>
@@ -1634,8 +1821,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporter/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html#sunlight-1-line-53">line 53</a>
+				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
+				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-53">line 53</a>
 			</li>
 		</ul>
 	</dd>
@@ -1801,8 +1988,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporter/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporter_SignalFxMetricsReporter.js.html#sunlight-1-line-25">line 25</a>
+				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
+				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-25">line 25</a>
 			</li>
 		</ul>
 	</dd>

@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Module: units</title>
+	<title>Measured Module: measured-reporting</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -34,21 +34,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-units.html">units</a></li>
+					<li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
+					<li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li>
 				</ul>
 			</li>
 			
@@ -94,7 +87,7 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Module: units</h1>
+	<h1 class="page-title">Module: measured-reporting</h1>
 <section>
 
 <header>
@@ -106,7 +99,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Time units, as found in Java: <a href="http://download.oracle.com/javase/6/docs/api/java/util/concurrent/TimeUnit.html">http://download.oracle.com/javase/6/docs/api/java/util/concurrent/TimeUnit.html</a></p></div>
+            <div class="description"><p>The main measured module that is referenced when require('measured-reporting') is used.</p></div>
         
 
         
@@ -144,8 +137,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="util_units.js.html">util/units.js</a>,
-				 <a href="util_units.js.html#sunlight-1-line-9">line 9</a>
+				<a href="index.js.html">index.js</a>,
+				 <a href="index.js.html#sunlight-1-line-5">line 5</a>
 			</li>
 		</ul>
 	</dd>
@@ -157,13 +150,6 @@
 
 	
 </dl>
-
-
-        
-            <h3>Example</h3>
-            
-    <pre class="sunlight-highlight-javascript">const TimeUnit = require(&#x27;measured-core&#x27;).unit
-setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
 
 
         
@@ -186,16 +172,12 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
         <dl>
             
 <hr>
-<dt class="name" id=".DAYS">
-    <h4 id=".DAYS"><span class="type-signature">&lt;static> </span>DAYS<span class="type-signature"> :number</span></h4>
+<dt class="name" id=".inputValidators">
+    <h4 id=".inputValidators"><span class="type-signature">&lt;static> </span>inputValidators<span class="type-signature"> :inputValidators</span></h4>
 
     
 </dt>
 <dd>
-    
-    <div class="description">
-        <p>days in milliseconds</p>
-    </div>
     
 
     
@@ -203,7 +185,7 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
         <ul>
             <li>
                 
-<span class="param-type">number</span>
+<span class="param-type">inputValidators</span>
 
 
 
@@ -246,8 +228,8 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="util_units.js.html">util/units.js</a>,
-				 <a href="util_units.js.html#sunlight-1-line-51">line 51</a>
+				<a href="index.js.html">index.js</a>,
+				 <a href="index.js.html#sunlight-1-line-21">line 21</a>
 			</li>
 		</ul>
 	</dd>
@@ -267,16 +249,12 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
         
             
 <hr>
-<dt class="name" id=".HOURS">
-    <h4 id=".HOURS"><span class="type-signature">&lt;static> </span>HOURS<span class="type-signature"> :number</span></h4>
+<dt class="name" id=".Reporter">
+    <h4 id=".Reporter"><span class="type-signature">&lt;static> </span>Reporter<span class="type-signature"> :<a href="Reporter.html">Reporter</a></span></h4>
 
     
 </dt>
 <dd>
-    
-    <div class="description">
-        <p>hours in milliseconds</p>
-    </div>
     
 
     
@@ -284,7 +262,7 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
         <ul>
             <li>
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="Reporter.html">Reporter</a></span>
 
 
 
@@ -327,8 +305,8 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="util_units.js.html">util/units.js</a>,
-				 <a href="util_units.js.html#sunlight-1-line-46">line 46</a>
+				<a href="index.js.html">index.js</a>,
+				 <a href="index.js.html#sunlight-1-line-17">line 17</a>
 			</li>
 		</ul>
 	</dd>
@@ -348,16 +326,12 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
         
             
 <hr>
-<dt class="name" id=".MICROSECONDS">
-    <h4 id=".MICROSECONDS"><span class="type-signature">&lt;static> </span>MICROSECONDS<span class="type-signature"> :number</span></h4>
+<dt class="name" id=".SelfReportingMetricsRegistry">
+    <h4 id=".SelfReportingMetricsRegistry"><span class="type-signature">&lt;static> </span>SelfReportingMetricsRegistry<span class="type-signature"> :<a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></span></h4>
 
     
 </dt>
 <dd>
-    
-    <div class="description">
-        <p>microseconds in milliseconds</p>
-    </div>
     
 
     
@@ -365,7 +339,7 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
         <ul>
             <li>
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></span>
 
 
 
@@ -408,332 +382,8 @@ setTimeout(() =&gt; {}, 5 * TimeUnit.MINUTES)</pre>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="util_units.js.html">util/units.js</a>,
-				 <a href="util_units.js.html#sunlight-1-line-26">line 26</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id=".MILLISECONDS">
-    <h4 id=".MILLISECONDS"><span class="type-signature">&lt;static> </span>MILLISECONDS<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>milliseconds in milliseconds</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="util_units.js.html">util/units.js</a>,
-				 <a href="util_units.js.html#sunlight-1-line-31">line 31</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id=".MINUTES">
-    <h4 id=".MINUTES"><span class="type-signature">&lt;static> </span>MINUTES<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>minutes in milliseconds</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="util_units.js.html">util/units.js</a>,
-				 <a href="util_units.js.html#sunlight-1-line-41">line 41</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id=".NANOSECONDS">
-    <h4 id=".NANOSECONDS"><span class="type-signature">&lt;static> </span>NANOSECONDS<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>nanoseconds in milliseconds</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="util_units.js.html">util/units.js</a>,
-				 <a href="util_units.js.html#sunlight-1-line-21">line 21</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id=".SECONDS">
-    <h4 id=".SECONDS"><span class="type-signature">&lt;static> </span>SECONDS<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>seconds in milliseconds</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="util_units.js.html">util/units.js</a>,
-				 <a href="util_units.js.html#sunlight-1-line-36">line 36</a>
+				<a href="index.js.html">index.js</a>,
+				 <a href="index.js.html#sunlight-1-line-13">line 13</a>
 			</li>
 		</ul>
 	</dd>
