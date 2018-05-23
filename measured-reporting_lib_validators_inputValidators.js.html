@@ -100,9 +100,13 @@
     <article>
         <pre
             class="sunlight-highlight-javascript linenums">const Optional = require('optional-js');
+const { MetricTypes } = require('measured-core');
+
+const metricTypeValues = Object.values(MetricTypes);
 
 /**
- * This module contains various validators to validate publicly exposed input
+ * This module contains various validators to validate publicly exposed input.
+ *
  * @module inputValidators
  */
 module.exports = {
@@ -115,10 +119,8 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateGaugeOptions: (name, callback, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateMetricName(name);
+    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
     module.exports.validateNumberReturningCallback(callback);
-    module.exports.validateOptionalDimensions(dimensions);
-    module.exports.validateOptionalPublishingInterval(publishingIntervalInSeconds);
   },
 
   /**
@@ -129,9 +131,7 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateHistogramOptions: (name, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateMetricName(name);
-    module.exports.validateOptionalDimensions(dimensions);
-    module.exports.validateOptionalPublishingInterval(publishingIntervalInSeconds);
+    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -142,9 +142,7 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateCounterOptions: (name, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateMetricName(name);
-    module.exports.validateOptionalDimensions(dimensions);
-    module.exports.validateOptionalPublishingInterval(publishingIntervalInSeconds);
+    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -155,9 +153,7 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateTimerOptions: (name, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateMetricName(name);
-    module.exports.validateOptionalDimensions(dimensions);
-    module.exports.validateOptionalPublishingInterval(publishingIntervalInSeconds);
+    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -169,10 +165,8 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateRegisterOptions: (name, metric, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateMetricName(name);
-    // todo validate metric
-    module.exports.validateOptionalDimensions(dimensions);
-    module.exports.validateOptionalPublishingInterval(publishingIntervalInSeconds);
+    module.exports.validateMetric(metric);
+    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -183,6 +177,17 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateSettableGaugeOptions: (name, dimensions, publishingIntervalInSeconds) => {
+    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
+  },
+
+  /**
+   * Validates the options that are common amoung all create metric methods
+   *
+   * @param {string} name The metric name
+   * @param {Dimensions} dimensions The optional custom dimensions
+   * @param {number} publishingIntervalInSeconds the optional publishing interval
+   */
+  validateCommonMetericParameters: (name, dimensions, publishingIntervalInSeconds) => {
     module.exports.validateMetricName(name);
     module.exports.validateOptionalDimensions(dimensions);
     module.exports.validateOptionalPublishingInterval(publishingIntervalInSeconds);
@@ -196,7 +201,33 @@ module.exports = {
   validateMetricName: name => {
     const type = typeof name;
     if (type !== 'string') {
-      throw new Error(`options.name is a required option and must be of type string, actual type: ${type}`);
+      throw new TypeError(`options.name is a required option and must be of type string, actual type: ${type}`);
+    }
+  },
+
+  /**
+   * Validates that a metric implements the metric interface.
+   *
+   * @param {Metric} metric The object that is supposed to be a metric.
+   */
+  validateMetric: metric => {
+    if (!metric) {
+      throw new TypeError('The metric was undefined, when it was required');
+    }
+    if (typeof metric.toJSON !== 'function') {
+      throw new TypeError('Metrics must implement toJSON(), see the Metric interface in the docs.');
+    }
+    if (typeof metric.getType !== 'function') {
+      throw new TypeError('Metrics must implement getType(), see the Metric interface in the docs.');
+    }
+    const type = metric.getType();
+
+    if (!metricTypeValues.includes(type)) {
+      throw new TypeError(
+        `Metric#getType(), must return a type defined in MetricsTypes. Found: ${type}, Valid values: ${metricTypeValues.join(
+          ', '
+        )}`
+      );
     }
   },
 
@@ -208,12 +239,12 @@ module.exports = {
   validateNumberReturningCallback: callback => {
     const type = typeof callback;
     if (type !== 'function') {
-      throw new Error(`options.callback is a required option and must be function, actual type: ${type}`);
+      throw new TypeError(`options.callback is a required option and must be function, actual type: ${type}`);
     }
 
     const callbackType = typeof callback();
     if (callbackType !== 'number') {
-      throw new Error(`options.callback must return a number, actual return type: ${callbackType}`);
+      throw new TypeError(`options.callback must return a number, actual return type: ${callbackType}`);
     }
   },
 
@@ -225,33 +256,37 @@ module.exports = {
     Optional.ofNullable(dimensionsOptional).ifPresent(dimensions => {
       const type = typeof dimensions;
       if (type !== 'object') {
-        throw new Error(`options.dimensions should be an object, actual type: ${type}`);
+        throw new TypeError(`options.dimensions should be an object, actual type: ${type}`);
       }
+
+      if (Array.isArray(dimensions)) {
+        throw new TypeError('dimensions where detected to be an array, expected Object&lt;string, string>');
+      }
+
       Object.keys(dimensions).forEach(key => {
         const valueType = typeof dimensions[key];
         if (valueType !== 'string') {
-          throw new Error(`options.dimensions.${key} should be of type string, actual type: ${type}`);
+          throw new TypeError(`options.dimensions.${key} should be of type string, actual type: ${type}`);
         }
       });
     });
   },
 
   /**
-   * Validates an optional logger instance
+   * Validates that an optional logger instance at least has the methods we expect.
    * @param loggerOptional
    */
   validateOptionalLogger: loggerOptional => {
     Optional.ofNullable(loggerOptional).ifPresent(logger => {
       if (
-        typeof logger.trace !== 'function' ||
         typeof logger.debug !== 'function' ||
         typeof logger.info !== 'function' ||
         typeof logger.warn !== 'function' ||
         typeof logger.error !== 'function'
       ) {
-        throw new Error(
+        throw new TypeError(
           'The logger that was passed in does not support all required ' +
-            'logging methods, expected object to have functions trace, debug, info, warn, and error with ' +
+            'logging methods, expected object to have functions debug, info, warn, and error with ' +
             'method signatures (...msgs) => {}'
         );
       }
@@ -267,30 +302,53 @@ module.exports = {
     Optional.ofNullable(publishingIntervalInSecondsOptional).ifPresent(publishingIntervalInSeconds => {
       const type = typeof publishingIntervalInSeconds;
       if (type !== 'number') {
-        throw new Error(`options.publishingIntervalInSeconds must be of type number, actual type: ${type}`);
+        throw new TypeError(`options.publishingIntervalInSeconds must be of type number, actual type: ${type}`);
       }
     });
   },
 
+  /**
+   * Validates optional params for a Reporter
+   * @param {ReporterOptions} options The optional params
+   */
   validateReporterParameters: options => {
-    module.exports.validateOptionalDimensions(options.defaultDimensions);
-    module.exports.validateOptionalLogger(options.logger);
+    if (options) {
+      module.exports.validateOptionalDimensions(options.defaultDimensions);
+      module.exports.validateOptionalLogger(options.logger);
+    }
   },
 
   /**
    * Validates that a valid Reporter object has been supplied
+   *
+   * @param {Reporter} reporter
    */
   validateReporterInstance: reporter => {
-    // TODO implement
+    if (!reporter) {
+      throw new TypeError('The reporter was undefined, when it was required');
+    }
+    if (typeof reporter.setRegistry !== 'function') {
+      throw new TypeError(
+        'A reporter must implement setRegistry(registry), see the abstract Reporter class in the docs.'
+      );
+    }
+    if (typeof reporter.reportMetricOnInterval !== 'function') {
+      throw new TypeError(
+        'A reporter must implement reportMetricOnInterval(metricKey, intervalInSeconds), see the abstract Reporter class in the docs.'
+      );
+    }
   },
 
   /**
    * Validates the input parameters for a {@link SelfReportingMetricsRegistry}
-   * @param reporter
-   * @param logger
+   * @param {Reporter} reporter
+   * @param {SelfReportingMetricsRegistryOptions} [options]
    */
-  validateSelfReportingMetricsRegistryParameters: (reporter, logger) => {
-    // TODO implement
+  validateSelfReportingMetricsRegistryParameters: (reporter, options) => {
+    module.exports.validateReporterInstance(reporter);
+    if (options) {
+      module.exports.validateOptionalLogger(options.logger);
+    }
   }
 };
 </pre>

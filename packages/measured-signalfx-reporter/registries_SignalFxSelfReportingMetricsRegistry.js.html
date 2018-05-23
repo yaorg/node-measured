@@ -97,12 +97,15 @@ const { SelfReportingMetricsRegistry } = require('measured-reporting');
 const { validateTimerOptions } = require('measured-reporting').inputValidators;
 
 /**
- * A SignalFx Self Reporting Metrics Registry that disallows the use of meters as they waste DPM and accomplished using a counter.
+ * A SignalFx Self Reporting Metrics Registry that disallows the use of meters.
+ * Meters don't make sense to use with SignalFx because the rate aggregations can be done within SignalFx itself.
+ * Meters simply waste DPM (Datapoints per Minute).
+ *
  * @extends {SelfReportingMetricsRegistry}
  */
 class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry {
   /**
-   * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo with a NoOpMeter
+   * Creates a {@link Timer} or get the existing Timer for a given name and dimension combo with a NoOpMeter.
    *
    * @param {string} name The Metric name
    * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
@@ -125,7 +128,10 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
   }
 
   /**
-   * You should use counters and implements meter functionality in your Dashboard.
+   * Meters are not reported to SignalFx.
+   * Meters do not make sense to use with SignalFx because the same values can be calculated
+   * using simple counters and aggregations within SignalFx itself.
+   *
    * @param {string} name The Metric name
    * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
    * @param {number} publishingIntervalInSeconds a optional custom publishing interval

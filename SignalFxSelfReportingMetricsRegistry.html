@@ -103,7 +103,7 @@
         SignalFxSelfReportingMetricsRegistry
         </h2>
         
-            <div class="class-description"><p>A SignalFx Self Reporting Metrics Registry that disallows the use of meters as they waste DPM and accomplished using a counter.</p></div>
+            <div class="class-description"><p>A SignalFx Self Reporting Metrics Registry that disallows the use of meters.<br>Meters don't make sense to use with SignalFx because the rate aggregations can be done within SignalFx itself.<br>Meters simply waste DPM (Datapoints per Minute).</p></div>
         
     
 </header>
@@ -166,7 +166,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registries/SignalFxSelfReportingMetricsRegistry.js</a>,
-				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-9">line 9</a>
+				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-12">line 12</a>
 			</li>
 		</ul>
 	</dd>
@@ -1228,7 +1228,7 @@ registry.getOrCreateGauge(
 
     
     <div class="description">
-        <p>You should use counters and implements meter functionality in your Dashboard.</p>
+        <p>Meters are not reported to SignalFx.<br>Meters do not make sense to use with SignalFx because the same values can be calculated<br>using simple counters and aggregations within SignalFx itself.</p>
     </div>
     
 
@@ -1378,7 +1378,7 @@ registry.getOrCreateGauge(
 		<ul class="dummy">
 			<li>
 				<a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registries/SignalFxSelfReportingMetricsRegistry.js</a>,
-				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-40">line 40</a>
+				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-46">line 46</a>
 			</li>
 		</ul>
 	</dd>
@@ -1619,7 +1619,7 @@ registry.getOrCreateGauge(
 
     
     <div class="description">
-        <p>Creates a <a href="Timer.html">Timer</a> or get the existing Timer for a given name and dimension combo with a NoOpMeter</p>
+        <p>Creates a <a href="Timer.html">Timer</a> or get the existing Timer for a given name and dimension combo with a NoOpMeter.</p>
     </div>
     
 
@@ -1769,7 +1769,7 @@ registry.getOrCreateGauge(
 		<ul class="dummy">
 			<li>
 				<a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html">measured-signalfx-reporter/lib/registries/SignalFxSelfReportingMetricsRegistry.js</a>,
-				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-18">line 18</a>
+				 <a href="measured-signalfx-reporter_lib_registries_SignalFxSelfReportingMetricsRegistry.js.html#sunlight-1-line-21">line 21</a>
 			</li>
 		</ul>
 	</dd>

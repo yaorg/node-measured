@@ -170,13 +170,13 @@ class SignalFxMetricsReporter extends Reporter {
   }
 
   /**
-   * Maps Measured Metrics Object JSON outputs to there respective signal fx metrics using logic from
+   * Maps Measured Metrics Object JSON outputs to their respective signal fx metrics using logic from
    * com.signalfx.codahale.reporter.AggregateMetricSenderSessionWrapper in the java lib to derive naming
    *
    * @param {string} name The registered metric base name
    * @param {Metric} metric The metric.
    * @return {MetricValueTypeWrapper[]} an array of MetricValueTypeWrapper that can be used to
-   * build the sig fx data point request
+   * build the SignalFx data point request
    * @protected
    */
   _getValuesToProcessForType(name, metric) {
@@ -192,7 +192,8 @@ class SignalFxMetricsReporter extends Reporter {
         return this._getValuesToProcessForHistogram(name, metric);
       case MetricTypes.METER:
         this._log.warn(
-          'Meters are not implemented in the signal fx reporter as you can use a counter and reduce your DPM'
+          'Meters are not reported to SignalFx. Meters do not make sense to use with SignalFx because the same values ' +
+            'can be calculated using simple counters and aggregations within SignalFx itself.'
         );
         return [];
       default:
@@ -217,7 +218,7 @@ class SignalFxMetricsReporter extends Reporter {
   }
 
   /**
-   * Maps and Filters values from a Gauge to a set of metrics to report to SigFx.
+   * Maps values from a Gauge to a set of metrics to report to SigFx.
    *
    * @param {string} name The registry name
    * @param {Gauge} gauge The Gauge
@@ -235,7 +236,7 @@ class SignalFxMetricsReporter extends Reporter {
   }
 
   /**
-   * Maps and Filters values from a Counter to a set of metrics to report to SigFx.
+   * Maps values from a Counter to a set of metrics to report to SigFx.
    *
    * @param {string} name The registry name
    * @param {Counter} counter The data from the measure metric object
