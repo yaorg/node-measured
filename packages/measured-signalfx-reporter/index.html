@@ -108,15 +108,13 @@
 
 
     <section class="readme-section">
-        <article><h1>Measured SignalFx Reporter</h1><p>This package ties together <a href="../measured-core">measured-core</a> and <a href="../measured-reporting">measured-reporting</a> to create a dimensional aware self reporting metrics registry that reports metrics to SignalFx.</p>
+        <article><h1>Measured SignalFx Reporter</h1><p>This package ties together <a href="../measured-core">measured-core</a> and <a href="../measured-reporting">measured-reporting</a> to create a dimensional aware self reporting metrics registry that reports metrics to <a href="https://signalfx.com/">SignalFx</a>.</p>
 <h2>Install</h2><pre class="prettyprint source"><code>npm install measured-signalfx-reporter</code></pre><h2>What is in this package</h2><h3><a href="https://yaorg.github.io/node-measured/SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></h3><p>A SignalFx specific implementation of the <a href="https://yaorg.github.io/node-measured/Reporter.html">Reporter Abstract Class</a>.</p>
-<p>Please note that this implementation ignores Meters and is opinionated that you should do meter logic with counters and utilize the built in capabilities of SignalFx to get rates from counted events. This lowers your DPM usage and is how SignalFx charges you, thus lowering your bill.</p>
-<p>If presented with a valid argument, I am open to changing this.</p>
 <h3><a href="https://yaorg.github.io/node-measured/SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></h3><p>Extends <a href="https://yaorg.github.io/node-measured/SelfReportingMetricsRegistry.html">Self Reporting Metrics Registry</a> but overrides methods that generate Meters to use the NoOpMeter.</p>
-<p>Again this is opinionated that you shouldn't use Meters with SignalFx, because you can use a counter and get the same results at 1/6 the DPM usage.</p>
-<p>If presented with a valid argument, I am open to changing this.</p>
+<h3>NoOpMeters</h3><p>Please note that this package ignores Meters by default. Meters do not make sense to use with SignalFx because the same<br>values can be calculated using simple counters and the aggregation functions available within SignalFx itself.<br>Additionally, this saves you money because SignalFx charges based on your DPM (Datapoints per Minute) consumption.</p>
+<p>This can be changed if anyone has a good argument for using Meters.  Please file an issue.</p>
 <h3>Usage</h3><p>See the full end to end example here: <a href="https://yaorg.github.io/node-measured/packages/measured-signalfx-reporter/tutorial-SignalFx%20Express%20Full%20End%20to%20End%20Example.html">SignalFx Express Full End to End Example</a></p>
-<h3>Dev</h3><p>There is a user acceptance test server to test this library end to end to signalfx</p>
+<h3>Dev</h3><p>There is a user acceptance test server to test this library end-to-end with <a href="https://signalfx.com/">SignalFx</a>.</p>
 <pre class="prettyprint source lang-bash"><code>SIGNALFX_API_KEY=xxxxx yarn uat:server</code></pre></article>
     </section>
 
