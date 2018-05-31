@@ -12,6 +12,7 @@ const ExponentiallyMovingWeightedAverage = require('./util/ExponentiallyMovingWe
 const Stopwatch = require('./util/Stopwatch');
 const units = require('./util/units');
 const { MetricTypes } = require('./metrics/Metric');
+const metricValidators = require('./validators/metricValidators');
 
 /**
  * The main measured-core module that is referenced when require('measured-core') is used.
@@ -101,6 +102,12 @@ module.exports = {
    * @type {units}
    */
   units,
+
+  /**
+   * See {@link module:metricValidators}
+   * @type {Object.<string, function>}
+   */
+  metricValidators,
 
   /**
    * Creates a named collection. See {@link Collection} for more details

@@ -237,8 +237,8 @@ class SelfReportingMetricsRegistry {
     // shutdown any metrics that have an end method
     this._registry.allKeys().forEach(key => {
       const metricWrapper = this._registry.getMetricWrapperByKey(key);
-      if (metricWrapper.metric.end) {
-        metricWrapper.metric.end();
+      if (metricWrapper.metricImpl.end) {
+        metricWrapper.metricImpl.end();
       }
     });
   }

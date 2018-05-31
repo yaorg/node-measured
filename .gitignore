@@ -68,3 +68,5 @@ typings/
 **build/
 
 *.un~
+
+**/.DS_Store
