@@ -18,6 +18,11 @@ Measured is heavily inspired by Coda Hale, Yammer Inc's [Dropwizard Metrics Libr
 **The registry and reporting library that has the classes needed to create a dimension aware, self reporting metrics registry.**
 [![npm](https://img.shields.io/npm/v/measured-reporting.svg)](https://www.npmjs.com/package/measured-reporting) 
 
+### [Measured Node Metrics](packages/measured-node-metrics)
+
+**Various metrics generators and http framework middlewares that can be used with a self reporting metrics registry to easily instrument metrics for a node app.**
+[![npm](https://img.shields.io/npm/v/measured-node-metrics.svg)](https://www.npmjs.com/package/measured-node-metrics) 
+
 ### [Measured SignalFx Reporter](packages/measured-signalfx-reporter)
 
 **A reporter that can be used with measured-reporting to send metrics to SignalFx.**

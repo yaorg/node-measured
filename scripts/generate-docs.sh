@@ -51,3 +51,12 @@ jsdoc --recurse --configure ${ROOT_DIR}/.jsdoc.json \
 --readme ${ROOT_DIR}/packages/measured-signalfx-reporter/README.md \
 --destination build/docs/packages/measured-signalfx-reporter/ \
 ${ROOT_DIR}/packages/measured-signalfx-reporter/lib/
+
+# Create the docs for measured-node-metrics
+export PACKAGE_NAME=measured-node-metrics
+jsdoc --recurse --configure ${ROOT_DIR}/.jsdoc.json \
+--tutorials ${ROOT_DIR}/tutorials \
+--template ${DOCSTRAP_PATH} \
+--readme ${ROOT_DIR}/packages/measured-node-metrics/README.md \
+--destination build/docs/packages/measured-node-metrics/ \
+${ROOT_DIR}/packages/measured-node-metrics/lib/
