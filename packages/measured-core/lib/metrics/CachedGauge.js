@@ -7,6 +7,20 @@ const TimeUnits = require('../util/units');
  *
  * toJSON() will return the currently cached value.
  *
+ * @example
+ * const cpuAverageCachedGauge = new CachedGauge(() => {
+ *     return new Promise(resolve => {
+ *       //Grab first CPU Measure
+ *       const startMeasure = cpuAverage();
+ *       setTimeout(() => {
+ *         //Grab second Measure
+ *         const endMeasure = cpuAverage();
+ *         const percentageCPU = calculateCpuUsagePercent(startMeasure, endMeasure);
+ *         resolve(percentageCPU);
+ *       }, sampleTimeInSeconds);
+ *     });
+ *   }, updateIntervalInSeconds);
+ *
  * @implements {Metric}
  */
 class CachedGauge {
