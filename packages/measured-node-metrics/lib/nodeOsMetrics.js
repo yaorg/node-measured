@@ -1,4 +1,5 @@
-const { Gauge } = require('measured-core');
+const { Gauge, CachedGauge } = require('measured-core');
+const { cpuAverage, calculateCpuUsagePercent } = require('./utils/CpuUtils');
 const os = require('os');
 
 /**
@@ -52,7 +53,8 @@ const nodeOsMetrics = {
 
   /**
    * Gauge to track how long the os has been running.
-   *
+   *\
+   *]=-
    * See {@link https://nodejs.org/api/os.html#os_os_uptime} for more information.
    * @return {Gauge}
    */
@@ -61,6 +63,33 @@ const nodeOsMetrics = {
       // The os.uptime() method returns the system uptime in number of seconds.
       return os.uptime();
     });
+  },
+
+  /**
+   * Creates an interval and a settable gauge that calculates the the average cpu usage across all cores.
+   *
+   * The way this interval / gauge works is that every updateIntervalInSeconds a callback will execute that calculates
+   * asynchronously over sampleTimeInSeconds the cpu usage average and then updates the settable gauge.
+   *
+   * @param updateIntervalInSeconds
+   * @param sampleTimeInSeconds
+   */
+  'node.os.cpu.all-cores-avg': (updateIntervalInSeconds, sampleTimeInSeconds) => {
+    updateIntervalInSeconds = updateIntervalInSeconds || 30;
+    sampleTimeInSeconds = sampleTimeInSeconds || 5;
+
+    return new CachedGauge(() => {
+      return new Promise(resolve => {
+        //Grab first CPU Measure
+        const startMeasure = cpuAverage();
+        setTimeout(() => {
+          //Grab second Measure
+          const endMeasure = cpuAverage();
+          const percentageCPU = calculateCpuUsagePercent(startMeasure, endMeasure);
+          resolve(percentageCPU);
+        }, sampleTimeInSeconds);
+      });
+    }, updateIntervalInSeconds);
   }
 };
 

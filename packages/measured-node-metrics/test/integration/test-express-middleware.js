@@ -15,7 +15,7 @@ describe('express-middleware', () => {
   let app;
   let httpServer;
   beforeEach(() => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       reporter = new TestReporter();
       registry = new Registry(reporter);
       middleware = createExpressMiddleware(registry, 1);
@@ -24,7 +24,7 @@ describe('express-middleware', () => {
 
       app.get('/hello', (req, res) => res.send('Hello World!'));
       app.get('/users/:userId', (req, res) => {
-        res.send(`id: ${req.params.userId}`)
+        res.send(`id: ${req.params.userId}`);
       });
 
       findFreePort(3000).then(portArr => {
@@ -52,7 +52,7 @@ describe('express-middleware', () => {
     const name = metricWrapper.name;
     const dimensions = metricWrapper.dimensions;
     assert.equal(name, 'request');
-    assert.deepEqual(dimensions, {statusCode: '200', method: 'GET', path: '/hello'})
+    assert.deepEqual(dimensions, { statusCode: '200', method: 'GET', path: '/hello' });
   });
 
   it('does not create runaway n metrics in the registry for n ids in the path', async () => {
@@ -60,24 +60,26 @@ describe('express-middleware', () => {
     await callLocalHost(port, 'users/bar');
     await callLocalHost(port, 'users/bop');
     assert.equal(registry._registry.allKeys().length, 1, 'There should only be one metric for /users and GET');
-  })
+  });
 });
 
 const callLocalHost = (port, endpoint) => {
-  return new Promise(((resolve, reject) => {
-    http.get(`http://127.0.0.1:${port}/${endpoint}`, (resp) => {
-      let data = '';
-      resp.on('data', (chunk) => {
-        data += chunk;
-      });
+  return new Promise((resolve, reject) => {
+    http
+      .get(`http://127.0.0.1:${port}/${endpoint}`, resp => {
+        let data = '';
+        resp.on('data', chunk => {
+          data += chunk;
+        });
 
-      resp.on('end', () => {
-        console.log(JSON.stringify(data));
-        resolve();
+        resp.on('end', () => {
+          console.log(JSON.stringify(data));
+          resolve();
+        });
       })
-    }).on('error', (err) => {
-      console.log('Error: ', JSON.stringify(err));
-      reject();
-    })
-  }));
+      .on('error', err => {
+        console.log('Error: ', JSON.stringify(err));
+        reject();
+      });
+  });
 };

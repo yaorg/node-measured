@@ -20,11 +20,15 @@ describe('nodeOsMetrics', () => {
       const value = metric.toJSON();
       const type = metric.getType();
       if ([MetricTypes.COUNTER, MetricTypes.GAUGE].includes(type)) {
-        assert(typeof value === 'number')
+        assert(typeof value === 'number');
       } else {
-        assert(typeof value === 'object')
+        assert(typeof value === 'object');
       }
-    })
+
+      if (metric.end) {
+        metric.end();
+      }
+    });
   });
 });
 

@@ -2,6 +2,7 @@ const Collection = require('./Collection');
 const Counter = require('./metrics/Counter');
 const Gauge = require('./metrics/Gauge');
 const SettableGauge = require('./metrics/SettableGauge');
+const CachedGauge = require('./metrics/CachedGauge');
 const Histogram = require('./metrics/Histogram');
 const Meter = require('./metrics/Meter');
 const NoOpMeter = require('./metrics/NoOpMeter');
@@ -42,6 +43,12 @@ module.exports = {
    * @type {SettableGauge}
    */
   SettableGauge,
+
+  /**
+   * See {@link CachedGauge}
+   * @type {CachedGauge}
+   */
+  CachedGauge,
 
   /**
    * See {@link Histogram}
@@ -102,6 +109,12 @@ module.exports = {
    * @type {units}
    */
   units,
+
+  /**
+   * See {@link units}
+   * @type {units}
+   */
+  TimeUnits: units,
 
   /**
    * See {@link module:metricValidators}

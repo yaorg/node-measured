@@ -2,7 +2,7 @@
 
 Various metrics generators and http framework middlewares that can be used with a self reporting metrics registry to easily instrument metrics for a node app.
 
-[![npm](https://img.shields.io/npm/v/measured-reporting.svg)](https://www.npmjs.com/package/measured-node-metrics) 
+[![npm](https://img.shields.io/npm/v/measured-node-metrics.svg)](https://www.npmjs.com/package/measured-node-metrics) 
 
 ## Install
 

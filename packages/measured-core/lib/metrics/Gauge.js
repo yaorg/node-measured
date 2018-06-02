@@ -18,7 +18,6 @@ class Gauge {
   }
 
   /**
-   * This is sync for now, but maybe async gauges would be useful as well?
    * @return {number} Gauges directly return the value from the callback which should be a number.
    */
   toJSON() {
