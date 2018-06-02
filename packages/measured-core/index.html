@@ -120,6 +120,7 @@
 <h2>Install</h2><pre class="prettyprint source"><code>npm install measured-core</code></pre><h2>What is in this package</h2><h3>Metric Implemenations</h3><p>The core library has the following metrics classes:</p>
 <h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Gauge.html">Gauge</a></h4><p>Values that can be read instantly via a supplied call back.</p>
 <h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/SettableGauge.html">SettableGauge</a></h4><p>Just like a Gauge but its value is set directly rather than supplied by a callback.</p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/CachedGauge.html">CachedGauge</a></h4><p>Like a mix of the regular and settable Gauge it takes a call back that returns a promise that will resolve the cached value and an interval that it should call the callback on to update its cached value.</p>
 <h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Counter.html">Counter</a></h4><p>Counters are things that increment or decrement.</p>
 <h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Timer.html">Timer</a></h4><p>Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.</p>
 <h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Histogram.html">Histogram</a></h4><p>Keeps a reservoir of statistically relevant values to explore their distribution.</p>
