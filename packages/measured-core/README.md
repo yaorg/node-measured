@@ -22,6 +22,9 @@ Values that can be read instantly via a supplied call back.
 #### [SettableGauge](https://yaorg.github.io/node-measured/packages/measured-core/SettableGauge.html)
 Just like a Gauge but its value is set directly rather than supplied by a callback.
 
+#### [CachedGauge](https://yaorg.github.io/node-measured/packages/measured-core/CachedGauge.html)
+Like a mix of the regular and settable Gauge it takes a call back that returns a promise that will resolve the cached value and an interval that it should call the callback on to update its cached value.
+
 #### [Counter](https://yaorg.github.io/node-measured/packages/measured-core/Counter.html)
 Counters are things that increment or decrement.
 
