@@ -300,7 +300,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="metrics_CachedGauge.js.html">metrics/CachedGauge.js</a>,
-				 <a href="metrics_CachedGauge.js.html#sunlight-1-line-12">line 12</a>
+				 <a href="metrics_CachedGauge.js.html#sunlight-1-line-26">line 26</a>
 			</li>
 		</ul>
 	</dd>
@@ -325,6 +325,23 @@
     
 
     
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">const cpuAverageCachedGauge = new CachedGauge(() =&gt; {
+    return new Promise(resolve =&gt; {
+      //Grab first CPU Measure
+      const startMeasure = cpuAverage();
+      setTimeout(() =&gt; {
+        //Grab second Measure
+        const endMeasure = cpuAverage();
+        const percentageCPU = calculateCpuUsagePercent(startMeasure, endMeasure);
+        resolve(percentageCPU);
+      }, sampleTimeInSeconds);
+    });
+  }, updateIntervalInSeconds);</pre>
+
 
     
 </dd>
@@ -406,7 +423,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="metrics_CachedGauge.js.html">metrics/CachedGauge.js</a>,
-				 <a href="metrics_CachedGauge.js.html#sunlight-1-line-59">line 59</a>
+				 <a href="metrics_CachedGauge.js.html#sunlight-1-line-73">line 73</a>
 			</li>
 		</ul>
 	</dd>
@@ -501,7 +518,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="metrics_CachedGauge.js.html">metrics/CachedGauge.js</a>,
-				 <a href="metrics_CachedGauge.js.html#sunlight-1-line-52">line 52</a>
+				 <a href="metrics_CachedGauge.js.html#sunlight-1-line-66">line 66</a>
 			</li>
 		</ul>
 	</dd>
@@ -616,7 +633,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="metrics_CachedGauge.js.html">metrics/CachedGauge.js</a>,
-				 <a href="metrics_CachedGauge.js.html#sunlight-1-line-44">line 44</a>
+				 <a href="metrics_CachedGauge.js.html#sunlight-1-line-58">line 58</a>
 			</li>
 		</ul>
 	</dd>
