@@ -34,14 +34,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
+					<li><a href="module-CpuUtils.html">CpuUtils</a></li><li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-node-metrics.html">measured-node-metrics</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-metricValidators.html">metricValidators</a></li><li><a href="module-node-http-request-metrics.html">node-http-request-metrics</a></li><li><a href="module-node-os-metrics.html">node-os-metrics</a></li><li><a href="module-node-process-metrics.html">node-process-metrics</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
 				</ul>
 			</li>
 			
@@ -62,7 +62,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html">Global</a></li>
+					<li><a href="global.html#DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#nodeOsMetrics">nodeOsMetrics</a></li><li><a href="global.html#nodeProcessMetrics">nodeProcessMetrics</a></li>
 				</ul>
 			</li>
 			
@@ -145,7 +145,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-16">line 16</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-18">line 18</a>
 			</li>
 		</ul>
 	</dd>
@@ -240,7 +240,88 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-73">line 73</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-81">line 81</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".CachedGauge">
+    <h4 id=".CachedGauge"><span class="type-signature">&lt;static> </span>CachedGauge<span class="type-signature"> :<a href="CachedGauge.html">CachedGauge</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>See <a href="CachedGauge.html">CachedGauge</a></p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="CachedGauge.html">CachedGauge</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-51">line 51</a>
 			</li>
 		</ul>
 	</dd>
@@ -321,7 +402,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-25">line 25</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-27">line 27</a>
 			</li>
 		</ul>
 	</dd>
@@ -402,7 +483,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-31">line 31</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-33">line 33</a>
 			</li>
 		</ul>
 	</dd>
@@ -483,7 +564,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-79">line 79</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-87">line 87</a>
 			</li>
 		</ul>
 	</dd>
@@ -564,7 +645,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-85">line 85</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-93">line 93</a>
 			</li>
 		</ul>
 	</dd>
@@ -645,7 +726,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-37">line 37</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-39">line 39</a>
 			</li>
 		</ul>
 	</dd>
@@ -726,7 +807,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-49">line 49</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-57">line 57</a>
 			</li>
 		</ul>
 	</dd>
@@ -807,7 +888,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-55">line 55</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-63">line 63</a>
 			</li>
 		</ul>
 	</dd>
@@ -888,7 +969,88 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-97">line 97</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-105">line 105</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".metricValidators">
+    <h4 id=".metricValidators"><span class="type-signature">&lt;static> </span>metricValidators<span class="type-signature"> :Object.&lt;string, function()></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>See <a href="module-metricValidators.html">module:metricValidators</a></p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object.&lt;string, function()></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-123">line 123</a>
 			</li>
 		</ul>
 	</dd>
@@ -969,7 +1131,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-61">line 61</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-69">line 69</a>
 			</li>
 		</ul>
 	</dd>
@@ -1050,7 +1212,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-43">line 43</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-45">line 45</a>
 			</li>
 		</ul>
 	</dd>
@@ -1131,7 +1293,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-91">line 91</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-99">line 99</a>
 			</li>
 		</ul>
 	</dd>
@@ -1212,7 +1374,88 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-67">line 67</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-75">line 75</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".TimeUnits">
+    <h4 id=".TimeUnits"><span class="type-signature">&lt;static> </span>TimeUnits<span class="type-signature"> :units</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>See units</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">units</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-117">line 117</a>
 			</li>
 		</ul>
 	</dd>
@@ -1293,7 +1536,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-103">line 103</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-111">line 111</a>
 			</li>
 		</ul>
 	</dd>
@@ -1419,7 +1662,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="measured-core_lib_index.js.html">measured-core/lib/index.js</a>,
-				 <a href="measured-core_lib_index.js.html#sunlight-1-line-111">line 111</a>
+				 <a href="measured-core_lib_index.js.html#sunlight-1-line-131">line 131</a>
 			</li>
 		</ul>
 	</dd>
@@ -1522,7 +1765,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Wed May 23rd 2018
+		on Sat Jun 2nd 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

@@ -34,14 +34,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
+					<li><a href="module-CpuUtils.html">CpuUtils</a></li><li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-node-metrics.html">measured-node-metrics</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-metricValidators.html">metricValidators</a></li><li><a href="module-node-http-request-metrics.html">node-http-request-metrics</a></li><li><a href="module-node-os-metrics.html">node-os-metrics</a></li><li><a href="module-node-process-metrics.html">node-process-metrics</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
 				</ul>
 			</li>
 			
@@ -62,7 +62,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html">Global</a></li>
+					<li><a href="global.html#DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#nodeOsMetrics">nodeOsMetrics</a></li><li><a href="global.html#nodeProcessMetrics">nodeProcessMetrics</a></li>
 				</ul>
 			</li>
 			
@@ -107,7 +107,7 @@
 const signalfx = require('signalfx');
 const express = require('express');
 const { SignalFxMetricsReporter, SignalFxSelfReportingMetricsRegistry } = require('measured-signalfx-reporter');
-const { Stopwatch } = require('measured-core');
+const { createProcessMetrics, createOSMetrics, createExpressMiddleware } = require('measured-node-metrics');
 const libraryMetadata = require('./package'); // get metadata from package.json
 
 const library = libraryMetadata.name;
@@ -162,128 +162,12 @@ const signalFxReporter = new SignalFxMetricsReporter(signalFxClient, {
 // Create the self reporting metrics registry with the signal fx reporter
 const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter, { logLevel: 'debug' });
 
-// Create a gauge to track the 1 minute load average from the Node OS API.
-metricsRegistry.getOrCreateGauge(
-  'os-1m-load-average',
-  () => {
-    // os.loadavg returns an array [1, 5, 15] mins intervals
-    return os.loadavg()[0];
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// Create a gauge to track the amount of free memory for the system from the Node OS API.
-metricsRegistry.getOrCreateGauge(
-  'os-free-mem-bytes',
-  () => {
-    return os.freemem();
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// Create a gauge to track the amount of memory used for the system from the Node OS API.
-metricsRegistry.getOrCreateGauge(
-  'os-total-mem-bytes',
-  () => {
-    return os.totalmem();
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_memoryusage
-metricsRegistry.getOrCreateGauge(
-  'process-memory-rss',
-  () => {
-    return process.memoryUsage().rss;
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_memoryusage
-metricsRegistry.getOrCreateGauge(
-  'process-memory-heap-total',
-  () => {
-    return process.memoryUsage().heapTotal;
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_memoryusage
-metricsRegistry.getOrCreateGauge(
-  'process-memory-heap-used',
-  () => {
-    return process.memoryUsage().heapUsed;
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_memoryusage
-metricsRegistry.getOrCreateGauge(
-  'process-memory-external',
-  () => {
-    const mem = process.memoryUsage();
-    return mem.hasOwnProperty('external') ? mem.external : 0;
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_uptime
-metricsRegistry.getOrCreateGauge(
-  'process-uptime-seconds',
-  () => {
-    return Math.floor(process.uptime());
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// Now that we have some base system and process metrics wired up,
-// lets wire up an express middleware that will track request count, latency statics and give us all this
-// information filterable by http method, response status code and URI path.
-
-/**
- * This middleware is a little interesting because we need to track the time elapsed before we know the status code dimension.
- * So we will create the Stopwatch manually rather that using the API available on the Timer object itself, see api docs for more info.
- *
- * @param metricsRegistry the self reporting metrics registry
- * @return {Function} Express Middleware
- */
-const createExpressMiddleware = metricsRegistry => {
-  return (req, res, next) => {
-    const stopwatch = new Stopwatch();
-
-    req.on('end', () => {
-      const customDimensions = {
-        statusCode: `${res.statusCode}`,
-        path: req.route ? req.route.path : '_unknown',
-        method: req.method
-      };
-
-      // create the timer for the request count/latency histogram
-      const requestTimer = metricsRegistry.getOrCreateTimer(
-        'request',
-        customDimensions,
-        REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS
-      );
-
-      // stop the request latency counter
-      const time = stopwatch.end();
-      requestTimer.update(time);
-    });
-    next();
-  };
-};
+createOSMetrics(metricsRegistry, {}, PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS);
+createProcessMetrics(metricsRegistry, {}, PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS);
 
 const app = express();
 // wire up the metrics middleware
-app.use(createExpressMiddleware(metricsRegistry));
+app.use(createExpressMiddleware(metricsRegistry, REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS));
 
 app.get('/hello', (req, res) => {
   res.send('hello world');
@@ -335,7 +219,7 @@ app.listen(8080, () => log.info('Example app listening on port 8080!'));</code><
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Wed May 23rd 2018
+		on Sat Jun 2nd 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
