@@ -66,13 +66,11 @@ const nodeOsMetrics = {
   },
 
   /**
-   * Creates an interval and a settable gauge that calculates the the average cpu usage across all cores.
+   * Creates a {@link CachedGauge} that will self update every updateIntervalInSeconds and sample the
+   * cpu usage across all cores for sampleTimeInSeconds.
    *
-   * The way this interval / gauge works is that every updateIntervalInSeconds a callback will execute that calculates
-   * asynchronously over sampleTimeInSeconds the cpu usage average and then updates the settable gauge.
-   *
-   * @param updateIntervalInSeconds
-   * @param sampleTimeInSeconds
+   * @param {number} [updateIntervalInSeconds] How often to update and cache the cpu usage average, defaults to 30 seconds.
+   * @param {number} [sampleTimeInSeconds] How long to sample the cpu usage over, defaults to 5 seconds.
    */
   'node.os.cpu.all-cores-avg': (updateIntervalInSeconds, sampleTimeInSeconds) => {
     updateIntervalInSeconds = updateIntervalInSeconds || 30;
