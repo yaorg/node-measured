@@ -2,6 +2,7 @@ const Collection = require('./Collection');
 const Counter = require('./metrics/Counter');
 const Gauge = require('./metrics/Gauge');
 const SettableGauge = require('./metrics/SettableGauge');
+const CachedGauge = require('./metrics/CachedGauge');
 const Histogram = require('./metrics/Histogram');
 const Meter = require('./metrics/Meter');
 const NoOpMeter = require('./metrics/NoOpMeter');
@@ -12,6 +13,7 @@ const ExponentiallyMovingWeightedAverage = require('./util/ExponentiallyMovingWe
 const Stopwatch = require('./util/Stopwatch');
 const units = require('./util/units');
 const { MetricTypes } = require('./metrics/Metric');
+const metricValidators = require('./validators/metricValidators');
 
 /**
  * The main measured-core module that is referenced when require('measured-core') is used.
@@ -41,6 +43,12 @@ module.exports = {
    * @type {SettableGauge}
    */
   SettableGauge,
+
+  /**
+   * See {@link CachedGauge}
+   * @type {CachedGauge}
+   */
+  CachedGauge,
 
   /**
    * See {@link Histogram}
@@ -101,6 +109,18 @@ module.exports = {
    * @type {units}
    */
   units,
+
+  /**
+   * See {@link units}
+   * @type {units}
+   */
+  TimeUnits: units,
+
+  /**
+   * See {@link module:metricValidators}
+   * @type {Object.<string, function>}
+   */
+  metricValidators,
 
   /**
    * Creates a named collection. See {@link Collection} for more details

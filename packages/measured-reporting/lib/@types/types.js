@@ -5,7 +5,7 @@
  * @typedef MetricWrapper
  * @type {Object}
  * @property {string} name The supplied name of the Metric
- * @property {Metric} metric The {@link Metric} object
+ * @property {Metric} metricImpl The {@link Metric} object
  * @property {Dimensions} dimensions The {@link Dimensions} for the given {@link Metric}
  */
 

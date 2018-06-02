@@ -8,7 +8,7 @@ const { EventEmitter } = require('events');
 class Stopwatch extends EventEmitter {
   /**
    * Creates a started Stopwatch
-   * @param {StopwatchProperties} options See {@link StopwatchProperties}
+   * @param {StopwatchProperties} [options] See {@link StopwatchProperties}
    */
   constructor(options) {
     super();
