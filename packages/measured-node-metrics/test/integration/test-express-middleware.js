@@ -42,16 +42,16 @@ describe('express-middleware', () => {
     registry.shutdown();
   });
 
-  it('creates a single timer that has 1 count for request, when an http call is made once', async () => {
+  it('creates a single timer that has 1 count for requests, when an http call is made once', async () => {
     await callLocalHost(port, 'hello');
 
     const registeredKeys = registry._registry.allKeys();
     assert(registeredKeys.length === 1);
-    assert.equal(registeredKeys[0], 'request-GET-/hello-200');
-    const metricWrapper = registry._registry.getMetricWrapperByKey('request-GET-/hello-200');
+    assert.equal(registeredKeys[0], 'requests-GET-/hello-200');
+    const metricWrapper = registry._registry.getMetricWrapperByKey('requests-GET-/hello-200');
     const name = metricWrapper.name;
     const dimensions = metricWrapper.dimensions;
-    assert.equal(name, 'request');
+    assert.equal(name, 'requests');
     assert.deepEqual(dimensions, { statusCode: '200', method: 'GET', path: '/hello' });
   });
 
