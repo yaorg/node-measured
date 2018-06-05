@@ -16,8 +16,21 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateGaugeOptions: (name, callback, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
+    module.exports.validateCommonMetricParameters(name, dimensions, publishingIntervalInSeconds);
     module.exports.validateNumberReturningCallback(callback);
+  },
+
+  /**
+   * Validates @{link Gauge} options.
+   *
+   * @param {string} name The metric name
+   * @param {function} callback The callback for the CachedGauge
+   * @param {Dimensions} dimensions The optional custom dimensions
+   * @param {number} publishingIntervalInSeconds the optional publishing interval
+   */
+  validateCachedGaugeOptions: (name, callback, dimensions, publishingIntervalInSeconds) => {
+    module.exports.validateCommonMetricParameters(name, dimensions, publishingIntervalInSeconds);
+    // Should we validate the promise call back, it may be expensive or produce a race condition in some use-cases.
   },
 
   /**
@@ -28,7 +41,7 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateHistogramOptions: (name, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
+    module.exports.validateCommonMetricParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -39,7 +52,7 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateCounterOptions: (name, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
+    module.exports.validateCommonMetricParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -50,7 +63,7 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateTimerOptions: (name, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
+    module.exports.validateCommonMetricParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -63,7 +76,7 @@ module.exports = {
    */
   validateRegisterOptions: (name, metric, dimensions, publishingIntervalInSeconds) => {
     module.exports.validateMetric(metric);
-    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
+    module.exports.validateCommonMetricParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -74,7 +87,7 @@ module.exports = {
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
   validateSettableGaugeOptions: (name, dimensions, publishingIntervalInSeconds) => {
-    module.exports.validateCommonMetericParameters(name, dimensions, publishingIntervalInSeconds);
+    module.exports.validateCommonMetricParameters(name, dimensions, publishingIntervalInSeconds);
   },
 
   /**
@@ -84,7 +97,7 @@ module.exports = {
    * @param {Dimensions} dimensions The optional custom dimensions
    * @param {number} publishingIntervalInSeconds the optional publishing interval
    */
-  validateCommonMetericParameters: (name, dimensions, publishingIntervalInSeconds) => {
+  validateCommonMetricParameters: (name, dimensions, publishingIntervalInSeconds) => {
     module.exports.validateMetricName(name);
     module.exports.validateOptionalDimensions(dimensions);
     module.exports.validateOptionalPublishingInterval(publishingIntervalInSeconds);
