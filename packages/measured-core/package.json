@@ -1,7 +1,7 @@
 {
   "name": "measured-core",
   "description": "A Node library for measuring and reporting application-level metrics.",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "homepage": "https://yaorg.github.io/node-measured/",
   "engines": {
     "node": ">= 5.12"
