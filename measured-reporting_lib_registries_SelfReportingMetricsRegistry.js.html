@@ -100,7 +100,7 @@
     <article>
         <pre
             class="sunlight-highlight-javascript linenums">const bunyan = require('bunyan');
-const { SettableGauge, Gauge, Timer, Counter, Meter, Histogram } = require('measured-core');
+const { CachedGauge, SettableGauge, Gauge, Timer, Counter, Meter, Histogram } = require('measured-core');
 const DimensionAwareMetricsRegistry = require('./DimensionAwareMetricsRegistry');
 const {
   validateSelfReportingMetricsRegistryParameters,
@@ -109,7 +109,8 @@ const {
   validateCounterOptions,
   validateHistogramOptions,
   validateTimerOptions,
-  validateSettableGaugeOptions
+  validateSettableGaugeOptions,
+  validateCachedGaugeOptions
 } = require('../validators/inputValidators');
 
 /**
@@ -310,9 +311,10 @@ class SelfReportingMetricsRegistry {
   /**
    * Creates a {@link SettableGauge} or gets the existing SettableGauge for a given name and dimension combo.
    *
-   * @param name
-   * @param dimensions
-   * @param publishingIntervalInSeconds
+   * @param {string} name The Metric name
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @return {SettableGauge}
    */
   getOrCreateSettableGauge(name, dimensions, publishingIntervalInSeconds) {
     validateSettableGaugeOptions(name, dimensions, publishingIntervalInSeconds);
@@ -327,6 +329,31 @@ class SelfReportingMetricsRegistry {
     }
 
     return settableGauge;
+  }
+
+  /**
+   * Creates a {@link CachedGauge} or gets the existing CachedGauge for a given name and dimension combo.
+   *
+   * @param {string} name The Metric name.
+   * @param {function} valueProducingPromiseCallback.
+   * @param {number} cachedGaugeUpdateIntervalInSeconds.
+   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric.
+   * @param {number} publishingIntervalInSeconds a optional custom publishing interval.
+   * @return {CachedGauge}
+   */
+  getOrCreateCachedGauge(name, valueProducingPromiseCallback, cachedGaugeUpdateIntervalInSeconds, dimensions, publishingIntervalInSeconds) {
+    validateCachedGaugeOptions(name, valueProducingPromiseCallback, dimensions, publishingIntervalInSeconds);
+
+    let cachedGauge;
+    if (this._registry.hasMetric(name, dimensions)) {
+      cachedGauge = this._registry.getMetric(name, dimensions);
+    } else {
+      cachedGauge = new CachedGauge(valueProducingPromiseCallback, cachedGaugeUpdateIntervalInSeconds);
+      const key = this._registry.putMetric(name, cachedGauge, dimensions);
+      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+    }
+
+    return cachedGauge;
   }
 
   /**

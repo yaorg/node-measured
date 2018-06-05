@@ -103,6 +103,7 @@
 const Counter = require('./metrics/Counter');
 const Gauge = require('./metrics/Gauge');
 const SettableGauge = require('./metrics/SettableGauge');
+const CachedGauge = require('./metrics/CachedGauge');
 const Histogram = require('./metrics/Histogram');
 const Meter = require('./metrics/Meter');
 const Timer = require('./metrics/Timer');
@@ -303,6 +304,30 @@ class Collection {
       }
     );
     return settableGauge;
+  }
+
+  /**
+   * Gets or creates and registers a {@link SettableGauge}
+   * @param {string} name The metric name
+   * @param {function} valueProducingPromiseCallback A function that returns a promise than when
+   * resolved supplies the value that should be cached in this gauge.
+   * @param {number} updateIntervalInSeconds How often the cached gauge should update it's value.
+   * @return {CachedGauge}
+   */
+  cachedGauge(name, valueProducingPromiseCallback, updateIntervalInSeconds) {
+    this._validateName(name);
+
+    let cachedGauge;
+    this._getMetricForNameAndType(name, MetricTypes.GAUGE).ifPresentOrElse(
+      registeredMetric => {
+        cachedGauge = registeredMetric;
+      },
+      () => {
+        cachedGauge = new CachedGauge(valueProducingPromiseCallback, updateIntervalInSeconds);
+        this.register(name, cachedGauge);
+      }
+    );
+    return cachedGauge;
   }
 
   /**
