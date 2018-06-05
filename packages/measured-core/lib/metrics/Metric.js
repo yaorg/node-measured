@@ -3,13 +3,14 @@
  *
  * Implementations
  * <p>
- * <li><a href="#counter">Counter</a>, things that increment or decrement.</li>
- * <li><a href="#gauge">Gauge</a>, values that can be read instantly via a supplied call back.</li>
- * <li><a href="#histogram">Histogram</a>, keeps a reservoir of statistically relevant values to explore their distribution.</li>
- * <li><a href="#meter">Meter</a>, things that are measured as events / interval.</li>
- * <li><a href="#noopmeter">NoOpMeter</a>, an empty impl of meter, useful for supplying to a Timer, when you only care about the Histogram.</li>
- * <li><a href="#settablegauge">SettableGauge</a>, just like a Gauge but its value is set directly rather than supplied by a callback.</li>
- * <li><a href="#timer">Timer</a>, timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.</li>
+ * <li><a href="Counter.html">Counter</a>, things that increment or decrement.</li>
+ * <li><a href="Gauge.html">Gauge</a>, values that can be read instantly via a supplied call back.</li>
+ * <li><a href="Histogram.html">Histogram</a>, keeps a reservoir of statistically relevant values to explore their distribution.</li>
+ * <li><a href="Meter.html">Meter</a>, things that are measured as events / interval.</li>
+ * <li><a href="NoOpMeter.html">NoOpMeter</a>, an empty impl of meter, useful for supplying to a Timer, when you only care about the Histogram.</li>
+ * <li><a href="SettableGauge.html">SettableGauge</a>, just like a Gauge but its value is set directly rather than supplied by a callback.</li>
+ * <li><a href="CachedGauge.html">CachedGauge</a>, A Cached Gauge takes a function that returns a promise that resolves a value that should be cached and updated on a given interval.</li>
+ * <li><a href="Timer.html">Timer</a>, timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.</li>
  * </p>
  *
  * @interface Metric
