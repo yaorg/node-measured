@@ -71,7 +71,7 @@ module.exports = {
     }
 
     // get or create the timer for the request count/latency timer
-    const requestTimer = metricsRegistry.getOrCreateTimer('request', customDimensions, reportingIntervalInSeconds);
+    const requestTimer = metricsRegistry.getOrCreateTimer('requests', customDimensions, reportingIntervalInSeconds);
 
     // stop the request latency counter
     const time = stopwatch.end();
