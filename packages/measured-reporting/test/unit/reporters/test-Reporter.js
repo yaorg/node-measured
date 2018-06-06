@@ -4,6 +4,7 @@ const TimeUnits = require('measured-core').units;
 const { Counter } = require('measured-core');
 const DimensionAwareMetricsRegistry = require('../../../lib/registries/DimensionAwareMetricsRegistry');
 const { Reporter } = require('../../../lib');
+const { validateReporterInstance } = require('../../../lib/validators/inputValidators');
 
 /**
  * @extends Reporter
@@ -112,6 +113,16 @@ describe('Reporter', () => {
       region: 'us-west-2'
     };
     assert.deepEqual(expected, merged);
+  });
+
+  it('Can be used to create an anonymous instance of a reporter', () => {
+    const anonymousReporter = new class extends Reporter {
+      _reportMetrics(metrics) {
+        metrics.forEach(metric => console.log(JSON.stringify(metric)))
+      }
+    };
+
+    validateReporterInstance(anonymousReporter);
   });
 });
 
