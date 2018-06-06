@@ -13,7 +13,7 @@ class LoggingReporter extends Reporter {
   /**
    * Logs the metrics via the inherited logger instance.
    * @param {MetricWrapper[]} metrics
-   * @private
+   * @protected
    */
   _reportMetrics(metrics) {
     metrics.forEach(metric => {
