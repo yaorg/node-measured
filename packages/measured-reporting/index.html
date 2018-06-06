@@ -116,7 +116,7 @@
 <pre class="prettyprint source lang-javascript"><code>// Create anonymous console logging Reporter instance.
 const reporter = new class extends Reporter {
     _reportMetrics(metrics) {
-        metrics.forEach(metric => console.log(JSON.stringify(metric.toJSON())))
+        metrics.forEach(metric => console.log(JSON.stringify(metric)))
     }
 };</code></pre><p>It would of course be better to create a proper class and contribute it back as a new package for measured if it is generic and sharable.</p>
 <h2>What are dimensions?</h2><p>As described by Signal Fx:</p>
