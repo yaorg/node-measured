@@ -79,14 +79,12 @@ const processUptimeGauge = registry.getOrCreateGauge('node.process.uptime', () =
 Here is the output from that example
 
 ```bash
-APP5HTD6ACCD8C:foo fieldju$ NODE_ENV=development node index.js 
-{"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":0.093}
-{"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":1.097}
-{"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":2.102}
-{"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":3.107}
-{"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":4.108}
-{"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":5.108}
-{"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":6.112}
+APP5HTD6ACCD8C:foo jfiel2$ NODE_ENV=development node index.js | bunyan
+[2018-06-06T23:39:49.678Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":0.092}
+[2018-06-06T23:39:50.685Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":1.099}
+[2018-06-06T23:39:51.690Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":2.104}
+[2018-06-06T23:39:52.691Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":3.105}
+[2018-06-06T23:39:53.692Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":4.106}
 ```
 
 
