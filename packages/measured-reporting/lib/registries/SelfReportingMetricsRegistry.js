@@ -240,7 +240,13 @@ class SelfReportingMetricsRegistry {
    * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval.
    * @return {CachedGauge}
    */
-  getOrCreateCachedGauge(name, valueProducingPromiseCallback, cachedGaugeUpdateIntervalInSeconds, dimensions, publishingIntervalInSeconds) {
+  getOrCreateCachedGauge(
+    name,
+    valueProducingPromiseCallback,
+    cachedGaugeUpdateIntervalInSeconds,
+    dimensions,
+    publishingIntervalInSeconds
+  ) {
     validateCachedGaugeOptions(name, valueProducingPromiseCallback, dimensions, publishingIntervalInSeconds);
 
     let cachedGauge;

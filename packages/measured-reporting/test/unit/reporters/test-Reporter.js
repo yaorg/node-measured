@@ -118,9 +118,9 @@ describe('Reporter', () => {
   it('Can be used to create an anonymous instance of a reporter', () => {
     const anonymousReporter = new class extends Reporter {
       _reportMetrics(metrics) {
-        metrics.forEach(metric => console.log(JSON.stringify(metric)))
+        metrics.forEach(metric => console.log(JSON.stringify(metric)));
       }
-    };
+    }();
 
     validateReporterInstance(anonymousReporter);
   });

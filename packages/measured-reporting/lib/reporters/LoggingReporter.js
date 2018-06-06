@@ -17,11 +17,13 @@ class LoggingReporter extends Reporter {
    */
   _reportMetrics(metrics) {
     metrics.forEach(metric => {
-      this._log.info(JSON.stringify({
-        metricName: metric.name,
-        dimensions: this._getDimensions(metric),
-        data: metric.metricImpl.toJSON()
-      }))
+      this._log.info(
+        JSON.stringify({
+          metricName: metric.name,
+          dimensions: this._getDimensions(metric),
+          data: metric.metricImpl.toJSON()
+        })
+      );
     });
   }
 }
