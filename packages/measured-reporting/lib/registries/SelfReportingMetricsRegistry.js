@@ -120,8 +120,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link Histogram} or gets the existing Histogram for a given name and dimension combo
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Histogram}
    */
   getOrCreateHistogram(name, dimensions, publishingIntervalInSeconds) {
@@ -143,8 +143,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link Meter} or gets the existing Meter for a given name and dimension combo
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Meter}
    */
   getOrCreateMeter(name, dimensions, publishingIntervalInSeconds) {
@@ -165,8 +165,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link Counter} or gets the existing Counter for a given name and dimension combo
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Counter}
    */
   getOrCreateCounter(name, dimensions, publishingIntervalInSeconds) {
@@ -188,8 +188,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link Timer} or gets the existing Timer for a given name and dimension combo.
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Timer}
    */
   getOrCreateTimer(name, dimensions, publishingIntervalInSeconds) {
@@ -211,8 +211,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link SettableGauge} or gets the existing SettableGauge for a given name and dimension combo.
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {SettableGauge}
    */
   getOrCreateSettableGauge(name, dimensions, publishingIntervalInSeconds) {
@@ -236,8 +236,8 @@ class SelfReportingMetricsRegistry {
    * @param {string} name The Metric name.
    * @param {function} valueProducingPromiseCallback.
    * @param {number} cachedGaugeUpdateIntervalInSeconds.
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric.
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval.
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric.
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval.
    * @return {CachedGauge}
    */
   getOrCreateCachedGauge(name, valueProducingPromiseCallback, cachedGaugeUpdateIntervalInSeconds, dimensions, publishingIntervalInSeconds) {

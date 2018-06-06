@@ -8,6 +8,50 @@ const DEFAULT_REPORTING_INTERVAL_IN_SECONDS = 10;
  * The abstract reporter that specific implementations can extend to create a Self Reporting Metrics Registry Reporter.
  *
  * {@link SelfReportingMetricsRegistry}
+ *
+ * @example
+ * const os = require('os');
+ * const process = require('process');
+ * const { SelfReportingMetricsRegistry, Reporter } = require('measured-reporting');
+ *
+ * // Create a self reporting registry with a named anonymous reporter instance;
+ * const registry = new SelfReportingMetricsRegistry(
+ *   new class ConsoleReporter extends Reporter {
+ *     constructor() {
+ *       super({
+ *         defaultDimensions: {
+ *           hostname: os.hostname(),
+ *           env: process.env['NODE_ENV'] ? process.env['NODE_ENV'] : 'unset'
+ *         }
+ *        })
+ *     }
+ *
+ *     _reportMetrics(metrics) {
+ *        metrics.forEach(metric => {
+ *          console.log(JSON.stringify({
+ *            metricName: metric.name,
+ *            dimensions: this._getDimensions(metric),
+ *            data: metric.metricImpl.toJSON()
+ *           }))
+ *       });
+ *     }
+ *  },
+ * );
+ *
+ * @example
+ * // Create a regular class that extends Reporter
+ * class LoggingReporter extends Reporter {
+ *   _reportMetrics(metrics) {
+ *     metrics.forEach(metric => {
+ *       this._log.info(JSON.stringify({
+ *        metricName: metric.name,
+ *        dimensions: this._getDimensions(metric),
+ *        data: metric.metricImpl.toJSON()
+ *       }))
+ *     });
+ *   }
+ * }
+ *
  * @abstract
  */
 class Reporter {
