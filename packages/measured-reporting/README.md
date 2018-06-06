@@ -23,7 +23,7 @@ You can technically create an anonymous instance of this, see the following exam
 // Create anonymous console logging Reporter instance.
 const reporter = new class extends Reporter {
     _reportMetrics(metrics) {
-        metrics.forEach(metric => console.log(JSON.stringify(metric)))
+        metrics.forEach(metric => console.log(JSON.stringify(metric.toJSON())))
     }
 };
 ```
