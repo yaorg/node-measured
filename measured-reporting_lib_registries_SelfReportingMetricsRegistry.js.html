@@ -41,7 +41,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="LoggingReporter.html">LoggingReporter</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
 				</ul>
 			</li>
 			
@@ -221,8 +221,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link Histogram} or gets the existing Histogram for a given name and dimension combo
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Histogram}
    */
   getOrCreateHistogram(name, dimensions, publishingIntervalInSeconds) {
@@ -244,8 +244,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link Meter} or gets the existing Meter for a given name and dimension combo
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Meter}
    */
   getOrCreateMeter(name, dimensions, publishingIntervalInSeconds) {
@@ -266,8 +266,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link Counter} or gets the existing Counter for a given name and dimension combo
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Counter}
    */
   getOrCreateCounter(name, dimensions, publishingIntervalInSeconds) {
@@ -289,8 +289,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link Timer} or gets the existing Timer for a given name and dimension combo.
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {Timer}
    */
   getOrCreateTimer(name, dimensions, publishingIntervalInSeconds) {
@@ -312,8 +312,8 @@ class SelfReportingMetricsRegistry {
    * Creates a {@link SettableGauge} or gets the existing SettableGauge for a given name and dimension combo.
    *
    * @param {string} name The Metric name
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval
    * @return {SettableGauge}
    */
   getOrCreateSettableGauge(name, dimensions, publishingIntervalInSeconds) {
@@ -337,11 +337,17 @@ class SelfReportingMetricsRegistry {
    * @param {string} name The Metric name.
    * @param {function} valueProducingPromiseCallback.
    * @param {number} cachedGaugeUpdateIntervalInSeconds.
-   * @param {Dimensions} dimensions any custom {@link Dimensions} for the Metric.
-   * @param {number} publishingIntervalInSeconds a optional custom publishing interval.
+   * @param {Dimensions} [dimensions] any custom {@link Dimensions} for the Metric.
+   * @param {number} [publishingIntervalInSeconds] a optional custom publishing interval.
    * @return {CachedGauge}
    */
-  getOrCreateCachedGauge(name, valueProducingPromiseCallback, cachedGaugeUpdateIntervalInSeconds, dimensions, publishingIntervalInSeconds) {
+  getOrCreateCachedGauge(
+    name,
+    valueProducingPromiseCallback,
+    cachedGaugeUpdateIntervalInSeconds,
+    dimensions,
+    publishingIntervalInSeconds
+  ) {
     validateCachedGaugeOptions(name, valueProducingPromiseCallback, dimensions, publishingIntervalInSeconds);
 
     let cachedGauge;
@@ -428,7 +434,7 @@ module.exports = SelfReportingMetricsRegistry;
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Wed Jun 6th 2018
+		on Thu Jun 7th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

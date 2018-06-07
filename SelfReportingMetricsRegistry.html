@@ -41,7 +41,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="LoggingReporter.html">LoggingReporter</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
 				</ul>
 			</li>
 			
@@ -550,7 +550,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getOrCreateCachedGauge"><span class="type-signature"></span>getOrCreateCachedGauge(name, dimensions, publishingIntervalInSeconds)</h4>
+    <h4 class="name" id="getOrCreateCachedGauge"><span class="type-signature"></span>getOrCreateCachedGauge(name [, dimensions] [, publishingIntervalInSeconds])</h4>
     
     
 </dt>
@@ -581,6 +581,8 @@
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
         
 
@@ -607,6 +609,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -630,6 +640,14 @@
             
             </td>
 
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -655,6 +673,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -679,6 +705,16 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -702,6 +738,16 @@
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -804,7 +850,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="getOrCreateCounter"><span class="type-signature"></span>getOrCreateCounter(name, dimensions, publishingIntervalInSeconds)</h4>
+    <h4 class="name" id="getOrCreateCounter"><span class="type-signature"></span>getOrCreateCounter(name [, dimensions] [, publishingIntervalInSeconds])</h4>
     
     
 </dt>
@@ -835,6 +881,8 @@
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
         
 
@@ -861,6 +909,14 @@
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -885,6 +941,16 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -908,6 +974,16 @@
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -1297,7 +1373,7 @@ registry.getOrCreateGauge(
             
 <hr>
 <dt>
-    <h4 class="name" id="getOrCreateHistogram"><span class="type-signature"></span>getOrCreateHistogram(name, dimensions, publishingIntervalInSeconds)</h4>
+    <h4 class="name" id="getOrCreateHistogram"><span class="type-signature"></span>getOrCreateHistogram(name [, dimensions] [, publishingIntervalInSeconds])</h4>
     
     
 </dt>
@@ -1328,6 +1404,8 @@ registry.getOrCreateGauge(
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
         
 
@@ -1354,6 +1432,14 @@ registry.getOrCreateGauge(
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -1378,6 +1464,16 @@ registry.getOrCreateGauge(
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -1401,6 +1497,16 @@ registry.getOrCreateGauge(
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -1503,7 +1609,7 @@ registry.getOrCreateGauge(
             
 <hr>
 <dt>
-    <h4 class="name" id="getOrCreateMeter"><span class="type-signature"></span>getOrCreateMeter(name, dimensions, publishingIntervalInSeconds)</h4>
+    <h4 class="name" id="getOrCreateMeter"><span class="type-signature"></span>getOrCreateMeter(name [, dimensions] [, publishingIntervalInSeconds])</h4>
     
     
 </dt>
@@ -1534,6 +1640,8 @@ registry.getOrCreateGauge(
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
         
 
@@ -1560,6 +1668,14 @@ registry.getOrCreateGauge(
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -1584,6 +1700,16 @@ registry.getOrCreateGauge(
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -1607,6 +1733,16 @@ registry.getOrCreateGauge(
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -1709,7 +1845,7 @@ registry.getOrCreateGauge(
             
 <hr>
 <dt>
-    <h4 class="name" id="getOrCreateSettableGauge"><span class="type-signature"></span>getOrCreateSettableGauge(name, dimensions, publishingIntervalInSeconds)</h4>
+    <h4 class="name" id="getOrCreateSettableGauge"><span class="type-signature"></span>getOrCreateSettableGauge(name [, dimensions] [, publishingIntervalInSeconds])</h4>
     
     
 </dt>
@@ -1740,6 +1876,8 @@ registry.getOrCreateGauge(
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
         
 
@@ -1766,6 +1904,14 @@ registry.getOrCreateGauge(
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -1790,6 +1936,16 @@ registry.getOrCreateGauge(
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -1813,6 +1969,16 @@ registry.getOrCreateGauge(
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -1915,7 +2081,7 @@ registry.getOrCreateGauge(
             
 <hr>
 <dt>
-    <h4 class="name" id="getOrCreateTimer"><span class="type-signature"></span>getOrCreateTimer(name, dimensions, publishingIntervalInSeconds)</h4>
+    <h4 class="name" id="getOrCreateTimer"><span class="type-signature"></span>getOrCreateTimer(name [, dimensions] [, publishingIntervalInSeconds])</h4>
     
     
 </dt>
@@ -1946,6 +2112,8 @@ registry.getOrCreateGauge(
         <th>Type</th>
 
         
+        <th>Argument</th>
+        
 
         
 
@@ -1972,6 +2140,14 @@ registry.getOrCreateGauge(
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -1996,6 +2172,16 @@ registry.getOrCreateGauge(
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
@@ -2019,6 +2205,16 @@ registry.getOrCreateGauge(
             
             </td>
 
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
             
 
             
@@ -2438,7 +2634,7 @@ interval(() =&gt; {
 		<ul class="dummy">
 			<li>
 				<a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html">measured-reporting/lib/registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-261">line 261</a>
+				 <a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-267">line 267</a>
 			</li>
 		</ul>
 	</dd>
@@ -2521,7 +2717,7 @@ interval(() =&gt; {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Wed Jun 6th 2018
+		on Thu Jun 7th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

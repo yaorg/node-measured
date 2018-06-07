@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Source: validators/inputValidators.js</title>
+	<title>Measured Source: reporters/LoggingReporter.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -34,14 +34,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li>
+					<li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li>
+					<li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="LoggingReporter.html">LoggingReporter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li>
 				</ul>
 			</li>
 			
@@ -87,31 +87,42 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: validators/inputValidators.js</h1>
+		<h1 class="page-title">Source: reporters/LoggingReporter.js</h1>
     
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">/**
- * Validation functions for validating public input
- * @module SignalFxReporterInputValidators
- * @private
- */
-module.exports = {
-  /**
-   * Validates that the object supplied for the sfx client at least has a send function
-   * @param signalFxClient
-   */
-  validateSignalFxClient: signalFxClient => {
-    if (signalFxClient === undefined) {
-      throw new Error('signalFxClient was undefined when it is required');
-    }
+            class="sunlight-highlight-javascript linenums">const Reporter = require('./Reporter');
 
-    if (typeof signalFxClient.send !== 'function' || signalFxClient.length &lt; 1) {
-      throw new Error('signalFxClient must implement send(data: any)');
-    }
+/**
+ * A reporter impl that simply logs the metrics via the Logger.
+ *
+ * @example
+ * const { SelfReportingMetricsRegistry, LoggingReporter } = require('measured-reporting');
+ * const registry = new SelfReportingMetricsRegistry(new LoggingReporter());
+ *
+ * @extends {Reporter}
+ */
+class LoggingReporter extends Reporter {
+  /**
+   * Logs the metrics via the inherited logger instance.
+   * @param {MetricWrapper[]} metrics
+   * @protected
+   */
+  _reportMetrics(metrics) {
+    metrics.forEach(metric => {
+      this._log.info(
+        JSON.stringify({
+          metricName: metric.name,
+          dimensions: this._getDimensions(metric),
+          data: metric.metricImpl.toJSON()
+        })
+      );
+    });
   }
-};
+}
+
+module.exports = LoggingReporter;
 </pre>
     </article>
 </section>
