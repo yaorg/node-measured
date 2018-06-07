@@ -35,7 +35,7 @@ const DEFAULT_REPORTING_INTERVAL_IN_SECONDS = 10;
  *           }))
  *       });
  *     }
- *  },
+ *  }()
  * );
  *
  * @example

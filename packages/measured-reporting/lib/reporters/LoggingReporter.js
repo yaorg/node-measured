@@ -1,7 +1,7 @@
 const Reporter = require('./Reporter');
 
 /**
- * A very simple reporter impl that logs the metrics via the Logger
+ * A reporter impl that simply logs the metrics via the Logger.
  *
  * @example
  * const { SelfReportingMetricsRegistry, LoggingReporter } = require('measured-reporting');

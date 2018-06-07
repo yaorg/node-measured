@@ -31,7 +31,7 @@ const myCounter = registry.getOrCreateCounter('my-counter');
 ```
 
 ### [Reporter Abstract Class](https://yaorg.github.io/node-measured/Reporter.html)
-The base class for reporter implementations. This class is extended and the [_reportMetrics(metrics)](https://yaorg.github.io/node-measured/Reporter.html#_reportMetrics__anchor) method gets overridden to create an data aggregator specific reporter. 
+Extend this class and override the [_reportMetrics(metrics)](https://yaorg.github.io/node-measured/Reporter.html#_reportMetrics__anchor) method to create a vendor specific reporter implementation. 
 
 See the [ReporterOptions](http://localhost:63342/node-measured/build/docs/packages/measured-reporting/global.html#ReporterOptions) for advanced configuration.
 
@@ -39,7 +39,7 @@ See the [ReporterOptions](http://localhost:63342/node-measured/build/docs/packag
 - [SignalFx Reporter](https://yaorg.github.io/node-measured/SignalFxMetricsReporter.html) in the `measured-signalfx-reporter` package.
   - reports metrics to SignalFx.
 - [Logging Reporter](https://yaorg.github.io/node-measured/LoggingReporter.html) in the `measured-reporting` package.
-  - logs reported metrics at an info level through a supplied logger, defaulting to a new bunyan logger if none supplied.
+  - A reporter impl that simply logs the metrics via the Logger
 
 #### Creating an anonymous Implementation
 You can technically create an anonymous instance of this, see the following example.
@@ -48,9 +48,9 @@ const os = require('os');
 const process = require('process');
 const { SelfReportingMetricsRegistry, Reporter } = require('measured-reporting');
 
-// Create a self reporting registry with a named anonymous Reporter instance;
+// Create a self reporting registry with an anonymous Reporter instance;
 const registry = new SelfReportingMetricsRegistry(
-  new class ConsoleReporter extends Reporter {
+  new class extends Reporter {
     constructor() {
       super({
         defaultDimensions: {
@@ -69,15 +69,14 @@ const registry = new SelfReportingMetricsRegistry(
         }))
       });
     }
-  },
+  }()
 );
 
 // create a gauge that reports the process uptime every second
 const processUptimeGauge = registry.getOrCreateGauge('node.process.uptime', () => process.uptime(), {}, 1);
 ```
 
-Here is the output from that example
-
+Example output:
 ```bash
 APP5HTD6ACCD8C:foo jfiel2$ NODE_ENV=development node index.js | bunyan
 [2018-06-06T23:39:49.678Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":0.092}
@@ -88,10 +87,10 @@ APP5HTD6ACCD8C:foo jfiel2$ NODE_ENV=development node index.js | bunyan
 ```
 
 
-It would of course be better to create a proper class and contribute it back as a new package for measured if it is generic and sharable.
+Consider creating a proper class and contributing it back to Measured if it is generic and sharable.
 
 ### [Logging Reporter Class](https://yaorg.github.io/node-measured/LoggingReporter.html)
-A very simple reporter that logs the metrics via the Logger.
+A simple reporter that logs the metrics via the Logger.
 
 See the [ReporterOptions](http://localhost:63342/node-measured/build/docs/packages/measured-reporting/global.html#ReporterOptions) for advanced configuration.
 

@@ -123,29 +123,13 @@ describe('SelfReportingMetricsRegistry', () => {
   it('#getOrCreateCachedGauge creates and registers the metric and when called a second time returns the same metric', () => {
     mockReporter.expects('reportMetricOnInterval').once();
 
-    const metric = selfReportingRegistry.getOrCreateCachedGauge(
-      'the-metric-name',
-      () => {
-        return new Promise(r => {
-          r(10);
-        });
-      },
-      1,
-      {},
-      1
-    );
+    const metric = selfReportingRegistry.getOrCreateCachedGauge('the-metric-name', () => {
+      return new Promise((r) => { r(10); });
+    }, 1, {}, 1);
 
-    const theSameMetric = selfReportingRegistry.getOrCreateCachedGauge(
-      'the-metric-name',
-      () => {
-        return new Promise(r => {
-          r(10);
-        });
-      },
-      1,
-      {},
-      1
-    );
+    const theSameMetric = selfReportingRegistry.getOrCreateCachedGauge('the-metric-name', () => {
+      return new Promise((r) => { r(10); });
+    }, 1, {}, 1);
 
     // clear the interval
     metric.end();
