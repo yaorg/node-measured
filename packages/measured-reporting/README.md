@@ -15,7 +15,7 @@ npm install measured-reporting
 ### [Self Reporting Metrics Registry](https://yaorg.github.io/node-measured/SelfReportingMetricsRegistry.html)
 A dimensional aware self-reporting metrics registry, just supply this class with a reporter implementation at instantiation and this is all you need to instrument application level metrics in your app.
 
-See the [SelfReportingMetricsRegistryOptions](http://localhost:63342/node-measured/build/docs/packages/measured-reporting/global.html#SelfReportingMetricsRegistryOptions) for advanced configuration.
+See the [SelfReportingMetricsRegistryOptions](http://yaorg.github.io/node-measured/build/docs/packages/measured-reporting/global.html#SelfReportingMetricsRegistryOptions) for advanced configuration.
 
 ```javascript
 const { SelfReportingMetricsRegistry, LoggingReporter } = require('measured-reporting');
@@ -33,7 +33,7 @@ const myCounter = registry.getOrCreateCounter('my-counter');
 ### [Reporter Abstract Class](https://yaorg.github.io/node-measured/Reporter.html)
 Extend this class and override the [_reportMetrics(metrics)](https://yaorg.github.io/node-measured/Reporter.html#_reportMetrics__anchor) method to create a vendor specific reporter implementation. 
 
-See the [ReporterOptions](http://localhost:63342/node-measured/build/docs/packages/measured-reporting/global.html#ReporterOptions) for advanced configuration.
+See the [ReporterOptions](http://yaorg.github.io/node-measured/build/docs/packages/measured-reporting/global.html#ReporterOptions) for advanced configuration.
 
 #### Current Implementations
 - [SignalFx Reporter](https://yaorg.github.io/node-measured/SignalFxMetricsReporter.html) in the `measured-signalfx-reporter` package.
@@ -92,7 +92,7 @@ Consider creating a proper class and contributing it back to Measured if it is g
 ### [Logging Reporter Class](https://yaorg.github.io/node-measured/LoggingReporter.html)
 A simple reporter that logs the metrics via the Logger.
 
-See the [ReporterOptions](http://localhost:63342/node-measured/build/docs/packages/measured-reporting/global.html#ReporterOptions) for advanced configuration.
+See the [ReporterOptions](http://yaorg.github.io/node-measured/build/docs/packages/measured-reporting/global.html#ReporterOptions) for advanced configuration.
 
 ```javascript
 const { SelfReportingMetricsRegistry, LoggingReporter } = require('measured-reporting');
