@@ -16,7 +16,7 @@ module.exports = {
 
     cpus.forEach(cpu => {
       //Total up the time in the cores tick
-      Object.keys(cpu.times).forEach((type) => {
+      Object.keys(cpu.times).forEach(type => {
         totalTick += cpu.times[type];
       });
       //Total up the idle time of the core
@@ -37,6 +37,6 @@ module.exports = {
     const idleDifference = endMeasure.idle - startMeasure.idle;
     const totalDifference = endMeasure.total - startMeasure.total;
     //Calculate the average percentage CPU usage
-    return Math.ceil(100 - (100 * idleDifference / totalDifference));
+    return Math.ceil(100 - 100 * idleDifference / totalDifference);
   }
 };
