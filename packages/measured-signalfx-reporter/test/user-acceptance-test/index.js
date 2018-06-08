@@ -1,21 +1,14 @@
-const os = require('os');
 const signalfx = require('signalfx');
 const express = require('express');
 const bunyan = require('bunyan');
-const { SignalFxMetricsReporter, SignalFxSelfReportingMetricsRegistry } = require('../../lib');
-const { Stopwatch } = require('../../../measured-core/lib');
+const { SignalFxMetricsReporter, SignalFxSelfReportingMetricsRegistry, SignalFxEventCategories } = require('../../lib');
+const { createOSMetrics, createProcessMetrics, createExpressMiddleware } = require('../../../measured-node-metrics/lib');
 const libraryMetadata = require('../../package');
 
 const log = bunyan.createLogger({ name: 'SelfReportingMetricsRegistry', level: 'info' });
 
 const library = libraryMetadata.name;
 const version = libraryMetadata.version;
-
-// Set things to report at a high frequency for this UAT test server.
-// This is probably more frequent than you would want for prod, as it would use more DPM than you probably meant.
-// This really depends on your data resolution requirements and scale.
-const PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS = 5;
-const REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS = 1;
 
 const defaultDimensions = {
   app: library,
@@ -60,125 +53,10 @@ const signalFxReporter = new SignalFxMetricsReporter(signalFxClient, {
 
 // Create the self reporting metrics registry with the signal fx reporter
 const metricsRegistry = new SignalFxSelfReportingMetricsRegistry(signalFxReporter, { logLevel: 'debug' });
+metricsRegistry.sendEvent('events.app.starting');
 
-// Create a gauge to track the 1 minute load average from the Node OS API.
-metricsRegistry.getOrCreateGauge(
-  'os-1m-load-average',
-  () => {
-    // os.loadavg returns an array [1, 5, 15] mins intervals
-    return os.loadavg()[0];
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// Create a gauge to track the amount of free memory for the system from the Node OS API.
-metricsRegistry.getOrCreateGauge(
-  'os-free-mem-bytes',
-  () => {
-    return os.freemem();
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// Create a gauge to track the amount of memory used for the system from the Node OS API.
-metricsRegistry.getOrCreateGauge(
-  'os-total-mem-bytes',
-  () => {
-    return os.totalmem();
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_memoryusage
-metricsRegistry.getOrCreateGauge(
-  'process-memory-rss',
-  () => {
-    return process.memoryUsage().rss;
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_memoryusage
-metricsRegistry.getOrCreateGauge(
-  'process-memory-heap-total',
-  () => {
-    return process.memoryUsage().heapTotal;
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_memoryusage
-metricsRegistry.getOrCreateGauge(
-  'process-memory-heap-used',
-  () => {
-    return process.memoryUsage().heapUsed;
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_memoryusage
-metricsRegistry.getOrCreateGauge(
-  'process-memory-external',
-  () => {
-    const mem = process.memoryUsage();
-    return mem.hasOwnProperty('external') ? mem.external : 0;
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// https://nodejs.org/api/process.html#process_process_uptime
-metricsRegistry.getOrCreateGauge(
-  'process-uptime-seconds',
-  () => {
-    return Math.floor(process.uptime());
-  },
-  {},
-  PROCESS_AND_SYSTEM_METRICS_REPORTING_INTERVAL_IN_SECONDS
-);
-
-// Now that we have some base system and process metrics wired up,
-// lets wire up an express middleware that will track request count, latency statics and give us all this
-// information filterable by http method, response status code and URI path.
-
-/**
- * This middleware is a little interesting because we need to track the time elapsed before we know the status code dimension.
- * So we will create the Stopwatch manually rather that using the API available on the Timer object itself, see api docs for more info.
- *
- * @param metricsRegistry the self reporting metrics registry
- * @return {Function} Express Middleware
- */
-const createExpressMiddleware = metricsRegistry => {
-  return (req, res, next) => {
-    const stopwatch = new Stopwatch();
-
-    req.on('end', () => {
-      const customDimensions = {
-        statusCode: `${res.statusCode}`,
-        path: req.route ? req.route.path : '_unknown',
-        method: req.method
-      };
-
-      // create the timer for the request count/latency histogram
-      const requestTimer = metricsRegistry.getOrCreateTimer(
-        'request',
-        customDimensions,
-        REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS
-      );
-
-      // stop the request latency counter
-      const time = stopwatch.end();
-      requestTimer.update(time);
-    });
-    next();
-  };
-};
+createOSMetrics(metricsRegistry);
+createProcessMetrics(metricsRegistry);
 
 const app = express();
 // wire up the metrics middleware
@@ -193,3 +71,15 @@ app.get('/path2', (req, res) => {
 });
 
 app.listen(8080, () => log.info('Example app listening on port 8080!'));
+
+process.on('SIGINT', async () => {
+  log.info('SIG INT, exiting');
+  await metricsRegistry.sendEvent('events.app.exiting');
+  process.exit(0);
+});
+
+
+process.on('uncaughtException', async (err) => {
+  log.error('There was an uncaught error', err);
+  await metricsRegistry.sendEvent('events.app.uncaught-exception', SignalFxEventCategories.ALERT, {err: JSON.stringify(err)});
+});

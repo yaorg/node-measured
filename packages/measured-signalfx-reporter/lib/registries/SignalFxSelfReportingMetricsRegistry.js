@@ -49,6 +49,29 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
     );
     return new NoOpMeter();
   }
+
+  /**
+   * Function exposes the event API of Signal Fx.
+   * See {@link https://github.com/signalfx/signalfx-nodejs#sending-events} for more details.
+   *
+   * @param {string} eventType The event type (name of the event time series).
+   * @param {SignalFxEventCategoryId} [category] the category of event. See {@link module:SignalFxEventCategories}. Value by default is USER_DEFINED.
+   * @param {Dimensions} [dimensions] a map of event dimensions, empty dictionary by default
+   * @param {Object.<string, string>} [properties] a map of extra properties on that event, empty dictionary by default
+   * @param {number} [timestamp] a timestamp, by default is current time.
+   *
+   * @example
+   * const {
+   *   SignalFxSelfReportingMetricsRegistry,
+   *   SignalFxMetricsReporter,
+   *   SignalFxEventCategories
+   * } = require('measured-signalfx-reporter');
+   * const registry = new SignalFxSelfReportingMetricsRegistry(new SignalFxMetricsReporter(signalFxClient));
+   * registry.sendEvent('uncaughtException', SignalFxEventCategories.ALERT);
+   */
+  sendEvent(eventType, category, dimensions, properties, timestamp) {
+    return this._reporter.sendEvent(eventType, category, dimensions, properties, timestamp);
+  }
 }
 
 module.exports = SignalFxSelfReportingMetricsRegistry;

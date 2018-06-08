@@ -12,7 +12,7 @@
   "main": "./lib/index.js",
   "scripts": {
     "clean": "rm -fr build",
-    "format": "prettier --write './lib/**/l*.{ts,js}'",
+    "format": "prettier --write './lib/**/*.{ts,js}'",
     "lint": "eslint lib --ext .js",
     "test:node": "mocha './test/**/test-*.js'",
     "test:node:coverage": "nyc --report-dir build/coverage/ --reporter=html --reporter=text mocha './test/**/test-*.js'",
