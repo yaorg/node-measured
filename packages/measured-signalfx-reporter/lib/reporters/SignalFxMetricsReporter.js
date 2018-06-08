@@ -228,12 +228,12 @@ class SignalFxMetricsReporter extends Reporter {
     const body = {
       eventType,
       category: category || USER_DEFINED,
-      dimensions: this._getDimensions({dimensions}),
+      dimensions: this._getDimensions({ dimensions }),
       properties,
       timestamp
     };
-    Object.keys(body).forEach((key) => (body[key] == null) && delete body[key]);
-    return this._signalFxClient.sendEvent(body)
+    Object.keys(body).forEach(key => body[key] == null && delete body[key]);
+    return this._signalFxClient.sendEvent(body);
   }
 }
 

@@ -70,7 +70,7 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
    * registry.sendEvent('uncaughtException', SignalFxEventCategories.ALERT);
    */
   sendEvent(eventType, category, dimensions, properties, timestamp) {
-    return this._reporter.sendEvent(eventType, category, dimensions, properties, timestamp)
+    return this._reporter.sendEvent(eventType, category, dimensions, properties, timestamp);
   }
 }
 
