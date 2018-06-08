@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Class: Counter</title>
+	<title>Measured Module: SignalFxEventCategories</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -34,21 +34,14 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-metricValidators.html">metricValidators</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
+					<li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-SignalFxEventCategories.html">SignalFxEventCategories</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
+					<li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li>
 				</ul>
 			</li>
 			
@@ -94,17 +87,10 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: Counter</h1>
+	<h1 class="page-title">Module: SignalFxEventCategories</h1>
 <section>
 
 <header>
-    
-        <h2>
-        Counter
-        </h2>
-        
-            <div class="class-description"><p>Counters are things that increment or decrement</p></div>
-        
     
 </header>
 
@@ -113,86 +99,10 @@
     <div class="container-overview">
     
         
-<hr>
-<dt>
-    <h4 class="name" id="Counter"><span class="type-signature"></span>new Counter( [properties])</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Argument</th>
+            <div class="description"><p>Different categories of events supported, within the SignalFx Event API.</p></div>
         
 
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>properties</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#CounterProperties">CounterProperties</a></span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>see <a href="global.html#CounterProperties">CounterProperties</a></p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
 <dl class="details">
     
 
@@ -206,13 +116,6 @@
 
     
 
-    
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="Metric.html">Metric</a></li>
-        
-    </ul></dd>
     
 
     
@@ -234,8 +137,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="metrics_Counter.js.html">metrics/Counter.js</a>,
-				 <a href="metrics_Counter.js.html#sunlight-1-line-16">line 16</a>
+				<a href="SignalFxEventCategories.js.html">SignalFxEventCategories.js</a>,
+				 <a href="SignalFxEventCategories.js.html#sunlight-1-line-1">line 1</a>
 			</li>
 		</ul>
 	</dd>
@@ -249,34 +152,14 @@
 </dl>
 
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">var Measured = require(&#x27;measured&#x27;)
-var activeUploads = new Measured.Counter();
-http.createServer(function(req, res) {
-   activeUploads.inc();
-   req.on(&#x27;end&#x27;, function() {
-        activeUploads.dec();
-   });
-});</pre>
+            <h3>Example</h3>
+            
+    <pre class="sunlight-highlight-javascript">const registry = new SignalFxSelfReportingMetricsRegistry(...);
+registry.sendEvent(&#x27;uncaughtException&#x27;, SignalFxEventCategories.ALERT);</pre>
 
 
-    
-</dd>
-
+        
     
     </div>
 
@@ -291,81 +174,34 @@ http.createServer(function(req, res) {
     
 
     
-
-    
-        <h3 class="subsection-title">Methods</h3>
+        <h3 class="subsection-title">Members</h3>
 
         <dl>
             
 <hr>
-<dt>
-    <h4 class="name" id="dec"><span class="type-signature"></span>dec(n)</h4>
-    
+<dt class="name" id=".ALERT">
+    <h4 id=".ALERT"><span class="type-signature">&lt;static> </span>ALERT<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
     
 </dt>
 <dd>
-
     
     <div class="description">
-        <p>Decrements the counter</p>
+        <p>Output by anomaly detectors</p>
     </div>
     
 
     
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>n</code></td>
-            
-
-            <td class="type">
-            
+        <h5>Type:</h5>
+        <ul>
+            <li>
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
 
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Decrement the counter by n. Defaults to 1.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
+            </li>
+        </ul>
     
 
     
@@ -403,8 +239,8 @@ http.createServer(function(req, res) {
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="metrics_Counter.js.html">metrics/Counter.js</a>,
-				 <a href="metrics_Counter.js.html#sunlight-1-line-46">line 46</a>
+				<a href="SignalFxEventCategories.js.html">SignalFxEventCategories.js</a>,
+				 <a href="SignalFxEventCategories.js.html#sunlight-1-line-20">line 20</a>
 			</li>
 		</ul>
 	</dd>
@@ -419,210 +255,34 @@ http.createServer(function(req, res) {
 
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 </dd>
 
         
             
 <hr>
-<dt>
-    <h4 class="name" id="getType"><span class="type-signature"></span>getType()</h4>
-    
+<dt class="name" id=".AUDIT">
+    <h4 id=".AUDIT"><span class="type-signature">&lt;static> </span>AUDIT<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
     
 </dt>
 <dd>
-
     
     <div class="description">
-        <p>The type of the Metric Impl. <a href="MetricTypes.html">MetricTypes</a>.</p>
+        <p>Audit trail events</p>
     </div>
     
 
     
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="Metric.html#getType">Metric#getType</a></li>
-        
-    </ul></dd>
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="metrics_Counter.js.html">metrics/Counter.js</a>,
-				 <a href="metrics_Counter.js.html#sunlight-1-line-62">line 62</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>The type of the Metric Impl.</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">string</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="inc"><span class="type-signature"></span>inc(n)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Increments the counter.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>n</code></td>
-            
-
-            <td class="type">
-            
+        <h5>Type:</h5>
+        <ul>
+            <li>
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
 
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Increment the counter by n. Defaults to 1.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
+            </li>
+        </ul>
     
 
     
@@ -660,8 +320,8 @@ http.createServer(function(req, res) {
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="metrics_Counter.js.html">metrics/Counter.js</a>,
-				 <a href="metrics_Counter.js.html#sunlight-1-line-38">line 38</a>
+				<a href="SignalFxEventCategories.js.html">SignalFxEventCategories.js</a>,
+				 <a href="SignalFxEventCategories.js.html#sunlight-1-line-25">line 25</a>
 			</li>
 		</ul>
 	</dd>
@@ -676,91 +336,34 @@ http.createServer(function(req, res) {
 
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 </dd>
 
         
             
 <hr>
-<dt>
-    <h4 class="name" id="reset"><span class="type-signature"></span>reset(count)</h4>
-    
+<dt class="name" id=".COLLECTD">
+    <h4 id=".COLLECTD"><span class="type-signature">&lt;static> </span>COLLECTD<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
     
 </dt>
 <dd>
-
     
     <div class="description">
-        <p>Resets the counter back to count Defaults to 0.</p>
+        <p>Event originated within collectd</p>
     </div>
     
 
     
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>count</code></td>
-            
-
-            <td class="type">
-            
+        <h5>Type:</h5>
+        <ul>
+            <li>
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
 
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Resets the counter back to count Defaults to 0.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
+            </li>
+        </ul>
     
 
     
@@ -798,8 +401,8 @@ http.createServer(function(req, res) {
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="metrics_Counter.js.html">metrics/Counter.js</a>,
-				 <a href="metrics_Counter.js.html#sunlight-1-line-54">line 54</a>
+				<a href="SignalFxEventCategories.js.html">SignalFxEventCategories.js</a>,
+				 <a href="SignalFxEventCategories.js.html#sunlight-1-line-35">line 35</a>
 			</li>
 		</ul>
 	</dd>
@@ -812,18 +415,6 @@ http.createServer(function(req, res) {
 	
 </dl>
 
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 
     
 </dd>
@@ -831,24 +422,29 @@ http.createServer(function(req, res) {
         
             
 <hr>
-<dt>
-    <h4 class="name" id="toJSON"><span class="type-signature"></span>toJSON()</h4>
-    
+<dt class="name" id=".EXCEPTION">
+    <h4 id=".EXCEPTION"><span class="type-signature">&lt;static> </span>EXCEPTION<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
     
 </dt>
 <dd>
-
     
     <div class="description">
-        <p>Counters directly return their currently value.</p>
+        <p>Created by exception appenders to denote exceptional events</p>
     </div>
     
 
     
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
 
-    
 
-    
+
+            </li>
+        </ul>
     
 
     
@@ -865,13 +461,6 @@ http.createServer(function(req, res) {
 
     
 
-    
-    <dt class="implements">Implements:</dt>
-    <dd class="implements"><ul>
-        
-            <li><a href="Metric.html#toJSON">Metric#toJSON</a></li>
-        
-    </ul></dd>
     
 
     
@@ -893,8 +482,8 @@ http.createServer(function(req, res) {
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="metrics_Counter.js.html">metrics/Counter.js</a>,
-				 <a href="metrics_Counter.js.html#sunlight-1-line-30">line 30</a>
+				<a href="SignalFxEventCategories.js.html">SignalFxEventCategories.js</a>,
+				 <a href="SignalFxEventCategories.js.html#sunlight-1-line-45">line 45</a>
 			</li>
 		</ul>
 	</dd>
@@ -909,41 +498,254 @@ http.createServer(function(req, res) {
 
 
     
+</dd>
 
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
         
-<span class="param-type">number</span>
+            
+<hr>
+<dt class="name" id=".JOB">
+    <h4 id=".JOB"><span class="type-signature">&lt;static> </span>JOB<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Generated by analytics server</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
 
 
 
-    </dd>
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="SignalFxEventCategories.js.html">SignalFxEventCategories.js</a>,
+				 <a href="SignalFxEventCategories.js.html#sunlight-1-line-30">line 30</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
 </dl>
 
 
+    
+</dd>
+
         
+            
+<hr>
+<dt class="name" id=".SERVICE_DISCOVERY">
+    <h4 id=".SERVICE_DISCOVERY"><span class="type-signature">&lt;static> </span>SERVICE_DISCOVERY<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Service discovery event</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="SignalFxEventCategories.js.html">SignalFxEventCategories.js</a>,
+				 <a href="SignalFxEventCategories.js.html#sunlight-1-line-40">line 40</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".USER_DEFINED">
+    <h4 id=".USER_DEFINED"><span class="type-signature">&lt;static> </span>USER_DEFINED<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Created by user via UI or API, e.g. a deployment event</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="SignalFxEventCategories.js.html">SignalFxEventCategories.js</a>,
+				 <a href="SignalFxEventCategories.js.html#sunlight-1-line-15">line 15</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
 
     
 </dd>
 
         </dl>
+    
+
     
 
     

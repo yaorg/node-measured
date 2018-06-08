@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Class: LoggingReporter</title>
+	<title>Measured Module: SignalFxEventCategories</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -94,17 +94,10 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: LoggingReporter</h1>
+	<h1 class="page-title">Module: SignalFxEventCategories</h1>
 <section>
 
 <header>
-    
-        <h2>
-        LoggingReporter
-        </h2>
-        
-            <div class="class-description"><p>A reporter impl that simply logs the metrics via the Logger.</p></div>
-        
     
 </header>
 
@@ -113,24 +106,10 @@
     <div class="container-overview">
     
         
-<hr>
-<dt>
-    <h4 class="name" id="LoggingReporter"><span class="type-signature"></span>new LoggingReporter()</h4>
-    
-    
-</dt>
-<dd>
+            <div class="description"><p>Different categories of events supported, within the SignalFx Event API.</p></div>
+        
 
-    
-
-    
-
-    
-
-    
-    
-
-    
+        
 <dl class="details">
     
 
@@ -165,8 +144,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_LoggingReporter.js.html">measured-reporting/lib/reporters/LoggingReporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_LoggingReporter.js.html#sunlight-1-line-12">line 12</a>
+				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
+				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-1">line 1</a>
 			</li>
 		</ul>
 	</dd>
@@ -180,41 +159,16 @@
 </dl>
 
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h5>Example</h5>
         
-    <pre class="sunlight-highlight-javascript">const { SelfReportingMetricsRegistry, LoggingReporter } = require(&#x27;measured-reporting&#x27;);
-const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
+            <h3>Example</h3>
+            
+    <pre class="sunlight-highlight-javascript">const registry = new SignalFxSelfReportingMetricsRegistry(...);
+registry.sendEvent(&#x27;uncaughtException&#x27;, SignalFxEventCategories.ALERT);</pre>
 
 
-    
-</dd>
-
+        
     
     </div>
-
-    
-        <h3 class="subsection-title">Extends</h3>
-
-        
-
-
-    <ul>
-        <li><a href="Reporter.html">Reporter</a></li>
-    </ul>
-
 
     
 
@@ -232,15 +186,15 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
         <dl>
             
 <hr>
-<dt class="name" id="_defaultDimensions">
-    <h4 id="_defaultDimensions"><span class="type-signature">&lt;protected> </span>_defaultDimensions<span class="type-signature"> :<a href="global.html#Dimensions">Dimensions</a></span></h4>
+<dt class="name" id=".ALERT">
+    <h4 id=".ALERT"><span class="type-signature">&lt;static> </span>ALERT<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Map of default dimensions, that should be sent with every metric.</p>
+        <p>Output by anomaly detectors</p>
     </div>
     
 
@@ -249,7 +203,7 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
         <ul>
             <li>
                 
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
 
 
 
@@ -265,15 +219,6 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
 
 	
 
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#_defaultDimensions">Reporter#_defaultDimensions</a>
-			</li>
-		</ul>
-	</dd>
 	
 
     
@@ -301,8 +246,8 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-84">line 84</a>
+				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
+				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-20">line 20</a>
 			</li>
 		</ul>
 	</dd>
@@ -322,15 +267,15 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
         
             
 <hr>
-<dt class="name" id="_defaultReportingIntervalInSeconds">
-    <h4 id="_defaultReportingIntervalInSeconds"><span class="type-signature">&lt;protected> </span>_defaultReportingIntervalInSeconds<span class="type-signature"> :number</span></h4>
+<dt class="name" id=".AUDIT">
+    <h4 id=".AUDIT"><span class="type-signature">&lt;static> </span>AUDIT<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>The default reporting interval, a number in seconds.<br>If not overridden via the {@see ReporterOptions}, defaults to 10 seconds.</p>
+        <p>Audit trail events</p>
     </div>
     
 
@@ -339,7 +284,7 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
         <ul>
             <li>
                 
-<span class="param-type">number</span>
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
 
 
 
@@ -355,15 +300,6 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
 
 	
 
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#_defaultReportingIntervalInSeconds">Reporter#_defaultReportingIntervalInSeconds</a>
-			</li>
-		</ul>
-	</dd>
 	
 
     
@@ -391,8 +327,8 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-100">line 100</a>
+				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
+				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-25">line 25</a>
 			</li>
 		</ul>
 	</dd>
@@ -412,15 +348,15 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
         
             
 <hr>
-<dt class="name" id="_log">
-    <h4 id="_log"><span class="type-signature">&lt;protected> </span>_log<span class="type-signature"> :Logger</span></h4>
+<dt class="name" id=".COLLECTD">
+    <h4 id=".COLLECTD"><span class="type-signature">&lt;static> </span>COLLECTD<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Loggers to use, defaults to a new bunyan logger if nothing is supplied in options</p>
+        <p>Event originated within collectd</p>
     </div>
     
 
@@ -429,7 +365,7 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
         <ul>
             <li>
                 
-<span class="param-type">Logger</span>
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
 
 
 
@@ -445,15 +381,6 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
 
 	
 
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#_log">Reporter#_log</a>
-			</li>
-		</ul>
-	</dd>
 	
 
     
@@ -481,8 +408,332 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-91">line 91</a>
+				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
+				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-35">line 35</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".EXCEPTION">
+    <h4 id=".EXCEPTION"><span class="type-signature">&lt;static> </span>EXCEPTION<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Created by exception appenders to denote exceptional events</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
+				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-45">line 45</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".JOB">
+    <h4 id=".JOB"><span class="type-signature">&lt;static> </span>JOB<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Generated by analytics server</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
+				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-30">line 30</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".SERVICE_DISCOVERY">
+    <h4 id=".SERVICE_DISCOVERY"><span class="type-signature">&lt;static> </span>SERVICE_DISCOVERY<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Service discovery event</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
+				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-40">line 40</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id=".USER_DEFINED">
+    <h4 id=".USER_DEFINED"><span class="type-signature">&lt;static> </span>USER_DEFINED<span class="type-signature"> :<a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Created by user via UI or API, e.g. a deployment event</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#SignalFxEventCategoryId">SignalFxEventCategoryId</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
+				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-15">line 15</a>
 			</li>
 		</ul>
 	</dd>
@@ -502,735 +753,6 @@ const registry = new SelfReportingMetricsRegistry(new LoggingReporter());</pre>
         </dl>
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        <dl>
-            
-<hr>
-<dt>
-    <h4 class="name" id="_getDimensions"><span class="type-signature">&lt;protected> </span>_getDimensions(metric)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>metric</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#MetricWrapper">MetricWrapper</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The Wrapped Metric Object.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#_getDimensions">Reporter#_getDimensions</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-192">line 192</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>The left merged default dimensions with the metric specific dimensions</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="_reportMetrics"><span class="type-signature">&lt;protected> </span>_reportMetrics(metrics)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Logs the metrics via the inherited logger instance.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>metrics</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Array.&lt;<a href="global.html#MetricWrapper">MetricWrapper</a>></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-    <dt class="tag-overrides">Overrides:</dt>
-    <dd class="tag-overrides"><ul class="dummy"><li>
-        <a href="Reporter.html#_reportMetrics">Reporter#_reportMetrics</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_LoggingReporter.js.html">measured-reporting/lib/reporters/LoggingReporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_LoggingReporter.js.html#sunlight-1-line-18">line 18</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="reportMetricOnInterval"><span class="type-signature"></span>reportMetricOnInterval(metricKey, intervalInSeconds)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Informs the reporter to report a metric on a given interval in seconds.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>metricKey</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The metric key for the metric in the metric registry.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>intervalInSeconds</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The interval in seconds to report the metric on.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#reportMetricOnInterval">Reporter#reportMetricOnInterval</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-119">line 119</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="setRegistry"><span class="type-signature"></span>setRegistry(registry)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Sets the registry, this must be called before reportMetricOnInterval.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>registry</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#setRegistry">Reporter#setRegistry</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-109">line 109</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="shutdown"><span class="type-signature"></span>shutdown()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Clears the intervals that are running to report metrics at an interval, and resets the state.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-	<dt class="inherited-from method-doc-label method-doc-details-label">Inherited From:</dt>
-	<dd class="inherited-from">
-		<ul class="dummy">
-			<li>
-				<a href="Reporter.html#shutdown">Reporter#shutdown</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-199">line 199</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dd>
-
-        </dl>
     
 
     

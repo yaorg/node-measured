@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Modules</title>
+	<title>Measured Source: measured-signalfx-reporter/lib/SignalFxEventCategories.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="../../"><img class="branding-logo" src="../../img/measured.png"
+		<a class="navbar-brand" href="./"><img class="branding-logo" src="./img/measured.png"
 		alt="logo"/>Measured</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
@@ -34,14 +34,21 @@
 			<li class="dropdown">
 				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li>
+					<li><a href="module-CpuUtils.html">CpuUtils</a></li><li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-node-metrics.html">measured-node-metrics</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-metricValidators.html">metricValidators</a></li><li><a href="module-node-http-request-metrics.html">node-http-request-metrics</a></li><li><a href="module-node-os-metrics.html">node-os-metrics</a></li><li><a href="module-node-process-metrics.html">node-process-metrics</a></li><li><a href="module-SignalFxEventCategories.html">SignalFxEventCategories</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="LoggingReporter.html">LoggingReporter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li>
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="LoggingReporter.html">LoggingReporter</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
 				</ul>
 			</li>
 			
@@ -55,7 +62,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html">Global</a></li>
+					<li><a href="global.html#DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#nodeOsMetrics">nodeOsMetrics</a></li><li><a href="global.html#nodeProcessMetrics">nodeProcessMetrics</a></li>
 				</ul>
 			</li>
 			
@@ -82,109 +89,75 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	<h1 class="page-title">Modules</h1>
+		<h1 class="page-title">Source: measured-signalfx-reporter/lib/SignalFxEventCategories.js</h1>
+    
 <section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/**
+ * Different categories of events supported, within the SignalFx Event API.
+ *
+ * @example
+ * const registry = new SignalFxSelfReportingMetricsRegistry(...);
+ * registry.sendEvent('uncaughtException', SignalFxEventCategories.ALERT);
+ *
+ * @module SignalFxEventCategories
+ */
+module.exports = {
+  /**
+   * Created by user via UI or API, e.g. a deployment event
+   * @type {SignalFxEventCategoryId}
+   */
+  USER_DEFINED: 'USER_DEFINED',
+  /**
+   * Output by anomaly detectors
+   * @type {SignalFxEventCategoryId}
+   */
+  ALERT: 'ALERT',
+  /**
+   * Audit trail events
+   * @type {SignalFxEventCategoryId}
+   */
+  AUDIT: 'AUDIT',
+  /**
+   * Generated by analytics server
+   * @type {SignalFxEventCategoryId}
+   */
+  JOB: 'JOB',
+  /**
+   * Event originated within collectd
+   * @type {SignalFxEventCategoryId}
+   */
+  COLLECTD: 'COLLECTD',
+  /**
+   * Service discovery event
+   * @type {SignalFxEventCategoryId}
+   */
+  SERVICE_DISCOVERY: 'SERVICE_DISCOVERY',
+  /**
+   * Created by exception appenders to denote exceptional events
+   * @type {SignalFxEventCategoryId}
+   */
+  EXCEPTION: 'EXCEPTION'
+};
 
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
-
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></dt>
-            <dd></dd>
-        
-            <dt><a href="LoggingReporter.html">LoggingReporter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="Reporter.html">Reporter</a></dt>
-            <dd></dd>
-        
-            <dt><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
+/**
+ * @interface SignalFxEventCategoryId
+ * @typedef SignalFxEventCategoryId
+ * @type {string}
+ * @example
+ * const registry = new SignalFxSelfReportingMetricsRegistry(...);
+ * registry.sendEvent('uncaughtException', SignalFxEventCategories.ALERT);
+ */
+</pre>
+    </article>
 </section>
+
 
 
 
@@ -194,10 +167,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>
