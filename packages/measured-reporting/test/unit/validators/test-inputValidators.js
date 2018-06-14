@@ -152,7 +152,7 @@ describe('validateReporterInstance', () => {
 
 describe('validateSelfReportingMetricsRegistryParameters', () => {
   it('does nothing when a reporter is passed in', () => {
-    validateSelfReportingMetricsRegistryParameters({ setRegistry: () => {}, reportMetricOnInterval: () => {} });
+    validateSelfReportingMetricsRegistryParameters([{ setRegistry: () => {}, reportMetricOnInterval: () => {} }]);
   });
 });
 
