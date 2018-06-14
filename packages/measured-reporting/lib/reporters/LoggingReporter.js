@@ -15,7 +15,8 @@ class LoggingReporter extends Reporter {
    */
   constructor(options) {
     super(options);
-    this._logLevel = (options || {}).logLevelToLogAt.toLowerCase() || 'info';
+    const level = (options || {}).logLevelToLogAt;
+    this._logLevel = (level || 'info').toLowerCase();
   }
 
   /**

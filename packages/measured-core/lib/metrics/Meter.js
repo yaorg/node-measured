@@ -47,7 +47,7 @@ class Meter {
 
   /**
    * Register n events as having just occured. Defaults to 1.
-   * @param {number} n
+   * @param {number} [n]
    */
   mark(n) {
     if (!this._interval) {
