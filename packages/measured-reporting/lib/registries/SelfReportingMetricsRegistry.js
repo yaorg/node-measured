@@ -17,25 +17,30 @@ const {
  */
 class SelfReportingMetricsRegistry {
   /**
-   * @param {Reporter} reporter The Metrics Reporter
+   * @param {Reporter|Reporter[]} reporters A single {@link Reporter} or an array of reporters that will be used to report metrics on an interval.
    * @param {SelfReportingMetricsRegistryOptions} [options] Configurable options for the Self Reporting Metrics Registry
    */
-  constructor(reporter, options) {
+  constructor(reporters, options) {
     options = options || {};
-    validateSelfReportingMetricsRegistryParameters(reporter, options);
+
+    if (!Array.isArray(reporters)) {
+      reporters = [reporters];
+    }
+
+    validateSelfReportingMetricsRegistryParameters(reporters, options);
 
     /**
      * @type {Reporter}
      * @protected
      */
-    this._reporter = reporter;
+    this._reporters = reporters;
 
     /**
      * @type {DimensionAwareMetricsRegistry}
      * @protected
      */
     this._registry = options.registry || new DimensionAwareMetricsRegistry();
-    this._reporter.setRegistry(this._registry);
+    this._reporters.forEach(reporter => reporter.setRegistry(this._registry));
 
     /**
      * Loggers to use, defaults to a new bunyan logger if nothing is supplied in options
@@ -74,7 +79,7 @@ class SelfReportingMetricsRegistry {
       );
     } else {
       const key = this._registry.putMetric(name, metric, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
     return metric;
   }
@@ -111,7 +116,7 @@ class SelfReportingMetricsRegistry {
     } else {
       gauge = new Gauge(callback);
       const key = this._registry.putMetric(name, gauge, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
     return gauge;
   }
@@ -133,7 +138,7 @@ class SelfReportingMetricsRegistry {
     } else {
       histogram = new Histogram();
       const key = this._registry.putMetric(name, histogram, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
 
     return histogram;
@@ -155,7 +160,7 @@ class SelfReportingMetricsRegistry {
     } else {
       meter = new Meter();
       const key = this._registry.putMetric(name, meter, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
 
     return meter;
@@ -178,7 +183,7 @@ class SelfReportingMetricsRegistry {
     } else {
       counter = new Counter();
       const key = this._registry.putMetric(name, counter, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
 
     return counter;
@@ -201,7 +206,7 @@ class SelfReportingMetricsRegistry {
     } else {
       timer = new Timer();
       const key = this._registry.putMetric(name, timer, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
 
     return timer;
@@ -224,7 +229,7 @@ class SelfReportingMetricsRegistry {
     } else {
       settableGauge = new SettableGauge();
       const key = this._registry.putMetric(name, settableGauge, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
 
     return settableGauge;
@@ -255,7 +260,7 @@ class SelfReportingMetricsRegistry {
     } else {
       cachedGauge = new CachedGauge(valueProducingPromiseCallback, cachedGaugeUpdateIntervalInSeconds);
       const key = this._registry.putMetric(name, cachedGauge, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
 
     return cachedGauge;
@@ -266,7 +271,7 @@ class SelfReportingMetricsRegistry {
    */
   shutdown() {
     // shutdown the reporter
-    this._reporter.shutdown();
+    this._reporters.forEach(reporter => reporter.shutdown());
     // shutdown any metrics that have an end method
     this._registry.allKeys().forEach(key => {
       const metricWrapper = this._registry.getMetricWrapperByKey(key);

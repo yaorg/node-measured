@@ -27,7 +27,7 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
     } else {
       timer = new Timer({ meter: new NoOpMeter() });
       const key = this._registry.putMetric(name, timer, dimensions);
-      this._reporter.reportMetricOnInterval(key, publishingIntervalInSeconds);
+      this._reporters.forEach(reporter => reporter.reportMetricOnInterval(key, publishingIntervalInSeconds));
     }
 
     return timer;
@@ -70,7 +70,11 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
    * registry.sendEvent('uncaughtException', SignalFxEventCategories.ALERT);
    */
   sendEvent(eventType, category, dimensions, properties, timestamp) {
-    return this._reporter.sendEvent(eventType, category, dimensions, properties, timestamp);
+    return this._reporters.forEach(reporter => {
+      if (typeof reporter.sendEvent === 'function') {
+        reporter.sendEvent(eventType, category, dimensions, properties, timestamp);
+      }
+    });
   }
 }
 
