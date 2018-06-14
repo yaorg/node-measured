@@ -193,7 +193,7 @@ class Collection {
     this._validateName(name);
 
     let settableGauge;
-    this._getMetricForNameAndType(name, MetricTypes.METER).ifPresentOrElse(
+    this._getMetricForNameAndType(name, MetricTypes.GAUGE).ifPresentOrElse(
       registeredMetric => {
         settableGauge = registeredMetric;
       },
