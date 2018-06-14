@@ -108,7 +108,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="SelfReportingMetricsRegistry"><span class="type-signature"></span>new SelfReportingMetricsRegistry(reporter [, options])</h4>
+    <h4 class="name" id="SelfReportingMetricsRegistry"><span class="type-signature"></span>new SelfReportingMetricsRegistry(reporters [, options])</h4>
     
     
 </dt>
@@ -149,13 +149,16 @@
 
         <tr>
             
-                <td class="name"><code>reporter</code></td>
+                <td class="name"><code>reporters</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type"><a href="Reporter.html">Reporter</a></span>
+|
+
+<span class="param-type">Array.&lt;<a href="Reporter.html">Reporter</a>></span>
 
 
 
@@ -174,7 +177,7 @@
 
             
 
-            <td class="description last"><p>The Metrics Reporter</p></td>
+            <td class="description last"><p>A single <a href="Reporter.html">Reporter</a> or an array of reporters that will be used to report metrics on an interval.</p></td>
         </tr>
 
     
@@ -362,7 +365,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-45">line 45</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-50">line 50</a>
 			</li>
 		</ul>
 	</dd>
@@ -439,7 +442,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-37">line 37</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-42">line 42</a>
 			</li>
 		</ul>
 	</dd>
@@ -459,8 +462,8 @@
         
             
 <hr>
-<dt class="name" id="_reporter">
-    <h4 id="_reporter"><span class="type-signature">&lt;protected> </span>_reporter<span class="type-signature"> :<a href="Reporter.html">Reporter</a></span></h4>
+<dt class="name" id="_reporters">
+    <h4 id="_reporters"><span class="type-signature">&lt;protected> </span>_reporters<span class="type-signature"> :<a href="Reporter.html">Reporter</a></span></h4>
 
     
 </dt>
@@ -516,7 +519,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-31">line 31</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-36">line 36</a>
 			</li>
 		</ul>
 	</dd>
@@ -790,7 +793,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-243">line 243</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-248">line 248</a>
 			</li>
 		</ul>
 	</dd>
@@ -1026,7 +1029,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-172">line 172</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-177">line 177</a>
 			</li>
 		</ul>
 	</dd>
@@ -1294,7 +1297,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-106">line 106</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-111">line 111</a>
 			</li>
 		</ul>
 	</dd>
@@ -1549,7 +1552,7 @@ registry.getOrCreateGauge(
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-127">line 127</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-132">line 132</a>
 			</li>
 		</ul>
 	</dd>
@@ -1785,7 +1788,7 @@ registry.getOrCreateGauge(
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-150">line 150</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-155">line 155</a>
 			</li>
 		</ul>
 	</dd>
@@ -2021,7 +2024,7 @@ registry.getOrCreateGauge(
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-218">line 218</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-223">line 223</a>
 			</li>
 		</ul>
 	</dd>
@@ -2257,7 +2260,7 @@ registry.getOrCreateGauge(
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-195">line 195</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-200">line 200</a>
 			</li>
 		</ul>
 	</dd>
@@ -2525,7 +2528,7 @@ registry.getOrCreateGauge(
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-68">line 68</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-73">line 73</a>
 			</li>
 		</ul>
 	</dd>
@@ -2627,7 +2630,7 @@ interval(() =&gt; {
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-267">line 267</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-272">line 272</a>
 			</li>
 		</ul>
 	</dd>

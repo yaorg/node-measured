@@ -260,6 +260,272 @@
             
                 
 <hr>
+<dt class="name" id="LoggingReporterOptions">
+    <h4 id="LoggingReporterOptions">LoggingReporterOptions</h4>
+
+    
+</dt>
+<dd>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Object</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Argument</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>defaultDimensions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A dictionary of dimensions to include with every metric reported</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>logger</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Logger</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The logger to use, if not supplied a new Buynan logger will be created</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>logLevel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The log level to use with the created Bunyan logger if you didn't supply your own logger.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>defaultReportingIntervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The default reporting interval to use if non is supplied when registering a metric, defaults to 10 seconds.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>logLevelToLogAt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>You can specify the log level ['debug', 'info', 'warn', 'error'] that this reporter will use when logging the metrics via the logger.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="reporters_LoggingReporter.js.html">reporters/LoggingReporter.js</a>,
+				 <a href="reporters_LoggingReporter.js.html#sunlight-1-line-41">line 41</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+            
+                
+<hr>
 <dt class="name" id="MetricWrapper">
     <h4 id="MetricWrapper">MetricWrapper</h4>
 
@@ -799,7 +1065,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="registries_SelfReportingMetricsRegistry.js.html">registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-282">line 282</a>
+				 <a href="registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-287">line 287</a>
 			</li>
 		</ul>
 	</dd>

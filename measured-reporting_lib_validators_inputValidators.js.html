@@ -335,11 +335,11 @@ module.exports = {
 
   /**
    * Validates the input parameters for a {@link SelfReportingMetricsRegistry}
-   * @param {Reporter} reporter
+   * @param {Reporter[]} reporters
    * @param {SelfReportingMetricsRegistryOptions} [options]
    */
-  validateSelfReportingMetricsRegistryParameters: (reporter, options) => {
-    module.exports.validateReporterInstance(reporter);
+  validateSelfReportingMetricsRegistryParameters: (reporters, options) => {
+    reporters.forEach(reporter => module.exports.validateReporterInstance(reporter));
     if (options) {
       module.exports.validateOptionalLogger(options.logger);
     }
