@@ -1,7 +1,7 @@
 {
   "name": "measured-signalfx-reporter",
   "description": "A Registry Reporter that knows how to report core metrics to SignalFx",
-  "version": "1.11.1",
+  "version": "1.11.2",
   "homepage": "https://yaorg.github.io/node-measured/",
   "engines": {
     "node": ">= 5.12"
@@ -26,8 +26,8 @@
   },
   "dependencies": {
     "bunyan": "^1.8.12",
-    "measured-core": "^1.11.1",
-    "measured-reporting": "^1.11.1",
+    "measured-core": "^1.11.2",
+    "measured-reporting": "^1.11.2",
     "optional-js": "^2.0.0"
   },
   "files": [
