@@ -34,11 +34,11 @@ describe('onRequestEnd', () => {
 
     const registeredKeys = registry._registry.allKeys();
     assert(registeredKeys.length === 1);
-    const expectedKey = 'requests-POST-/some/path-201';
+    const expectedKey = 'requests-POST-201-/some/path';
     assert.equal(registeredKeys[0], expectedKey);
     const metricWrapper = registry._registry.getMetricWrapperByKey(expectedKey);
     assert.equal(metricWrapper.name, 'requests');
-    assert.deepEqual(metricWrapper.dimensions, { statusCode: '201', method: 'POST', path: '/some/path' });
+    assert.deepEqual(metricWrapper.dimensions, { statusCode: '201', method: 'POST', uri: '/some/path' });
     assert.equal(metricWrapper.metricImpl.getType(), 'Timer');
     assert.equal(metricWrapper.metricImpl._histogram._count, 1);
     registry.shutdown();

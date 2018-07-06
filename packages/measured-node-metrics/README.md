@@ -55,8 +55,8 @@ You can also create your own middleware if your not using express, (please contr
         const { statusCode } = res;
         // path variables should be stripped in order to avoid runaway time series creation, 
         // /v1/cars/:id should be one dimension rather than n, one for each id.
-        const path = req.route ? req.route.path : '_unknown';
-        onRequestEnd(metricsRegistry, stopwatch, method, statusCode, path, reportingIntervalInSeconds);
+        const uri = req.route ? req.route.path : '_unknown';
+        onRequestEnd(metricsRegistry, stopwatch, method, statusCode, uri, reportingIntervalInSeconds);
       });
 
       next();

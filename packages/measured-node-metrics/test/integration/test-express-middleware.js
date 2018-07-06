@@ -47,12 +47,12 @@ describe('express-middleware', () => {
 
     const registeredKeys = registry._registry.allKeys();
     assert(registeredKeys.length === 1);
-    assert.equal(registeredKeys[0], 'requests-GET-/hello-200');
-    const metricWrapper = registry._registry.getMetricWrapperByKey('requests-GET-/hello-200');
+    assert.equal(registeredKeys[0], 'requests-GET-200-/hello');
+    const metricWrapper = registry._registry.getMetricWrapperByKey('requests-GET-200-/hello');
     const name = metricWrapper.name;
     const dimensions = metricWrapper.dimensions;
     assert.equal(name, 'requests');
-    assert.deepEqual(dimensions, { statusCode: '200', method: 'GET', path: '/hello' });
+    assert.deepEqual(dimensions, { statusCode: '200', method: 'GET', uri: '/hello' });
   });
 
   it('does not create runaway n metrics in the registry for n ids in the path', async () => {

@@ -29,8 +29,8 @@ module.exports = {
       req.on('end', () => {
         const { method } = req;
         const { statusCode } = res;
-        const path = req.route ? req.route.path : '_unknown';
-        module.exports.onRequestEnd(metricsRegistry, stopwatch, method, statusCode, path, reportingIntervalInSeconds);
+        const uri = req.route ? req.route.path : '_unknown';
+        module.exports.onRequestEnd(metricsRegistry, stopwatch, method, statusCode, uri, reportingIntervalInSeconds);
       });
 
       next();
@@ -48,17 +48,17 @@ module.exports = {
   /**
    * When the request ends stop the stop watch and create or update the timer for requests that tracked by method, status code, path.
    * The timers (meters and histograms) that get reported will be filterable by status codes, http method, the uri path.
-   * You will be able to create dash boards such as success percentage, latency percentiles by path and method, etc.
+   * You will be able to create dash boards such as success percentage, latency percentiles by uri path and method, etc.
    *
    * @param {SelfReportingMetricsRegistry} metricsRegistry The Self Reporting Metrics Registry
    * @param {Stopwatch} stopwatch The stopwatch created by onRequestStart
    * @param {string} method The Http Method for the request
    * @param {string|number} statusCode The status code for the response
-   * @param {string} [path] The path for the request. Please note to avoid out of control time series dimension creation spread,
-   * you would want to strip out ids and or other variables from the path.
+   * @param {string} [uri] The uri path for the request. Please note to avoid out of control time series dimension creation spread,
+   * you would want to strip out ids and or other variables from the uri path.
    * @param {number} [reportingIntervalInSeconds] override the reporting interval defaults to every 10 seconds.
    */
-  onRequestEnd: (metricsRegistry, stopwatch, method, statusCode, path, reportingIntervalInSeconds) => {
+  onRequestEnd: (metricsRegistry, stopwatch, method, statusCode, uri, reportingIntervalInSeconds) => {
     reportingIntervalInSeconds = reportingIntervalInSeconds || DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS;
 
     const customDimensions = {
@@ -66,8 +66,8 @@ module.exports = {
       method: `${method}`
     };
 
-    if (path) {
-      customDimensions.path = path;
+    if (uri) {
+      customDimensions.uri = uri;
     }
 
     // get or create the timer for the request count/latency timer

@@ -88,8 +88,8 @@ module.exports = {
    * @param stopwatch The stopwatch created by onRequestStart
    * @param method The Http Method for the request
    * @param statusCode The status code for the response
-   * @param [path] The path for the request. Please note to avoid out of control time series dimension creation spread,
-   * you would want to strip out ids and or other variables from the path.
+   * @param [uri] The uri for the request. Please note to avoid out of control time series dimension creation spread,
+   * you would want to strip out ids and or other variables from the uri path.
    * @param [reportingIntervalInSeconds] override the reporting interval defaults to every 10 seconds.
    */
   onRequestEnd
