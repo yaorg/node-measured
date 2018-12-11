@@ -89,13 +89,13 @@ describe('validateMetric', () => {
   it('throws an error if the metric is undefined', () => {
     assert.throws(() => {
       validateMetric(undefined);
-    }, 'The metric was undefined, when it was required');
+    }, /^TypeError: The metric was undefined, when it was required$/);
   });
 
   it('throws an error if the metric is null', () => {
     assert.throws(() => {
       validateMetric(null);
-    }, 'The metric was undefined, when it was required');
+    }, /^TypeError: The metric was undefined, when it was required$/);
   });
 
   it('throws an error if toJSON is not a function', () => {
