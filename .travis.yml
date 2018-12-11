@@ -12,6 +12,7 @@ jobs:
     - stage: release tasks
       node_js: "8"
       script:
+        - yarn test:node:coverage
         - yarn coverage
         - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master"
           && yarn travis-deploy-github-pages
