@@ -23,6 +23,7 @@ jobs:
       script:
         - scripts/publish.sh
 sudo: required
+dist: xenial
 addons:
   chrome: stable
 env:
