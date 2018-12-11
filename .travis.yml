@@ -9,15 +9,13 @@ before_install:
 - sudo apt-get install -y gawk jq
 after_success:
 - yarn coverage
-# Deploy documentation site every commit to master
 - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master"
   && yarn travis-deploy-github-pages
-# Trigger publish script on tagged builds
 - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && scripts/publish.sh
 sudo: required
 addons:
   chrome: stable
 env:
   global:
-  - secure: S5UUBCJPljTUXznK0CAc7WHwlkn5uMNSymiJqDZX+7FhVVwybWvpl24edzOX/wjAoID1VSI8A2u5DOwNMFG/bWitzdNin+LdEg0gGa4MBK0ysS9Dkavv9MQrVEDwOiFELXVQUlt24fEHiQqL12iEmJS1a8GYCxtZLt0DeP6feQs=
-  - secure: htcr11/RhghV9ImZAZ6PH6jOw4ZNyVVfGELKe/S7uoLlSElAx3yJ2fguFLRcFyoX/UuwDibuWKJ0tS0j644B+NNFEeaI4GjOa1rWuEwhX2MSHJnVWAvtJiF7jBtfiRuEjz7wrq3KYCffjS3loJx5+8D70GQI4dM0E4WbzyJBOb4=
+  - secure: ZKLEofNJCHSzJzfmayPgRdDWqD5N5g7OPs+gJELmwopAKCUaoOH4H5iH0eg1TZzcAoPL/qwU+gheEW1V7Io4PmVB2WUXUdBP9vaqZlrIw/sa6RD/51jpx4MkXd6ciXl1vmiWMnqPBj+S0NuYjKOt1tGMPDiOtK96UUVNA8uRMrs=
+  - secure: sAfy698oA7zJdVEYt+MrBFlmbXIC0Xg+PSIA6bc6klp11yfgXS3vIXM5cW4MuijLJhxvPDmGzhsgVHB+pIQXffeVYKQypCp6JcoDG6OyUxUglvHoLaIfpMD+jQzu2I05EFCxyRZWrq+i5tMWZjkUPUfRJrXtnXEYqm2A5cWPOHs=
