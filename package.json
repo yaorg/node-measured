@@ -28,7 +28,6 @@
     "test:node:coverage": "nyc --report-dir build/coverage/ --reporter=html --reporter=text lerna exec yarn test:node",
     "test:browser": "lerna exec yarn test:browser",
     "test": "yarn test:node:coverage && yarn test:browser",
-    "posttest": "yarn generate-docs",
     "format": "lerna exec yarn format",
     "clean": "rm -fr build && lerna exec yarn clean",
     "generate-docs": "./scripts/generate-docs.sh",

@@ -7,16 +7,21 @@ node_js:
 before_install:
 - sudo apt-get -qq update
 - sudo apt-get install -y gawk jq
+after_success:
+- yarn coverage
 jobs:
   include:
-    - stage: release tasks
+    - stage: release docs
+      if: type != pull_request AND branch = master
       node_js: "8"
       script:
-        - yarn test:node:coverage
-        - yarn coverage
-        - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master"
-          && yarn travis-deploy-github-pages
-        - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && scripts/publish.sh
+      - yarn generate-docs
+      - yarn travis-deploy-github-pages
+    - stage: learna publish and npm release
+      if: type != pull_request AND tag = true
+      node_js: "8"
+      script:
+        - scripts/publish.sh
 sudo: required
 addons:
   chrome: stable
