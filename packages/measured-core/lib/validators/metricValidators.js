@@ -1,6 +1,8 @@
 const { MetricTypes } = require('../metrics/Metric');
 
-const metricTypeValues = Object.values(MetricTypes);
+// TODO: Object.values(...) does not exist in Node.js 6.x, switch after LTS period ends.
+// const metricTypeValues = Object.values(MetricTypes);
+const metricTypeValues = Object.keys(MetricTypes).map(key => MetricTypes[key]);
 
 /**
  * This module contains various validators to validate publicly exposed input.

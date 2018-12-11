@@ -42,24 +42,27 @@ describe('express-middleware', () => {
     registry.shutdown();
   });
 
-  it('creates a single timer that has 1 count for requests, when an http call is made once', async () => {
-    await callLocalHost(port, 'hello');
-
-    const registeredKeys = registry._registry.allKeys();
-    assert(registeredKeys.length === 1);
-    assert.equal(registeredKeys[0], 'requests-GET-200-/hello');
-    const metricWrapper = registry._registry.getMetricWrapperByKey('requests-GET-200-/hello');
-    const name = metricWrapper.name;
-    const dimensions = metricWrapper.dimensions;
-    assert.equal(name, 'requests');
-    assert.deepEqual(dimensions, { statusCode: '200', method: 'GET', uri: '/hello' });
+  it('creates a single timer that has 1 count for requests, when an http call is made once', () => {
+    return callLocalHost(port, 'hello').then(() => {
+      const registeredKeys = registry._registry.allKeys();
+      assert(registeredKeys.length === 1);
+      assert.equal(registeredKeys[0], 'requests-GET-200-/hello');
+      const metricWrapper = registry._registry.getMetricWrapperByKey('requests-GET-200-/hello');
+      const name = metricWrapper.name;
+      const dimensions = metricWrapper.dimensions;
+      assert.equal(name, 'requests');
+      assert.deepEqual(dimensions, { statusCode: '200', method: 'GET', uri: '/hello' });
+    });
   });
 
-  it('does not create runaway n metrics in the registry for n ids in the path', async () => {
-    await callLocalHost(port, 'users/foo');
-    await callLocalHost(port, 'users/bar');
-    await callLocalHost(port, 'users/bop');
-    assert.equal(registry._registry.allKeys().length, 1, 'There should only be one metric for /users and GET');
+  it('does not create runaway n metrics in the registry for n ids in the path', () => {
+    return Promise.all([
+      callLocalHost(port, 'users/foo'),
+      callLocalHost(port, 'users/bar'),
+      callLocalHost(port, 'users/bop')
+    ]).then(() => {
+      assert.equal(registry._registry.allKeys().length, 1, 'There should only be one metric for /users and GET');
+    });
   });
 });
 

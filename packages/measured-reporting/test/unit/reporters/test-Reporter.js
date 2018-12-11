@@ -47,7 +47,7 @@ describe('Reporter', () => {
   it('throws an error if you try to instantiate the abstract class', () => {
     assert.throws(() => {
       new Reporter();
-    }, "Can't instantiate abstract class!");
+    }, /^TypeError: Can\'t instantiate abstract class\!$/);
   });
 
   it('throws an error if _reportMetrics is not implemented', () => {

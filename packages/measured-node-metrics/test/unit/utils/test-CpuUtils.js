@@ -12,7 +12,7 @@ describe('CpuUtils', () => {
     assert(measure.total > 0);
   });
 
-  it('#calculateCpuUsagePercent calculates a percent', async () => {
+  it('#calculateCpuUsagePercent calculates a percent', () => {
     const start = CpuUtils.cpuAverage();
 
     for (let i = 0; i < 10000000; i++) {

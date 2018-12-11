@@ -5,7 +5,7 @@ const assert = require('assert');
 
 describe('CachedGauge', () => {
   let cachedGauge;
-  it('A cachedGauge immediately calls the callback to set its initial value', async () => {
+  it('A cachedGauge immediately calls the callback to set its initial value', () => {
     cachedGauge = new CachedGauge(
       () => {
         return new Promise(resolve => {
@@ -16,12 +16,12 @@ describe('CachedGauge', () => {
       TimeUnits.MINUTES
     ); // Shouldn't update in the unit test.
 
-    await wait(5 * TimeUnits.MILLISECONDS);
-
-    assert.equal(cachedGauge.toJSON(), 10);
+    return wait(5 * TimeUnits.MILLISECONDS).then(() => {
+      assert.equal(cachedGauge.toJSON(), 10);
+    });
   });
 
-  it('A cachedGauge calls the callback at the interval provided', async () => {
+  it('A cachedGauge calls the callback at the interval provided', () => {
     const values = [1, 2];
     cachedGauge = new CachedGauge(
       () => {
@@ -33,10 +33,10 @@ describe('CachedGauge', () => {
       TimeUnits.MILLISECONDS
     );
 
-    await wait(7 * TimeUnits.MILLISECONDS);
-
-    assert.equal(cachedGauge.toJSON(), 2);
-    assert.equal(values.length, 0, 'the callback should have been called 2x, emptying the values array');
+    return wait(7 * TimeUnits.MILLISECONDS).then(() => {
+      assert.equal(cachedGauge.toJSON(), 2);
+      assert.equal(values.length, 0, 'the callback should have been called 2x, emptying the values array');
+    });
   });
 
   afterEach(() => {
