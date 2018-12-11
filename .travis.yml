@@ -11,7 +11,7 @@ after_success:
 - yarn coverage
 - test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_BRANCH}" == "master"
   && yarn travis-deploy-github-pages
-#- test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && scripts/publish.sh
+- test "${TRAVIS_PULL_REQUEST}" == "false" && test "${TRAVIS_TAG}" != "" && scripts/publish.sh
 sudo: required
 addons:
   chrome: stable
