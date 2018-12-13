@@ -302,6 +302,11 @@ module.exports = {
     if (options) {
       module.exports.validateOptionalDimensions(options.defaultDimensions);
       module.exports.validateOptionalLogger(options.logger);
+
+      const type = typeof options.unrefTimers;
+      if (type !== 'boolean' &amp;&amp; type !== 'undefined') {
+        throw new TypeError(`options.unrefTimers should be a boolean or undefined, actual type: ${type}`);
+      }
     }
   },
 

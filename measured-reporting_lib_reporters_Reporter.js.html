@@ -200,6 +200,15 @@ class Reporter {
      */
     this._defaultReportingIntervalInSeconds =
       options.defaultReportingIntervalInSeconds || DEFAULT_REPORTING_INTERVAL_IN_SECONDS;
+
+    /**
+     * Flag to indicate if reporting timers should be unref'd.
+     * If not overridden via the {@see ReporterOptions}, defaults to false.
+     *
+     * @type {boolean}
+     * @protected
+     */
+    this._unrefTimers = !!options.unrefTimers;
   }
 
   /**
@@ -243,11 +252,16 @@ class Reporter {
    */
   _createIntervalCallback(intervalInSeconds) {
     this._log.debug(`_createIntervalCallback() called with intervalInSeconds: ${intervalInSeconds}`);
-    this._intervals.push(
-      setInterval(() => {
-        this._reportMetricsWithInterval(intervalInSeconds);
-      }, intervalInSeconds * 1000)
-    );
+
+    const timer = setInterval(() => {
+      this._reportMetricsWithInterval(intervalInSeconds);
+    }, intervalInSeconds * 1000);
+
+    if (this._unrefTimers) {
+      timer.unref();
+    }
+
+    this._intervals.push(timer);
   }
 
   /**
