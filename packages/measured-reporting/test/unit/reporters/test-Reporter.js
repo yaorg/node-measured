@@ -124,6 +124,27 @@ describe('Reporter', () => {
 
     validateReporterInstance(anonymousReporter);
   });
+
+  it('unrefs timers, when configured to', () => {
+    let calledUnref = false;
+
+    const timer = setTimeout(() => {}, 100);
+    clearTimeout(timer);
+    const proto = timer.constructor.prototype;
+    const { unref } = proto;
+    proto.unref = function wrappedUnref() {
+      calledUnref = true;
+      return unref.call(this);
+    };
+
+    reporter = new TestReporter({ unrefTimers: true });
+    reporter.setRegistry(registry);
+    reporter.reportMetricOnInterval(metricKey, metricInterval);
+
+    proto.unref = unref;
+
+    assert.ok(calledUnref);
+  });
 });
 
 const reportAndWait = (reporter, metricKey, metricInterval) => {
