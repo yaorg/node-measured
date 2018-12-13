@@ -12,7 +12,7 @@ jobs:
     - stage: publish code coverage
       node_js: "8"
       script:
-      - yarn test:node:coverage
+      - npm run test:node:coverage
       - yarn coverage
     - stage: release docs
       if: type != pull_request AND branch = master
