@@ -138,8 +138,10 @@ class Reporter {
       this._intervalToMetric[intervalInSeconds].add(metricKey);
     } else {
       this._intervalToMetric[intervalInSeconds] = new Set([metricKey]);
-      this._reportMetricsWithInterval(intervalInSeconds);
       this._createIntervalCallback(intervalInSeconds);
+      setImmediate(() => {
+        this._reportMetricsWithInterval(intervalInSeconds);
+      });
     }
   }
 
