@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Cerberus Node Client Source: index.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Cerberus Node Client</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="CerberusClient.html">CerberusClient</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">Global</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: index.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">'use strict'
+
+const request = require('request-micro')
+const urlJoin = require('url-join')
+const FormData = require('form-data')
+const packageData = require('./package.json')
+const { getAuthenticationHeaders } = require('./lib/sts')
+const { log, noop } = require('./lib/log')
+
+const globalHeaders = {
+  'X-Cerberus-Client': `CerberusNodeClient/${packageData.version}`
+}
+
+const cerberusVersion = 'v1'
+
+/**
+ * Options for creating a {@link CerberusClient}
+ * @interface CerberusClientOptions
+ * @typedef CerberusClientOptions
+ * @type {object}
+ * @property {string} hostUrl required base url for the Cerberus API.
+ * @property {string} [region] region to sign sts auth request for, defaults to us-west-2
+ * @property {boolean} [debug] If set to true additional logging occurs.
+ */
+
+/**
+ * @interface ListKeyResult
+ * @typedef ListKeyResult
+ * @type {object}
+ * @property {array&lt;string>} keys
+ */
+
+/**
+ * @interface ListFileResult
+ * @typedef ListFileResult
+ * @type {object}
+ * @property {boolean} has_next If the result requires pagination
+ * @property {string} next_offset The offset to use for the next page
+ * @property {number} limit The limit that was used for the results
+ * @property {number} offset The offset of the results
+ * @property {number} file_count_in_result Number of files in result
+ * @property {number} total_file_count Number of total files under path
+ * @property {array&lt;SecureFileSummaries>} secure_file_summaries
+ */
+
+/**
+ * @interface SecureFileSummaries
+ * @typedef SecureFileSummaries
+ * @type {object}
+ * @property {string} sdbox_id The SDB id
+ * @property {string} path The path for the file
+ * @property {number} size_in_bytes The size in bytes of the file
+ * @property {string} name The name of the file
+ * @property {string} created_by Who originally uploaded the file
+ * @property {string} created_ts ISO 8061 String of when the file was originally uploaded
+ * @property {string} last_updated_by Who last updated the file
+ * @property {string} last_updated_ts ISO 8061 String of when the file was last updated
+ */
+
+/**
+ * Cerberus client with CRUD operations for secure data and files.
+ *
+ * @example
+ * var CerberusClient = require('cerberus-node-client')
+ *
+ * var client = new CerberusClient({
+ *   // string, The cerberus URL to use.
+ *   hostUrl: YOUR_CERBERUS_HOST,
+ *
+ *   // boolean, defaults to false. When true will console.log many operations
+ *   debug: true,
+ *
+ *   // This will be used as the cerberus X-Vault-Token if supplied
+ *   // OVERRIDDEN by process.env.CERBERUS_TOKEN
+ *   // If present, normal authentication with cerberus will be skipped
+ *   // You should normally only be using this in testing environments
+ *   // When developing locally, it is easier to use process.env.CERBERUS_TOKEN
+ *   token: 'Some_Auth_Token'
+ * })
+ *
+ * cerberusClient.getSecureData('path/to/my/secret').then(secureConfig => {
+ *   //do something with config
+ * })
+ */
+class CerberusClient {
+
+  /**
+   * @param {CerberusClientOptions} options The options for the Cerberus client.
+   */
+  constructor (options) {
+    if (!options || typeof options !== 'object') {
+      throw new Error('options parameter is required')
+    }
+    this._log = options.debug ? log : noop
+
+    // Override context with env variables
+    let envToken = getEnvironmentVariable(process.env.CERBERUS_TOKEN)
+    if (envToken) {
+      this._log('environment variable token found', envToken)
+      this._token = envToken
+    }
+
+    // Validate configuration
+    if (typeof options.hostUrl !== 'string') {
+      throw new Error('options.hostUrl must be a URL string')
+    }
+
+    this._hostUrl = options.hostUrl
+    this._region = options.region ? options.region : 'us-west-2'
+  }
+
+  /**
+   * Fetches secure data.
+   *
+   * @param {string} path The path for the secure data
+   * @return {Promise&lt;object>} A promise that when resolved supplies the secure data
+   */
+  getSecureData (path) {
+    return this._doSecretAction('GET', path, undefined)
+  }
+
+  /**
+   * Writes secure data.
+   *
+   * @param {string} path The path for the secure data
+   * @param {object} data The secure data
+   * @return {Promise&lt;undefined>} A promise that will be resolved when the write is finished
+   */
+  writeSecureData (path, data) {
+    return this._doSecretAction('POST', path, data)
+  }
+
+  /**
+   * Deletes secure data.
+   *
+   * @param {string} path The path for the secure data
+   * @return {Promise&lt;object>} A promise that will be resolved when the delete is finished
+   */
+  deleteSecureData (path) {
+    return this._doSecretAction('DELETE', path, undefined)
+  }
+
+  /**
+   * lists the keys under a secure data path.
+   *
+   * If no keys are present {ListKeyResult} will have an empty array.
+   *
+   * @param {string} path The path or partial path
+   * @return {Promise&lt;ListKeyResult>} A promise that will be resolved when the list is finished supplying the results
+   */
+  async listPathsForSecureData (path) {
+    let res
+    try {
+      res = await this._doSecretAction('LIST', path, undefined)
+    } catch (e) {
+      // If no keys under a partial path can be found the API returns a 404, lets convert that to set of empty keys
+      if (e.message.includes('status code: 404')) {
+        res = {keys: []}
+      } else {
+        throw e
+      }
+    }
+    return res
+  }
+
+  /**
+   * lists the files under a path.
+   *
+   * @param {string} path The path or partial path
+   * @return {Promise&lt;ListFileResult>} A promise that will be resolved when the list is finished supplying the {ListFileResult}
+   */
+  listFile (path) {
+    return this._doFileAction('LIST', path, undefined)
+  }
+
+  /**
+   * Reads the contents of an uploaded file
+   *
+   * @param {string} path The path the the uploaded file
+   * @return {Promise&lt;Buffer|string>} A promise that will be resolved when the file contents have been fetched
+   */
+  readFile (path) {
+    return this._doFileAction('GET', path, undefined)
+  }
+
+  /**
+   * Uploads a file to a given path
+   *
+   * @param {string} path The path
+   * @param {string|Buffer} data The file buffer or string
+   * @return {Promise&lt;object>} A promise that will be resolved when the file contents have been uploaded
+   */
+  writeFile (path, data) {
+    return this._doFileAction('POST', path, data)
+  }
+
+  /**
+   * deletes an uploaded file
+   *
+   * @param {string} path The path the the uploaded file
+   * @return {Promise&lt;object>} A promise that will be resolved when the file contents have been deleted
+   */
+  deleteFile (path) {
+    return this._doFileAction('DELETE', path, undefined)
+  }
+
+  /**
+   * Performs an API action against the secret endpoint in Cerberus
+   *
+   * @param type The type of secret action
+   * @param {string} path The secure data path
+   * @param body The post for writes
+   * @return {Promise&lt;*>} This method returns a promised that when resolved will supply the secure data.
+   * @private
+   */
+  async _doSecretAction (type, path, body) {
+    this._log(`Starting ${type} request for ${path}`)
+    const token = await this._getToken()
+    const response = await this._executeCerberusRequest({
+      headers: Object.assign({}, globalHeaders, { 'X-Cerberus-Token': token }),
+      method: type === 'LIST' ? 'GET' : type,
+      url: urlJoin(this._hostUrl, cerberusVersion, 'secret', path) + (type === 'LIST' ? '?list=true' : ''),
+      body: body
+    })
+
+    return response ? response.data : undefined
+  }
+
+  /**
+   * Executes a request against the Cerberus API dealing with any error cases.
+   *
+   * @param requestConfig The request configuration to be executed
+   * @return {Promise&lt;*>} The response body from Cerberus
+   * @private
+   */
+  async _executeCerberusRequest (requestConfig) {
+    let response
+    try {
+      response = await this._executeRequest(Object.assign({}, { json: true }, requestConfig))
+    } catch (error) {
+      const msg = 'There was an error executing a call to Cerberus.\nmsg: \'' + error.message + '\''
+      this._log(msg)
+      throw new Error(msg)
+    }
+
+    if (!(response.statusCode >= 200 &amp;&amp; response.statusCode &lt; 300)) {
+      if (response.headers['content-type'].startsWith('application/json')) {
+        throw new Error(`Cerberus returned an error, when executing a call.\nstatus code: ${response.statusCode}\nmsg: ${JSON.stringify(response.data)}`)
+      } else {
+        throw new Error('Cerberus returned a non-success response that wasn\'t JSON' +
+          ', this is likely due to being blocked by the WAF')
+      }
+    }
+
+    return response.data
+  }
+
+  // noinspection JSMethodCanBeStatic
+  /**
+   * Uses the micro request library to execute the request
+   * @param requestConfig
+   * @return {promise&lt;*>}
+   * @private
+   */
+  _executeRequest (requestConfig) {
+    return request(requestConfig)
+  }
+
+  /**
+   * Upload, delete, read, and list files on Cerberus.
+   *
+   * @param {string} type - The HTTP method (with the exception of 'LIST') to use as outlined in https://github.com/Nike-Inc/cerberus-management-service/blob/master/API.md
+   * @param {string} filePath - The path of the file
+   * @param {string|Buffer} fileBuffer - Buffer of the file to upload
+   * @returns {Promise&lt;object>} Buffer if read file and Cerberus response otherwise
+   * @private
+   */
+  async _doFileAction (type, filePath, fileBuffer) {
+    this._log(`Starting ${type} file request for ${filePath}`)
+    const token = await this._getToken()
+    let form
+    if (fileBuffer) {
+      form = new FormData({})
+      form.append('file-content', fileBuffer, {filename: filePath.match(/([^\/]*)\/*$/)[1]})
+    }
+
+    const data = await this._executeCerberusRequest({
+      method: type === 'LIST' ? 'GET' : type,
+      url: urlJoin(this._hostUrl, cerberusVersion, type === 'LIST' ? 'secure-files' : 'secure-file', filePath),
+      headers: Object.assign({}, globalHeaders, {'X-Cerberus-Token': token}, type === 'POST' ? form.getHeaders() : undefined),
+      body: form,
+      json: type === 'LIST' || type === 'DELETE'
+    })
+
+    return data
+  }
+
+  /**
+   * Fetches a token either from a local env var or attempts to authenticate with Cerberus via the STS authentication endpoint.
+   *
+   * @return {Promise&lt;string>} when the promise is resolved the Cerberus auth token string is supplied.
+   * @private
+   */
+  async _getToken () {
+    // tokenExpiresAt in secs, Date.now in ms
+    if (this._tokenExpiresAt &amp;&amp; (this._tokenExpiresAt &lt;= (Date.now() / 1000))) {
+      this._tokenExpiresAt = null
+      this._token = null
+    }
+
+    // Already has token
+    if (this._token) {
+      this._log('returning stored token')
+      return this._token
+    }
+
+    let authResponse
+    try {
+      const authHeaders = await getAuthenticationHeaders(this._region)
+      authResponse = await this._executeCerberusRequest({
+        method: 'POST',
+        url: urlJoin(this._hostUrl, 'v2/auth/sts-identity'),
+        headers: Object.assign({}, globalHeaders, authHeaders)
+      })
+    } catch (error) {
+      throw new Error('There was an issue trying to authenticate with Cerberus using the STS auth endpoint\nmsg: \'' + error.message + '\'')
+    }
+
+    // Expire 60 seconds before lease is up, to account for latency
+    this._tokenExpiresAt = (Date.now() / 1000) + authResponse['lease_duration'] - 60  // token TTL in secs, Date.now in ms
+    this._token = authResponse['client_token']
+    return this._token
+  }
+}
+
+/**
+ * Gets the set value or undefined
+ *
+ * @param value The value under question
+ * @return {String|undefined} Returns the string of the value or undefined
+ * @private
+ */
+const getEnvironmentVariable = (value) => {
+  return value &amp;&amp; value !== 'undefined' &amp;&amp; value !== undefined &amp;&amp; value !== null ? value : undefined
+}
+
+module.exports = CerberusClient
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Fri Dec 21st 2018
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

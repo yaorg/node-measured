@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Measured Global</title>
+	<title>Cerberus Node Client Global</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,8 +20,7 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="./"><img class="branding-logo" src="./img/measured.png"
-		alt="logo"/>Measured</a>
+		<a class="navbar-brand" href="index.html">Cerberus Node Client</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -32,37 +31,16 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
-				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="module-CpuUtils.html">CpuUtils</a></li><li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-node-metrics.html">measured-node-metrics</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-metricValidators.html">metricValidators</a></li><li><a href="module-node-http-request-metrics.html">node-http-request-metrics</a></li><li><a href="module-node-os-metrics.html">node-os-metrics</a></li><li><a href="module-node-process-metrics.html">node-process-metrics</a></li><li><a href="module-SignalFxEventCategories.html">SignalFxEventCategories</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="LoggingReporter.html">LoggingReporter</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
-				</ul>
-			</li>
-			
-			<li class="dropdown">
-				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
-				<ul class="dropdown-menu ">
-					<li><a href="tutorial-SignalFx Express Full End to End Example.html">SignalFx Express Full End to End Example</a></li>
+					<li><a href="CerberusClient.html">CerberusClient</a></li>
 				</ul>
 			</li>
 			
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html#DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#nodeOsMetrics">nodeOsMetrics</a></li><li><a href="global.html#nodeProcessMetrics">nodeProcessMetrics</a></li>
+					<li><a href="global.html">Global</a></li>
 				</ul>
 			</li>
 			
@@ -167,404 +145,6 @@
     
 
     
-        <h3 class="subsection-title">Members</h3>
-
-        <dl>
-            
-<hr>
-<dt class="name" id="DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS">
-    <h4 id="DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS"><span class="type-signature">&lt;constant> </span>DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>The default reporting interval for node os metrics is 30 seconds.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-node-metrics_lib_nodeOsMetrics.js.html">measured-node-metrics/lib/nodeOsMetrics.js</a>,
-				 <a href="measured-node-metrics_lib_nodeOsMetrics.js.html#sunlight-1-line-10">line 10</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS">
-    <h4 id="DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS"><span class="type-signature">&lt;constant> </span>DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>The default reporting interval for node process metrics is 30 seconds.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-node-metrics_lib_nodeProcessMetrics.js.html">measured-node-metrics/lib/nodeProcessMetrics.js</a>,
-				 <a href="measured-node-metrics_lib_nodeProcessMetrics.js.html#sunlight-1-line-9">line 9</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS">
-    <h4 id="DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS"><span class="type-signature">&lt;constant> </span>DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS<span class="type-signature"> :number</span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>The default reporting interval for requests</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">number</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-node-metrics_lib_nodeHttpRequestMetrics.js.html">measured-node-metrics/lib/nodeHttpRequestMetrics.js</a>,
-				 <a href="measured-node-metrics_lib_nodeHttpRequestMetrics.js.html#sunlight-1-line-7">line 7</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="nodeOsMetrics">
-    <h4 id="nodeOsMetrics"><span class="type-signature">&lt;constant> </span>nodeOsMetrics<span class="type-signature"></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>A map of Metric generating functions, that create Metrics to measure node os stats.</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-node-metrics_lib_nodeOsMetrics.js.html">measured-node-metrics/lib/nodeOsMetrics.js</a>,
-				 <a href="measured-node-metrics_lib_nodeOsMetrics.js.html#sunlight-1-line-15">line 15</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt class="name" id="nodeProcessMetrics">
-    <h4 id="nodeProcessMetrics"><span class="type-signature">&lt;constant> </span>nodeProcessMetrics<span class="type-signature"> :Object.&lt;string, function()></span></h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>A map of Metric generating functions, that create Metrics to measure node process stats.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object.&lt;string, function()></span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-node-metrics_lib_nodeProcessMetrics.js.html">measured-node-metrics/lib/nodeProcessMetrics.js</a>,
-				 <a href="measured-node-metrics_lib_nodeProcessMetrics.js.html#sunlight-1-line-15">line 15</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-        </dl>
-    
 
     
 
@@ -574,247 +154,15 @@
         <dl>
                 
 <hr>
-<dt class="name" id="CounterProperties">
-    <h4 id="CounterProperties">CounterProperties</h4>
+<dt class="name" id="CerberusClientOptions">
+    <h4 id="CerberusClientOptions">CerberusClientOptions</h4>
 
     
 </dt>
 <dd>
     
     <div class="description">
-        <p>Properties that can be supplied to the constructor of a <a href="Counter.html">Counter</a></p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>count</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>An initial count for the counter. Defaults to 0.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-core_lib_metrics_Counter.js.html">measured-core/lib/metrics/Counter.js</a>,
-				 <a href="measured-core_lib_metrics_Counter.js.html#sunlight-1-line-69">line 69</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">// Creates a counter that starts at 5.
-const counter = new Counter({ count: 5 })</pre>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="Dimensions">
-    <h4 id="Dimensions">Dimensions</h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>A Dictionary of string, string key value pairs</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object.&lt;string, string></span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_@types_types.js.html">measured-reporting/lib/@types/types.js</a>,
-				 <a href="measured-reporting_lib_@types_types.js.html#sunlight-1-line-12">line 12</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">{
-  path: &quot;/api/foo&quot;
-  method: &quot;GET&quot;
-  statusCode: &quot;200&quot;
-}</pre>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="HistogramData">
-    <h4 id="HistogramData">HistogramData</h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>The data returned from Histogram::toJSON()</p>
+        <p>Options for creating a <a href="CerberusClient.html">CerberusClient</a></p>
     </div>
     
 
@@ -824,552 +172,6 @@ const counter = new Counter({ count: 5 })</pre>
             <li>
                 
 <span class="param-type">object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>min</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">null</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The lowest observed value.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>max</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">null</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The highest observed value.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>sum</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">null</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The sum of all observed values.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>variance</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">null</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The variance of all observed values.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>mean</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">null</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The average of all observed values.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>stddev</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">null</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The stddev of all observed values.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>count</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The number of observed values.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>median</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>50% of all values in the resevoir are at or below this value.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>p75</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>See median, 75% percentile.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>p95</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>See median, 95% percentile.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>p99</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>See median, 99% percentile.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>p999</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>See median, 99.9% percentile.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-core_lib_metrics_Histogram.js.html">measured-core/lib/metrics/Histogram.js</a>,
-				 <a href="measured-core_lib_metrics_Histogram.js.html#sunlight-1-line-239">line 239</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="HistogramProperties">
-    <h4 id="HistogramProperties">HistogramProperties</h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Properties to create a <a href="Histogram.html">Histogram</a> with.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>sample</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The sample reservoir to use. Defaults to an ExponentiallyDecayingSample.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-core_lib_metrics_Histogram.js.html">measured-core/lib/metrics/Histogram.js</a>,
-				 <a href="measured-core_lib_metrics_Histogram.js.html#sunlight-1-line-230">line 230</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="LoggingReporterOptions">
-    <h4 id="LoggingReporterOptions">LoggingReporterOptions</h4>
-
-    
-</dt>
-<dd>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
 
 
 
@@ -1409,13 +211,13 @@ const counter = new Counter({ count: 5 })</pre>
 
         <tr>
             
-                <td class="name"><code>defaultDimensions</code></td>
+                <td class="name"><code>hostUrl</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+<span class="param-type">string</span>
 
 
 
@@ -1432,46 +234,14 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>A dictionary of dimensions to include with every metric reported</p></td>
+            <td class="description last"><p>required base url for the Cerberus API.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>logger</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Logger</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>The logger to use, if not supplied a new Buynan logger will be created</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logLevel</code></td>
+                <td class="name"><code>region</code></td>
             
 
             <td class="type">
@@ -1496,20 +266,20 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>The log level to use with the created Bunyan logger if you didn't supply your own logger.</p></td>
+            <td class="description last"><p>region to sign sts auth request for, defaults to us-west-2</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>defaultReportingIntervalInSeconds</code></td>
+                <td class="name"><code>debug</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">boolean</span>
 
 
 
@@ -1528,39 +298,7 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>The default reporting interval to use if non is supplied when registering a metric, defaults to 10 seconds.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logLevelToLogAt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>You can specify the log level ['debug', 'info', 'warn', 'error'] that this reporter will use when logging the metrics via the logger.</p></td>
+            <td class="description last"><p>If set to true additional logging occurs.</p></td>
         </tr>
 
     
@@ -1601,8 +339,8 @@ const counter = new Counter({ count: 5 })</pre>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-reporting_lib_reporters_LoggingReporter.js.html">measured-reporting/lib/reporters/LoggingReporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_LoggingReporter.js.html#sunlight-1-line-42">line 42</a>
+				<a href="index.js.html">index.js</a>,
+				 <a href="index.js.html#sunlight-1-line-16">line 16</a>
 			</li>
 		</ul>
 	</dd>
@@ -1622,16 +360,12 @@ const counter = new Counter({ count: 5 })</pre>
             
                 
 <hr>
-<dt class="name" id="MeterData">
-    <h4 id="MeterData">MeterData</h4>
+<dt class="name" id="ListFileResult">
+    <h4 id="ListFileResult">ListFileResult</h4>
 
     
 </dt>
 <dd>
-    
-    <div class="description">
-        <p>The data returned from Meter::toJSON()</p>
-    </div>
     
 
     
@@ -1677,13 +411,13 @@ const counter = new Counter({ count: 5 })</pre>
 
         <tr>
             
-                <td class="name"><code>mean</code></td>
+                <td class="name"><code>has_next</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">boolean</span>
 
 
 
@@ -1694,404 +428,14 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>The average rate since the meter was started.</p></td>
+            <td class="description last"><p>If the result requires pagination</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>count</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The total of all values added to the meter.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>currentRate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The rate of the meter since the last toJSON() call.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>1MinuteRate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The rate of the meter biased towards the last 1 minute.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>5MinuteRate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The rate of the meter biased towards the last 5 minutes.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>15MinuteRate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The rate of the meter biased towards the last 15 minutes.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-core_lib_metrics_Meter.js.html">measured-core/lib/metrics/Meter.js</a>,
-				 <a href="measured-core_lib_metrics_Meter.js.html#sunlight-1-line-171">line 171</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="MeterProperties">
-    <h4 id="MeterProperties">MeterProperties</h4>
-
-    
-</dt>
-<dd>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>rateUnit</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The rate unit. Defaults to 1000 (1 sec).</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>tickInterval</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The interval in which the averages are updated. Defaults to 5000 (5 sec).</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-core_lib_metrics_Meter.js.html">measured-core/lib/metrics/Meter.js</a>,
-				 <a href="measured-core_lib_metrics_Meter.js.html#sunlight-1-line-160">line 160</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const meter = new Meter({ rateUnit: 1000, tickInterval: 5000})</pre>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="MetricValueTypeWrapper">
-    <h4 id="MetricValueTypeWrapper">MetricValueTypeWrapper</h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Wrapper object to wrap metric value and SFX metadata needed to send metric value to SFX data ingestion.</p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>metric</code></td>
+                <td class="name"><code>next_offset</code></td>
             
 
             <td class="type">
@@ -2108,14 +452,14 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>The metric name to report to SignalFx</p></td>
+            <td class="description last"><p>The offset to use for the next page</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>limit</code></td>
             
 
             <td class="type">
@@ -2132,20 +476,20 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>the value to report to SignalFx</p></td>
+            <td class="description last"><p>The limit that was used for the results</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>type</code></td>
+                <td class="name"><code>offset</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
 
@@ -2156,7 +500,79 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>The mapped SignalFx metric type</p></td>
+            <td class="description last"><p>The offset of the results</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>file_count_in_result</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Number of files in result</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>total_file_count</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Number of total files under path</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secure_file_summaries</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array.&lt;<a href="global.html#SecureFileSummaries">SecureFileSummaries</a>></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
         </tr>
 
     
@@ -2197,8 +613,8 @@ const counter = new Counter({ count: 5 })</pre>
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html">measured-signalfx-reporter/lib/reporters/SignalFxMetricsReporter.js</a>,
-				 <a href="measured-signalfx-reporter_lib_reporters_SignalFxMetricsReporter.js.html#sunlight-1-line-246">line 246</a>
+				<a href="index.js.html">index.js</a>,
+				 <a href="index.js.html#sunlight-1-line-33">line 33</a>
 			</li>
 		</ul>
 	</dd>
@@ -2218,16 +634,12 @@ const counter = new Counter({ count: 5 })</pre>
             
                 
 <hr>
-<dt class="name" id="MetricWrapper">
-    <h4 id="MetricWrapper">MetricWrapper</h4>
+<dt class="name" id="ListKeyResult">
+    <h4 id="ListKeyResult">ListKeyResult</h4>
 
     
 </dt>
 <dd>
-    
-    <div class="description">
-        <p>A wrapper object around a <a href="Metric.html">Metric</a>, <a href="global.html#Dimensions">Dimensions</a> and the metric name</p>
-    </div>
     
 
     
@@ -2235,7 +647,7 @@ const counter = new Counter({ count: 5 })</pre>
         <ul>
             <li>
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
 
@@ -2269,6 +681,208 @@ const counter = new Counter({ count: 5 })</pre>
     </thead>
 
     <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>keys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array.&lt;string></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="index.js.html">index.js</a>,
+				 <a href="index.js.html#sunlight-1-line-26">line 26</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+            
+                
+<hr>
+<dt class="name" id="SecureFileSummaries">
+    <h4 id="SecureFileSummaries">SecureFileSummaries</h4>
+
+    
+</dt>
+<dd>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">object</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>sdbox_id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The SDB id</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The path for the file</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>size_in_bytes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The size in bytes of the file</p></td>
+        </tr>
+
     
 
         <tr>
@@ -2290,220 +904,14 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>The supplied name of the Metric</p></td>
+            <td class="description last"><p>The name of the file</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>metricImpl</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Metric.html">Metric</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The <a href="Metric.html">Metric</a> object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>dimensions</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The <a href="global.html#Dimensions">Dimensions</a> for the given <a href="Metric.html">Metric</a></p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_@types_types.js.html">measured-reporting/lib/@types/types.js</a>,
-				 <a href="measured-reporting_lib_@types_types.js.html#sunlight-1-line-1">line 1</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="ReporterOptions">
-    <h4 id="ReporterOptions">ReporterOptions</h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Options for creating a <a href="Reporter.html">Reporter</a></p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>defaultDimensions</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>A dictionary of dimensions to include with every metric reported</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logger</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Logger</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The logger to use, if not supplied a new Buynan logger will be created</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logLevel</code></td>
+                <td class="name"><code>created_by</code></td>
             
 
             <td class="type">
@@ -2520,161 +928,14 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>The log level to use with the created Bunyan logger if you didn't supply your own logger.</p></td>
+            <td class="description last"><p>Who originally uploaded the file</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>defaultReportingIntervalInSeconds</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The default reporting interval to use if non is supplied when registering a metric, defaults to 10 seconds.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_reporters_Reporter.js.html">measured-reporting/lib/reporters/Reporter.js</a>,
-				 <a href="measured-reporting_lib_reporters_Reporter.js.html#sunlight-1-line-222">line 222</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="SelfReportingMetricsRegistryOptions">
-    <h4 id="SelfReportingMetricsRegistryOptions">SelfReportingMetricsRegistryOptions</h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Configurable options for the Self Reporting Metrics Registry</p>
-    </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>logger</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Logger</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>the Logger to use</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>logLevel</code></td>
+                <td class="name"><code>created_ts</code></td>
             
 
             <td class="type">
@@ -2691,375 +952,44 @@ const counter = new Counter({ count: 5 })</pre>
 
             
 
-            <td class="description last"><p>The Log level to use if defaulting to included logger</p></td>
+            <td class="description last"><p>ISO 8061 String of when the file was originally uploaded</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>registry</code></td>
+                <td class="name"><code>last_updated_by</code></td>
             
 
             <td class="type">
             
-                
-<span class="param-type"><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The registry to use, defaults to new DimensionAwareMetricsRegistry</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html">measured-reporting/lib/registries/SelfReportingMetricsRegistry.js</a>,
-				 <a href="measured-reporting_lib_registries_SelfReportingMetricsRegistry.js.html#sunlight-1-line-287">line 287</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="SettableGaugeProperties">
-    <h4 id="SettableGaugeProperties">SettableGaugeProperties</h4>
-
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Properties that can be supplied to the constructor of a <a href="Counter.html">Counter</a></p>
-    </div>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>initialValue</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>An initial value to use for this settable gauge. Defaults to 0.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-core_lib_metrics_SettableGauge.js.html">measured-core/lib/metrics/SettableGauge.js</a>,
-				 <a href="measured-core_lib_metrics_SettableGauge.js.html#sunlight-1-line-47">line 47</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">// Creates a Gauge that with an initial value of 500.
-const settableGauge = new SettableGauge({ initialValue: 500 })</pre>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="SignalFxEventCategoryId">
-    <h4 id="SignalFxEventCategoryId">SignalFxEventCategoryId</h4>
-
-    
-</dt>
-<dd>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
                 
 <span class="param-type">string</span>
 
 
 
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html">measured-signalfx-reporter/lib/SignalFxEventCategories.js</a>,
-				 <a href="measured-signalfx-reporter_lib_SignalFxEventCategories.js.html#sunlight-1-line-48">line 48</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-        <h5>Example</h5>
-        
-    <pre class="sunlight-highlight-javascript">const registry = new SignalFxSelfReportingMetricsRegistry(...);
-registry.sendEvent(&#x27;uncaughtException&#x27;, SignalFxEventCategories.ALERT);</pre>
-
-
-    
-</dd>
+            
+            </td>
 
             
-                
-<hr>
-<dt class="name" id="StopwatchProperties">
-    <h4 id="StopwatchProperties">StopwatchProperties</h4>
 
-    
-</dt>
-<dd>
-    
+            
 
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
+            <td class="description last"><p>Who last updated the file</p></td>
+        </tr>
 
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>getTime</code></td>
+                <td class="name"><code>last_updated_ts</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">function</span>
+<span class="param-type">string</span>
 
 
 
@@ -3070,7 +1000,7 @@ registry.sendEvent(&#x27;uncaughtException&#x27;, SignalFxEventCategories.ALERT)
 
             
 
-            <td class="description last"><p>optional function override for supplying time., defaults to new Date() / process.hrt()</p></td>
+            <td class="description last"><p>ISO 8061 String of when the file was last updated</p></td>
         </tr>
 
     
@@ -3111,186 +1041,8 @@ registry.sendEvent(&#x27;uncaughtException&#x27;, SignalFxEventCategories.ALERT)
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="measured-core_lib_util_Stopwatch.js.html">measured-core/lib/util/Stopwatch.js</a>,
-				 <a href="measured-core_lib_util_Stopwatch.js.html#sunlight-1-line-53">line 53</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-</dd>
-
-            
-                
-<hr>
-<dt class="name" id="TimerProperties">
-    <h4 id="TimerProperties">TimerProperties</h4>
-
-    
-</dt>
-<dd>
-    
-
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">Object</span>
-
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    <dl>
-
-<table class="props table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>meter</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Meter.html">Meter</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The internal meter to use. Defaults to a new <a href="Meter.html">Meter</a>.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>histogram</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="Histogram.html">Histogram</a></span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The internal histogram to use. Defaults to a new <a href="Histogram.html">Histogram</a>.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>getTime</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>optional function override for supplying time to the <a href="Stopwatch.html">Stopwatch</a></p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-</dl>
-
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="measured-core_lib_metrics_Timer.js.html">measured-core/lib/metrics/Timer.js</a>,
-				 <a href="measured-core_lib_metrics_Timer.js.html#sunlight-1-line-123">line 123</a>
+				<a href="index.js.html">index.js</a>,
+				 <a href="index.js.html#sunlight-1-line-46">line 46</a>
 			</li>
 		</ul>
 	</dd>
@@ -3352,14 +1104,10 @@ registry.sendEvent(&#x27;uncaughtException&#x27;, SignalFxEventCategories.ALERT)
 <footer>
 
 
-	<span class="copyright">
-	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors. </br>Icon by <a href="http://www.simpleicon.com/">SimpleIcon</a> <a href="https://creativecommons.org/licenses/by/3.0">[CC BY 3.0]</a>, <a href="https://commons.wikimedia.org/wiki/File:Simpleicons_Business_line-graphic-with-two-lines.svg">via Wikimedia Commons</a>
-	</span>
-
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Tue Dec 18th 2018
+		on Fri Dec 21st 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
@@ -3439,23 +1187,6 @@ $( function () {
 
 
 <!--Google Analytics-->
-
-<script>
-	(function ( i, s, o, g, r, a, m ) {
-		i['GoogleAnalyticsObject'] = r;
-		i[r] = i[r] || function () {
-			(i[r].q = i[r].q || []).push( arguments )
-		}, i[r].l = 1 * new Date();
-		a = s.createElement( o ),
-			m = s.getElementsByTagName( o )[0];
-		a.async = 1;
-		a.src = g;
-		m.parentNode.insertBefore( a, m )
-	})( window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga' );
-
-	ga( 'create', 'UA-119781742-1', 'yaorg.github.io' );
-	ga( 'send', 'pageview' );
-</script>
 
 
 

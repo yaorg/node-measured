@@ -1,2 +1,0 @@
-measured.png and measured.svg by [SimpleIcon](http://www.simpleicon.com/) available at [flaticon](http://www.flaticon.com/packs/simpleicon-business) 
-Licenced by [CC BY 3.0](https://creativecommons.org/licenses/by/3.0), via Wikimedia Commons
