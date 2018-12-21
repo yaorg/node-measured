@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Cerberus Node Client Class: CerberusClient</title>
+	<title>Measured Class: Reporter</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,7 +20,8 @@
 <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
 <div class="container">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="index.html">Cerberus Node Client</a>
+		<a class="navbar-brand" href="../../"><img class="branding-logo" src="../../img/measured.png"
+		alt="logo"/>Measured</a>
 		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
@@ -31,9 +32,23 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="CerberusClient.html">CerberusClient</a></li>
+					<li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="LoggingReporter.html">LoggingReporter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-SignalFx Express Full End to End Example.html">SignalFx Express Full End to End Example</a></li>
 				</ul>
 			</li>
 			
@@ -72,16 +87,17 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: CerberusClient</h1>
+	<h1 class="page-title">Class: Reporter</h1>
 <section>
 
 <header>
     
         <h2>
-        CerberusClient
+        Reporter
         </h2>
         
-            <div class="class-description"><p>Cerberus client with CRUD operations for secure data and files.</p></div>
+            <div class="class-description"><p>The abstract reporter that specific implementations can extend to create a Self Reporting Metrics Registry Reporter.</p>
+<p><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></p></div>
         
     
 </header>
@@ -93,7 +109,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="CerberusClient"><span class="type-signature"></span>new CerberusClient(options)</h4>
+    <h4 class="name" id="Reporter"><span class="type-signature">&lt;abstract> </span>new Reporter( [options])</h4>
     
     
 </dt>
@@ -119,6 +135,8 @@
 
         <th>Type</th>
 
+        
+        <th>Argument</th>
         
 
         
@@ -138,7 +156,7 @@
             <td class="type">
             
                 
-<span class="param-type"><a href="global.html#CerberusClientOptions">CerberusClientOptions</a></span>
+<span class="param-type"><a href="global.html#ReporterOptions">ReporterOptions</a></span>
 
 
 
@@ -146,10 +164,20 @@
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last"><p>The options for the Cerberus client.</p></td>
+            <td class="description last"><p>The optional params to supply when creating a reporter.</p></td>
         </tr>
 
     
@@ -193,8 +221,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-85">line 85</a>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-57">line 57</a>
 			</li>
 		</ul>
 	</dd>
@@ -221,28 +249,48 @@
     
 
     
-        <h5>Example</h5>
+        <h5>Examples</h5>
         
-    <pre class="sunlight-highlight-javascript">var CerberusClient = require(&#x27;cerberus-node-client&#x27;)
+    <pre class="sunlight-highlight-javascript">const os = require(&#x27;os&#x27;);
+const process = require(&#x27;process&#x27;);
+const { SelfReportingMetricsRegistry, Reporter } = require(&#x27;measured-reporting&#x27;);
 
-var client = new CerberusClient({
-  // string, The cerberus URL to use.
-  hostUrl: YOUR_CERBERUS_HOST,
+// Create a self reporting registry with a named anonymous reporter instance;
+const registry = new SelfReportingMetricsRegistry(
+  new class ConsoleReporter extends Reporter {
+    constructor() {
+      super({
+        defaultDimensions: {
+          hostname: os.hostname(),
+          env: process.env[&#x27;NODE_ENV&#x27;] ? process.env[&#x27;NODE_ENV&#x27;] : &#x27;unset&#x27;
+        }
+       })
+    }
 
-  // boolean, defaults to false. When true will console.log many operations
-  debug: true,
+    _reportMetrics(metrics) {
+       metrics.forEach(metric =&gt; {
+         console.log(JSON.stringify({
+           metricName: metric.name,
+           dimensions: this._getDimensions(metric),
+           data: metric.metricImpl.toJSON()
+          }))
+      });
+    }
+ }()
+);</pre>
 
-  // This will be used as the cerberus X-Vault-Token if supplied
-  // OVERRIDDEN by process.env.CERBERUS_TOKEN
-  // If present, normal authentication with cerberus will be skipped
-  // You should normally only be using this in testing environments
-  // When developing locally, it is easier to use process.env.CERBERUS_TOKEN
-  token: &#x27;Some_Auth_Token&#x27;
-})
-
-cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&gt; {
-  //do something with config
-})</pre>
+    <pre class="sunlight-highlight-javascript">// Create a regular class that extends Reporter
+class LoggingReporter extends Reporter {
+  _reportMetrics(metrics) {
+    metrics.forEach(metric =&gt; {
+      this._log.info(JSON.stringify({
+       metricName: metric.name,
+       dimensions: this._getDimensions(metric),
+       data: metric.metricImpl.toJSON()
+      }))
+    });
+  }
+}</pre>
 
 
     
@@ -261,6 +309,253 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
     
 
+    
+        <h3 class="subsection-title">Members</h3>
+
+        <dl>
+            
+<hr>
+<dt class="name" id="_defaultDimensions">
+    <h4 id="_defaultDimensions"><span class="type-signature">&lt;protected> </span>_defaultDimensions<span class="type-signature"> :<a href="global.html#Dimensions">Dimensions</a></span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Map of default dimensions, that should be sent with every metric.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-84">line 84</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="_defaultReportingIntervalInSeconds">
+    <h4 id="_defaultReportingIntervalInSeconds"><span class="type-signature">&lt;protected> </span>_defaultReportingIntervalInSeconds<span class="type-signature"> :number</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The default reporting interval, a number in seconds.<br>If not overridden via the {@see ReporterOptions}, defaults to 10 seconds.</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">number</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-100">line 100</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt class="name" id="_log">
+    <h4 id="_log"><span class="type-signature">&lt;protected> </span>_log<span class="type-signature"> :Logger</span></h4>
+
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>Loggers to use, defaults to a new bunyan logger if nothing is supplied in options</p>
+    </div>
+    
+
+    
+        <h5>Type:</h5>
+        <ul>
+            <li>
+                
+<span class="param-type">Logger</span>
+
+
+
+            </li>
+        </ul>
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-91">line 91</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+</dd>
+
+        </dl>
     
 
     
@@ -270,16 +565,12 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
             
 <hr>
 <dt>
-    <h4 class="name" id="deleteFile"><span class="type-signature"></span>deleteFile(path)</h4>
+    <h4 class="name" id="_getDimensions"><span class="type-signature">&lt;protected> </span>_getDimensions(metric)</h4>
     
     
 </dt>
 <dd>
 
-    
-    <div class="description">
-        <p>deletes an uploaded file</p>
-    </div>
     
 
     
@@ -313,13 +604,13 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
         <tr>
             
-                <td class="name"><code>path</code></td>
+                <td class="name"><code>metric</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="global.html#MetricWrapper">MetricWrapper</a></span>
 
 
 
@@ -330,7 +621,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
             
 
-            <td class="description last"><p>The path the the uploaded file</p></td>
+            <td class="description last"><p>The Wrapped Metric Object.</p></td>
         </tr>
 
     
@@ -374,8 +665,8 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-203">line 203</a>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-192">line 192</a>
 			</li>
 		</ul>
 	</dd>
@@ -404,7 +695,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
     
             
 <div class="param-desc">
-    <p>A promise that will be resolved when the file contents have been deleted</p>
+    <p>The left merged default dimensions with the metric specific dimensions</p>
 </div>
 
 
@@ -415,7 +706,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;object></span>
+<span class="param-type"><a href="global.html#Dimensions">Dimensions</a></span>
 
 
 
@@ -432,7 +723,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
             
 <hr>
 <dt>
-    <h4 class="name" id="deleteSecureData"><span class="type-signature"></span>deleteSecureData(path)</h4>
+    <h4 class="name" id="_reportMetrics"><span class="type-signature">&lt;abstract, protected> </span>_reportMetrics(metrics)</h4>
     
     
 </dt>
@@ -440,7 +731,8 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
     
     <div class="description">
-        <p>Deletes secure data.</p>
+        <p>This method gets called with an array of <a href="global.html#MetricWrapper">MetricWrapper</a> on an interval, when metrics should be reported.</p>
+<p>This is the main method that needs to get implemented when created an aggregator specific reporter.</p>
     </div>
     
 
@@ -475,13 +767,13 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
         <tr>
             
-                <td class="name"><code>path</code></td>
+                <td class="name"><code>metrics</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Array.&lt;<a href="global.html#MetricWrapper">MetricWrapper</a>></span>
 
 
 
@@ -492,7 +784,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
             
 
-            <td class="description last"><p>The path for the secure data</p></td>
+            <td class="description last"><p>The array of metrics to report.</p></td>
         </tr>
 
     
@@ -536,8 +828,8 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-139">line 139</a>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-182">line 182</a>
 			</li>
 		</ul>
 	</dd>
@@ -562,30 +854,6 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>A promise that will be resolved when the delete is finished</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;object></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -594,7 +862,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
             
 <hr>
 <dt>
-    <h4 class="name" id="getSecureData"><span class="type-signature"></span>getSecureData(path)</h4>
+    <h4 class="name" id="reportMetricOnInterval"><span class="type-signature"></span>reportMetricOnInterval(metricKey, intervalInSeconds)</h4>
     
     
 </dt>
@@ -602,7 +870,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
     
     <div class="description">
-        <p>Fetches secure data.</p>
+        <p>Informs the reporter to report a metric on a given interval in seconds.</p>
     </div>
     
 
@@ -637,7 +905,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
         <tr>
             
-                <td class="name"><code>path</code></td>
+                <td class="name"><code>metricKey</code></td>
             
 
             <td class="type">
@@ -654,7 +922,31 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
             
 
-            <td class="description last"><p>The path for the secure data</p></td>
+            <td class="description last"><p>The metric key for the metric in the metric registry.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>intervalInSeconds</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The interval in seconds to report the metric on.</p></td>
         </tr>
 
     
@@ -698,8 +990,8 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-118">line 118</a>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-119">line 119</a>
 			</li>
 		</ul>
 	</dd>
@@ -724,30 +1016,6 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>A promise that when resolved supplies the secure data</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;object></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -756,7 +1024,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
             
 <hr>
 <dt>
-    <h4 class="name" id="listFile"><span class="type-signature"></span>listFile(path)</h4>
+    <h4 class="name" id="setRegistry"><span class="type-signature"></span>setRegistry(registry)</h4>
     
     
 </dt>
@@ -764,7 +1032,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
     
     <div class="description">
-        <p>lists the files under a path.</p>
+        <p>Sets the registry, this must be called before reportMetricOnInterval.</p>
     </div>
     
 
@@ -799,13 +1067,13 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
         <tr>
             
-                <td class="name"><code>path</code></td>
+                <td class="name"><code>registry</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></span>
 
 
 
@@ -816,7 +1084,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
             
 
-            <td class="description last"><p>The path or partial path</p></td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -860,8 +1128,8 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-172">line 172</a>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-109">line 109</a>
 			</li>
 		</ul>
 	</dd>
@@ -886,30 +1154,6 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>A promise that will be resolved when the list is finished supplying the {ListFileResult}</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;<a href="global.html#ListFileResult">ListFileResult</a>></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -918,7 +1162,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
             
 <hr>
 <dt>
-    <h4 class="name" id="listPathsForSecureData"><span class="type-signature">&lt;async> </span>listPathsForSecureData(path)</h4>
+    <h4 class="name" id="shutdown"><span class="type-signature"></span>shutdown()</h4>
     
     
 </dt>
@@ -926,8 +1170,7 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
     
     <div class="description">
-        <p>lists the keys under a secure data path.</p>
-<p>If no keys are present {ListKeyResult} will have an empty array.</p>
+        <p>Clears the intervals that are running to report metrics at an interval, and resets the state.</p>
     </div>
     
 
@@ -936,56 +1179,6 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
     
 
     
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The path or partial path</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
     
 
     
@@ -1023,8 +1216,8 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-151">line 151</a>
+				<a href="reporters_Reporter.js.html">reporters/Reporter.js</a>,
+				 <a href="reporters_Reporter.js.html#sunlight-1-line-199">line 199</a>
 			</li>
 		</ul>
 	</dd>
@@ -1049,567 +1242,6 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
     
 
     
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>A promise that will be resolved when the list is finished supplying the results</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;<a href="global.html#ListKeyResult">ListKeyResult</a>></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="readFile"><span class="type-signature"></span>readFile(path)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Reads the contents of an uploaded file</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The path the the uploaded file</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-182">line 182</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>A promise that will be resolved when the file contents have been fetched</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;(Buffer|string)></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="writeFile"><span class="type-signature"></span>writeFile(path, data)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Uploads a file to a given path</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The path</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">Buffer</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The file buffer or string</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-193">line 193</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>A promise that will be resolved when the file contents have been uploaded</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;object></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="writeSecureData"><span class="type-signature"></span>writeSecureData(path, data)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Writes secure data.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>path</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The path for the secure data</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The secure data</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
-	<dd class="tag-source">
-		<ul class="dummy">
-			<li>
-				<a href="index.js.html">index.js</a>,
-				 <a href="index.js.html#sunlight-1-line-129">line 129</a>
-			</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <p>A promise that will be resolved when the write is finished</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Promise.&lt;undefined></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
 
     
 </dd>
@@ -1660,6 +1292,10 @@ cerberusClient.getSecureData(&#x27;path/to/my/secret&#x27;).then(secureConfig =&
 
 <footer>
 
+
+	<span class="copyright">
+	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors. </br>Icon by <a href="http://www.simpleicon.com/">SimpleIcon</a> <a href="https://creativecommons.org/licenses/by/3.0">[CC BY 3.0]</a>, <a href="https://commons.wikimedia.org/wiki/File:Simpleicons_Business_line-graphic-with-two-lines.svg">via Wikimedia Commons</a>
+	</span>
 
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
@@ -1744,6 +1380,23 @@ $( function () {
 
 
 <!--Google Analytics-->
+
+<script>
+	(function ( i, s, o, g, r, a, m ) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push( arguments )
+		}, i[r].l = 1 * new Date();
+		a = s.createElement( o ),
+			m = s.getElementsByTagName( o )[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore( a, m )
+	})( window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga' );
+
+	ga( 'create', 'UA-119781742-1', 'yaorg.github.io' );
+	ga( 'send', 'pageview' );
+</script>
 
 
 

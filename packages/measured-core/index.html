@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Measured Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="../../"><img class="branding-logo" src="../../img/measured.png"
+		alt="logo"/>Measured</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-metricValidators.html">metricValidators</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-SignalFx Express Full End to End Example.html">SignalFx Express Full End to End Example</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">Global</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>Measured Core</h1><p>The core measured library that has the Metric interfaces and implementations.</p>
+<p><a href="https://www.npmjs.com/package/measured-core"><img src="https://img.shields.io/npm/v/measured-core.svg" alt="npm"></a> </p>
+<h2>Install</h2><pre class="prettyprint source"><code>npm install measured-core</code></pre><h2>What is in this package</h2><h3>Metric Implemenations</h3><p>The core library has the following metrics classes:</p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Gauge.html">Gauge</a></h4><p>Values that can be read instantly via a supplied call back.</p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/SettableGauge.html">SettableGauge</a></h4><p>Just like a Gauge but its value is set directly rather than supplied by a callback.</p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/CachedGauge.html">CachedGauge</a></h4><p>Like a mix of the regular and settable Gauge it takes a call back that returns a promise that will resolve the cached value and an interval that it should call the callback on to update its cached value.</p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Counter.html">Counter</a></h4><p>Counters are things that increment or decrement.</p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Timer.html">Timer</a></h4><p>Timers are a combination of Meters and Histograms. They measure the rate as well as distribution of scalar events.</p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Histogram.html">Histogram</a></h4><p>Keeps a reservoir of statistically relevant values to explore their distribution.</p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Meter.html">Meter</a></h4><p>Things that are measured as events / interval.</p>
+<h3>Registry</h3><p>The core library comes with a basic registry class </p>
+<h4><a href="https://yaorg.github.io/node-measured/packages/measured-core/Collection.html">Collection</a></h4><p>that is not aware of dimensions / tags and leaves reporting up to you.</p>
+<h4>See the <a href="../measured-reporting/">measured-reporting</a> module for more advanced and featured registries.</h4><h3>Other</h3><p>See The <a href="https://yaorg.github.io/node-measured/packages/measured-core/module-measured-core.html">measured-core</a> modules for the full list of exports for require('measured-core').</p>
+<h2>Usage</h2><p><strong>Step 1:</strong> Add measurements to your code. For example, lets track the<br>requests/sec of a http server:</p>
+<pre class="prettyprint source lang-js"><code>var http  = require('http');
+var stats = require('measured').createCollection();
+
+http.createServer(function(req, res) {
+  stats.meter('requestsPerSecond').mark();
+  res.end('Thanks');
+}).listen(3000);</code></pre><p><strong>Step 2:</strong> Show the collected measurements (more advanced examples follow later):</p>
+<pre class="prettyprint source lang-js"><code>setInterval(function() {
+  console.log(stats.toJSON());
+}, 1000);</code></pre><p>This will output something like this every second:</p>
+<pre class="prettyprint source"><code>{ requestsPerSecond:
+   { mean: 1710.2180279856818,
+     count: 10511,
+     'currentRate': 1941.4893498239829,
+     '1MinuteRate': 168.08263156623656,
+     '5MinuteRate': 34.74630977619571,
+     '15MinuteRate': 11.646507524106095 } }</code></pre><p><strong>Step 3:</strong> Aggregate the data into your backend of choice.<br>Here are a few time series data aggregators.</p>
+<ul>
+<li><a href="http://graphite.wikidot.com/">Graphite</a><ul>
+<li>A free and open source, self hosted and managed solution for time series data.</li>
+</ul>
+</li>
+<li><a href="https://signalfx.com/">SignalFx</a><ul>
+<li>An enterprise SASS offering for time series data.</li>
+</ul>
+</li>
+<li><a href="https://www.datadoghq.com/">Datadog</a><ul>
+<li>An enterprise SASS offering for time series data.</li>
+</ul>
+</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors. </br>Icon by <a href="http://www.simpleicon.com/">SimpleIcon</a> <a href="https://creativecommons.org/licenses/by/3.0">[CC BY 3.0]</a>, <a href="https://commons.wikimedia.org/wiki/File:Simpleicons_Business_line-graphic-with-two-lines.svg">via Wikimedia Commons</a>
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Fri Dec 21st 2018
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+<script>
+	(function ( i, s, o, g, r, a, m ) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push( arguments )
+		}, i[r].l = 1 * new Date();
+		a = s.createElement( o ),
+			m = s.getElementsByTagName( o )[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore( a, m )
+	})( window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga' );
+
+	ga( 'create', 'UA-119781742-1', 'yaorg.github.io' );
+	ga( 'send', 'pageview' );
+</script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Measured Source: measured-reporting/lib/reporters/Reporter.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="./"><img class="branding-logo" src="./img/measured.png"
+		alt="logo"/>Measured</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-CpuUtils.html">CpuUtils</a></li><li><a href="module-inputValidators.html">inputValidators</a></li><li><a href="module-measured-core.html">measured-core</a></li><li><a href="module-measured-node-metrics.html">measured-node-metrics</a></li><li><a href="module-measured-reporting.html">measured-reporting</a></li><li><a href="module-measured-signalfx-reporter.html">measured-signalfx-reporter</a></li><li><a href="module-metricValidators.html">metricValidators</a></li><li><a href="module-node-http-request-metrics.html">node-http-request-metrics</a></li><li><a href="module-node-os-metrics.html">node-os-metrics</a></li><li><a href="module-node-process-metrics.html">node-process-metrics</a></li><li><a href="module-SignalFxEventCategories.html">SignalFxEventCategories</a></li><li><a href="module-timeUnits.html">timeUnits</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BinaryHeap.html">BinaryHeap</a></li><li><a href="CachedGauge.html">CachedGauge</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Counter.html">Counter</a></li><li><a href="DimensionAwareMetricsRegistry.html">DimensionAwareMetricsRegistry</a></li><li><a href="ExponentiallyDecayingSample.html">ExponentiallyDecayingSample</a></li><li><a href="ExponentiallyMovingWeightedAverage.html">ExponentiallyMovingWeightedAverage</a></li><li><a href="Gauge.html">Gauge</a></li><li><a href="Histogram.html">Histogram</a></li><li><a href="LoggingReporter.html">LoggingReporter</a></li><li><a href="Meter.html">Meter</a></li><li><a href="NoOpMeter.html">NoOpMeter</a></li><li><a href="Reporter.html">Reporter</a></li><li><a href="SelfReportingMetricsRegistry.html">SelfReportingMetricsRegistry</a></li><li><a href="SettableGauge.html">SettableGauge</a></li><li><a href="SignalFxMetricsReporter.html">SignalFxMetricsReporter</a></li><li><a href="SignalFxSelfReportingMetricsRegistry.html">SignalFxSelfReportingMetricsRegistry</a></li><li><a href="Stopwatch.html">Stopwatch</a></li><li><a href="Timer.html">Timer</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Metric.html">Metric</a></li><li><a href="MetricTypes.html">MetricTypes</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-SignalFx Express Full End to End Example.html">SignalFx Express Full End to End Example</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_OS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_NODE_PROCESS_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS">DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS</a></li><li><a href="global.html#nodeOsMetrics">nodeOsMetrics</a></li><li><a href="global.html#nodeProcessMetrics">nodeProcessMetrics</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: measured-reporting/lib/reporters/Reporter.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const bunyan = require('bunyan');
+const Optional = require('optional-js');
+const { validateReporterParameters } = require('../validators/inputValidators');
+
+const DEFAULT_REPORTING_INTERVAL_IN_SECONDS = 10;
+
+/**
+ * The abstract reporter that specific implementations can extend to create a Self Reporting Metrics Registry Reporter.
+ *
+ * {@link SelfReportingMetricsRegistry}
+ *
+ * @example
+ * const os = require('os');
+ * const process = require('process');
+ * const { SelfReportingMetricsRegistry, Reporter } = require('measured-reporting');
+ *
+ * // Create a self reporting registry with a named anonymous reporter instance;
+ * const registry = new SelfReportingMetricsRegistry(
+ *   new class ConsoleReporter extends Reporter {
+ *     constructor() {
+ *       super({
+ *         defaultDimensions: {
+ *           hostname: os.hostname(),
+ *           env: process.env['NODE_ENV'] ? process.env['NODE_ENV'] : 'unset'
+ *         }
+ *        })
+ *     }
+ *
+ *     _reportMetrics(metrics) {
+ *        metrics.forEach(metric => {
+ *          console.log(JSON.stringify({
+ *            metricName: metric.name,
+ *            dimensions: this._getDimensions(metric),
+ *            data: metric.metricImpl.toJSON()
+ *           }))
+ *       });
+ *     }
+ *  }()
+ * );
+ *
+ * @example
+ * // Create a regular class that extends Reporter
+ * class LoggingReporter extends Reporter {
+ *   _reportMetrics(metrics) {
+ *     metrics.forEach(metric => {
+ *       this._log.info(JSON.stringify({
+ *        metricName: metric.name,
+ *        dimensions: this._getDimensions(metric),
+ *        data: metric.metricImpl.toJSON()
+ *       }))
+ *     });
+ *   }
+ * }
+ *
+ * @abstract
+ */
+class Reporter {
+  /**
+   * @param {ReporterOptions} [options] The optional params to supply when creating a reporter.
+   */
+  constructor(options) {
+    if (this.constructor === Reporter) {
+      throw new TypeError("Can't instantiate abstract class!");
+    }
+
+    options = options || {};
+    validateReporterParameters(options);
+
+    /**
+     * Map of intervals to metric keys, this will be used to look up what metrics should be reported at a given interval.
+     *
+     * @type {Object.&lt;number, Set&lt;string>>}
+     * @private
+     */
+    this._intervalToMetric = {};
+    this._intervals = [];
+
+    /**
+     * Map of default dimensions, that should be sent with every metric.
+     *
+     * @type {Dimensions}
+     * @protected
+     */
+    this._defaultDimensions = options.defaultDimensions || {};
+
+    /**
+     * Loggers to use, defaults to a new bunyan logger if nothing is supplied in options
+     * @type {Logger}
+     * @protected
+     */
+    this._log = options.logger || bunyan.createLogger({ name: 'Reporter', level: options.logLevel || 'info' });
+
+    /**
+     * The default reporting interval, a number in seconds.
+     * If not overridden via the {@see ReporterOptions}, defaults to 10 seconds.
+     *
+     * @type {number}
+     * @protected
+     */
+    this._defaultReportingIntervalInSeconds =
+      options.defaultReportingIntervalInSeconds || DEFAULT_REPORTING_INTERVAL_IN_SECONDS;
+  }
+
+  /**
+   * Sets the registry, this must be called before reportMetricOnInterval.
+   *
+   * @param {DimensionAwareMetricsRegistry} registry
+   */
+  setRegistry(registry) {
+    this._registry = registry;
+  }
+
+  /**
+   * Informs the reporter to report a metric on a given interval in seconds.
+   *
+   * @param {string} metricKey The metric key for the metric in the metric registry.
+   * @param {number} intervalInSeconds The interval in seconds to report the metric on.
+   */
+  reportMetricOnInterval(metricKey, intervalInSeconds) {
+    intervalInSeconds = intervalInSeconds || this._defaultReportingIntervalInSeconds;
+
+    if (!this._registry) {
+      throw new Error(
+        'You must call setRegistry(registry) before telling a Reporter to report a metric on an interval.'
+      );
+    }
+
+    if (Object.prototype.hasOwnProperty.call(this._intervalToMetric, intervalInSeconds)) {
+      this._intervalToMetric[intervalInSeconds].add(metricKey);
+    } else {
+      this._intervalToMetric[intervalInSeconds] = new Set([metricKey]);
+      this._reportMetricsWithInterval(intervalInSeconds);
+      this._createIntervalCallback(intervalInSeconds);
+    }
+  }
+
+  /**
+   * Creates the timed callback loop for the given interval.
+   *
+   * @param {number} intervalInSeconds the interval in seconds for the timeout callback
+   * @private
+   */
+  _createIntervalCallback(intervalInSeconds) {
+    this._log.debug(`_createIntervalCallback() called with intervalInSeconds: ${intervalInSeconds}`);
+    this._intervals.push(
+      setInterval(() => {
+        this._reportMetricsWithInterval(intervalInSeconds);
+      }, intervalInSeconds * 1000)
+    );
+  }
+
+  /**
+   * Gathers all the metrics that have been registered to report on the given interval.
+   *
+   * @param {number} interval The interval to look up what metrics to report
+   * @private
+   */
+  _reportMetricsWithInterval(interval) {
+    this._log.debug(`_reportMetricsWithInterval() called with intervalInSeconds: ${interval}`);
+    try {
+      Optional.of(this._intervalToMetric[interval]).ifPresent(metrics => {
+        const metricsToSend = [];
+        metrics.forEach(metricKey => {
+          metricsToSend.push(this._registry.getMetricWrapperByKey(metricKey));
+        });
+        this._reportMetrics(metricsToSend);
+      });
+    } catch (error) {
+      this._log.error('Failed to send metrics to signal fx', error);
+    }
+  }
+
+  /**
+   * This method gets called with an array of {@link MetricWrapper} on an interval, when metrics should be reported.
+   *
+   * This is the main method that needs to get implemented when created an aggregator specific reporter.
+   *
+   * @param {MetricWrapper[]} metrics The array of metrics to report.
+   * @protected
+   * @abstract
+   */
+  _reportMetrics(metrics) {
+    throw new TypeError('Abstract method _reportMetrics(metrics) must be implemented in implementation class');
+  }
+
+  /**
+   *
+   * @param {MetricWrapper} metric The Wrapped Metric Object.
+   * @return {Dimensions} The left merged default dimensions with the metric specific dimensions
+   * @protected
+   */
+  _getDimensions(metric) {
+    return Object.assign({}, this._defaultDimensions, metric.dimensions);
+  }
+
+  /**
+   * Clears the intervals that are running to report metrics at an interval, and resets the state.
+   */
+  shutdown() {
+    this._intervals.forEach(interval => clearInterval(interval));
+    this._intervals = [];
+    this._intervalToMetric = {};
+  }
+}
+
+/**
+ * Options for creating a {@link Reporter}
+ * @interface ReporterOptions
+ * @typedef ReporterOptions
+ * @type {Object}
+ * @property {Dimensions} defaultDimensions A dictionary of dimensions to include with every metric reported
+ * @property {Logger} logger The logger to use, if not supplied a new Buynan logger will be created
+ * @property {string} logLevel The log level to use with the created Bunyan logger if you didn't supply your own logger.
+ * @property {number} defaultReportingIntervalInSeconds The default reporting interval to use if non is supplied when registering a metric, defaults to 10 seconds.
+ */
+
+module.exports = Reporter;
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	License: MIT. Measured Copyright © 2012-2017 Felix Geisendörfer and Contributors, © 2018 Yet Another Org and Contributors. </br>Icon by <a href="http://www.simpleicon.com/">SimpleIcon</a> <a href="https://creativecommons.org/licenses/by/3.0">[CC BY 3.0]</a>, <a href="https://commons.wikimedia.org/wiki/File:Simpleicons_Business_line-graphic-with-two-lines.svg">via Wikimedia Commons</a>
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Fri Dec 21st 2018
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+<script>
+	(function ( i, s, o, g, r, a, m ) {
+		i['GoogleAnalyticsObject'] = r;
+		i[r] = i[r] || function () {
+			(i[r].q = i[r].q || []).push( arguments )
+		}, i[r].l = 1 * new Date();
+		a = s.createElement( o ),
+			m = s.getElementsByTagName( o )[0];
+		a.async = 1;
+		a.src = g;
+		m.parentNode.insertBefore( a, m )
+	})( window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga' );
+
+	ga( 'create', 'UA-119781742-1', 'yaorg.github.io' );
+	ga( 'send', 'pageview' );
+</script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
