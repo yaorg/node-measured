@@ -26,7 +26,7 @@ module.exports = {
     return (req, res, next) => {
       const stopwatch = module.exports.onRequestStart();
 
-      req.on('end', () => {
+      res.on('finish', () => {
         const { method } = req;
         const { statusCode } = res;
         const uri = req.route ? req.route.path : '_unknown';
