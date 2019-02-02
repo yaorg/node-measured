@@ -4,6 +4,8 @@ This tutorial shows how to use the measured libraries to fully instrument OS and
 
 The middleware will measure request count, latency distributions (req/res time histogram) and add dimensions to make it filterable by request method, response status code, request uri path.
 
+**NOTE:** You must add `app.use(createExpressMiddleware(...))` **before** the use of any express bodyParsers like `app.use(express.json())` because requests that are first handled by a bodyParser will not get measured.
+
 ```javascript
 const os = require('os');
 const signalfx = require('signalfx');

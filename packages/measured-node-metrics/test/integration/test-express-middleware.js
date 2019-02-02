@@ -21,8 +21,10 @@ describe('express-middleware', () => {
       middleware = createExpressMiddleware(registry, 1);
       app = express();
       app.use(middleware);
+      app.use(express.json());
 
       app.get('/hello', (req, res) => res.send('Hello World!'));
+      app.post('/world', (req, res) => res.status(201).send('Hello World!'));
       app.get('/users/:userId', (req, res) => {
         res.send(`id: ${req.params.userId}`);
       });
@@ -55,6 +57,20 @@ describe('express-middleware', () => {
     });
   });
 
+  it('creates a single timer that has 1 count for requests, when an http POST call is made once', () => {
+    const options = {method: 'POST', headers: {'Content-Type': 'application/json'}};
+    return callLocalHost(port, 'world', options).then(() => {
+      const registeredKeys = registry._registry.allKeys();
+      assert(registeredKeys.length === 1);
+      assert.equal(registeredKeys[0], 'requests-POST-201-/world');
+      const metricWrapper = registry._registry.getMetricWrapperByKey('requests-POST-201-/world');
+      const name = metricWrapper.name;
+      const dimensions = metricWrapper.dimensions;
+      assert.equal(name, 'requests');
+      assert.deepEqual(dimensions, { statusCode: '201', method: 'POST', uri: '/world' });
+    });
+  });
+
   it('does not create runaway n metrics in the registry for n ids in the path', () => {
     return Promise.all([
       callLocalHost(port, 'users/foo'),
@@ -66,10 +82,16 @@ describe('express-middleware', () => {
   });
 });
 
-const callLocalHost = (port, endpoint) => {
+const callLocalHost = (port, endpoint, options) => {
   return new Promise((resolve, reject) => {
+    const req = Object.assign({protocol: `http:`,
+                                   host: `127.0.0.1`,
+                                   port: `${port}`,
+                                   path: `/${endpoint}`,
+                                   method: 'GET'},
+                                  options || {});
     http
-      .get(`http://127.0.0.1:${port}/${endpoint}`, resp => {
+      .request(req, resp => {
         let data = '';
         resp.on('data', chunk => {
           data += chunk;
@@ -83,6 +105,7 @@ const callLocalHost = (port, endpoint) => {
       .on('error', err => {
         console.log('Error: ', JSON.stringify(err));
         reject();
-      });
+      })
+    .end();
   });
 };
