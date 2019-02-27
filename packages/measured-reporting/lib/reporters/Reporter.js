@@ -1,4 +1,4 @@
-const bunyan = require('bunyan');
+const pino = require('pino');
 const Optional = require('optional-js');
 const { validateReporterParameters } = require('../validators/inputValidators');
 
@@ -84,11 +84,11 @@ class Reporter {
     this._defaultDimensions = options.defaultDimensions || {};
 
     /**
-     * Loggers to use, defaults to a new bunyan logger if nothing is supplied in options
+     * Loggers to use, defaults to a new pino logger if nothing is supplied in options
      * @type {Logger}
      * @protected
      */
-    this._log = options.logger || bunyan.createLogger({ name: 'Reporter', level: options.logLevel || 'info' });
+    this._log = options.logger || pino({ name: 'Reporter', level: options.logLevel || 'info' });
 
     /**
      * The default reporting interval, a number in seconds.
@@ -226,7 +226,7 @@ class Reporter {
  * @type {Object}
  * @property {Dimensions} defaultDimensions A dictionary of dimensions to include with every metric reported
  * @property {Logger} logger The logger to use, if not supplied a new Buynan logger will be created
- * @property {string} logLevel The log level to use with the created Bunyan logger if you didn't supply your own logger.
+ * @property {string} logLevel The log level to use with the created pino logger if you didn't supply your own logger.
  * @property {number} defaultReportingIntervalInSeconds The default reporting interval to use if non is supplied when registering a metric, defaults to 10 seconds.
  */
 

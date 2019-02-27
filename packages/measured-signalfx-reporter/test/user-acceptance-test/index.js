@@ -1,11 +1,11 @@
 const signalfx = require('signalfx');
 const express = require('express');
-const bunyan = require('bunyan');
+const pino = require('pino');
 const { SignalFxMetricsReporter, SignalFxSelfReportingMetricsRegistry, SignalFxEventCategories } = require('../../lib');
 const { createOSMetrics, createProcessMetrics, createExpressMiddleware } = require('../../../measured-node-metrics/lib');
 const libraryMetadata = require('../../package');
 
-const log = bunyan.createLogger({ name: 'SelfReportingMetricsRegistry', level: 'info' });
+const log = pino({ name: 'SelfReportingMetricsRegistry', level: 'info' });
 
 const library = libraryMetadata.name;
 const version = libraryMetadata.version;

@@ -1,4 +1,4 @@
-const bunyan = require('bunyan');
+const pino = require('pino');
 const { CachedGauge, SettableGauge, Gauge, Timer, Counter, Meter, Histogram } = require('measured-core');
 const DimensionAwareMetricsRegistry = require('./DimensionAwareMetricsRegistry');
 const {
@@ -43,13 +43,13 @@ class SelfReportingMetricsRegistry {
     this._reporters.forEach(reporter => reporter.setRegistry(this._registry));
 
     /**
-     * Loggers to use, defaults to a new bunyan logger if nothing is supplied in options
+     * Loggers to use, defaults to a new pino logger if nothing is supplied in options
      * @type {Logger}
      * @protected
      */
     this._log =
       options.logger ||
-      bunyan.createLogger({ name: 'SelfReportingMetricsRegistry', level: options.logLevel || 'info' });
+      pino({ name: 'SelfReportingMetricsRegistry', level: options.logLevel || 'info' });
   }
 
   /**

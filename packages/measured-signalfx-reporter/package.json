@@ -19,16 +19,16 @@
     "test:browser": "exit 0",
     "test": "yarn test:node:coverage",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "uat:server": "node --inspect test/user-acceptance-test/index.js | ../../node_modules/.bin/bunyan"
+    "uat:server": "node --inspect test/user-acceptance-test/index.js | pino-pretty -c -l"
   },
   "repository": {
     "url": "git://github.com/yaorg/node-measured.git"
   },
   "dependencies": {
-    "bunyan": "^1.8.12",
     "measured-core": "^1.40.2",
     "measured-reporting": "^1.40.2",
-    "optional-js": "^2.0.0"
+    "optional-js": "^2.0.0",
+    "pino": "^5.11.1"
   },
   "files": [
     "lib",
@@ -38,6 +38,7 @@
   "devDependencies": {
     "express": "^4.16.3",
     "jsdoc": "^3.5.5",
+    "pino-pretty": "^2.5.0",
     "signalfx": "^6.0.0"
   }
 }

@@ -24,9 +24,9 @@
     "url": "git://github.com/yaorg/node-measured.git"
   },
   "dependencies": {
-    "bunyan": "^1.8.12",
     "measured-core": "^1.40.2",
-    "optional-js": "^2.0.0"
+    "optional-js": "^2.0.0",
+    "pino": "^5.11.1"
   },
   "files": [
     "lib",

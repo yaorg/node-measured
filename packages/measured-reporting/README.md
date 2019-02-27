@@ -78,12 +78,12 @@ const processUptimeGauge = registry.getOrCreateGauge('node.process.uptime', () =
 
 Example output:
 ```bash
-APP5HTD6ACCD8C:foo jfiel2$ NODE_ENV=development node index.js | bunyan
-[2018-06-06T23:39:49.678Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":0.092}
-[2018-06-06T23:39:50.685Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":1.099}
-[2018-06-06T23:39:51.690Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":2.104}
-[2018-06-06T23:39:52.691Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":3.105}
-[2018-06-06T23:39:53.692Z]  INFO: Reporter/9526 on APP5HTD6ACCD8C: {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":4.106}
+APP5HTD6ACCD8C:foo jfiel2$ NODE_ENV=development node index.js | pino-pretty -c -l
+[2018-06-06T23:39:49.678Z]  INFO (Reporter/9526 on APP5HTD6ACCD8C): {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":0.092}
+[2018-06-06T23:39:50.685Z]  INFO (Reporter/9526 on APP5HTD6ACCD8C): {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":1.099}
+[2018-06-06T23:39:51.690Z]  INFO (Reporter/9526 on APP5HTD6ACCD8C): {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":2.104}
+[2018-06-06T23:39:52.691Z]  INFO (Reporter/9526 on APP5HTD6ACCD8C): {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":3.105}
+[2018-06-06T23:39:53.692Z]  INFO (Reporter/9526 on APP5HTD6ACCD8C): {"metricName":"node.process.uptime","dimensions":{"hostname":"APP5HTD6ACCD8C","env":"development"},"data":4.106}
 ```
 
 
@@ -97,7 +97,7 @@ See the [ReporterOptions](http://yaorg.github.io/node-measured/build/docs/packag
 ```javascript
 const { SelfReportingMetricsRegistry, LoggingReporter } = require('measured-reporting');
 const registry = new SelfReportingMetricsRegistry(new LoggingReporter({
-  logger: myLogerImpl, // defaults to new bunyan logger if not supplied
+  logger: myLogerImpl, // defaults to new pino logger if not supplied
   defaultDimensions: {
     hostname: require('os').hostname()
   }
