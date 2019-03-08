@@ -44,7 +44,7 @@ describe('validateNumberReturningCallback', () => {
 });
 
 describe('validateOptionalLogger', () => {
-  it('validates a Buynan logger', () => {
+  it('validates a pino logger', () => {
     const logger = pino({ name: 'pino-logger' });
     validateOptionalLogger(logger);
   });
