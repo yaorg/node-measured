@@ -4,6 +4,10 @@ const { validateReporterParameters } = require('../validators/inputValidators');
 
 const DEFAULT_REPORTING_INTERVAL_IN_SECONDS = 10;
 
+function prefix() {
+  return `${new Date().toISOString()}: `;
+}
+
 /**
  * The abstract reporter that specific implementations can extend to create a Self Reporting Metrics Registry Reporter.
  *
@@ -88,7 +92,7 @@ class Reporter {
      * @type {Logger}
      * @protected
      */
-    this._log = options.logger || consoleLogLevel({ name: 'Reporter', level: options.logLevel || 'info' });
+    this._log = options.logger || consoleLogLevel({ name: 'Reporter', level: options.logLevel || 'info', prefix: prefix });
 
     /**
      * The default reporting interval, a number in seconds.

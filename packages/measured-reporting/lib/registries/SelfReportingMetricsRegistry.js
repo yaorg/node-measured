@@ -12,6 +12,10 @@ const {
   validateCachedGaugeOptions
 } = require('../validators/inputValidators');
 
+function prefix() {
+  return `${new Date().toISOString()}: `;
+}
+
 /**
  * A dimensional aware self-reporting metrics registry
  */
@@ -49,7 +53,7 @@ class SelfReportingMetricsRegistry {
      */
     this._log =
       options.logger ||
-      consoleLogLevel({ name: 'SelfReportingMetricsRegistry', level: options.logLevel || 'info' });
+      consoleLogLevel({ name: 'SelfReportingMetricsRegistry', level: options.logLevel || 'info', prefix: prefix });
   }
 
   /**
