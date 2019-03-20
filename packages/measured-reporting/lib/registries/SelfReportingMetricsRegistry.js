@@ -1,4 +1,4 @@
-const bunyan = require('bunyan');
+const consoleLogLevel = require('console-log-level');
 const { CachedGauge, SettableGauge, Gauge, Timer, Counter, Meter, Histogram } = require('measured-core');
 const DimensionAwareMetricsRegistry = require('./DimensionAwareMetricsRegistry');
 const {
@@ -11,6 +11,10 @@ const {
   validateSettableGaugeOptions,
   validateCachedGaugeOptions
 } = require('../validators/inputValidators');
+
+function prefix() {
+  return `${new Date().toISOString()}: `;
+}
 
 /**
  * A dimensional aware self-reporting metrics registry
@@ -43,13 +47,13 @@ class SelfReportingMetricsRegistry {
     this._reporters.forEach(reporter => reporter.setRegistry(this._registry));
 
     /**
-     * Loggers to use, defaults to a new bunyan logger if nothing is supplied in options
+     * Loggers to use, defaults to a new console logger if nothing is supplied in options
      * @type {Logger}
      * @protected
      */
     this._log =
       options.logger ||
-      bunyan.createLogger({ name: 'SelfReportingMetricsRegistry', level: options.logLevel || 'info' });
+      consoleLogLevel({ name: 'SelfReportingMetricsRegistry', level: options.logLevel || 'info', prefix: prefix });
   }
 
   /**

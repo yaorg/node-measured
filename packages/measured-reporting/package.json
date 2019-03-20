@@ -24,7 +24,7 @@
     "url": "git://github.com/yaorg/node-measured.git"
   },
   "dependencies": {
-    "bunyan": "^1.8.12",
+    "console-log-level": "^1.4.1",
     "measured-core": "^1.40.2",
     "optional-js": "^2.0.0"
   },

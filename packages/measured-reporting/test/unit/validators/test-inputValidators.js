@@ -1,5 +1,5 @@
 /*global describe, it, beforeEach, afterEach*/
-const bunyan = require('bunyan');
+const consoleLogLevel = require('console-log-level');
 const loglevel = require('loglevel');
 const winston = require('winston');
 const assert = require('assert');
@@ -45,7 +45,7 @@ describe('validateNumberReturningCallback', () => {
 
 describe('validateOptionalLogger', () => {
   it('validates a Buynan logger', () => {
-    const logger = bunyan.createLogger({ name: 'bunyan-logger' });
+    const logger = consoleLogLevel({ name: 'consoleLogLevel-logger' });
     validateOptionalLogger(logger);
   });
 
