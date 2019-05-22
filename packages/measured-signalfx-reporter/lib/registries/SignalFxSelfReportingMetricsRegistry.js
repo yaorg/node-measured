@@ -71,9 +71,11 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
    */
   sendEvent(eventType, category, dimensions, properties, timestamp) {
     return Promise.all(
-      this._reporters
-        .filter(reporter => typeof reporter.sendEvent === 'function')
-        .map(reporter => reporter.sendEvent(eventType, category, dimensions, properties, timestamp))
+      this._reporters.filter(reporter => typeof reporter.sendEvent === 'function').map(reporter =>
+        reporter.sendEvent(eventType, category, dimensions, properties, timestamp).catch(error => {
+          return error;
+        })
+      )
     );
   }
 }
