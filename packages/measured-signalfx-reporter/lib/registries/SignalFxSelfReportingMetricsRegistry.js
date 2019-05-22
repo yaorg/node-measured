@@ -70,11 +70,9 @@ class SignalFxSelfReportingMetricsRegistry extends SelfReportingMetricsRegistry 
    * registry.sendEvent('uncaughtException', SignalFxEventCategories.ALERT);
    */
   sendEvent(eventType, category, dimensions, properties, timestamp) {
-    return this._reporters.forEach(reporter => {
-      if (typeof reporter.sendEvent === 'function') {
-        reporter.sendEvent(eventType, category, dimensions, properties, timestamp);
-      }
-    });
+    return Promise.all(this._reporters
+      .filter(reporter => typeof reporter.sendEvent === 'function')
+      .map(reporter => reporter.sendEvent(eventType, category, dimensions, properties, timestamp)));
   }
 }
 
