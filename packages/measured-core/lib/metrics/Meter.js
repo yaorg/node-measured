@@ -22,6 +22,10 @@ class Meter {
   constructor(properties) {
     this._properties = properties || {};
     this._initializeState();
+
+    if (!this._properties.keepAlive) {
+      this.unref();
+    }
   }
 
   /**
@@ -164,6 +168,7 @@ module.exports = Meter;
  * @type {Object}
  * @property {number} rateUnit The rate unit. Defaults to 1000 (1 sec).
  * @property {number} tickInterval The interval in which the averages are updated. Defaults to 5000 (5 sec).
+ * @property {boolean} keepAlive Optional flag to unref the associated timer. Defaults to `false`.
  * @example
  * const meter = new Meter({ rateUnit: 1000, tickInterval: 5000})
  */

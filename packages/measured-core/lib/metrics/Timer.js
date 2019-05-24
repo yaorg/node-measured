@@ -43,6 +43,11 @@ class Timer {
     this._meter = properties.meter || new Meter({});
     this._histogram = properties.histogram || new Histogram({});
     this._getTime = properties.getTime;
+    this._keepAlive = !!properties.keepAlive;
+
+    if (!properties.keepAlive) {
+      this.unref();
+    }
   }
 
   /**
@@ -127,4 +132,5 @@ module.exports = Timer;
  * @property {Meter} meter The internal meter to use. Defaults to a new {@link Meter}.
  * @property {Histogram} histogram The internal histogram to use. Defaults to a new {@link Histogram}.
  * @property {function} getTime optional function override for supplying time to the {@link Stopwatch}
+ * @property {boolean} keepAlive Optional flag to unref the associated timer. Defaults to `false`.
  */
