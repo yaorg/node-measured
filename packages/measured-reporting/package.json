@@ -1,7 +1,7 @@
 {
   "name": "measured-reporting",
   "description": "The classes needed to create self reporting dimension aware metrics registries",
-  "version": "1.43.0",
+  "version": "1.44.0",
   "homepage": "https://yaorg.github.io/node-measured/",
   "engines": {
     "node": ">= 5.12"
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "console-log-level": "^1.4.1",
-    "measured-core": "^1.43.0",
+    "measured-core": "^1.44.0",
     "optional-js": "^2.0.0"
   },
   "files": [
