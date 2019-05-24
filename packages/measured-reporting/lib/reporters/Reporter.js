@@ -92,7 +92,8 @@ class Reporter {
      * @type {Logger}
      * @protected
      */
-    this._log = options.logger || consoleLogLevel({ name: 'Reporter', level: options.logLevel || 'info', prefix: prefix });
+    this._log =
+      options.logger || consoleLogLevel({ name: 'Reporter', level: options.logLevel || 'info', prefix: prefix });
 
     /**
      * The default reporting interval, a number in seconds.
