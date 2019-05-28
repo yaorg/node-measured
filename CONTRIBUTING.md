@@ -50,4 +50,21 @@ Pull requests are welcome, please keep conversations and commit messages civil.
     1. Your changes must not break the existing library API without good justification.
     1. Your commit messages should be reasonable. (`git rebase -i head~n` choose the r option to reword you commits).
     
-This guide is loosely based off of [factory_bot_rails contributing.md](https://github.com/thoughtbot/factory_bot_rails/blob/master/CONTRIBUTING.md) which is referenced here [GitHub's Contributing Guidelines blog post](https://blog.github.com/2012-09-17-contributing-guidelines/) 
+This guide is loosely based off of [factory_bot_rails contributing.md](https://github.com/thoughtbot/factory_bot_rails/blob/master/CONTRIBUTING.md) which is referenced here [GitHub's Contributing Guidelines blog post](https://blog.github.com/2012-09-17-contributing-guidelines/)
+
+## Releasing a new version
+
+Once a pull request has been reviewed and merged new versions of all packages can be released by any of the maintainers. This is an automated process driven by [Github Release](https://github.com/yaorg/node-measured/releases).
+
+1. Check the [latest version number under releases](https://github.com/yaorg/node-measured/releases) and decide if the changes to be released require a MAJOR, MINOR or PATCH release according to [semantic versioning](https://semver.org/):
+
+    1. MAJOR version when you make incompatible API changes (e.g. `1.15.0` -> `2.0.0`)
+    2. MINOR version when you add functionality in a backwards-compatible manner (e.g. `1.15.0` -> `1.16.0`)
+    3. PATCH version when you make backwards-compatible bug fixes (e.g. `1.15.0` -> `1.15.1`
+
+2. Create a new release by incrementing the correct version number using the [Github Releases user interface](https://github.com/yaorg/node-measured/releases/new).
+
+    1. Be sure not to save any draft releases! (as they'll also trigger step 3 below since Github creates a new tag for draft releases).
+    2. The tag version and release title is expected to be the same and in the following format: `v1.43.0`
+
+3. The new tag will kick off a Travis build and using will automatically release all packages using the new version specified. (See [scripts/publish.sh](scripts/publish.sh) for details).
