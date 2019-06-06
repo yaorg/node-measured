@@ -145,6 +145,17 @@ describe('Reporter', () => {
 
     assert.ok(calledUnref);
   });
+
+  it('resets metrics, when configured to', () => {
+    reporter = new TestReporter({ resetMetricsOnInterval: true });
+    reporter.setRegistry(registry);
+    reporter._intervalToMetric[metricInterval] = new Set([metricKey]);
+    reporter._reportMetricsWithInterval(metricInterval);
+
+    const [[{ metricImpl }]] = reporter.getReportedMetrics();
+
+    assert.equal(metricImpl.toJSON(), 0);
+  });
 });
 
 const reportAndWait = (reporter, metricKey, metricInterval) => {

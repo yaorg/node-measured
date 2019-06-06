@@ -113,6 +113,15 @@ class Reporter {
      * @protected
      */
     this._unrefTimers = !!options.unrefTimers;
+
+    /**
+     * Flag to indicate if metrics should be reset on each reporting interval.
+     * If not overridden via the {@see ReporterOptions}, defaults to false.
+     *
+     * @type {boolean}
+     * @protected
+     */
+    this._resetMetricsOnInterval = !!options.resetMetricsOnInterval;
   }
 
   /**
@@ -185,6 +194,15 @@ class Reporter {
           metricsToSend.push(this._registry.getMetricWrapperByKey(metricKey));
         });
         this._reportMetrics(metricsToSend);
+
+        if (this._resetMetricsOnInterval) {
+          metricsToSend.forEach(({ name, metricImpl }) => {
+            if (metricImpl && metricImpl.reset) {
+              this._log.debug('Resetting metric', name);
+              metricImpl.reset();
+            }
+          });
+        }
       });
     } catch (error) {
       this._log.error('Failed to send metrics to signal fx', error);
@@ -233,6 +251,8 @@ class Reporter {
  * @property {Logger} logger The logger to use, if not supplied a new Buynan logger will be created
  * @property {string} logLevel The log level to use with the created console logger if you didn't supply your own logger.
  * @property {number} defaultReportingIntervalInSeconds The default reporting interval to use if non is supplied when registering a metric, defaults to 10 seconds.
+ * @property {boolean} unrefTimers Indicate if reporting timers should be unref'd, defaults to false.
+ * @property {boolean} resetMetricsOnInterval Indicate if metrics should be reset on each reporting interval, defaults to false.
  */
 
 module.exports = Reporter;
