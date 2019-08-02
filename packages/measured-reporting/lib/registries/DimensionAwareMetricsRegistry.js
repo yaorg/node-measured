@@ -1,9 +1,21 @@
+const mapcap = require('mapcap');
+
 /**
  * Simple registry that stores Metrics by name and dimensions.
  */
 class DimensionAwareMetricsRegistry {
-  constructor() {
-    this._metrics = {};
+  /**
+   * @param {DimensionAwareMetricsRegistryOptions} [options] Configurable options for the Dimension Aware Metrics Registry
+   */
+  constructor(options) {
+    options = options || {};
+
+    let metrics = new Map();
+    if (options.metricLimit) {
+      metrics = mapcap(metrics, options.metricLimit, options.lru);
+    }
+
+    this._metrics = metrics;
   }
 
   /**
@@ -15,7 +27,7 @@ class DimensionAwareMetricsRegistry {
    */
   hasMetric(name, dimensions) {
     const key = this._generateStorageKey(name, dimensions);
-    return Object.prototype.hasOwnProperty.call(this._metrics, key);
+    return this._metrics.has(key);
   }
 
   /**
@@ -27,7 +39,7 @@ class DimensionAwareMetricsRegistry {
    */
   getMetric(name, dimensions) {
     const key = this._generateStorageKey(name, dimensions);
-    return this._metrics[key].metricImpl;
+    return this._metrics.get(key).metricImpl;
   }
 
   /**
@@ -37,7 +49,7 @@ class DimensionAwareMetricsRegistry {
    * @returns {MetricWrapper} a wrapper object around name, dimension and {@link Metric}
    */
   getMetricWrapperByKey(key) {
-    return this._metrics[key];
+    return this._metrics.get(key);
   }
 
   /**
@@ -50,11 +62,11 @@ class DimensionAwareMetricsRegistry {
    */
   putMetric(name, metric, dimensions) {
     const key = this._generateStorageKey(name, dimensions);
-    this._metrics[key] = {
+    this._metrics.set(key, {
       name: name,
       metricImpl: metric,
       dimensions: dimensions || {}
-    };
+    });
     return key;
   }
 
@@ -63,7 +75,7 @@ class DimensionAwareMetricsRegistry {
    * @return {string[]} all keys of metrics stored in this registry.
    */
   allKeys() {
-    return Object.keys(this._metrics);
+    return Array.from(this._metrics.keys());
   }
 
   /**
@@ -88,3 +100,12 @@ class DimensionAwareMetricsRegistry {
 }
 
 module.exports = DimensionAwareMetricsRegistry;
+
+/**
+ * Configurable options for the Dimension Aware Metrics Registry
+ *
+ * @interface DimensionAwareMetricsRegistryOptions
+ * @typedef DimensionAwareMetricsRegistryOptions
+ * @property {Number} metricLimit the maximum number of metrics the registry may hold before dropping metrics
+ * @property {Boolean} lru switch dropping strategy from "least recently added" to "least recently used"
+ */

@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "console-log-level": "^1.4.1",
+    "mapcap": "^1.0.0",
     "measured-core": "^1.49.0",
     "optional-js": "^2.0.0"
   },
