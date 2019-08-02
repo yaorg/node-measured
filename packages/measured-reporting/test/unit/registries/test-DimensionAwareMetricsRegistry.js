@@ -85,4 +85,54 @@ describe('DimensionAwareMetricsRegistry', () => {
 
     assert.equal(key1, key2);
   });
+
+  it('metricLimit limits metric count', () => {
+    const limitedRegistry = new DimensionAwareMetricsRegistry({
+      metricLimit: 10
+    });
+
+    const counter = new Counter({
+      count: 10
+    });
+
+    const dimensions = {
+      foo: 'bar'
+    };
+
+    for (let i = 0; i < 20; i++) {
+      limitedRegistry.putMetric(`metric #${i}`, counter, dimensions);
+    }
+
+    assert.equal(10, limitedRegistry._metrics.size);
+    assert(!limitedRegistry.hasMetric('metric #0', dimensions));
+  });
+
+  it('lru changes metric dropping strategy', () => {
+    const limitedRegistry = new DimensionAwareMetricsRegistry({
+      metricLimit: 10,
+      lru: true
+    });
+
+    const counter = new Counter({
+      count: 10
+    });
+
+    const dimensions = {
+      foo: 'bar'
+    };
+
+    for (let i = 0; i < 10; i++) {
+      limitedRegistry.putMetric(`metric #${i}`, counter, dimensions);
+    }
+
+    // Touch the first added metric
+    limitedRegistry.getMetric('metric #0', dimensions);
+
+    // Put a new metric in to trigger a drop
+    limitedRegistry.putMetric('metric #11', counter, dimensions);
+
+    // Verify that it dropped metric #1, not metric #0
+    assert(limitedRegistry.hasMetric('metric #0', dimensions));
+    assert(!limitedRegistry.hasMetric('metric #1', dimensions));
+  });
 });

@@ -40,7 +40,7 @@ describe('SelfReportingMetricsRegistry', () => {
 
     selfReportingRegistry.register(metricKey, new Counter(), {}, reportInterval);
 
-    assert.equal(1, Object.keys(registry._metrics).length);
+    assert.equal(1, registry._metrics.size);
 
     mockReporter.restore();
     mockReporter.verify();
