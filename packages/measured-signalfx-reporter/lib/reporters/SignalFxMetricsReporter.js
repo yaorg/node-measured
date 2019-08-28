@@ -13,9 +13,12 @@ class SignalFxMetricsReporter extends Reporter {
    * @param {ReporterOptions} [options] See {@link ReporterOptions}.
    */
   constructor(signalFxClient, options) {
+    options = options || {};
     super(options);
     validateSignalFxClient(signalFxClient);
     this._signalFxClient = signalFxClient;
+
+    this._log.debug(`SignalFx Metrics Reporter Created with the following default default reporting interval: ${options.defaultReportingIntervalInSeconds}, default dimensions: ${JSON.stringify(options.defaultDimensions, null, 2)}`);
   }
 
   /**
@@ -36,7 +39,7 @@ class SignalFxMetricsReporter extends Reporter {
       signalFxDataPointRequest = this._processMetric(metric, signalFxDataPointRequest);
     });
 
-    this._log.debug('Sending data to Signal Fx');
+    this._log.debug(`Sending data to Signal Fx. Request: ${JSON.stringify(signalFxDataPointRequest)}`);
 
     this._signalFxClient.send(signalFxDataPointRequest).catch(error => {
       this._log.error('Failed to send metrics to signal fx error:', error);
