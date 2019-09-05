@@ -18,7 +18,7 @@ class SignalFxMetricsReporter extends Reporter {
     validateSignalFxClient(signalFxClient);
     this._signalFxClient = signalFxClient;
 
-    this._log.debug(`SignalFx Metrics Reporter Created with the following default default reporting interval: ${options.defaultReportingIntervalInSeconds}, default dimensions: ${JSON.stringify(options.defaultDimensions, null, 2)}`);
+    this._log.debug(`SignalFx Metrics Reporter Created with the following default reporting interval: ${options.defaultReportingIntervalInSeconds}, default dimensions: ${JSON.stringify(options.defaultDimensions, null, 2)}`);
   }
 
   /**
