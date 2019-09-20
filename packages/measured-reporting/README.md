@@ -33,7 +33,7 @@ const myCounter = registry.getOrCreateCounter('my-counter');
 ### [Reporter Abstract Class](https://yaorg.github.io/node-measured/Reporter.html)
 Extend this class and override the [_reportMetrics(metrics)](https://yaorg.github.io/node-measured/Reporter.html#_reportMetrics__anchor) method to create a vendor specific reporter implementation. 
 
-See the [ReporterOptions](http://yaorg.github.io/node-measured/build/docs/packages/measured-reporting/global.html#ReporterOptions) for advanced configuration.
+See the [ReporterOptions](https://yaorg.github.io/node-measured/global.html#ReporterOptions) for advanced configuration.
 
 #### Current Implementations
 - [SignalFx Reporter](https://yaorg.github.io/node-measured/SignalFxMetricsReporter.html) in the `measured-signalfx-reporter` package.
