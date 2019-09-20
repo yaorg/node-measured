@@ -15,7 +15,7 @@ npm install measured-reporting
 ### [Self Reporting Metrics Registry](https://yaorg.github.io/node-measured/SelfReportingMetricsRegistry.html)
 A dimensional aware self-reporting metrics registry, just supply this class with a reporter implementation at instantiation and this is all you need to instrument application level metrics in your app.
 
-See the [SelfReportingMetricsRegistryOptions](http://yaorg.github.io/node-measured/build/docs/packages/measured-reporting/global.html#SelfReportingMetricsRegistryOptions) for advanced configuration.
+See the [SelfReportingMetricsRegistryOptions](https://yaorg.github.io/node-measured/global.html#SelfReportingMetricsRegistryOptions) for advanced configuration.
 
 ```javascript
 const { SelfReportingMetricsRegistry, LoggingReporter } = require('measured-reporting');
