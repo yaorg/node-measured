@@ -2,7 +2,7 @@
 const assert = require('assert');
 const EventEmitter = require('events');
 const { Stopwatch } = require('measured-core');
-const { createExpressMiddleware, onRequestStart, onRequestEnd } = require('../../lib');
+const { createExpressMiddleware, createKoaMiddleware, onRequestStart, onRequestEnd } = require('../../lib');
 const TestReporter = require('./TestReporter');
 const Registry = require('measured-reporting').SelfReportingMetricsRegistry;
 
@@ -55,7 +55,7 @@ describe('createExpressMiddleware', () => {
     middleware(
       {
         method: 'GET',
-        routine: {path: '/v1/rest/some-end-point'}
+        routine: { path: '/v1/rest/some-end-point' }
       },
       res,
       () => {}
@@ -66,5 +66,32 @@ describe('createExpressMiddleware', () => {
     assert(registeredKeys.length === 1);
     assert(registeredKeys[0].includes('requests-GET'));
     registry.shutdown();
+  });
+});
+
+describe('createKoaMiddleware', () => {
+  it('creates and registers a metric called request that is a timer', async () => {
+    const reporter = new TestReporter();
+    const registry = new Registry(reporter);
+
+    const middleware = createKoaMiddleware(registry);
+
+    const res = new MockResponse();
+    middleware(
+      {
+        req: {
+          method: 'GET',
+          url: '/v1/rest/some-end-point',
+        },
+        res,
+      },
+      () => Promise.resolve()
+    ).then(() => {
+      const registeredKeys = registry._registry.allKeys();
+      assert(registeredKeys.length === 1);
+      assert(registeredKeys[0].includes('requests-GET'));
+      registry.shutdown();
+    });
+    res.finish();
   });
 });

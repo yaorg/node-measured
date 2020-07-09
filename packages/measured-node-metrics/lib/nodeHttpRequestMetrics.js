@@ -7,7 +7,7 @@ const { Stopwatch } = require('measured-core');
 const DEFAULT_REQUEST_METRICS_REPORTING_INTERVAL_IN_SECONDS = 10;
 
 /**
- * This module has functions needed to create middlewares for frameworks such as express.
+ * This module has functions needed to create middlewares for frameworks such as express and koa.
  * It also exports the 2 functions needed to implement your own middleware.
  * If you implement a middleware for a framework not implemented here, please contribute it back.
  *
@@ -35,6 +35,28 @@ module.exports = {
 
       next();
     };
+  },
+
+  /**
+   * Creates a Koa middleware that reports a timer on request data.
+   * With this middleware you will get requests counts and latency percentiles all filterable by status codes, http method, and uri paths.
+   *
+   * @param {SelfReportingMetricsRegistry} metricsRegistry
+   * @param {number} [reportingIntervalInSeconds]
+   * @return {Function}
+   */
+  createKoaMiddleware: (metricsRegistry, reportingIntervalInSeconds) => async (ctx, next) => {
+    const stopwatch = module.exports.onRequestStart();
+    const { req, res } = ctx;
+
+    res.once('finish', () => {
+      const { method } = req;
+      const { statusCode } = res;
+      const uri = ctx._matchedRoute || '_unknown';
+      module.exports.onRequestEnd(metricsRegistry, stopwatch, method, statusCode, uri, reportingIntervalInSeconds);
+    });
+
+    await next();
   },
 
   /**
