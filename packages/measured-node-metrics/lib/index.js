@@ -1,6 +1,6 @@
 const { nodeProcessMetrics, createProcessMetrics } = require('./nodeProcessMetrics');
 const { nodeOsMetrics, createOSMetrics } = require('./nodeOsMetrics');
-const { createExpressMiddleware, onRequestStart, onRequestEnd } = require('./nodeHttpRequestMetrics');
+const { createExpressMiddleware, createKoaMiddleware, onRequestStart, onRequestEnd } = require('./nodeHttpRequestMetrics');
 
 /**
  * The main module for the measured-node-metrics lib.
@@ -68,6 +68,18 @@ module.exports = {
    * @return {Function}
    */
   createExpressMiddleware,
+
+  /**
+   * Creates a Koa middleware that reports a timer on request data.
+   * With this middleware you will get requests counts and latency percentiles all filterable by status codes, http method, and uri paths.
+   *
+   * @function
+   * @name createExpressMiddleware
+   * @param {SelfReportingMetricsRegistry} metricsRegistry
+   * @param {number} [reportingIntervalInSeconds]
+   * @return {Function}
+   */
+  createKoaMiddleware,
 
   /**
    * At the start of the request, create a stopwatch, that starts tracking how long the request is taking.

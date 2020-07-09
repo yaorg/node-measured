@@ -1,39 +1,54 @@
-/*global describe, it, beforeEach, afterEach*/
-const express = require('express');
+const Koa = require('koa');
+const KoaBodyParser = require('koa-bodyparser');
+const Router = require('koa-router');
 const Registry = require('measured-reporting').SelfReportingMetricsRegistry;
 const TestReporter = require('../unit/TestReporter');
-const { createExpressMiddleware } = require('../../lib');
+const { createKoaMiddleware } = require('../../lib');
 const findFreePort = require('find-free-port');
 const assert = require('assert');
 const http = require('http');
 
-describe('express-middleware', () => {
+describe('koa-middleware', () => {
   let port;
   let reporter;
   let registry;
   let middleware;
   let app;
   let httpServer;
+  let router;
   beforeEach(() => {
     return new Promise(resolve => {
       reporter = new TestReporter();
       registry = new Registry(reporter);
-      middleware = createExpressMiddleware(registry, 1);
-      app = express();
-      app.use(middleware);
-      app.use(express.json());
+      middleware = createKoaMiddleware(registry, 1);
+      app = new Koa();
+      router = new Router();
 
-      app.get('/hello', (req, res) => res.send('Hello World!'));
-      app.post('/world', (req, res) => res.status(201).send('Hello World!'));
-      app.get('/users/:userId', (req, res) => {
-        res.send(`id: ${req.params.userId}`);
+      router.get('/hello', ({ response }) => {
+        response.body = 'Hello World!';
+        return response;
       });
+      router.post('/world', ({ response }) => {
+        response.body = 'Hello World!';
+        response.status = 201;
+        return response;
+      });
+      router.get('/users/:userId', ({ params, response }) => {
+        response.body = `id: ${params.userId}`;
+        return response;
+      });
+
+      app.use(middleware);
+      app.use(KoaBodyParser());
+      app.use(router.routes());
+      app.use(router.allowedMethods());
+
+      app.on('error', (err) => console.error(err));
 
       findFreePort(3000).then(portArr => {
         port = portArr.shift();
 
-        httpServer = http.createServer(app);
-        httpServer.listen(port);
+        httpServer = app.listen(port);
         resolve();
       });
     });
